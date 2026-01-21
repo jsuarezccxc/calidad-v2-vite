@@ -48,6 +48,10 @@ export default defineConfig(({ mode }) => {
       scss: {
         // Allow importing scss files without extensions
         additionalData: '',
+        // Fix font path resolution - set includePaths to resolve from src
+        includePaths: [path.resolve(__dirname, './src')],
+        // Silence deprecation warnings for legacy APIs
+        silenceDeprecations: ['legacy-js-api'],
       },
     },
   },
