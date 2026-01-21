@@ -1,0 +1,22 @@
+.visualization-notes {
+	.style-label-checkbox {
+		@apply w-26 rounded-lg text-xs h-8.5 text-center text-blue flex justify-center items-center bg-gray-light;
+	}
+
+	.without-padding-body {
+		@apply p-0;
+		min-height: 2.438rem !important;
+		height: auto !important;
+	}
+	
+	.input-number-negative::-webkit-inner-spin-button,
+	.input-number-negative::-webkit-outer-spin-button{
+		-webkit-appearance: none;
+	}
+
+	@media screen and (min-width:50px) and (max-width:767px) {
+		.without-padding-body {
+			min-height: 1.813rem !important;
+		}
+	}
+}

@@ -1,0 +1,39 @@
+.no-padding {
+	padding: 0 !important;
+}
+
+.header-table-reason-rejection {
+	@apply w-full flex items-center px-2 py-3;
+
+	@media (min-width: 64rem) {
+		width: 25.375rem;
+	}
+}
+
+.wrapper-errors-table {
+	@apply mb-4.5;
+
+	@media (min-width: 1024px) {
+		width: 25.375rem;
+	}
+}
+
+.correction-success-modal, .correction-error-modal {
+	@apply shadow-templateDesign rounded-2.5xl bg-white p-11.5 flex flex-col justify-center items-center;
+
+	width: 31.75rem;
+	height: 22.25rem;
+
+	.icon {
+		@apply mb-2.5;
+
+		height: 5.625rem;
+		width: 5.625rem;
+	}
+}
+
+.delete-product-modal {
+	@apply p-6.70 bg-white shadow-templateDesign rounded-2xl flex flex-col justify-center items-center;
+	width: 26.5625rem;
+	height: 19.4375rem;
+}

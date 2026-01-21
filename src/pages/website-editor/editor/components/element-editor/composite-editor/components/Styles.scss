@@ -1,0 +1,164 @@
+$border-gray: rgba(221, 221, 221, 1);
+$text-gray: rgba(174, 174, 175);
+
+.editor {
+    .add-social-network {
+        @apply mt-4.5;
+
+        &__items {
+            @apply flex flex-col;
+        }
+
+        &__item {
+            @apply flex items-center;
+
+            &-container {
+                @apply mr-1 bg-gray-light;
+                width: 6.5rem;
+                height: 2rem;
+            }
+
+            &-name {
+                @apply p-1.5 text-tiny text-gray-dark bg-gray-light mr-2;
+
+                width: 6.688rem;
+            }
+
+            .input--container {
+                @apply bg-white #{!important};
+            }
+
+            .editor-input,
+            .edit-input {
+                @apply border-gray bg-white overflow-hidden px-1.5;
+                width: 6.5rem;
+                height: 2rem;
+
+                input {
+                    width: 5.75rem;
+                }
+
+                input::placeholder {
+                    @apply text-gray font-aller;
+                }
+            }
+        }
+    }
+
+    .field {
+        width: 11.5rem;
+
+        &__input {
+            @apply border text-blue font-allerbold text-tiny w-full mb-0.5 px-1.5 outline-none;
+
+            height: 1.1875rem;
+            border-radius: 0.5rem;
+
+            &:focus {
+                @apply border-green;
+            }
+        }
+
+        .select__content {
+            max-width: 11.5rem !important;
+        }
+    }
+}
+
+
+.edit {
+    &-input {
+        @apply border rounded border-blue px-2 text-tiny py-1 text-gray-dark font-allerbold flex;
+
+        width: 9.75rem;
+        height: 1.625rem;
+
+        input {
+            @apply outline-none mr-1;
+
+            width: 7.313rem;
+
+            &::placeholder {
+                @apply font-allerbold text-gray text-tiny;
+            }
+        }
+
+        .icon {
+            @apply w-4.5 h-4.5;
+        }
+    }
+
+    &-modal {
+        width: 100% !important;
+
+        &__container {
+            @apply bg-white p-11;
+
+            width: 26.25rem;
+            height: 38.5625rem;
+            border-radius: 1.125rem;
+
+            .field {
+                &__input {
+                    @apply text-tiny border rounded-lg px-1.5 mb-0.5;
+                }
+            }
+
+            .input {
+                &--container {
+                    width: 6.75rem;
+                }
+            }
+
+            .adaptable-text-area {
+                width: 16.125rem;
+            }
+        }
+
+        &__title {
+            @apply mb-1 text-blue text-tiny border font-allerbold px-1.5 rounded-lg;
+
+            border-color: $border-gray;
+            width: 11.5rem;
+            height: 1.188rem;
+        }
+    }
+}
+
+.catalog-config {
+    @apply ml-2;
+
+    .disabled--icon {
+        filter: brightness(4) saturate(0);
+    }
+
+    .select{
+        &__filters{
+            @apply mb-4.5;
+
+            .select__content--common{
+                width: 14.125rem !important;
+            }
+        }
+
+        &--font-family, &--font-weight{
+            width: 6.8125rem !important;
+        }
+
+        &--font-size {
+            width: 3.8125rem !important;
+        }
+    }
+    .price-range {
+
+        &__input {
+            @apply text-tiny;
+            width: 5.375rem;
+            height: 1.4375rem;
+
+            .input{
+                @apply text-tiny text-center;
+            }
+        }
+    }
+}

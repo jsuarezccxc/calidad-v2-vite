@@ -1,0 +1,13 @@
+.website-active-domain {
+    @apply flex flex-col w-full h-full xs:px-2;
+
+    .title__container {
+        h1 {
+            @apply text-base;
+        }
+    }
+
+    .container__views {
+        @apply flex w-full h-full;
+    }
+}

@@ -1,0 +1,13 @@
+.rating {
+	@apply flex justify-center;
+
+	&__star-icon {
+		@apply cursor-pointer;
+		transition: 0.4s all;
+		width: 1.5625rem;
+	}
+
+	.big-star {
+		transform: scale(1.5);
+	}
+}

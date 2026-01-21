@@ -1,0 +1,62 @@
+.modal-confirm-data {
+    min-width: 25.9375rem;
+    max-width: 25.9375rem;
+    width: 25.9375rem;
+    padding: 1.625rem;
+
+    .confirm-data {
+        @apply flex flex-col;
+
+        &__header {
+            @apply flex flex-col justify-center items-center mb-7;
+
+            .title--modal {
+                @apply text-blue text-xl font-allerbold text-center w-full;
+            }
+        }
+
+        &__body {
+            @apply flex flex-col gap-y-4.5 justify-center items-center;
+        }
+
+        &__footer {
+            @apply flex flex-col justify-center items-center mt-7;
+        }
+    }
+}
+
+.zi-modals-landing {
+    z-index: 25;
+}
+
+.modal-success-registration {
+    min-width: 26.5625rem;
+    max-width: 26.5625rem;
+    width: 26.5625rem;
+    padding: 1.625rem;
+
+    .success-registration {
+        @apply flex flex-col;
+
+        &__header {
+            @apply flex flex-col gap-y-2 justify-center items-center;
+
+            .icon--style {
+                width: 5.625rem;
+                height: 5.625rem;
+            }
+
+            .title--style {
+                @apply text-xl text-blue text-center w-full font-allerbold;
+            }
+        }
+
+        &__body {
+            @apply flex flex-col gap-y-7 justify-center items-center;
+
+            .description--modal {
+                @apply text-center text-base text-gray-dark font-normal w-full;
+            }
+        }
+    }
+}

@@ -1,0 +1,86 @@
+.payment-instructions {
+	&__img-one {
+		@apply mx-auto;
+		width: 54.125rem;
+		height: 21.625rem;
+	}
+
+	&__width-161 {
+		@apply xs:w-full;
+		width: 10.0625rem;
+	}
+
+	&__img-two {
+		@apply mx-auto;
+		width: 41.875rem;
+		height: 21.625rem;
+	}
+
+	&__img-three {
+		@apply mx-auto;
+		width: 40.2225rem;
+		height: 22.25rem;
+	}
+
+	&__img-four, &__img-eight, &__img-nine, &__img-eleven, &__img-twelve {
+		@apply mx-auto;
+		width: 54.25rem;
+	}
+
+	&__img-four {
+		height: 24rem;
+	}
+
+	&__img-five {
+		@apply mx-auto;
+		width: 54.125rem;
+		height: 26.25rem;
+	}
+
+	&__img-six {
+		@apply mx-auto;
+		width: 33rem;
+		height: 25.3125rem;
+	}
+
+	&__img-seven {
+		@apply mx-auto;
+		width: 30.25rem;
+		height: 29.9375rem;
+	}
+
+	&__img-eight, &__img-nine, &__img-ten {
+		height: 25.75rem;
+	}
+
+	&__img-ten {
+		@apply mx-auto;
+		width: 54.125rem;
+	}
+
+	&__img-eleven {
+		height: 24.5rem;
+	}
+
+	&__img-twelve {
+		height: 24.75rem;
+	}
+
+	&__img-thirteen {
+		width: 24.1875rem;
+		height: 24.875rem;
+	}
+
+	&__step-last {
+		@apply flex items-center xs:flex-col gap-x-6;
+	}
+
+	&__paragraph {
+		@apply flex flex-col gap-y-2 xs:w-full;
+		width: 28.3125rem;
+	}
+
+	&__page-buttons-footer {
+		@apply lg:flex lg:justify-end;
+	}
+}

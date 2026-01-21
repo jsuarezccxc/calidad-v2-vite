@@ -1,0 +1,137 @@
+$greenUltraLight: rgba(217, 242, 240, 1);
+$gray: #eff0f2;
+$greenOpacity: #00a99d26;
+
+.supplier-database {
+	@apply flex flex-col;
+
+	&__select {
+		@apply xs:w-full;
+		width: 14.375rem;
+		@media (max-width: 48rem) {
+			width: 100%;
+		}
+	}
+
+	&__table {
+		@apply mt-1.5 overflow-x-auto;
+		max-width: fit-content;
+		margin-bottom: 2.4375rem;
+
+		@media (max-width: 48rem) {
+			margin-bottom: 1rem;
+		}
+
+		&-column {
+			&-number {
+				min-width: 2.5rem;
+				max-width: 2.5rem;
+				padding: 0;
+			}
+		
+			&-name {
+				min-width: 10.25rem;
+				max-width: 10.25rem;
+				padding: 0;
+			}
+		
+			&-documentType {
+				min-width: 6rem;
+				max-width: 6rem;
+				padding: 0;
+			}
+		
+			&-documentNumber {
+				min-width: 6.5rem;
+				max-width: 6.5rem;
+				padding: 0;
+			}
+		
+			&-taxpayerType {
+				min-width: 7.625rem;
+				max-width: 7.625rem;
+				padding: 0;
+			}
+		
+			&-ciiuActivity {
+				min-width: 13rem;
+				max-width: 13rem;
+				padding: 0;
+			}
+		
+			&-email {
+				min-width: 10.25rem;
+				max-width: 10.25rem;
+				padding: 0;
+			}
+		
+			&-address {
+				min-width: 10.5rem;
+				max-width: 10.5rem;
+				padding: 0;
+			}
+		
+			&-phone {
+				min-width: 7.625rem;
+				max-width: 7.625rem;
+				padding: 0;
+			}
+		
+			&-plan {
+				min-width: 11.75rem;
+				max-width: 11.75rem;
+				padding: 0;
+			}
+		
+			&-planStatus {
+				min-width: 7rem;
+				max-width: 7rem;
+				padding: 0;
+			}
+		
+			&-planPurchaseDate {
+				min-width: 9rem;
+				max-width: 9rem;
+				padding: 0;
+			}
+		
+			&-planExpirationDate {
+				min-width: 9.7rem;
+				max-width: 9.7rem;
+				padding: 0;
+			}
+		
+			&-websiteUrl {
+				min-width: 15.0625rem;
+				max-width: 15.0625rem;
+				padding: 0;
+			}
+		
+			&-numberElectronicDocuments {
+				min-width: 12.0625rem;
+				max-width: 12.0625rem;
+				padding: 0;
+			}
+		
+			&-lastAccess {
+				min-width: 11.75rem;
+				max-width: 11.75rem;
+				padding: 0;
+			}
+		}
+	}
+
+	&__total-supplier {
+		&-title {
+			@apply h-10 text-blue py-2.5 xs:h-8.75 px-2 border-b border-gray text-sm font-allerbold xs:text-tiny;
+			background-color: $greenUltraLight;
+			width: 13.4375rem;
+		}
+
+		&-result {
+			@apply flex items-center h-10 border-b border-gray xs:h-8.75 px-2 py-3 text-sm bg-white text-gray xs:text-tiny;
+			width: 8rem;
+		}
+	}
+
+}

@@ -1,0 +1,27 @@
+.create-supplier {
+	@apply flex flex-col gap-y-4.5;
+
+	& h2 {
+		@apply text-26lg font-allerbold text-blue text-center;
+	}
+
+	.card-style {
+		@apply flex flex-col gap-y-4.5 py-4.5 px-2.75 bg-white shadow-templateDesign;
+
+		& h3 {
+			@apply text-base leading-19.38px text-gray-dark font-allerbold;
+		}
+		
+		.content-inputs {
+			@apply flex flex-col lg:flex-row gap-x-7 gap-y-4.5 flex-wrap lg:px-2;
+
+			&__input-size {
+				@apply xs:w-full w-73;
+			}
+
+			&__size-radio-buttons {
+				@apply h-8.2 w-8.7;
+			}
+		}
+	}
+}

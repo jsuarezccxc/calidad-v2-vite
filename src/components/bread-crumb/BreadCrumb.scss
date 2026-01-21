@@ -1,0 +1,19 @@
+.bread-crumb {
+    @apply block xs:hidden;
+
+    &__route {
+        @apply font-normal text-tiny text-blue no-underline overflow-hidden;
+
+        &--arrow {
+            @apply mx-1 font-normal text-tiny text-blue;
+        }
+
+        &--current {
+            @apply no-underline font-normal text-tiny text-blue hover:text-blue overflow-hidden hover:no-underline cursor-default;
+        }
+    }
+
+    &__title {
+        @apply text-xl font-allerbold;
+    }
+}

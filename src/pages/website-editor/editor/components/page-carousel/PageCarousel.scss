@@ -1,0 +1,61 @@
+$black-light: rgba(0, 0, 0, 0.25);
+
+.page-carousel {
+	@apply flex justify-between w-full pt-2 pl-2 border-t border-gray-smoke h-12.5 pr-2;
+
+	.white-svg {
+		svg>circle {
+			fill: white;
+		}
+	}
+
+	.icon--add {
+		width: 1.1875rem;
+		height: 1.25rem;
+	}
+
+	&__button {
+		@apply p-1 w-35.25 mr-2 text-xs rounded font-bold cursor-pointer text-blue font-allerbold flex items-center justify-center;
+		height: 1.875rem;
+
+		&:hover {
+			@apply bg-green-ultraLight;
+
+			svg>circle {
+				fill: white;
+			}
+		}
+	}
+
+	&__button-plus {
+		@apply text-sm rounded ml-8 font-bold cursor-pointer font-allerbold;
+	}
+
+	&__button-disabled {
+		@apply text-sm rounded ml-2 cursor-default font-bold font-allerbold;
+	}
+
+	&__items {
+		@apply flex h-full overflow-y-auto;
+		width: 51.5rem;
+	}
+
+	&__delete-modal {
+		@apply bg-white p-6.70 flex flex-col justify-center items-center rounded-2.5xl;
+		width: 26.563rem;
+		height: 18.938rem;
+
+		button {
+			@apply shadow-templateDesign;
+		}
+	}
+}
+
+.icon-arrow--page {
+	width: .6875rem;
+	height: .4375rem;
+}
+
+.page-title-popper {
+	@apply shadow-templateDesign;
+}

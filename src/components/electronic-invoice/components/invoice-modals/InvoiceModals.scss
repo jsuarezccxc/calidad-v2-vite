@@ -1,0 +1,49 @@
+
+.modal-update {
+	width: 48.3244rem !important;
+}
+
+.container-update-customer {
+	@apply flex flex-col flex-wrap h-auto gap-x-4.5 max-h-60 min-h-8.76 xs:flex-nowrap xs:w-full xs:overflow-auto;
+
+	&__row-title {
+		max-width: 20.7244rem;
+		@apply flex min-h-8.75 h-auto border-collapse border-t border-gray;
+
+		&__style-title {
+			@apply flex items-center justify-center flex-1 border-l border-r border-gray px-1 py-0 xs:h-8.6 xs:w-34.4;
+			width: 9.475rem;
+		}
+
+		&__style-value {
+			@apply flex items-center justify-center text-sm border-r border-gray;
+			width: 11.25rem;
+		}
+
+		&--border-button {
+			@apply border-b xs:border-b-0;
+		}
+
+		&:last-child {
+			@apply border-b;
+		}
+	}
+
+	&__paragraph-text {
+		@apply text-sm text-center text-gray-dark xs:w-full leading-none;
+	}
+}
+
+.modal__button {
+	&--blue {
+		@apply w-40 p-2 text-xs font-bold rounded-lg bg-blue text-white xs:max-w-max xs:px-8;
+		min-width: 8.375rem;
+		width: 9.5625rem !important;
+		height: 2.0625rem !important;
+
+		@media (max-width: 47.9375rem) {
+			max-width: 8.375rem;
+			height: 3.3rem !important;
+		}
+	}
+}

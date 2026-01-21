@@ -1,0 +1,200 @@
+.wrapper-box {
+    @apply w-64 p-2 rounded-md bg-gray-light flex flex-row items-center relative;
+}
+
+.wrapper-subcategory {
+    @apply w-64 px-2 rounded-md bg-transparent flex flex-row items-center relative;
+}
+
+.padding-items-second-level {
+    padding-left: 1.4rem !important;
+    padding-right: 1.4rem !important;
+}
+
+.wrapper-dropbox {
+    @apply relative flex flex-row items-center w-64 p-2 rounded-md bg-gray-light cursor-pointer;
+}
+
+.checkmark {
+    @apply rounded absolute left-0 h-4.5 w-4.5 border border-solid border-gray pointer-events-auto;
+
+    top: calc(50% - 0.563rem);
+
+    &:hover {
+        @apply bg-gray-light cursor-pointer;
+    }
+
+    &::after {
+        @apply absolute hidden;
+
+        content: "";
+    }
+}
+
+.each-list-item {
+    @apply mb-2;
+
+    &:first-child {
+        @apply mt-2;
+    }
+}
+
+.container {
+    @apply flex relative pl-7 text-base font-normal leading-sm select-none text-gray h-auto w-52;
+
+    min-height: 1.125rem;
+
+    &--father {
+        @apply items-center;
+    }
+
+    &--fill {
+        width: 100% !important;
+        margin: 0.125rem 0.188rem;
+    }
+
+    &--child {
+        @apply items-start pointer-events-none;
+    }
+
+    &--standard {
+        @apply relative pl-7 cursor-pointer text-sm font-bold leading-sm select-none text-gray-dark h-auto w-52;
+
+        input {
+            @apply block absolute opacity-0 cursor-pointer h-0 w-0;
+        }
+
+        &:hover input ~ .checkmark {
+            @apply bg-gray-softLight cursor-pointer;
+        }
+
+        & input:checked ~ .checkmark {
+            @apply bg-blue border-blue;
+        }
+
+        & input:checked ~ .checkmark:after {
+            @apply block;
+        }
+    }
+
+    &--disabled {
+        @apply relative pl-7 text-sm font-bold leading-sm select-none text-gray-dark h-auto w-52;
+
+        input {
+            @apply block absolute opacity-0 h-0 w-0;
+        }
+    }
+
+    &--subcategory,
+    &--category {
+        @apply relative pl-7 cursor-pointer text-sm font-normal leading-sm select-none text-gray-dark h-auto w-52;
+
+        input {
+            @apply block absolute opacity-0 cursor-pointer h-0 w-0;
+        }
+
+        &:hover input ~ .checkmark {
+            @apply bg-gray-light;
+        }
+
+        & input:checked ~ .checkmark {
+            @apply bg-blue;
+        }
+
+        & input:checked ~ .checkmark:after {
+            @apply block;
+        }
+    }
+
+    &--category {
+        @apply text-blue py-2 rounded-lg  md:mt-1 md:pr-5 w-76 sm:w-85 my-1;
+
+        & input:checked ~ .checkmark {
+            background: rgba(75, 75, 75, 1);
+        }
+
+        & input ~ .checkmark {
+            @apply md:ml-2 md:mt-1 rounded-none;
+        }
+
+        & label ~ .checkmark {
+            @apply md:ml-2 md:mt-1;
+        }
+    }
+
+    input {
+        @apply block absolute opacity-0 cursor-pointer h-0 w-0;
+    }
+
+    & input:checked ~ .checkmark {
+        @apply bg-blue border-blue cursor-pointer;
+    }
+
+    & input:disabled ~ .checkmark {
+        @apply bg-gray-light border-gray cursor-default;
+    }
+
+    & input:checked ~ .checkmark:after {
+        @apply block;
+    }
+}
+
+.columns {
+    &--many-items {
+        @apply w-64;
+
+        columns: 1;
+        -webkit-columns: 1;
+        -moz-columns: 1;
+
+        li {
+            display: inline-block;
+        }
+    }
+
+    &--standard {
+        @apply w-64;
+    }
+}
+
+.checkmark-light {
+    @apply border border-solid border-gray;
+}
+
+.small-checkbox {
+    width: min-content !important;
+}
+
+.checkbox {
+    @apply w-4.5 h-4.5 border border-gray cursor-pointer;
+
+    border-radius: 0.25rem;
+
+    &:is(:hover) {
+        @apply bg-gray-light cursor-pointer;
+    }
+
+    &--checked {
+        @apply bg-blue border-transparent;
+		
+        &:is(:hover) {
+            @apply bg-blue border-transparent cursor-pointer;
+        }
+    }
+}
+
+.single-checkbox {
+    @apply flex items-center gap-2;
+
+    &__input {
+        @apply inline-block border cursor-pointer;
+
+        width: 1.125rem;
+        height: 1.125rem;
+        border-radius: 0.25rem;
+    }
+
+    &__label {
+        @apply text-blue text-sm font-allerbold;
+    }
+}

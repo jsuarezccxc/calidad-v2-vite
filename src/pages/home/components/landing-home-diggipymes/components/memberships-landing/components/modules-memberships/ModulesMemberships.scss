@@ -1,0 +1,101 @@
+.module_membership{
+	&__container{
+		@apply bg-white border-gray-smoke shadow-newMemberships flex flex-col justify-center items-center;
+
+		border-radius: 0.5rem;
+		border: 0.0313rem solid #d9d9d9;
+		width: 13.625rem;
+		height: 10.0625rem;
+	}
+
+	&__container-website{
+		@apply bg-white border-gray-smoke shadow-newMemberships flex flex-col justify-center items-center;
+
+		border-radius: 0.5rem;
+		border: 0.0313rem solid #d9d9d9;
+		width: 16.375rem;
+		height: 11.3125rem;
+	}
+
+	&__big-container{
+		@apply bg-white flex flex-row justify-center items-center;
+
+		border-radius: 0.5rem;
+		width: 71.75rem;
+		height: 16.3125rem;
+		display: flex;
+		box-shadow: 0rem 0.25rem 0.625rem 0rem #00A99D59;
+
+		&--left{
+			@apply flex items-center text-center justify-center;
+
+			box-shadow: 0.3125rem 0 0.9375rem -0.3125rem rgba(0, 171, 157, 0.32);
+			width: 24.25rem;
+			height: 16.3125rem;
+		}
+
+		&--right{
+			@apply flex items-center text-center justify-center;
+
+			width: 47.5rem;
+			height: 16.3125rem;
+		}
+	}
+
+	&__title {
+		@apply text-blue font-poppinsbold text-base flex items-center w-full justify-center;
+	}
+
+	&__title-website {
+		@apply text-blue font-poppinsbold text-2lg;
+	}
+
+	&__price {
+		@apply text-blue font-poppinsbold text-2xl ;
+	}
+
+	&__price-website {
+		@apply text-blue font-poppinsbold text-4xl ;
+	}
+
+	&__inputRadio {
+		@apply relative;
+		width: 1.125rem;
+		height: 1.125rem;
+	}
+	
+}
+
+
+@media (max-width: 48rem) {
+
+	.module_membership{
+		&__container{
+			width: 100%;
+		}
+		&__big-container{
+			width: 90vw;
+			height: auto;
+			flex-direction: column;
+	
+			&--left{
+				box-shadow: 0rem 0.25rem 1.1687rem 0rem rgba(0, 171, 158, 0.3215686275);
+				width: 100%;
+				height: 16.3125rem;
+			}
+	
+			&--right{
+				width: 22.5rem;
+				height: auto;
+				padding: 2.5rem 0rem;
+			}
+		}
+		&__imgPlanning{
+			content: url('/assets/images/landing/organization-planning-review-vertical.svg');
+		}
+
+		&__imgCrm{
+			content: url('/assets/images/landing/crm-review-vertical.svg');
+		}
+	}
+}

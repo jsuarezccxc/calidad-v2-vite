@@ -1,0 +1,82 @@
+$gray: #AEAEAF;
+
+.add-taxes {
+    &__title {
+        @apply text-lg text-blue font-allerbold;
+    }
+
+    &__table {
+        &-variants, &-content, &-tax, &-units {
+            @apply text-sm border-b border-gray bg-green-extraLight font-allerbold text-left;
+        }
+
+        &_variants {
+            width: 9.375rem !important;
+        }
+
+        &-content {
+            width: 6.375rem !important;
+            text-align: center !important;
+        }
+
+        &-tax {
+            width: 12.625rem !important;
+        }
+
+        &-unit {
+            width: 0 !important;
+        }
+
+        &-container {
+            width: 34.9375rem;
+        }
+
+        &-container-icui, &-container-inc, &-container-iva {
+            width: 22rem;
+        }
+
+        &-input-value {
+            @apply text-gray;
+
+            text-align: left !important;
+            -webkit-appearance: none !important;
+        }
+
+        &-milliliters {
+            width: 9.375rem !important;
+        }
+    }
+
+    &__input-text {
+        @apply text-gray;
+
+        text-align: left !important;
+    }
+
+    &__milliliters {
+        color: $gray !important;
+    }
+
+    .MuiInputBase-input .MuiInput-input {
+        color: $gray !important;
+    }
+}
+
+.add-taxes {
+    input[type="number"] {
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+        }
+    }
+
+    .rate-input {
+        @apply w-full lg:w-26 mt-2;
+
+        .select__text {
+            @apply text-sm;
+
+            text-overflow: unset !important;
+        }
+    }
+}

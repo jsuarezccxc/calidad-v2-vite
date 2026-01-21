@@ -1,0 +1,53 @@
+$light-green: #00A99D26;
+
+.purchase-summary {
+    &__card {
+        @apply bg-white flex justify-between p-2 rounded-md items-center shadow-card cursor-pointer;
+
+        width: 9.75rem;
+        height: 3.125rem;
+		max-width: 58.3125rem;
+
+        &-text {
+            @apply text-center text-sm text-blue font-allerbold;
+
+            width: 6.375rem;
+        }
+    }
+
+    &__form {
+        @apply p-4.5 rounded-lg bg-white my-5.5 pb-2 shadow-card;
+
+        max-width: 58.3125rem;
+    }
+
+    &__field {
+        height: 2.875rem;
+
+        &--small {
+            width: 9.1875rem;
+        }
+
+        &--long {
+            width: 12.125rem;
+        }
+
+		&--auto {
+            width: auto;
+        }
+
+        > hr {
+            border-color: $light-green;
+        }
+    }
+
+    &__group {
+        @apply flex border-b-1 h-16 mb-4.5 gap-4.5;
+
+        border-color: $light-green;
+
+        &:last-of-type {
+            @apply mb-0;
+        }
+    }
+}

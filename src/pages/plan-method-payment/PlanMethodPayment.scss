@@ -1,0 +1,12 @@
+.plan-method-payment {
+	@apply flex flex-col h-full justify-between xs:px-2;
+
+	&--description {
+		@apply text-base text-gray-dark font-normal;
+	}
+
+	.options__method-payment {
+		@apply flex flex-col w-full;
+		margin-top: 1.0625rem;
+	}
+}

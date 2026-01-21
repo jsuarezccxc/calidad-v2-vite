@@ -1,0 +1,35 @@
+.prefix-note {
+	.background-transparent {
+		@apply text-left bg-transparent #{!important};
+	}
+
+	.input-text-left {
+		@apply pl-2 text-left #{!important};
+	}
+
+	.input-bg-transparent {
+		@apply bg-transparent #{!important};
+	}
+
+	.select__text {
+		@apply text-left #{!important};
+	}
+
+	.td-checkbox {
+		@apply bg-white h-10 xs:h-8.2;
+	}
+
+	.field-body--uneditable, .field-body--editable {
+		@apply border-t-0 border-b-1 h-10 xs:h-8.2;
+	}
+
+	.input--disabled {
+		& .select__text {
+			@apply text-gray #{!important};
+		}
+	}
+
+	.table-prefix-required {
+		@apply border-purple;
+	}
+}

@@ -1,0 +1,189 @@
+@mixin select-width($wrapper-width, $options-width) {
+    width: $wrapper-width;
+
+    .select__options {
+        min-width: $options-width;
+    }
+}
+
+.icon-size--common {
+    width: 1.1875rem;
+    height: 1.125rem;
+}
+
+.icon-opacity {
+    width: 1.5625rem;
+    height: 1.5rem;
+}
+
+.arrow-icon--link {
+    width: 1.1875rem;
+    height: 1.1875rem;
+}
+
+.icon-size {
+    width: 1.125rem;
+    height: .8125rem;
+}
+
+.basic-editor {
+    @apply flex items-center p-2 text-sm w-full;
+
+    height: 2.1875rem;
+
+    &__modal-footer {
+        @apply p-6.70 bg-white rounded-2.5xl flex flex-col justify-center items-center;
+
+        width: 35.625rem;
+        height: 26.063rem;
+    }
+
+    &__border {
+        @apply text-white bg-blue text-sm;
+
+        width: 10.75rem;
+        height: 1.4375rem;
+
+        &--none {
+            @apply bg-transparent text-gray-dark;
+        }
+
+        &--rounded {
+            width: 9.1875rem;
+            border-radius: 1.125rem;
+            height: 1.375rem;
+        }
+
+        &--semi-rounded {
+            border-radius: 0.625rem;
+        }
+
+        &--semi-square {
+            @apply rounded;
+        }
+    }
+
+    &__dropdown {
+        height: 1.625rem;
+
+        &--color {
+            width: 7.125rem;
+            padding: 0 !important;
+
+            input {
+                padding-left: 0.3125rem !important;
+                font-size: 0.75rem !important;
+                margin: 0 !important;
+            }
+
+            label {
+                max-width: 1.75rem !important;
+                margin-right: 0.125rem !important;
+            }
+        }
+    }
+
+    &__icon {
+        @apply relative flex items-center cursor-pointer transition-all;
+
+        &::before {
+            @apply absolute -left-4 py-2 px-4.5 bg-white w-max text-sm text-blue font-allerbold border border-gray hidden shadow-templateDesign;
+
+            z-index: 100 !important;
+            top: 2rem;
+            content: attr(aria-label);
+            border-radius: 0.5rem;
+        }
+
+        &:hover {
+            &.basic-editor__icon {
+                &::before {
+                    @apply block;
+                }
+            }
+        }
+    }
+
+    &__select {
+        &--border {
+            @include select-width(6.4375rem, 10.75rem);
+        }
+
+        &--size {
+            width: 5.25rem;
+        }
+
+        &--font-family {
+            @include select-width(9.75rem, 9.75rem);
+        }
+
+        &--font-weight {
+            @include select-width(5.8125rem, 5.8125rem);
+        }
+
+        &--font-size {
+            @include select-width(3.8125rem, 3.8125rem);
+        }
+
+        &--turn {
+            @include select-width(5.8125rem, 11.1875rem);
+        }
+
+        &--link {
+            @include select-width(5.5625rem, 11.1875rem);
+        }
+
+        &--filling {
+            @include select-width(6.4375rem, 6.4375rem);
+        }
+    }
+
+    &__size-box {
+        @apply border border-black text-center text-tiny;
+
+        border-radius: 0.25rem;
+        width: 4.0625rem;
+        height: 1.4375rem;
+    }
+
+    &__slider {
+        color: black !important;
+        width: 4.875rem !important;
+    }
+
+    &__custom-list {
+        @apply bg-white shadow-card flex items-center justify-center gap-1.5;
+
+        border-radius: 8px;
+        width: 7.8125rem;
+        height: 2.125rem;
+    }
+
+    &__opacity {
+        @apply absolute left-0 border top-6 z-10;
+    }
+}
+
+.select-link {
+    @apply cursor-pointer w-22 h-6.5 border border-black rounded flex items-center justify-center;
+
+    &--text {
+        @apply whitespace-nowrap w-14 overflow-hidden overflow-ellipsis flex items-center font-bold font-allerbold text-gray-dark text-tiny;
+    }
+}
+
+.link-option {
+    @apply flex flex-col mt-4;
+
+    &__input {
+        @apply w-26 border border-black rounded-md px-1.5 h-8 text-gray-dark text-sm mr-1;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__name {
+        @apply flex items-center justify-center h-full mx-4 border-b w-36 border-gray-dark text-sm;
+    }
+}

@@ -1,0 +1,32 @@
+.contingency-activation {
+	@apply flex flex-col gap-y-4.5;
+
+	&__form-group {
+		@apply flex xs:flex-col lg:gap-x-4.5 xs:gap-y-4.5;
+
+		&__input {
+			@apply w-46.5 m-0;
+		}
+	}
+
+	&__sub-title {
+		@apply text-blue text-center text-26lg mx-auto #{!important};
+		line-height: 1.9681rem;
+	}
+
+	.text-area {
+		@apply bg-transparent xs:w-full;
+		width: 24.4375rem;
+		height: 5.6875rem;
+	}
+
+	.file-input {
+		@apply w-73 xs:w-full;
+	}
+
+	@media screen and (min-width: 3.125rem) and (max-width: 47.9375rem) {
+		.text-area {
+			width: 100%;
+		}
+	}
+}

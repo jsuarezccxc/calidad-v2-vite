@@ -1,0 +1,90 @@
+$greenUltraLight: rgba(217, 242, 240, 1);
+
+.ending-inventory-month {
+	@apply flex-1;
+
+	&__table {
+		width: 42.5rem;
+
+		@media (max-width: 48rem) {
+			width: 100%;
+		}
+
+		&-title {
+			&__first {
+				max-width: 8.75rem !important;
+				min-width: 8.75rem !important;
+			}
+
+			&__second {
+				max-width: 9.375rem !important;
+				min-width: 9.375rem !important;
+			}
+
+			&__third {
+				max-width: 6.25rem !important;
+				min-width: 6.25rem !important;
+			}
+		}
+	}
+
+	&__date-table {
+		padding: 0 !important;
+		text-align: left !important;
+	}
+
+	&__container-total {
+		@apply border-gray flex h-10 border-b;
+		width: 30.5rem;
+
+		@media (max-width: 48rem) {
+			width: 100%;
+			height: 2.1875rem !important;
+		}
+	}
+
+	&__text-total {
+		@apply flex items-center h-10 px-2 py-3 text-blue text-sm xs:leading-4 border-b border-gray;
+		background-color: $greenUltraLight;
+		width: 22.5rem;
+
+		@media (max-width: 48rem) {
+			height: 2.1875rem !important;
+		}
+	}
+
+	.field-header {
+		&--uneditable {
+			@apply bg-green-bgLight border-none;
+		}
+	}
+
+	.downloadIcons {
+		.withoutText {
+			@apply items-end flex-row-reverse gap-2;
+		}
+	}
+
+	.content {
+		@apply flex items-end;
+	}
+
+	&__td-body {
+		height: 2.46875rem;
+
+		@media (max-width: 48rem) {
+			height: 2.1875rem !important;
+		}
+	}
+
+	&__input {
+		@apply text-left;
+	}
+
+	&__content-tooltip {
+		.text-tooltip {
+			@apply text-base;
+			line-height: 1.1875rem
+		}
+	}
+}

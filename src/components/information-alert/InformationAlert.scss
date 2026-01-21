@@ -1,0 +1,23 @@
+.information-alert {
+	@apply relative inline-flex flex-row;
+
+	&--icon {
+		position: absolute;
+		width: 4.375rem;
+		height: 4.375rem;
+		right: -2.5rem;
+		top: -0.5rem;
+	}
+
+	&__info {
+		@apply rounded-lg bg-blue py-2 px-2.75;
+		box-shadow: 0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25);
+		max-width: 11.125rem;
+		width: 11.125rem;
+
+		.text {
+			@apply text-sm font-normal text-white text-left m-0;
+			width: 90%;
+		}
+	}
+}

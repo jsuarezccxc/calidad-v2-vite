@@ -1,0 +1,97 @@
+.basic-information {
+    &__name {
+        @apply w-full;
+
+        @media (min-width: 48rem) {
+            width: 38.75rem;
+        }
+    }
+
+    &__description {
+        width: 1.3125rem;
+        height: 1.3125rem;
+    }
+
+    &__title-variants {
+        @apply font-allerbold text-left text-base ml-1;
+    }
+
+    &__add-variants {
+        @apply flex gap-2 text-white rounded-md bg-green h-9 justify-center items-center mt-2;
+
+        width: 10.5981rem;
+    }
+
+    &__hidden-edit {
+        display: none !important;
+    }
+
+    &__add-variants-table {
+        @apply mt-2 text-base underline text-green font-aller cursor-pointer;
+
+        width: fit-content !important;
+    }
+
+    &__table-name {
+        @apply font-allerbold text-sm text-blue h-10 xs:h-8.75 text-left p-2;
+
+        width: 15.625rem;
+        background-color: #00A99D26;
+    }
+
+    &__table-options {
+        @apply font-allerbold text-sm text-blue h-10 xs:h-8.75 flex-1 text-left p-2 w-auto;
+
+        min-width: 31.25rem;
+        background-color: #00A99D26;
+    }
+
+    &__table-container {
+        @apply w-max;
+    }
+
+    &__table-input {
+        @apply flex-1 px-2;
+
+        text-align: left !important;
+    }
+
+    &__table-example {
+        page-break-inside: avoid;
+    }
+}
+
+.sun-editor {
+    @apply p-1 bg-gray-light border border-solid rounded-md;
+
+    width: 100% !important;
+
+    .se-toolbar {
+        height: auto !important;
+    }
+}
+
+.se-wrapper-inner {
+    @apply p-1 bg-gray-light;
+}
+
+.se-toolbar {
+    background-color: #F4F4F4 !important;
+}
+
+.sun-editor .se-toolbar {
+    outline: none;
+}
+
+.sun-editor .se-resizing-bar.se-resizing-none {
+    background-color: #F4F4F4 !important;
+}
+
+.sun-editor .se-resizing-bar {
+    border-top: 0px !important;
+}
+
+.sun-editor .se-btn {
+    height: 23px;
+    background-color: #FFFF;
+}

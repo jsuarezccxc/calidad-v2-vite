@@ -1,0 +1,28 @@
+.button-with-icon {
+    @apply px-2 py-3 text-white bg-green shadow-templateDesign;
+    width: 10.625rem;
+    height: 2.875rem;
+}
+
+.user-total {
+    @apply flex items-center h-full pl-2 border-b border-gray bg-green-ultraLight text-sm text-blue font-allerbold;
+    width: 13.4375rem;
+
+    &--number {
+        @apply flex items-center h-full pl-2 bg-white border-b border-gray text-sm text-gray;
+        width: 8rem;
+    }
+}
+
+.membership-modal, .delete-modal {
+    @apply p-6.70 flex flex-col justify-center items-center bg-white shadow-templateDesign rounded-2.5xl;
+    width: 26.5625rem;
+}
+
+.membership-modal {
+    height: 20.625rem;
+}
+
+.delete-modal {
+    height: 17.75rem;
+}

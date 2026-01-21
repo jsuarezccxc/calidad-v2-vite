@@ -1,0 +1,32 @@
+.react-pdf-container {
+	margin: 0 auto;
+	width: 33.5rem !important;
+	height: 46.25rem !important;
+}
+
+.scrollbar {
+	@apply xs:overflow-x-auto;
+	// scrollbar in firefox
+	scrollbar-width: thin;
+	scrollbar-color: rgb(0, 169, 157) rgb(244, 244, 244);
+
+	&::-webkit-scrollbar {
+		@apply w-1.5 h-1.5;
+	}
+
+	&::-webkit-scrollbar-track {
+		@apply bg-green bg-opacity-20 rounded-md;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		@apply bg-green rounded-md xs:bg-opacity-70;
+	}
+}
+
+
+.file {
+	canvas {
+		width: 21.5625rem !important;
+		height: 30.375rem !important;
+	}
+}

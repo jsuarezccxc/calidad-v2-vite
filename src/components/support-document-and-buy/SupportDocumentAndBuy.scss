@@ -1,0 +1,340 @@
+.support-document-and-buy {
+    @apply w-full bg-white shadow-templateDesign px-7 py-4.5;
+
+    .margin-8 {
+        @apply mb-2;
+    }
+
+    .padding-header {
+        @apply p-0;
+    }
+
+    .d-flex-row {
+        @apply flex flex-row;
+    }
+
+    .h-40 {
+        @apply h-10;
+    }
+
+    .xs-h-auto {
+        @apply xs:h-auto;
+    }
+
+    .xs-w-m-modal {
+        @apply xs:mx-auto xs:w-min;
+    }
+
+    .w-28 {
+        @apply w-7;
+    }
+
+    .mt-2-1 {
+        margin-top: 0.5625rem;
+    }
+
+    .mb-29 {
+        margin-bottom: 1.8125rem;
+    }
+
+    .m-mobile {
+        @apply xs:m-0;
+    }
+
+    .radio-custom {
+        @apply bg-white px-0 w-full text-tiny;
+    }
+
+    .w-200-4 {
+        @apply w-49.4;
+    }
+
+    .w-185-96 {
+        @apply w-44.4;
+    }
+
+    .text-left-link {
+        @apply text-left;
+    }
+
+    .max-180 {
+        @apply min-w-180 p-11.5 overflow-auto pb-10;
+
+        height: 42.6875rem;
+    }
+
+    .check-input {
+        @apply w-4.5 p-0 ml-2.5;
+    }
+
+    .box-textarea {
+        @apply flex gap-4.5;
+    }
+
+    .section-title {
+        @apply flex flex-row;
+
+        h3 {
+            @apply font-allerbold text-lg text-gray-dark;
+
+            &.sub-title {
+                @apply text-blue text-base;
+            }
+
+            &.modal-title {
+                @apply text-blue text-xl;
+            }
+
+            &.modal-supplier {
+                @apply text-lg leading-5;
+            }
+        }
+    }
+
+    .section-paragraph {
+        @apply mt-2;
+
+        &__mt-sub-paragraph {
+            @apply mt-2.5;
+        }
+
+        &__mt-footer-page {
+            @apply mt-9;
+        }
+
+        p {
+            @apply text-gray-dark;
+
+            &.mt-paragraph {
+                @apply mt-4.5;
+            }
+        }
+    }
+
+    .section-form {
+        @apply flex flex-col gap-y-4.5;
+
+        .box-input {
+            @apply flex justify-start xs:flex-col flex-row items-start gap-4.5;
+
+            &__input-supplier {
+                @apply xs:w-full w-73 flex flex-col;
+
+                &__link-modal {
+                    @apply text-base mt-2 w-max;
+                }
+            }
+
+            &__input-select {
+                @apply xs:w-full w-73;
+
+                &--icon-size {
+                    & img {
+                        width: 1.51rem;
+                    }
+                }
+            }
+
+            &__input-digit {
+                @apply xs:w-full w-59.5;
+            }
+
+            &__box-checkbox {
+                @apply lg:ml-4.5 ml-0 w-60 flex flex-col mb-2 xs:mt-4.5 xs:w-full;
+            }
+
+            &__checkbox-label {
+                @apply text-blue font-allerbold text-tiny;
+            }
+
+            &__checkbox {
+                @apply rounded-full;
+            }
+
+            &__box-radio {
+                @apply mt-8 mb-5;
+            }
+        }
+
+		.foreign-currency {
+			@apply flex flex-col w-73 xs:w-full;
+			
+			&__message {
+				@apply text-right text-green text-tiny mx-1.5 h-8.2;
+			}
+		}
+
+		.group-input-text {
+			@apply flex flex-col w-73 xs:w-full;
+		}
+    }
+
+	.rate-message {
+		@apply text-left text-green text-tiny mx-1.5 h-8.2;
+		line-height: normal;
+	}
+
+    .section-table {
+        .table-service-product {
+            @apply mt-5 w-max xs:mt-0;
+
+            .header {
+                @apply p-0 xs:p-0.25;
+
+                &__w-35-1 {
+                    width: 8.6875rem;
+                }
+
+                &__w-28-8 {
+                    width: 7.4375rem;
+                }
+
+                &__w-26-4 {
+                    width: 6.8125rem;
+                }
+
+                &__w-36-6 {
+                    width: 9.3125rem;
+                }
+
+                &__w-48-1 {
+                    @apply w-48;
+                }
+
+                &__w-80 {
+                    @apply w-20;
+                }
+
+                &__w-192 {
+                    @apply w-48;
+                }
+
+                &__w-175 {
+                    @apply w-41;
+                }
+
+                &__w-165 {
+                    width: 10.3125rem;
+                }
+
+                &__w-160 {
+                    @apply w-39;
+                }
+
+                &__w-150 {
+                    @apply w-37;
+                }
+
+                &__w-140 {
+                    width: 8.75rem;
+                }
+
+                &__w-120 {
+                    @apply w-29;
+                }
+
+                &__w-110 {
+                    @apply w-27;
+                }
+
+                &__w-211 {
+                    width: 13.1875rem;
+                }
+
+                &__w-209 {
+                    width: 13.0625rem;
+                }
+            }
+
+            .body {
+                &__input-date {
+                    @apply flex flex-row items-center justify-center w-full h-full;
+                }
+
+                &__input-lot {
+                    @apply flex items-center px-1.5;
+                }
+
+                &__h-auto {
+                    @apply xs:min-h-8 xs:h-8.2 h-10;
+                }
+
+                &__px-0 {
+                    @apply px-0;
+                }
+            }
+
+            .select-search__input {
+                @apply m-0 p-0;
+            }
+        }
+
+        &__section-table-totals {
+            @apply flex my-7 xs:flex-col;
+        }
+
+        &__column-1 {
+            @apply xs:w-full mr-7 xs:mr-0;
+        }
+
+        &__column-2 {
+            @apply w-2/5 xs:w-full xs:mt-3;
+        }
+    }
+
+    .content-section-table {
+        @apply flex flex-col mb-2 mt-9.5;
+
+        .content-taxes-withholdings {
+            @apply flex md:flex-col lg:flex-row xs:flex-col xs:gap-y-5;
+
+            &__table-taxes {
+                @apply flex flex-row xs:flex-col xs:w-full xs:mb-5;
+            }
+
+            &__table-withholdings {
+                @apply xs:w-full lgm:w-full xs:ml-0 md:ml-0 md:mt-4.5 lg:ml-7 lg:mt-0;
+            }
+        }
+    }
+
+    @media screen and (min-width: 96.688rem) {
+        .w-max-table-service {
+            @apply w-full;
+        }
+
+        .section-table {
+            .table-service-product {
+                @apply w-full;
+            }
+        }
+    }
+
+    @media screen and (min-width: 80rem) {
+        .margin-top-2-5 {
+            @apply mt-10;
+        }
+    }
+
+    @media screen and (min-width: 125.188rem) {
+        .w-max-table-product {
+            @apply w-max;
+        }
+    }
+
+    @media screen and (min-width: 126.5rem) {
+        .w-max-table-warehouse {
+            @apply w-max;
+        }
+
+        .mr-10-trash {
+            @apply mr-2.5;
+        }
+    }
+
+    @media screen and (min-width: 3.125rem) and (max-width: 47.938rem) {
+        .max-180 {
+            height: auto;
+        }
+    }
+}

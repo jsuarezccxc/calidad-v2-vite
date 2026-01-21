@@ -1,0 +1,123 @@
+.layout {
+    &__title {
+        @apply text-center font-allerbold text-blue mb-4.5;
+
+        font-size: 1.625rem;
+    }
+
+    &__description {
+        @apply font-allerbold text-base text-blue;
+    }
+}
+
+.social-card {
+    @apply bg-white p-1.5 flex w-full;
+
+    height: 2rem;
+    column-gap: 0.3125rem;
+
+    @media (min-width: 37.5rem) {
+        width: 6.6875rem;
+    }
+
+    @media (max-width: 64rem) {
+        @apply text-left;
+    }
+}
+
+.social-input {
+    @apply border border-blue rounded-md p-1.5 outline-none  font-aller text-blue text-sm w-full;
+
+    height: 2rem;
+
+    @media (min-width: 48rem) {
+        width: 13.25rem;
+    }
+
+    &:focus {
+        @apply border border-green;
+    }
+
+    &::placeholder {
+        @apply text-blue;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+.select-prefix {
+    @apply bg-white outline-none text-sm text-gray-dark font-aller cursor-pointer appearance-none border-none w-full;
+
+    height: 2rem;
+
+    @media (min-width: 37.5rem) {
+        width: 5.325rem;
+    }
+}
+
+.text-whatsapp {
+    @apply border border-blue rounded-md p-1.5 outline-none  font-aller text-blue w-full;
+
+    height: 2rem;
+
+    &:focus {
+        @apply border border-blue;
+    }
+
+    &::placeholder {
+        color: #AEAEAF;
+    }
+
+    @media (min-width: 37.5rem) {
+        width: 14.875rem;
+    }
+}
+
+.whatsapp-inputs {
+    @apply flex mb-4.5 items-start gap-2 xs:w-full;
+
+    @media (max-width: 64rem) {
+        @apply flex-col items-start;
+    }
+}
+
+.social-content {
+    @apply flex items-start gap-2;
+
+    @media (max-width: 64rem) {
+        @apply flex-col items-start;
+    }
+}
+
+.title-social {
+    margin-bottom: 0.4375rem;
+}
+
+.modal-social-example {
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    padding: 0.625rem .5rem;
+}
+
+iframe {
+    border-radius: 0.9375rem;
+}
+
+.wrapper-modal-social {
+    @apply p-0;
+
+    max-width: 100%;
+    width: 36rem;
+    height: 20.75rem;
+
+    @media (max-width: 64rem) {
+        min-width: 0;
+        width: 16rem;
+        height: 10.75rem;
+    }
+}

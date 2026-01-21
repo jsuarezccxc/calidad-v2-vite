@@ -1,0 +1,72 @@
+
+.simple-card {
+	@apply xs:w-full bg-white font-allerbold shadow-templateDesign flex flex-col items-center justify-between rounded-lg pt-3.25 px-2 pb-2;
+	height: 7.0625rem;
+	width: 7.625rem;
+
+	&__img {
+		@apply h-12.5;
+		width: 2.6875rem;
+	}
+	&__label {
+		@apply text-center underline text-tiny text-green leading-xs cursor-pointer;
+
+		&--bold {
+			@apply text-tiny font-allerbold leading-16.95px;
+		}
+	}
+
+	&__label-blue {
+		@apply text-center underline text-tiny text-blue leading-xs cursor-pointer;
+	}
+}
+
+.color-card {
+	@apply flex py-4.5 pl-4.5 pr-2 shadow-templateDesign rounded-lg gap-x-2;
+
+	&__line {
+		@apply h-auto rounded-lg border-t-1 border-l-1.25 border-r-1.25 border-b-1 border-transparent;
+		width: 0.1875rem;
+	}
+
+	&__content-text {
+		@apply flex flex-col gap-y-1;
+
+		& h1 {
+			@apply leading-8 font-allerbold;
+		}
+
+		& label {
+			@apply font-allerbold text-sm leading-16.95px;
+		}
+	}
+	
+	&__icon {
+		@apply self-start w-5 h-5 ml-auto;
+	}
+}
+
+.little-card {
+	@apply flex items-center justify-between w-full px-2 rounded-lg;
+
+	&__title {
+		@apply font-allerbold;
+		font-size: 0.7219rem;
+	}
+
+	&__number {
+		@apply font-allerbold text-2lg;
+	}
+}
+
+.content-card {
+	@apply h-auto bg-white rounded-lg shadow-templateDesign px-2.5 flex flex-col;
+
+	&__title {
+		@apply text-blue text-sm font-allerbold leading-16.95px;
+	}
+
+	&__content {
+		@apply self-center w-full;
+	}
+}

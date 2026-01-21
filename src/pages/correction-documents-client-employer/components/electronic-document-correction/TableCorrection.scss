@@ -1,0 +1,124 @@
+.correction-number-inputs {
+    @apply text-sm;
+    height: 2.3125rem !important;
+
+    @media (max-width: 48rem) {
+        height: 1.688rem !important;
+    }
+
+    .number-format {
+        @apply px-2;
+        text-align: left !important;
+    }
+
+    .field-body--uneditable {
+        p {
+            padding-left: 0.5rem !important;
+            padding-right: 0.5rem !important;
+        }
+    }
+
+	&--disabled {
+		@apply text-left text-gray #{!important};
+	}
+}
+
+.table-total-overflow--hidden {
+    overflow: hidden !important;
+}
+
+.table-total-custom {
+
+    .field-body--uneditable,
+    .field-body--editable {
+        @apply mt-0.5;
+        border: none !important;
+        background-color: white !important;
+        max-height: 1.1875rem;
+    }
+
+    .field-body--editable {
+        @apply rounded border-gray-dark px-0.5;
+        border: 0.0625rem solid !important;
+    }
+
+    .number-format {
+        @apply text-blue;
+        margin: 0 !important;
+        text-align: left !important;
+        max-height: 1.1875rem;
+
+
+    }
+}
+
+.table-correction-withholdings {
+	@apply border-b border-gray;
+
+	&--disabled {
+		@apply w-full text-left text-gray #{!important};
+	}
+
+	&__select {
+		@apply mx-0 px-0 #{!important};
+	}
+
+	&__number, &__select {
+		@apply w-full text-left #{!important};
+	}
+}
+
+.table-body-correction {
+    @apply text-sm bg-white xs:text-tiny text-gray-dark;
+
+    .field-body--uneditable {
+        @apply bg-gray-light text-gray;
+
+        .number-format {
+            @apply text-gray;
+        }
+
+        p {
+            @apply text-gray;
+        }
+    }
+
+    .number-format {
+        @apply px-2;
+        text-align: left !important;
+    }
+
+    .MuiAutocomplete-input {
+        margin: 0 !important;
+        text-align: left !important;
+    }
+
+    .MuiAutocomplete-endAdornment {
+        right: 0.5rem !important;
+    }
+
+    .input--disabled {
+        background-color: white !important;
+
+        .select__text {
+            @apply text-gray;
+
+            .icon {
+                @apply hidden;
+            }
+        }
+    }
+
+    .select__text {
+        text-align: left !important;
+    }
+
+	&--required {
+		@apply bg-white border border-purple;
+	}
+}
+
+.adaptable-text-area {
+    @apply border-gray #{!important};
+    height: 4.3125rem !important;
+}

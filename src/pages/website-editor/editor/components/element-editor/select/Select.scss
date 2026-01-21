@@ -1,0 +1,98 @@
+.editor,
+.MuiModal-root {
+    .select {
+        &__content {
+            @apply border rounded items-center flex justify-between pl-2 pr-1 cursor-pointer relative visible;
+
+            &--style {
+                @apply border-blue;
+
+                height: 1.625rem !important;
+            }
+
+            &--common {
+                @apply border-gray w-57;
+
+                height: 2rem;
+            }
+        }
+
+        &__label {
+            @apply text-tiny font-allerbold text-blue mb-1;
+        }
+
+        &__options {
+            @apply top-7 rounded-lg bg-gray-light shadow-card left-0;
+
+            z-index: 90;
+            position: absolute !important;
+            max-height: 9.375rem;
+
+            &--common {
+                @apply w-full;
+            }
+        }
+
+        &__option {
+            @apply text-center py-2 cursor-pointer hover:bg-blue text-gray-dark text-sm relative;
+
+            &:hover {
+                @apply bg-blue text-white;
+
+                &::before {
+                    @apply bg-transparent;
+                }
+
+                svg path {
+                    fill: white;
+                }
+            }
+
+            &:last-of-type {
+                &::before {
+                    @apply bg-transparent;
+                }
+            }
+
+            &::before {
+                @apply absolute inline-block w-full bottom-0 m-auto inset-x-0 bg-gray;
+
+                content: '';
+                height: 0.0313rem;
+                width: calc(100% - 2rem);
+            }
+
+            &--white {
+                background-color: white !important;
+
+                &:hover {
+                    color: #4B4B4B !important;
+                }
+            }
+        }
+
+        &__placeholder {
+            @apply text-tiny;
+
+            &--common {
+                @apply text-gray;
+            }
+
+            &--style {
+                @apply text-blue font-allerbold;
+            }
+        }
+
+        &__value {
+            @apply text-tiny flex-1 truncate;
+
+            &--common {
+                @apply text-gray-dark leading-4;
+            }
+
+            &--style {
+                @apply text-blue font-allerbold;
+            }
+        }
+    }
+}

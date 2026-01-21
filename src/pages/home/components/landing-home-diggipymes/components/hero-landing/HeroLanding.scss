@@ -1,0 +1,141 @@
+.hero-landing {
+    @apply font-poppins xs:px-2;
+
+    &__header {
+        justify-content: space-between;
+        align-items: center;
+		text-align: center;
+
+        @media (max-width: 48rem) {
+            width: 100%;
+            flex-direction: column;
+        }
+    }
+
+    &__title {
+        line-height: 5.625rem;
+        @apply  font-poppinssemibold text-5xl text-center;
+
+        @media (max-width: 48rem) {
+            line-height: normal;
+        }
+    }
+
+	&__source {
+		@apply text-xtiny mx-auto text-white;
+		max-width: 35.75rem;
+
+		&--link {
+			@apply text-xtiny;
+		}
+	}
+
+    &__subtitle {
+        font-weight: bold;
+
+        @media (max-width: 48rem) {
+            font-size: 1.25rem;
+        }
+
+        @apply font-poppinssemibold text-white text-5xl;
+    }
+
+    &__description-container {
+        margin-bottom: 1.75rem;
+
+        @apply text-2xl;
+
+        line-height: 5rem;
+
+        &--text {
+            @apply text-white text-2xl xs:text-lg xs:text-center;
+
+            @media (max-width: 48rem) {
+                line-height: normal;
+            }
+        }
+
+        &--price-text-l1 {
+            line-height: 2.18rem;
+            font-weight: 600;
+			background-image: url("/assets/images/landing/price-underline-1.svg");
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: bottom;
+			width: max-content;
+
+            span {
+                @apply font-poppinssemibold;
+            }
+
+            @apply text-white text-center text-2xl xs:text-lg mx-auto;
+        }
+
+		&--price-text-l2 {
+            margin-top: .5rem;
+            line-height: 2.18rem;
+            font-weight: 600;
+			background-image: url("/assets/images/landing/price-underline-2.svg");
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: bottom;
+			width: max-content;
+
+            span {
+                @apply font-poppinssemibold;
+            }
+
+            @apply text-white text-center text-2xl xs:text-lg mx-auto;
+        }
+    }
+
+    &__buttons-container {
+        display: flex;
+        column-gap: 1.75rem;
+
+        @media (max-width: 48rem) {
+            flex-direction: column;
+            row-gap: 1.75rem;
+        }
+
+        &--button {
+            border-radius: 1.75rem;
+            width: 18.125rem;
+            height: 3.3125rem;
+
+            @apply font-poppins bg-purple hover:bg-purple focus:bg-purple text-lg xs:text-base;
+        }
+
+        &--button-schedule {
+			color: white;
+			width: 22.8125rem;
+
+            &:hover {
+				color: white;
+            }
+
+			@media (max-width: 48rem) {
+				width: 20.8125rem;
+				flex-direction: column;
+			}
+
+            @apply border border-green hover:border-purple hover:text-white focus:bg-green bg-green text-white text-xl;
+        }
+    }
+
+}
+
+.captcha-modal {
+    &__content {
+        width: 24.125rem !important;
+        height: 12.0625rem !important;
+    }
+
+    &__children {
+        @apply flex flex-col items-center justify-center;
+    }
+
+    &__buttons {
+        @apply flex gap-7 mt-7;
+    }
+}

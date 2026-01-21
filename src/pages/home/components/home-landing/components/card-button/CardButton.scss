@@ -1,0 +1,7 @@
+.CardButton {
+	@apply lg:w-44.25 lg:h-32 rounded-lg bg-green shadow-template hover:bg-blue xs:h-24 xs:w-32 md:h-24 md:w-30;
+
+	&__text {
+		@apply lg:text-2.1lg text-white font-aller xs:text-sm md:text-sm pr-2 text-center pl-2;
+	}
+}

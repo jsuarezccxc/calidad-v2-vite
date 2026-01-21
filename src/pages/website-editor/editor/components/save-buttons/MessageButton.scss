@@ -1,0 +1,24 @@
+.message-button {
+	@apply flex flex-col w-34;
+
+	&__container {
+		@apply flex mt-2 gap-7;
+		margin-left: 16.875rem;
+	}
+
+	.container__message {
+		@apply flex flex-row w-full;
+
+		.text--date {
+			@apply flex items-center justify-center w-full mx-auto mt-0 text-tiny text-gray-dark font-allerbold;
+		}	
+	}
+	
+	.message-publish {
+		@apply h-5 py-0.25 ml-7 text-center text-white rounded-lg w-22 bg-green text-tiny hidden;
+	}
+	
+	.container__message:hover ~ .message-publish {
+		@apply block xs:hidden;
+	}
+}

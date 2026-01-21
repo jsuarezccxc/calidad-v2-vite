@@ -1,0 +1,29 @@
+.editor,
+.preview-page {
+    .input {
+        @apply flex flex-col flex-1 w-full;
+
+        &__label {
+            @apply text-tiny text-blue font-allerbold mb-1 whitespace-nowrap overflow-hidden overflow-ellipsis;
+        }
+
+        &__box {
+            @apply border rounded-md h-8 px-1.5 text-sm text-gray outline-none bg-white border-gray;
+
+            &-mobile {
+                @apply h-8.5;
+            }
+        }
+
+        &--two-mobile>input {
+            @apply relative;
+            height: 6.5rem;
+
+
+            &::placeholder {
+                @apply absolute top-1 left-1;
+            }
+        }
+
+    }
+}

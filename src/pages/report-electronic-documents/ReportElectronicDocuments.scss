@@ -1,0 +1,74 @@
+.report-table {
+
+    &__download, &__paginator {
+        max-width: 90.25rem
+    }
+
+    &__wrapper {
+        @apply overflow-y-hidden;
+    }
+
+    &__head,
+    &__body {
+        max-width: 90.25rem;
+    }
+
+    &--tbody {
+        @apply text-tiny lg:text-sm text-gray break-words;
+        line-height: 0.9375rem;
+    }
+
+    &--tr {
+        @apply border-b border-gray flex items-center;
+        min-height: 2.5rem;
+        height: auto;
+
+        @media (max-width: 64rem) {
+            min-height: 2.1875rem;
+        }
+    }
+
+    &--date,
+    &--product,
+    &--sku,
+    &--concept,
+    &--electronic {
+        @apply px-2 text-left;
+    }
+
+    &--date {
+        min-width: 9.125rem;
+        max-width: 9.125rem;
+    }
+
+    &--product {
+        min-width: 8rem;
+        max-width: 8rem;
+    }
+
+    &--sku {
+        min-width: 7rem;
+        max-width: 7rem;
+    }
+
+    &--concept,
+    &--electronic {
+        min-width: 10.5rem;
+        max-width: 10.5rem;
+    }
+
+    &--input,
+    &--output,
+    &--available {
+        min-width: 15rem;
+        max-width: 15rem;
+    }
+
+    .input--disabled {
+        @apply bg-transparent border-none flex justify-between;
+
+        .input {
+            @apply text-left px-0 text-tiny lg:text-sm text-gray;
+        }
+    }
+}

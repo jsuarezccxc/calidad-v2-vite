@@ -1,0 +1,27 @@
+.database-employee-detail {
+	.container__buttons {
+		@apply flex flex-row w-full gap-x-4.5;
+
+		.button--option {
+			@apply p-2 rounded-lg bg-white shadow-templateDesign text-blue text-sm font-allerbold;
+		}
+	}
+
+	.col-width {
+		&:nth-child(1) {
+			width: 12.4375rem;
+		}
+		&:nth-child(2) {
+			width: 30.1875rem;
+		}
+		&:nth-child(3) {
+			width: 14.625rem;
+		}
+	}
+
+	.field-body--uneditable {
+		* {
+			@apply text-gray;
+		}
+	}
+}

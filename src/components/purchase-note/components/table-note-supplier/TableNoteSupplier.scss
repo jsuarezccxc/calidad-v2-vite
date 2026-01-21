@@ -1,0 +1,98 @@
+
+@mixin field-width($width) {
+		width: $width !important;
+		min-width: $width !important;
+		max-width: $width !important;
+		height: 2.5rem !important;
+}
+
+.table-note{
+
+	input[type=number]::-webkit-inner-spin-button, 
+	input[type=number]::-webkit-outer-spin-button { 
+	-webkit-appearance: none; 
+	margin: 0; 
+	}
+
+	input[type=number] { -moz-appearance:textfield; }
+
+	@media (max-width: 80rem) {
+		@include field-width(58.875rem)
+	}
+
+	.input{
+		@apply w-auto mr-0;
+	}
+
+	.field-header-note{
+
+	  .input-number{
+
+		div{
+			@apply m-auto;
+		}
+
+	  }
+
+	}
+	@media (min-width: 80rem) {
+		.input--container{
+			input{
+				width: 100% !important;
+				text-align: center !important;
+			}
+		}
+		.field-md{
+			width: 100% !important;
+			text-align: center !important;
+		}
+	}
+	@media (max-width: 80rem) {
+		
+		.field-number{
+			@include field-width(3.375rem)
+		}
+
+		.field-sku{
+			@include field-width(8.0625rem)
+		}
+
+		.field-product{
+			@include field-width(10.3125rem)
+		}
+
+		.field-quantity{
+			@include field-width(6.0625rem)
+		}
+
+		.field-iva{
+			@include field-width(7rem)
+		}
+
+		.field-md{
+			@include field-width(7.8125rem)
+		}
+		
+	}
+	.check-md{
+		@apply ml-4.5 p-0 w-4.5
+		
+	}
+}
+
+.total-table {
+	@apply flex flex-row justify-end mr-0 lg:mr-8 h-10;
+
+	.total-box {
+		@apply w-49 bg-gray-light border-gray xs:w-40;
+	}
+	
+	.total-text {
+		@apply text-sm leading-4 text-center font-allerbold mt-3 text-blue;
+	}
+
+	.total-container {
+		@include field-width(11.0625rem);
+		@apply text-center bg-gray-light border-gray xs:w-40 ;
+	}
+}

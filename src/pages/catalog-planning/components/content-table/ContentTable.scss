@@ -1,0 +1,8 @@
+.table-custom {
+    .field-body--uneditable.custom-field-body { 
+        @media (max-width: 47.9375rem) {
+            max-width: 100% !important;
+            @apply px-1;
+        }
+    }
+} 

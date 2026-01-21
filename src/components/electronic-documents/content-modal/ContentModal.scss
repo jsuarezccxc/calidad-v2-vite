@@ -1,0 +1,35 @@
+.content-modal {
+	&__content {
+		@apply flex flex-col items-center justify-center gap-7;
+	}
+
+	&__content-information {
+		@apply flex flex-col items-center justify-center gap-2;
+
+		&__icon {
+			@apply w-22.2 h-22.2;
+		}
+
+		& h3 {
+			@apply text-xl text-center font-allerbold text-blue;
+			line-height: 1.6875rem;
+		}
+
+		& p {
+			@apply text-center text-gray-dark;
+			width: 29.6875rem;
+		}
+	}
+
+	&__form {
+		@apply flex flex-col gap-4.5;
+
+		&__input {
+			@apply w-73 xs:w-full;
+		}
+	}
+
+	&__content-button {
+		@apply flex gap-7;
+	}
+}

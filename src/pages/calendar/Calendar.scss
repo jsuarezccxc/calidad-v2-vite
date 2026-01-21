@@ -1,0 +1,131 @@
+$primary: #0B2C4C;
+
+.calendar {
+    @apply font-aller xs:px-2;
+
+    &__modal-content {
+        @media (max-width: 38.5rem) {
+            @apply m-auto;
+        }
+    }
+
+    &__back-button {
+        @media (min-width: 43.75rem) {
+            @apply hidden;
+        }
+    }
+
+    .fc-header-toolbar {
+        @media (max-width: 37.5rem) {
+            @apply flex flex-col gap-2;
+        }
+    }
+
+    .fc-today-button {
+        display: none !important;
+    }
+
+    .fc-button-primary {
+        background-color: $primary !important;
+    }
+
+    .fc-timegrid-slot-label-cushion {
+        @apply text-blue text-center w-full font-allerbold text-sm block;
+
+        width: 1.625rem !important;
+    }
+
+    .fc-col-header-cell-cushion {
+        @apply text-blue text-center w-full font-allerbold text-sm;
+    }
+
+    .fc-toolbar-title {
+        @apply text-blue font-allerbold;
+    }
+
+    .fc-daygrid-day {
+        @media (max-width: 37.5rem) {
+            min-width: 9.375rem !important;
+            width: 9.375rem !important;
+            min-height: 3.75rem;
+            height: 3.75rem !important;
+        }
+    }
+
+    .fc-daygrid-day-frame {
+        .fc-event-time {
+            @apply hidden;
+        }
+    }
+
+    .fc-daygrid-event {
+        @apply border-none px-1;
+    }
+
+    .fc-daygrid-body, .fc-col-header {
+        @apply overflow-y-auto;
+    }
+
+    .fc-scroller {
+        @apply overflow-y-auto;
+
+        overflow: auto !important;
+    }
+
+    .fc-toolbar-title {
+        @media (max-width: 37.5rem) {
+            font-size: 1.25rem !important;
+        }
+    }
+
+    .fc-dayGridMonth-view {
+        thead {
+            @media (max-width: 37.5rem) {
+                @apply hidden;
+            }
+        }
+    }
+}
+
+.calendar-datepicker {
+    height: 10.5rem;
+
+    .custom-calendar {
+        font-size: 0.75rem;
+    }
+
+    .react-datepicker__day-name,
+    .react-datepicker__day {
+        font-size: 0.625rem;
+        width: 1.7em;
+        height: 1.7em;
+        line-height: 1.7em;
+    }
+}
+
+.calendar-hours {
+    width: 4.063rem;
+    height: 1.563rem;
+    top: 2.969rem;
+    left: 13.063rem;
+    border: 0.125rem solid #AEAEAF;
+    font-size: 0.75rem;
+    text-align: center;
+}
+
+.calendar-hours:hover {
+    border: 0.125rem solid #AEAEAF;
+
+    @apply bg-blue text-white cursor-pointer;
+}
+
+.calendar-hours-select {
+    border: 0.125rem solid #AEAEAF;
+
+    @apply bg-blue text-white cursor-pointer;
+}
+
+.calendar-box-shadow {
+    border-radius: 0.3125rem;
+    box-shadow: 0.1875rem 0.1875rem 0.6875rem #b3b3b3, -0.1875rem -0.1875rem 0.6875rem #ffffff;
+}

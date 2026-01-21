@@ -1,0 +1,66 @@
+.work-space {
+    @apply relative flex flex-col bg-white;
+    width: 77.8125vw !important; 
+    height: 64.16vh !important; 
+    min-height: 64.16vh !important;
+
+
+    &__arrows {
+        @apply flex;
+    }
+
+    &__arrow-button {
+        @apply flex items-center justify-center border w-7 h-7 bg-gray-light border-blue;
+
+        border-radius: .25rem 0 0 .25rem;
+
+        &:last-of-type {
+            @apply border-l-0;
+
+            border-radius: 0 .25rem .25rem 0;
+        }
+    }
+
+    &__box {
+        @apply border border-gray-smoke flex flex-col h-full;
+        flex: 1;
+        min-height: 64.16vh;
+
+        .icon--paste {
+            @apply mr-2;
+            width: .9194rem;
+            height: 1.0344rem;
+        }
+    }
+
+    &__drop-zone {
+        @apply overflow-y-auto flex-1 relative overflow-x-hidden;
+    }
+
+    &__mobile {
+        @apply border border-black ml-auto text-center mx-auto bg-white overflow-y-auto w-86;
+		max-width: 360px !important;
+    }
+
+    &__tab {
+        @apply flex items-center gap-2.5 overflow-hidden border-blue bg-gray-light border px-4 transition-all;
+
+        font-size: .8125rem;
+        max-width: 9.875rem;
+        height: 1.75rem;
+
+        &--active {
+            @apply bg-blue border-blue text-white border;
+
+            padding: 0 .6875rem;
+        }
+
+        &--left {
+            border-radius: .125rem 0 0 .125rem;
+        }
+
+        &--right {
+            border-radius: 0 .125rem .125rem 0;
+        }
+    }
+}

@@ -1,0 +1,115 @@
+.add-inventory {
+    &__bulb {
+        margin-top: 0 !important;
+    }
+
+    &__tooltip {
+        width: 19.625rem !important;
+        height: 22.375rem !important;
+    }
+
+    &__description {
+        @apply text-base;
+
+        line-height: 1.175rem !important;
+    }
+
+    &__description {
+        @apply font-aller text-base text-gray-dark;
+    }
+
+    &__table {
+        &-container {
+            width: 68.75rem;
+        }
+
+        &-variants, &-name, &-perishable, &-batch, &-date-expired, &-units, &-warehouse {
+            @apply bg-green-extraLight border-b border-gray h-10 font-allerbold text-sm leading-tight;
+        }
+
+        &-variants {
+            width: 12.5rem !important;
+        }
+
+        &-name {
+            width: 10rem;
+        }
+
+        &-perishable {
+            width: 9.0625rem;
+        }
+
+        &-batch {
+            width: 9.5rem;
+        }
+
+        &-date-expired {
+            width: 8.5rem;
+        }
+
+        &-units {
+            width: 6.75rem;
+        }
+
+        &-warehouse {
+            width: 9.75rem;
+        }
+
+        &-input-batch {
+            @apply text-gray-dark w-32.4 px-2;
+
+            text-align: left !important;
+        }
+
+        &-units-warehouse {
+            @apply text-gray-dark pl-2;
+
+            text-align: left !important;
+            width: 6.75rem;
+            -webkit-appearance: none !important;
+
+            input[type="number"] {
+                -moz-appearance: textfield !important;
+            }
+
+            &::-webkit-inner-spin-button,
+            input[type="number"]::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            /* Eliminar flechas en Firefox */
+            input[type="number"] {
+                -moz-appearance: textfield;
+            }
+        }
+    }
+
+	&__content-thrash{
+		max-width: 68.125rem;
+	}
+
+    &__modal {
+        &-wrapper {
+            @apply flex items-center;
+
+            width: 26.5625rem;
+            padding: 1.625rem !important;
+        }
+    }
+	.MuiInputBase-input {
+		margin: 0 !important
+	}
+
+    .MuiInputBase-input {
+        margin: 0 !important;
+    }
+
+    .table-inventory {
+        &__container {
+            @apply mt-4.5;
+
+            width: 30.5rem;
+        }
+    }
+}

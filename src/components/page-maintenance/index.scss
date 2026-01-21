@@ -1,0 +1,101 @@
+.header-maintenance {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 1rem;
+    text-align: center;
+}
+.maintenance-image {
+    margin: auto !important;
+    width: 34.375rem;
+    height: 100%;
+}
+
+.maintenance-work{
+    width: 100% !important;
+
+}
+
+.maintenance-container__diggy-logo {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-right: 5rem;
+    margin-top: 2.5rem;
+    width: 9.375rem;
+    height: auto;
+}
+
+.image-container-maintenance {
+    margin-bottom: 2rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+.image-maintenance {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-height: 100%;
+    margin-bottom: 1.875rem;
+}
+
+.image-responsive-maintenance {
+    display: none;
+}
+
+.footer-maintenance {
+    background: rgb(0, 169, 157);
+    background: linear-gradient(0deg, rgba(0, 169, 157, 1) 15%, rgba(11, 44, 76, 1) 94%);
+    padding: 1.25rem;
+}
+
+.footer-maintenance__social {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    gap: 3.75rem;
+}
+
+.footer-maintenance-p {
+    text-align: center;
+    color: white;
+}
+
+.footer-maintenance-a {
+    color: white;
+}
+
+@media (max-width: 48rem) {
+
+    .footer-maintenance {
+        font-size: 0.75rem;
+    }
+
+    .image-maintenance  {
+        height: auto;
+        width: 100%;
+        display: none;
+    }
+
+    .image-responsive-maintenance {
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+
+    .maintenance-image {
+        width: 21.875rem;
+        height: 100%;
+        margin-top: 4.375rem;
+    }
+
+    .maintenance-container__diggy-logo {
+        margin-top: 1.25rem;
+        margin-right: 0.9375rem;
+        width: 7.5rem;
+    }
+}

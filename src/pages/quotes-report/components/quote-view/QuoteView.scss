@@ -1,0 +1,228 @@
+
+.quote-view {
+  &__container {
+    @apply w-full m-0 flex flex-col items-stretch relative bg-transparent;
+    padding: 1.25rem;
+    box-sizing: border-box;
+    gap: 0;
+    z-index: 1;
+
+    .quote-view__page-subtitle {
+      @apply text-left whitespace-nowrap font-bold block visible text-blue;
+      margin-left: 0 !important;
+      margin-bottom: 1rem !important;
+      overflow: visible !important;
+      text-overflow: unset !important;
+      max-width: none !important;
+      font-size: 1.625rem !important;
+      opacity: 1 !important;
+      position: relative;
+      z-index: 2;
+      background: transparent;
+    }
+  }
+
+  &__title {
+    @apply w-auto h-auto mb-2 relative;
+    margin-top: 0.5rem;
+    z-index: 2;
+    
+    h3 {
+      @apply text-lg font-bold text-blue m-0 block visible;
+      line-height: normal;
+      opacity: 1 !important;
+    }
+  }
+
+  &__description {
+    @apply text-base mb-4 ml-0 relative block visible;
+    color: #6b7280 !important;
+    z-index: 2;
+    opacity: 1 !important;
+  }
+
+  &__action-buttons {
+    @apply flex mb-7 gap-x-4.5;
+    margin-top: 0.25rem;
+  }
+
+  &__action-button {
+    @apply cursor-pointer flex bg-white shadow-templateDesign justify-center items-center rounded-md p-2;
+    width: 9.75rem;
+    height: 2.875rem;
+
+    &--auto,
+    &--fixed-width {
+      width: 9.75rem;
+    }
+
+    &--generateInvoice {
+      width: 12rem;
+      height: 2.875rem;
+    }
+
+    .quote-view__icon {
+      @apply w-7.5 mr-2;
+    }
+
+    .button-text {
+      @apply w-25 text-sm text-center text-blue font-allerbold no-underline leading-16.95px;
+
+      &--single-line {
+        @apply w-25;
+      }
+
+      &--multi-line {
+        @apply w-25 text-center text-blue font-allerbold;
+        line-height: 1.0625rem;
+      }
+    }
+  }
+
+  &__preview-container {
+    @apply flex justify-center items-center relative;
+    margin-bottom: 0.75rem;
+    margin-top: 1rem;
+    padding: 1rem 0.5rem;
+    z-index: 0;
+    width: 100%;
+  }
+
+  &__preview-wrapper {
+    @apply flex justify-center items-center rounded-md;
+    width: 28rem;
+    height: 36rem;
+    background-color: theme('colors.green.ultraLight');
+    padding: 0.5rem;
+    box-shadow: 0 0.25rem 0.25rem 0 rgba(0,0,0,0.25);
+  }
+
+  &__preview-background {
+    @apply relative w-full h-full flex justify-center items-center cursor-pointer;
+  }
+
+  &__preview-content {
+    @apply relative w-full h-full flex justify-center items-center;
+  }
+
+  &__document-container {
+    @apply w-full h-full bg-white rounded-md overflow-hidden flex justify-center items-center p-1;
+    box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,0.1);
+  }
+
+  &__document-scaled {
+    @apply w-full h-full flex justify-center items-center;
+    transform: scale(0.9);
+    transform-origin: center center;
+    
+    .react-pdf__Document {
+      @apply flex justify-center items-center;
+    }
+    
+    .react-pdf__Page {
+      @apply border-none;
+      box-shadow: none;
+    }
+  }
+
+  &__animate-spin {
+    @apply animate-spin;
+  }
+
+  &__hover-overlay {
+    @apply absolute inset-0 flex justify-center items-center bg-transparent cursor-pointer rounded-md transition-colors duration-200 ease-in-out;
+
+    &:hover {
+      background-color: rgba(0,0,0,0.1);
+
+      .search-icon {
+        @apply opacity-80;
+      }
+    }
+  }
+
+  &__search-icon {
+    @apply w-8 h-8 opacity-0 cursor-pointer transition-opacity duration-200 ease-in-out;
+  }
+
+  &__modal {
+    @apply relative max-w-6xl max-h-screen overflow-auto flex justify-center items-center;
+    
+    .react-pdf__Document {
+      @apply flex justify-center items-center;
+    }
+    
+    .react-pdf__Page {
+      @apply max-w-full;
+      max-height: 85vh;
+    }
+  }
+
+  &__close-icon {
+    @apply absolute cursor-pointer w-6 h-6 transition-opacity duration-200 ease-in-out;
+    right: -1.75rem;
+    top: -1.75rem;
+    z-index: 100;
+
+    &:hover {
+      @apply opacity-70;
+    }
+  }
+
+.MuiBox-root {
+  .react-pdf__Page__canvas {
+    width: 30.75rem !important;
+    height: 39.9375rem !important;
+  }
+}
+
+  &__document {
+    &--container {
+      @apply text-gray-dark;
+    }
+    
+    &--header-border {
+      @apply border-green;
+    }
+    
+    &--title {
+      @apply text-blue;
+    }
+    
+    &--quote-number {
+      @apply text-green;
+    }
+    
+    &--text {
+      @apply text-gray-dark;
+    }
+    
+    &--border {
+      @apply border-gray;
+    }
+    
+    &--background {
+      @apply bg-gray-light;
+    }
+    
+    &--strong {
+      @apply text-blue;
+    }
+    
+    &--table-row {
+      @apply border-gray;
+      
+      &:hover {
+        @apply bg-gray-light;
+      }
+    }
+    
+    &--total-text {
+      @apply text-blue;
+    }
+  }
+
+  .page-buttons-footer {
+    @apply flex justify-end w-full;
+  }
+}

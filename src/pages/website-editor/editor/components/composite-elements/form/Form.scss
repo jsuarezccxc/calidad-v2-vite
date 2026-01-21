@@ -1,0 +1,162 @@
+$text-color: rgba(112, 98, 98, 1);
+
+.form {
+    @apply shadow-card bg-white w-full h-full;
+
+    &--one {
+        width: 37.3125rem;
+        padding: 2.875rem;
+        border-radius: 0.5rem;
+
+        &-mobile {
+            width: 22.5rem !important;
+            padding: 1.25rem;
+        }
+    }
+
+    &--two {
+        width: 33.125rem;
+        border-radius: 0.5rem;
+        padding: 2.875rem;
+
+        &-mobile {
+            width: 22.5rem !important;
+            height: 28.625rem !important;
+            padding: 1.25rem;
+        }
+    }
+
+    &--three {
+        width: 31.25rem;
+        padding: 1.75rem;
+
+        &-mobile {
+            width: 22.5rem !important;
+            height: 11.125rem !important;
+        }
+    }
+
+    &--four {
+        width: 20.75rem;
+        padding: 2.875rem;
+        border-radius: 0.5rem;
+
+        &-mobile {
+            width: 22.5rem !important;
+            padding: 1.25rem;
+        }
+    }
+
+    &--five {
+        @apply w-full;
+
+        width: 80rem !important;
+        height: 34.4375rem !important;
+        padding: 2.625rem 8.125rem 1.75rem 6.625rem;
+
+        .form__button {
+            width: 13.75rem !important;
+            height: 2.063rem !important;
+        }
+
+        &-mobile {
+            width: 22.5rem !important;
+            height: 80rem !important;
+            padding: 3.75rem;
+
+            .input {
+                width: 15rem !important;
+            }
+
+            .form--five {
+                &__title {
+                    width: 15rem !important;
+                }
+
+                &__information {
+                    @apply text-left;
+
+                    width: 13.125rem;
+                }
+
+                &__terms {
+                    @apply mx-0 mt-3;
+
+                    width: 14.8125rem !important;
+                }
+            }
+        }
+
+        &__terms {
+            @apply flex gap-1.5 m-auto;
+
+            width: 43.6875rem;
+        }
+
+        &__information {
+            @apply block mt-2 text-gray-dark text-tiny mb-4.5;
+        }
+
+        &__title {
+            @apply mb-2 text-lg text-gray-dark font-allerbold mt-7 w-max;
+        }
+    }
+
+    &__button {
+        @apply bg-blue text-white text-center font-bold block mx-auto px-2;
+
+        height: 2rem;
+        min-width: 9.5625rem;
+        font-size: 0.8125rem;
+        border-radius: 0.5rem;
+        text-align: center !important;
+    }
+
+    &__checkbox {
+        @apply block w-4.5 h-4.5 border border-gray;
+
+        border-radius: 0.25rem;
+        min-width: 1.125rem !important;
+        min-height: 1.125rem !important;
+    }
+
+    &__input {
+        @apply flex-1 border rounded-md h-8 px-1.5 text-sm text-gray-dark w-full;
+
+        &--three {
+            min-width: 17.8125rem;
+        }
+    }
+
+    .note-input {
+        .input__label {
+            @apply text-gray-dark font-allerbold font-bold;
+            font-size: 1.25rem !important;
+        }
+
+        &__mobile {
+            .input__box {
+                @apply pb-12 italic;
+                width: 14.563rem;
+                height: 5.375rem;
+
+                &::placeholder {
+                    color: $text-color;
+                }
+
+            }
+        }
+    }
+
+    &__date-picker {
+        width: 15rem !important;
+
+        .input--container {
+            @apply bg-white;
+        }
+    }
+
+    .rounded-none {
+        border-radius: 0 !important;
+    }
+}

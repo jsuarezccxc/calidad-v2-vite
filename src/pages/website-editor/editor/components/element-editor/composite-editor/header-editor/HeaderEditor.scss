@@ -1,0 +1,53 @@
+.editor {
+	.header-editor {
+		&__image {
+			@apply w-57;
+			height: 4.313rem;
+		}
+
+		&__color {
+			@apply h-6.5;
+			width: 6.938rem;
+		}
+
+		.switch {
+			@apply ml-2;
+		}
+	}
+}
+
+.dimensions-input {
+	@apply flex items-center gap-2;
+
+	&__group {
+		@apply flex flex-col;
+	}
+
+	&__label {
+		@apply font-allerbold text-blue text-tiny;
+	}
+
+	&__box {
+		position: relative;
+		display: flex;
+
+		input {
+			@apply text-blue text-tiny font-allerbold;
+			width: 6.125rem;
+			height: 1.4375rem;
+			border-radius: 0.25rem;
+			border: 0.0625rem solid #0b2c4c;
+			text-align: center;
+
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+
+	&__size {
+		@apply bottom-0.5 text-blue text-tiny font-allerbold;
+		position: absolute;
+		right: 1.4rem;
+	}
+}

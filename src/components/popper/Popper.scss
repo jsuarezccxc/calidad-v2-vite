@@ -1,0 +1,28 @@
+.popper {
+    @apply z-30;
+
+    &__content {
+        @apply py-2.5 px-4.5 border rounded-lg bg-gray-light border-gray w-68 font-aller;
+
+        width: 17.0625rem;
+
+        &::before {
+            @apply absolute bg-gray-light border-gray border border-b-0 border-r-0;
+
+            content: "";
+            top: -0.4rem;
+            right: 1.3rem;
+            width: 0.75rem;
+            height: 0.75rem;
+            transform: rotate(45deg);
+        }
+    }
+
+    &__description {
+        @apply mt-1 text-sm text-gray-dark;
+    }
+
+    &__title {
+        @apply text-sm font-allerbold text-blue;
+    }
+}

@@ -1,0 +1,89 @@
+.ending-inventory {
+	&__table {
+		min-width: 60.25rem;
+		max-width: 60.25rem;
+
+		@media (max-width: 48rem) {
+			max-width: 100%;
+			min-width: 100%;
+		}
+	}
+
+	&__td-quantity {
+		@apply flex items-center px-2 text-sm text-gray;
+	}
+
+	&__header {
+		height: 2.5rem !important;
+		align-items: center !important;
+		padding: 0 0.5rem !important;
+
+		@media (max-width: 48rem) {
+			height: 2.1875rem !important;
+		}
+
+		&-first {
+			max-width: 8.75rem !important;
+			min-width: 8.75rem !important;
+		}
+
+		&-second {
+			max-width: 6.25rem !important;
+			min-width: 6.25rem !important;
+		}
+
+		&-third {
+			max-width: 8.125rem !important;
+			min-width: 8.125rem !important;
+		}
+
+		&-four {
+			max-width: 8.5rem !important;
+			min-width: 8.5rem !important;
+		}
+
+		&-five {
+			max-width: 13.625rem !important;
+			min-width: 13.625rem !important;
+		}
+		&-quantities {
+			max-width: 23.5rem !important;
+			min-width: 23.5rem !important;
+		}
+	}
+
+	&__td-body {
+		height: 2.46875rem;
+
+		@media (max-width: 48rem) {
+			height: 2.1875rem !important;
+		}
+	}
+
+	&__content-tooltip {
+		.text-tooltip {
+			@apply text-base;
+			line-height: 1.1875rem
+		}
+	}
+
+	&__date {
+        width: 6.375rem;
+        margin-right: 0;
+    }
+}
+
+.downloadIcons {
+	.withoutText {
+		@apply items-end flex-row-reverse gap-x-2;
+	}
+}
+
+.header-text {
+	text-align: left !important;
+	justify-content: flex-start !important;
+}
+
+.title-daily {
+	margin-bottom: 0.4375rem;
+}

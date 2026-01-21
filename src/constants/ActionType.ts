@@ -1,0 +1,17 @@
+export enum ActionType {
+    INFO = 'info',
+    ADD = 'add',
+    ADD_PRODUCT = 'add_product',
+    ADD_SERVICE = 'add_service',
+    ADD_BOTH = 'add_both',
+    SAVE = 'save',
+    UPDATE = 'update',
+    DELETE = 'delete',
+    CANT_DELETE = 'cant_delete',
+    SUCCESS = 'success',
+    WARNING = 'warning',
+    INFO_OC = 'info_purchase_order',
+    SUCCESS_CORRECTION_INVOICE = 'success_correction_invoice',
+    EDIT = 'edit',
+    CANCEL_MODULE_OR_GROUP = 'cancel_module_or_group',
+}

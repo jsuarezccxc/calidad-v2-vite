@@ -1,0 +1,193 @@
+@import "../../index.scss";
+
+.MuiBox-root {
+    .react-pdf__Page__canvas {
+        width: 30.75rem !important;
+        height: 39.9375rem !important;
+    }
+}
+
+.consult-electronic-document {
+    .icon--review {
+        width: 1.1106rem;
+        height: 1.1106rem;
+    }
+
+    .download {
+        @apply flex mb-7 gap-x-4.5;
+
+        &__type {
+            @apply cursor-pointer flex bg-white shadow-templateDesign justify-center items-center rounded-md p-2;
+			width: 9.75rem;
+            height: 2.875rem;
+
+            &--text {
+                @apply w-25 text-sm text-center text-blue font-allerbold no-underline leading-16.95px;
+            }
+        }
+    }
+
+    .actions {
+        @apply bg-white p-7;
+
+        &__preview {
+            @apply rounded-md cursor-pointer shadow-templateDesign relative xs:hidden;
+            padding: 0.9375rem 0.5625rem 1rem 0.6875rem;
+            background-color: rgba(0, 169, 157, 0.15);
+            width: 29.4375rem;
+            height: 31.5rem;
+
+            &--pdf {
+                @apply flex justify-center items-center absolute z-10 cursor-pointer;
+                top: 0.9375rem;
+                height: 29.5625rem;
+                width: 28.1875rem;
+
+                &:hover {
+                    .icon {
+                        @apply block;
+                    }
+                }
+            }
+
+            .react-pdf__Page__canvas {
+                width: 100% !important;
+                height: 100% !important;
+            }
+
+            .react-pdf__Page__textContent {
+                @apply hidden;
+            }
+        }
+
+        &__input-date {
+			@apply text-base text-blue leading-19.38px font-allerbold;
+        }
+
+        &__response-icon {
+            @apply flex items-center justify-center rounded-full border-green mr-7;
+            height: 2.875rem;
+            border-width: .0625rem;
+        }
+    }
+
+	.event-status {
+		@apply flex;
+
+		&__content-step {
+			@apply flex flex-col;
+
+			&--icon {
+				@apply flex items-center justify-center rounded-full border-green xs:w-12;
+				height: 2.875rem;
+                border-width: .0625rem;
+			}
+		}
+
+		&__content-list {
+			@apply ml-7 mt-1.5 text-blue;
+
+		}
+
+		&__button {
+			@apply flex items-center px-2 py-1 mt-2 rounded-lg w-max shadow-templateDesign h-8.2;
+
+			&--icon {
+				@apply mr-2 cursor-pointer w-5.5 h-5.5;
+			}
+
+			&--label {
+				@apply w-full text-xs font-bold cursor-pointer text-blue font-allerbold;
+			}
+		}
+	}
+
+	.step-divider {
+		@apply h-4.5 w-0.25 bg-green mx-auto;
+	}
+
+	.divider {
+		@apply absolute h-4.5 w-0.25 bg-green;
+		top: 2.875rem;
+		left: 1.4375rem;
+	}
+
+    .in-verification {
+        &--container {
+            @apply flex px-2 py-1.25 rounded-lg shadow-templateDesign w-auto mt-1;
+            width: 12.375rem;
+        }
+    }
+
+    &__modal {
+        @apply p-11.5 bg-white shadow-templateDesign rounded-2.5xl flex flex-col justify-center items-center;
+        width: 31.75rem;
+        height: 21.0625rem;
+
+        .icon {
+            width: 5.625rem;
+            height: 5.625rem
+        }
+
+        &--title {
+           @apply mb-2 px-2 text-xl font-bold leading-6 text-center font-allerbold text-blue;
+        }
+
+        &--subtitle {
+            @apply text-gray-dark mb-2.5 px-1;
+        }
+    }
+}
+
+.modal-receipt-document,
+.modal-status {
+    @apply p-6.70 bg-white flex flex-col justify-center items-center shadow-templateDesign rounded-2.5xl;
+    width: 26.5625rem;
+
+}
+
+.modal-receipt-document {
+	@apply h-auto;
+	min-height: 17.75rem;
+	max-height: 31.8125rem;
+
+	&__icon {
+		@apply mb-2 w-22.2 h-22.2;
+	}
+
+	&__title {
+		@apply mb-2 text-xl font-allerbold text-blue leading-xl;
+	}
+
+	&__form {
+		@apply flex flex-col items-center gap-y-2;
+
+		&--required-text {
+			@apply self-end text-tiny text-purple mr-1.5 text-right leading-xtiny mt-1;
+		}
+	}
+
+	&__footer {
+		@apply flex gap-x-2.5 mt-7;
+
+		&--button {
+			@apply flex items-center justify-center px-4.5;
+		}
+	}
+}
+
+.modal-status {
+    height: 16.5625rem;
+}
+
+@media screen and (min-width: 3.125rem) and (max-width: 47.938rem) {
+	.modal-receipt-document,
+	.modal-status {
+		@apply w-full h-auto;
+		max-height: 100%;
+	}
+
+	.width-156 {
+		@include field-width(100%)
+	}
+}

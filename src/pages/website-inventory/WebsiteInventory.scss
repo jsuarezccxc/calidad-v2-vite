@@ -1,0 +1,171 @@
+@import "../../index.scss";
+
+$gray: #AEAEAF;
+
+.select-search {
+    &__input {
+        @apply text-left m-0 p-0 overflow-ellipsis;
+
+        width: fit-content;
+    }
+}
+
+.table-inventory {
+    background-color: white !important;
+
+    &__container {
+        @include field-width(54.875rem);
+
+        overflow: unset;
+
+        @media (max-width: 79.9375rem) {
+            @include field-width(100%);
+
+            overflow: auto;
+        }
+    }
+
+    .input--disabled {
+        background-color: white !important;
+    }
+
+    .w-160 {
+        @include field-width(10rem);
+    }
+
+    .w-150 {
+        @include field-width(9.375rem);
+    }
+
+    .w-120 {
+        @include field-width(7.5rem);
+    }
+
+    .w-310 {
+        @include field-width(19.375rem);
+    }
+
+    .w-28 {
+        background-color: #eff0f2 !important;
+
+        @include field-width(1.75rem);
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    .custom-border {
+        position: relative;
+
+        &__full {
+            position: relative;
+        }
+
+        &::after {
+            @apply absolute left-0 bottom-0;
+
+            content: "";
+            right: 1.75rem;
+            border-bottom: 0.05rem solid $gray;
+        }
+
+        &__full::after {
+            @apply absolute left-0 right-0 bottom-0;
+
+            content: "";
+            border-bottom: 0.05rem solid $gray;
+        }
+    }
+
+    .required-field {
+        @apply border-1 border-l-0.5 border-r-0.5 border-t-0.5 border-b-1.1 border-purple-700;
+    }
+
+    .select-batch-text {
+        @apply overflow-ellipsis whitespace-nowrap;
+
+        padding: 0 !important;
+    }
+}
+
+.padding-none {
+    padding: 0 !important;
+}
+
+.field-body--editable {
+    @apply border-b-1 border-gray;
+
+    height: 2.5rem !important;
+}
+
+.w-360 {
+    @include field-width(22.5rem);
+}
+
+.w-128 {
+    @include field-width(8rem);
+}
+
+.delete-modal {
+    @apply bg-white p-6.70 flex flex-col justify-center items-center rounded-2.5xl;
+
+    width: 26.563rem;
+    height: 17.75rem;
+
+    button {
+        @apply shadow-templateDesign;
+    }
+}
+
+.information-modal {
+    @apply flex flex-col items-center;
+
+    width: 26.5625rem;
+    padding: 1.625rem;
+}
+
+.success-modal {
+    @apply p-6.70 bg-white rounded-2.5xl flex flex-col justify-center items-center h-auto;
+
+    width: 26.563rem;
+}
+
+.footer-width-field {
+    @include field-width(fit-content);
+
+    @media (min-width: 80rem) {
+        @include field-width(22.5rem);
+    }
+
+    &__quantity {
+        @include field-width(fit-content);
+
+        @media (min-width: 80rem) {
+            @include field-width(8rem);
+        }
+    }
+}
+
+.input-radio{
+	min-width: 12.125rem !important;
+}
+
+
+.table-register-date {
+	width: 7.875rem !important;
+	min-width: 7.875rem !important;
+	max-width: 7.875rem !important;
+}
+
+.table-expired-date {
+	width: 7.1875rem !important;
+	min-width: 7.1875rem !important;
+	max-width: 7.1875rem !important;
+}

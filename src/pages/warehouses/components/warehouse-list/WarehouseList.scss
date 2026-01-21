@@ -1,0 +1,163 @@
+$green-extra-light: #00A99D26;
+
+@mixin table-cell {
+    @apply border-b border-gray font-allerbold text-blue text-sm text-left px-2;
+
+    background-color: $green-extra-light;
+}
+
+.warehouse-list {
+    &__title {
+        @apply w-full text-center text-26lg mb-2.5;
+    }
+
+    &__add-warehouse {
+        @apply flex bg-green rounded-md justify-center items-center gap-2 text-white font-allerbold text-sm;
+
+        width: 10.625rem;
+        height: 2.875rem;
+    }
+
+    &__table-n,
+    &__table-name,
+    &__table-country,
+    &__table-department,
+    &__table-city,
+    &__table-address,
+    &__total-warehouses,
+    &__table-document--modal,
+    &__table-name--modal {
+        @include table-cell;
+    }
+
+    &__table-container {
+        width: 60.3125rem;
+    }
+
+    &__wrapper-table {
+        @apply flex flex-col h-full;
+
+        max-width: 60.875rem;
+    }
+
+    &__table-n {
+        width: 2.5rem !important;
+        height: 2.5rem;
+
+        @media (max-width: 47.9375rem) {
+            height: 2.1875rem !important;
+        }
+    }
+
+    &__table-name {
+        width: 13.4375rem;
+    }
+
+    &__table-name--modal {
+        @apply h-10 xs:h-8.5;
+
+        width: 13.7344rem;
+    }
+
+    &__table-document--modal {
+        width: 12.4856rem;
+    }
+
+    &__table-country, &__table-department, &__table-city {
+        width: 9.375rem;
+    }
+
+    &__table-address {
+        width: 14.3125rem;
+    }
+
+    &__total-warehouses {
+        @apply h-10 text-blue font-allerbold text-sm flex-1 xs:h-8.75;
+
+        max-width: 13.4375rem;
+    }
+
+    &__total {
+        @apply bg-white border-b border-gray;
+
+        width: 8rem;
+    }
+
+    &__modal-delete {
+        width: 26.5625rem !important;
+        height: 16.5625rem !important;
+        padding: 1.75rem !important;
+
+        @apply items-center p-7;
+    }
+
+    &__transfer-alert {
+        width: 26.5625rem !important;
+        height: 21.8125rem !important;
+        padding: 1.625rem !important;
+
+        @apply items-center p-7;
+
+        &--title {
+            @apply my-2 font-allerbold text-blue text-center;
+
+            font-size: 1.375rem;
+            width: 16.8125rem;
+            line-height: normal;
+        }
+    }
+
+    &__modal-error-invoices {
+        width: 29.5rem !important;
+        height: 34.8125rem !important;
+        padding: 1.625rem !important;
+
+        @apply items-center p-7 bg-white;
+
+        &--title {
+            @apply my-2 font-allerbold text-blue text-center;
+
+            font-size: 1.375rem;
+            width: 16.8125rem;
+            line-height: normal;
+        }
+    }
+
+    &__modal-error-invoice {
+        width: 26.5625rem !important;
+        height: 23.625rem !important;
+        padding: 1.625rem !important;
+
+        @apply items-center p-7 bg-white;
+
+        &--title {
+            @apply my-2 font-allerbold text-blue text-center;
+
+            font-size: 1.375rem;
+            width: 16.8125rem;
+            line-height: normal;
+        }
+    }
+
+    &__wrapper-table-modal {
+        max-height: 12.5rem;
+    }
+}
+
+.warehouse-add {
+    &__title {
+        @apply w-full text-center text-26lg mb-2.5;
+    }
+
+    &__name {
+        @apply w-full;
+
+        @media (min-width: 48rem) {
+            width: 18.125rem;
+        }
+    }
+
+    &__modal-icon {
+        right: 0 !important;
+    }
+}

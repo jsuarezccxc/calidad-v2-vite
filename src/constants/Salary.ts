@@ -1,0 +1,1 @@
+export const MINIMUM_SALARY = 1300000;

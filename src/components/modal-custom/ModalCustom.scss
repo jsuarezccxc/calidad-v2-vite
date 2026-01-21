@@ -1,0 +1,95 @@
+.background {
+    background: #0B2C4CCC !important;;
+}
+
+.modal--full {
+    @apply xs:w-full
+	xs:h-full
+	xs:rounded-none
+	xs:bg-white;
+}
+
+.scroll-modal::-webkit-scrollbar {
+    display: none;
+}
+
+.modal--response {
+    @apply xs:flex xs:flex-col xs:justify-center xs:mx-16 xs:h-screen xs:mt-14 xs:mb-14 md:flex-none md:mx-0 md:h-auto;
+}
+
+.header__icon {
+    @apply mr-2 text-blue self-center w-5.5 h-5.5;
+}
+
+.footer__button {
+    &--blue {
+        @apply w-40 p-2 text-xs font-bold rounded-lg bg-blue hover:bg-green text-white xs:max-w-max xs:px-8;
+        min-width: 8.375rem;
+        width: 9.5625rem !important;
+        height: 2.0625rem !important;
+
+        @media (max-width: 47.9375rem) {
+            max-width: 8.375rem;
+            height: 2.063rem;
+        }
+    }
+
+    &--gray-light {
+        @apply w-40 p-2 text-xs font-bold rounded-lg bg-gray-light text-blue xs:max-w-max xs:px-12;
+
+        @media (max-width: 47.9375rem) {
+            max-width: 8.375rem;
+            height: 2.063rem;
+        }
+    }
+}
+
+.modal-duplicate {
+    @apply flex flex-col items-center p-6.70 #{!important};
+    width: 32.9375rem;
+
+	&__title {
+		@apply my-2 text-xl font-allerbold text-blue;
+		line-height: 1.6875rem;
+	}
+
+	&__description {
+		@apply text-base text-gray-dark text-center;
+		height: 3.5625rem;
+	}
+
+	&__group-input {
+		@apply mx-auto my-7 flex flex-col gap-4.5;
+	}
+}
+
+.custom-isLoader-modal {
+    z-index: 1000 !important;
+}
+
+.modal-custom {
+    &__error-invoice-delete {
+        padding: 1.625rem !important;
+        width: 26.5625rem;
+    }
+
+    &__error-table-invoice {
+        padding: 1.625rem !important;
+        width: 29.5rem;
+    }
+
+    &__error-type-document {
+        width: 12.5rem;
+    }
+
+    &__error-warehouse {
+        width: 4.6875rem;
+    }
+
+	&__cell{
+		text-align: left;
+		font-size: 0.875rem;
+		color:gray
+	}
+}
+

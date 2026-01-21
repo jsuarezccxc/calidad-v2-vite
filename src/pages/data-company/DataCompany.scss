@@ -1,0 +1,39 @@
+@mixin field-width($width) {
+    width: $width !important;
+    min-width: $width !important;
+    max-width: $width !important;
+}
+
+.data-company {
+    .table-store {
+        &__standard, &__phone {
+            @apply bg-green-extraLight border-b-1 border-gray font-allerbold text-blue text-left pl-2;
+        }
+
+        &__standard {
+            @include field-width(9.825rem);       
+        }
+
+        &__phone {
+            @include field-width(6.875rem);
+        }
+
+        &__text {
+            @apply pl-2;
+
+            text-align: left !important;
+        }
+    }
+
+    .MuiInputBase-input {
+        text-align: left !important;
+        margin: 0 !important;
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+
+        @apply m-0;
+    }
+}

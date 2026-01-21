@@ -1,0 +1,153 @@
+.sidebar {
+    @apply relative flex flex-col;
+    width: 20vw;
+    min-width: 20vw;
+	max-height: calc(100vh - 9.5625rem);
+	z-index: 50;
+
+    &__plan {
+        @apply flex;
+        min-height: 5.25rem !important;
+    }
+
+    &__tabs {
+        @apply relative border border-gray-smoke flex flex-col bg-white;
+        box-sizing: border-box !important;
+        height: 64.16vh !important;
+        width: auto !important;
+        max-height: 64.16vh !important;
+        
+    }
+
+    &__card {
+        @apply flex flex-col items-center justify-center;
+
+        max-width: 5.5rem;
+        min-width: 5.5rem;
+
+        &:hover .pop-up {
+            @apply block;
+        }
+
+        &-icon {
+            @apply relative flex items-center justify-center h-10 rounded cursor-pointer w-11 bg-gray-light shadow-card;
+
+            .icon--width {
+                min-width: 1.1875rem
+            }
+        }
+
+        &-name {
+            @apply mt-2 text-sm font-bold text-center text-gray-dark font-allerbold leading-4;
+
+            &--small {
+                font-size: 0.6875rem !important;
+            }
+        }
+    }
+
+    &__cards {
+        @apply flex flex-wrap py-2 gap-x-4 px-5 gap-y-4.5 items-center h-full justify-center;
+    }
+
+    &__element-options {
+        @apply flex-col items-center justify-center grid-cols-2 gap-y-4 mx-auto flex py-2;
+
+        &--button {
+            @apply grid grid-cols-2 mt-4.5 gap-y-7 gap-x-0;
+        }
+    }
+
+    &__elements {
+        @apply invisible h-0 flex items-center;
+        transition: all 0.3s ease-in-out;
+
+        &--active {
+            @apply visible h-auto;
+        }
+    }
+
+    &__header {
+        @apply flex justify-between items-center h-10.5 mx-auto border-b border-solid;
+
+        &-icon {
+            @apply w-7.5 h-7 rounded bg-gray-light flex justify-center items-center shadow-card;
+        }
+
+        &-title {
+            @apply text-sm font-allerbold text-blue;
+        }
+    }
+
+    &__information {
+        @apply pl-4.5 pr-3.75 py-2.5 w-full bg-gray-light;
+
+
+        &-title {
+            @apply font-bold font-allerbold text-blue;
+            font-size: 0.875rem !important;
+            line-height: 1.063rem !important
+        }
+
+        &-text {
+            @apply text-tiny text-gray-dark;
+            line-height: 0.875rem !important
+        }
+    }
+
+    &__tab {
+        @apply text-sm w-full text-blue font-allerbold flex justify-between items-center pl-4.5 pr-2 relative border-t border-solid border-gray-smoke transition-all;
+        min-height: 3rem !important;
+
+        &:hover .pop-up {
+            @apply block;
+        }
+    }
+
+    &__template-popper {
+        .popper {
+            &__content {
+                @apply relative top-2;
+
+                &::before {
+                    left: 1.3rem;
+                }
+            }
+        }
+    }
+
+    &__template-carousel {
+        @apply mt-2 mx-auto;
+
+        max-width: 12rem !important;
+    }
+
+    &__image-shadow {
+        @apply absolute top-0 left-0 w-full h-full items-center justify-center gap-2 hidden;
+
+        background-color: rgba(174, 174, 175, 0.73);
+    }
+
+    &__template-option {
+        @apply relative cursor-pointer;
+
+        .img--template {
+            min-width: 5.25rem;
+        }
+
+        &:hover>.sidebar__image-shadow {
+            @apply flex;
+        }
+    }
+}
+
+
+.MuiModal-root {
+    .template-modal {
+        &__content {
+            @apply bg-white rounded-2.5xl p-6.70 flex flex-col justify-center items-center;
+            width: 26.563rem;
+            height: auto;
+        }
+    }
+}

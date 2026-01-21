@@ -1,0 +1,63 @@
+.dash-information {
+    &__title {
+        @apply font-allerbold leading-8 text-blue mt-7 mx-auto;
+
+        font-size: 1.625rem;
+    }
+}
+
+.people-icon {
+    width: 3.75rem;
+    height: 3.8125rem;
+}
+
+.separator-icon {
+    width: 1.1875rem;
+    height: 3.4375rem;
+}
+
+.arrow-up-icon {
+    width: .8125rem;
+    height: 1.25rem;
+}
+
+.box-icon {
+    width: 4.75rem;
+    height: 3.75rem;
+}
+
+.separator-box-icon {
+    width: .6875rem;
+    height: 3.4375rem;
+}
+
+.cart-icon {
+    width: 3.6875rem;
+    height: 2.8125rem;
+}
+
+.medal-icon {
+    width: 1.5rem;
+    height: 1.9375rem;
+}
+
+.card-chart {
+    max-height: 13.125rem !important;
+    max-width: 28.625rem  !important;
+	width: 28.625rem !important;
+}
+.card-leaderboard {
+    max-height: 13.125rem !important;
+    max-width: 28rem  !important;
+	width: 28rem !important;
+}
+
+.icon-download-metrics {
+    height: 1.875rem;
+    width: 1.875rem;
+    align-items: flex-end;
+}
+
+.container-download-metrics {
+    max-width: 57.75rem;
+}

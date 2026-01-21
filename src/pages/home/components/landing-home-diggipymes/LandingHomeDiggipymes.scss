@@ -1,0 +1,223 @@
+.landing {
+	&--section-one{
+		background-image: url("/assets/images/landing/section-one-background.svg");
+		background-size: cover;
+		background-repeat: no-repeat;
+		display: flex;
+		gap: 1.75rem;
+		flex-direction: column;
+	}
+
+	&--section-contact{
+		background-image: url("/assets/images/landing/contact-background.svg");
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	.text-gradient {
+		background: linear-gradient(to bottom, rgba(18, 128, 195, 1), rgba(0, 171, 158, 1));
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+}
+.landing-header {
+	&--container {
+		@apply flex flex-col min-h-screen;
+	}
+
+	&--background {
+		height: 41.5rem;
+		@apply w-full relative z-10 xs:h-64;
+
+		@media (max-width: 27.4375rem) {
+			object-fit: cover;
+			object-position: -3.75rem 0;
+		}
+	}
+
+	&--information {
+		@apply absolute w-full text-white lg:grid lg:grid-cols-2 xs:m-0 xs:flex xs:w-full xs:justify-center xs:p-0 pl-16.5 pr-13.25;
+	}
+
+	&--title {
+		width: 42.5rem;
+		@apply xs:text-1.5xl xs:text-center text-title font-poppinsbold leading-tight xs:mx-auto xs:w-85;
+	}
+
+	&--description {
+		@apply max-w-sm leading-7 text-2lg mt-21.75 font-poppins xs:mt-56 xs:text-blue xs:text-center xs:font-aller xs:text-sm xs:px-12 xs:leading-5;
+	}
+
+	&--image {
+		@apply flex items-center justify-center w-full xs:ml-0 ml-auto;
+		margin-top: 14.1875rem;
+
+		@media (max-width: 48rem) {
+			max-width: 22rem !important;
+		}
+	}
+
+	&--logo {
+		@apply flex absolute justify-end w-full xs:hidden;
+		margin: 2.1875rem 0 0 -3.3125rem;
+	}
+}
+
+.landing-body {
+	@apply xs:mt-12 xs:mx-8.5 xs:mb-7 xs:px-0 px-10;
+
+	&-information--logo {
+		width: 15.75rem;
+		height: 9.25rem;
+	}
+
+	&-information--container {
+		@apply flex xs:flex-col w-full justify-center;
+	}
+
+	&--information {
+		@apply mt-7;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	&--text {
+		width: 27.5rem;
+		padding-left: 1.125rem;
+		margin-top: 1.375rem;
+		@apply text-gray border-l border-solid border-green-light xs:w-full xs:border-none xs:p-0 xs:text-center font-allerbold xs:text-sm;
+
+		&--span-green {
+			@apply text-green-light font-semibold;
+		}
+
+		&--span-blue {
+			@apply text-blue font-normal leading-6 pr-4;
+		}
+	}
+
+	&--benefits {
+		@apply xs:mt-10 flex flex-col items-center  ml-20 xs:ml-0 font-allerbold;
+		&-container {
+			@apply flex items-center justify-center xs:flex-col text-center;
+		}
+
+		&-information {
+			width: 20.5625rem;
+			@apply xs:w-full;
+		}
+
+		h1 {
+			@apply text-1.5xl text-blue xs:ml-0 xs:text-lg text-center pr-8 xs:pr-0 leading-9 xs:leading-7 xs:font-semibold;
+		}
+
+		h2 {
+			margin-bottom: 0.25rem;
+			@apply text-green-light;
+		}
+
+		p {
+			@apply text-green text-2lg font-aller xs:text-sm;
+		}
+	}
+}
+
+@media (max-width: 80rem) {
+	.landing-header--image {
+		margin-top: 14.1875rem;
+	}
+}
+
+@media (max-width: 48rem) {
+	.landing-header--background {
+		height: 15.875rem;
+	}
+	.landing-header--title {
+		@apply font-poppins;
+		margin-top: 2rem;
+	}
+	.landing-header--image {
+		margin: 6.9375rem 0 0;
+	}
+}
+
+.button-landing {
+	width: 14.375rem;
+	padding: 0.3125rem 0;
+	border-radius: 2.125rem;
+	line-height: 1.25rem;
+	font-weight: normal;
+	@apply flex justify-center items-center cursor-pointer bg-purple text-white xs:mt-0 xs:h-9.25 
+		h-15 text-lg xs:text-tiny no-underline xs:px-2 xs:leading-4 font-poppinsmedium xs:w-34;
+	&--information {
+		@apply text-center w-45 xs:w-32 text-xl xs:text-sm;
+
+		span {
+			@apply underline mr-5 xs:mr-1;
+		}
+	}
+}
+
+.button-landing:hover {
+	@apply bg-blue;
+}
+
+.screen-scroll-smooth {
+	* {
+		scroll-behavior: smooth;
+	}
+}
+
+.payment-plans-landing {
+	@apply pb-8 xs:pt-5 pt-5.5 flex flex-col items-center px-75 xs:px-9 xs:w-full;
+}
+
+.contact-us {
+	@apply bg-blue text-white absolute font-poppins right-5 z-0 pl-3.75 pt-5 text-2lg hidden;
+	width: 14.2rem;
+	height: 3.6875rem;
+	border-radius: 1.875rem;
+}
+
+.container-icon-whatsapp {
+	@apply fixed flex flex-row mr-auto right-10 xs:right-5;
+	top: 87%;
+
+	@media (min-width: 86rem) {
+		right: 5rem;
+	}
+	@media (min-width: 87rem) {
+		right: 6.875rem;
+	}
+	@media (min-width: 93rem) {
+		right: 8.75rem;
+	}
+	@media (min-width: 100rem) {
+		right: 10.625rem;
+	}
+	@media (max-width: 48rem) {
+		top: 90%;
+	}
+}
+
+.icon-phone {
+	@apply cursor-pointer xs:w-10 xs:p-2 p-3.25 bg-blue rounded-full hover:bg-purple z-10;
+}
+
+.icon-phone:hover ~ .contact-us {
+	@apply block xs:hidden;
+}
+
+.information-title-payment-plans {
+	@apply text-2xl xs:text-left xs:text-1.5xl xs:w-full font-poppinsbold md:px-32 mb-2.5 xs:mb-0 py-3 xs:pb-0;
+	font-family: PoppinsBold;
+}
+
+.information-container-payment-plan {
+	@apply xs:ml-0 w-full mb-8 flex flex-col xs:items-start items-center px-6 xs:px-0 text-xl xs:mb-4.5;
+}
+
+.text-document{
+	width: 70.125rem !important;
+}

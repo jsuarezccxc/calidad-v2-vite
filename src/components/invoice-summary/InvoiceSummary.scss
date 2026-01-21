@@ -1,0 +1,42 @@
+#bodyApp {
+    @apply bg-white;
+}
+
+.invoice-summary-container {
+    @apply h-screen xs:mb-8 py-7 lg:px-8 lg:flex lg:gap-7;
+
+    .textarea {
+        outline: none;
+
+        @apply w-full relative h-29 rounded-md text-sm bg-transparent resize-none p-2 -mt-px;
+
+        &::placeholder {
+            font-size: 0.875rem;
+        }
+    }
+
+    .button {
+        width: 13.125rem;
+        height: 2.5rem;
+    }
+
+    .button-disabled {
+        @apply cursor-auto bg-gray-light;
+
+        &:hover {
+            @apply bg-gray-light text-gray;
+        }
+    }
+
+    .react-pdf__Page__canvas {
+        width: 27.875rem !important;
+        height: 38rem !important;
+    }
+
+    @media (max-width: 48rem) {
+        .button {
+            width: 9.563rem;
+            height: 2.063rem;
+        }
+    }
+}

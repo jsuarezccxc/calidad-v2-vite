@@ -1,0 +1,11 @@
+.progress {
+  @apply fixed w-full bg-white h-1 top-0 left-0;
+  height: 0.3125rem;
+  z-index: 9999;
+
+  &-bar {
+    @apply rounded-tr rounded-br bg-green;
+    height: 0.3125rem;
+    transition: width 0.6s ease-in-out;
+  }
+}

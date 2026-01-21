@@ -1,0 +1,134 @@
+$text-gray: #4B4B4B;
+$primary: #0B2C4C;
+
+.MuiAutocomplete {
+    // select search wrapper
+    &-root {
+        font-size: 0.0625rem !important;
+        height: max-content !important;
+    }
+
+    &-paper {
+        top: 0% !important;
+    }
+
+    &-listbox {
+        @apply bg-gray-light;
+
+        padding: 0 !important;
+        max-height: 8.75rem !important;
+
+        &::-webkit-scrollbar {
+            @apply w-1.5 h-1.5;
+        }
+
+        &::-webkit-scrollbar-track {
+            @apply bg-green bg-opacity-20 rounded-md;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            @apply bg-green rounded-md xs:bg-opacity-70;
+        }
+    }
+
+    &-noOptions {
+        @apply bg-gray-light;
+
+        font-size: 0.875rem !important;
+        padding: 0.75rem 0.625rem !important;
+        line-height: 0.875rem !important;
+    }
+
+    &-clearIndicator {
+        display: none !important;
+    }
+
+    &-option {
+        @apply text-gray-dark text-center border-gray border-b-0.5 border-solid break-words;
+
+        font-size: 0.875rem !important;
+        padding: 0.5rem 0 !important;
+        margin: 0 0.5rem !important;
+        line-height: 0.9375rem;
+        display: block !important;
+        min-height: 1.25rem !important;
+
+        &:hover {
+            @apply text-white;
+
+            margin: 0 !important;
+            padding: 0.5rem !important;
+            background-color: $primary !important;
+        }
+
+        &:last-of-type {
+            border: none !important;
+        }
+    }
+
+    &-popper {
+        @apply shadow-templateDesign bg-gray-light;
+
+        z-index: 1 !important;
+    }
+}
+
+.MuiInputBase {
+    &-root {
+        padding: 0 !important;
+
+        &:active,
+        &::after {
+            border: none !important;
+            outline: none !important;
+        }
+
+        &::before {
+            width: 0;
+        }
+    }
+
+    &-input {
+        @apply text-center font-allerbold text-red-200 xs:font-sans;
+
+        -webkit-text-fill-color: $text-gray !important;
+        font-size: 0.875rem !important;
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+        font-family: "aller" !important;
+        color: $text-gray !important;
+        max-width: 82% !important;
+        margin: auto !important;
+
+        @media (max-width: 47.938rem) {
+            height: 1.875rem !important;
+            font-size: 0.75rem !important;
+        }
+    }
+}
+
+.css-1q60rmi-MuiAutocomplete-endAdornment {
+	top: calc(50% - 0.875rem) !important;
+}
+
+.css-gdh49b-MuiAutocomplete-listbox .MuiAutocomplete-option.Mui-focused {
+	@apply text-white;
+	
+	margin: 0 !important;
+	padding: 0.5rem !important;
+	background-color: $primary !important;
+}
+
+.MuiAutocomplete-option[aria-selected="true"] {
+    @apply text-white;
+
+    margin: 0 !important;
+    background-color: $primary !important;
+}
+
+.MuiAutocomplete-option[data-focus="true"] {
+    @apply text-white;
+
+    margin: 0 !important;
+    background-color: $primary !important;
+}

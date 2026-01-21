@@ -1,0 +1,60 @@
+$purple-dark: #5b7ef866;
+$purple-light:rgba(129, 49, 155, 0.15);
+$gray-user: #0b2c4c26;
+$purple-text: #5e1b74;
+$green-light:rgba(0, 169, 157, 0.15);
+
+.database-menu {
+	@apply flex flex-col items-center mb-auto;
+	&__container-cards {
+		@apply flex flex-wrap justify-center items-center;
+		gap: 3.625rem;
+
+		@media(max-width:48rem){
+			@apply gap-7;
+		}
+	}
+
+	&__card {
+		@apply flex shadow-card pr-2 pl-4.5 justify-between cursor-pointer rounded;
+		width: 21.25rem;
+		min-height: 6.25rem;
+
+		.icon-card {
+			width: 6.25rem;
+			height: 5.75rem;
+		}
+	}
+
+	&__color-card {
+		&-purple {
+			background-color: $purple-dark;
+		}
+
+		&-gray {
+			background-color: $gray-user;
+		}
+
+		&-purple-light {
+			background-color: $purple-light;
+		}
+
+		&-green {
+			background-color: $green-light;
+		}
+	}
+
+	&__text-color {
+		&-blue {
+			@apply text-blue;
+		}
+
+		&-green {
+			@apply text-green font-allerbold;
+		}
+
+		&-purple {
+			color: $purple-text;
+		}
+	}
+}

@@ -1,0 +1,60 @@
+$gray-light: #f4f4f4;
+
+.sales-report {
+	@apply h-full;
+	&__title {
+		h1 {
+			font-size: 1rem !important;
+		}
+	}
+
+	&__icon {
+		@apply flex items-end mt-auto xs:mt-4.5 xs:mb-3;
+		img {
+			@apply w-7.5 h-8.2;
+		}
+
+		.withoutText {
+			@apply items-end flex-row-reverse gap-x-2;
+		}
+	}
+
+	&__select {
+		padding: 0 0 0 0.5rem !important;
+	}
+}
+
+.padding-none {
+	padding: 0 !important;
+}
+
+.table-product {
+	width: 58.75rem !important;
+	max-width: 58.75rem !important;
+
+	&__td {
+		@apply flex items-center w-36 text-gray text-sm xs:h-8.2 xs:text-tiny box-border pl-2;
+	}
+
+	&__date {
+        width: 8.875rem;
+        margin-right: 0;
+    }
+}
+
+.table-total {
+	max-width: 30.5rem !important;
+}
+
+.tooltip-report {
+	@apply p-2 shadow-templateDesign absolute z-40 bg-white rounded -top-24 hidden;
+	width: 19.625rem;
+}
+
+.tooltip-icon {
+	@apply mr-1 cursor-pointer;
+}
+
+.tooltip-icon:hover ~ .tooltip-report {
+	@apply flex xs:hidden;
+}

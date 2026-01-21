@@ -1,0 +1,937 @@
+@import "../../../../index.scss";
+@import "../../../../components/electronic-documents/cards/Cards.scss";
+
+@mixin card($width, $height) {
+    @apply shadow-card bg-white flex justify-center items-center w-full rounded-lg;
+    min-height: $height !important;
+    height: max-content;
+
+    @media (min-width: 56.25rem) {
+        width: $width;
+        min-width: $width;
+    }
+}
+
+
+.quote-generate {
+    &__cards {
+        @apply flex w-full flex-col md:flex-row items-center justify-center m-auto;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+        min-height: 6.75rem;
+
+        @media (max-width: 37.5rem) {
+            @apply flex flex-col items-center;
+            gap: 1.125rem;
+        }
+
+        @media (min-width: 48rem) {
+            gap: 2.5rem;
+        }
+
+        &--logo-card {
+            @include card(15.6875rem, 6.75rem);
+        }
+
+        &--company-card {
+            @include card(26.5625rem, 6.75rem);
+        }
+
+        &--date-card {
+            @include card(15.6875rem, 6.75rem);
+        }
+    }
+    
+    &__text {
+        &--blue {
+            @apply text-center block text-blue font-allerbold text-tiny leading-4;
+        }
+
+        &--green {
+            @apply block text-center text-green text-sm leading-4;
+        }
+    }
+
+    &__radio-buttons {
+        @apply mb-4.5;
+
+        .radio-button {
+            @apply flex gap-2.5 items-center;
+
+            &__option {
+                @apply bg-gray-light h-8 text-xs flex items-center text-gray-dark pl-2.5 xl:pl-16 pr-2.5 justify-between cursor-pointer;
+                width: 25.625rem;
+                border-radius: 0.5rem;
+            
+                @media (max-width: 22.5rem) {
+                    width: 14.625rem; 
+                }
+            }
+
+            > input {
+                @apply cursor-pointer appearance-none bg-white rounded-full w-4.5 h-4.5 border border-gray;
+
+                &:checked {
+                    @apply border-transparent bg-blue;
+                }
+            }
+        }
+    }
+
+    &__optional-fields {
+        @apply h-0 flex flex-wrap;
+        gap: 1.75rem 1.75rem;
+        max-width: 38.75rem;
+
+        &--active {
+            @apply h-full;
+            height: 8.375rem;
+
+            @media (max-width: 37.5rem) {
+                height: 17.5rem;
+            }
+        }
+    }
+
+    &__margin-8 {
+        margin-bottom: 0.5rem;
+    }
+
+    &__products-table {
+        @apply overflow-x-scroll w-full;
+        margin-top: 0.875rem;
+        
+        &--icon {
+            @apply cursor-pointer;
+            @include field-width(1.125rem);
+            height: 1.125rem;
+        }
+
+        &--border-none {
+            @apply border-none bg-transparent;
+            
+            &.table-field {
+                @apply bg-transparent;
+            }
+        }
+        
+        table tbody tr td.quote-products-table__border-none {
+            @apply bg-transparent;
+        }
+        
+        .quote-products-table table tbody tr td.quote-products-table__border-none {
+            @apply bg-transparent;
+        }
+
+
+        &--number,
+        &--selector {
+            @include field-width(2.5rem);
+        }
+        
+        &--selector {
+            @apply bg-transparent text-center;
+            
+            &.table-field {
+                @apply bg-transparent;
+            }
+        }
+
+        &--sku {
+            @include field-width(12rem);
+        }
+
+        &--description,
+        &--supplier {
+            @include field-width(8rem);
+        }
+
+        &--warehouse, 
+        &--batch, 
+        &--due-date, 
+        &--discount-rate, 
+        &--discount {
+            @include field-width(6.5rem);
+        }
+
+        &--unit {
+            @include field-width(6.5rem);
+        }
+
+        &--quantity, 
+        &--taxes {
+            @include field-width(6rem);
+        }
+
+        &--unit-value {
+            @include field-width(6.5rem);
+        }
+
+        &--select {
+            @apply w-full p-0 m-0;
+
+            textarea {
+                @apply text-sm w-full p-0 m-0;
+                line-height: 0.9375rem;
+
+                @media (max-width: 37.5rem) {
+                    @apply text-xs;
+                    line-height: 0.75rem;
+                }
+            }
+        }
+    }
+
+    &__header-section {
+        h1, 
+        .header-title {
+            @apply text-blue;
+        }
+        
+        p, 
+        .header-subtitle {
+            @apply text-blue;
+        }
+        
+        nav, 
+        .header-breadcrumb {
+            @apply text-blue;
+            
+            button, 
+            a, 
+            span {
+                @apply text-blue;
+            }
+        }
+        
+        h3, 
+        .section-title {
+            @apply text-blue;
+        }
+        
+        .description-text {
+            @apply text-gray-dark font-allerbold;
+        }
+    }
+
+    &__billing-information {
+        @apply bg-white rounded;
+        padding: 0.875rem 1.25rem;
+        width: 100%;
+
+        &--main-container {
+            @apply flex flex-col;
+            gap: 1.75rem;
+            width: 100%;
+        }
+
+        &--lower-section {
+            @apply flex flex-col items-center justify-center;
+            gap: 2.375rem;
+            margin-top: 1.5rem;
+          
+            @media (min-width: 62.5rem) {
+              @apply flex-row;
+            }
+          
+            @media (max-width: 23.4375rem) {
+              width: 16.5rem;
+            }
+        }
+
+        &--shipping-cost {
+            @apply outline-none rounded border border-gray-dark bg-white text-gray-dark text-sm px-2 py-1;
+            @include field-width(6.625rem);
+            height: 1.1875rem;
+
+            &--disabled{
+                @apply outline-none rounded border border-gray-dark bg-gray-light text-gray-dark text-sm px-2 py-1;
+                @include field-width(6.625rem);
+                height: 1.1875rem;
+            }
+
+            input {
+                @apply m-0 p-0 w-full text-left outline-none;
+                border: none !important;
+                background: transparent;
+                height: 100%;
+                color: inherit;
+            }
+        }
+
+        &--text-area {
+            width: 20rem;
+            
+            textarea {
+                min-height: 4rem !important;
+                padding: 0.75rem !important;
+                font-size: 0.875rem !important;
+            }
+        }
+    }
+
+    &__invoice-form {
+        margin-bottom: 1.125rem;
+
+        &--select-search {
+            line-height: 0.6875rem;
+            max-height: 2rem;
+        }
+
+        &--group {
+            @apply flex flex-col lg:flex-row;
+            gap: 1.125rem 1.75rem;
+        }
+
+        &--customer-button {
+            @apply underline cursor-pointer text-green font-aller text-base;
+            margin-top: 0.5rem;
+
+            &:disabled {
+                @apply text-gray;
+            }
+        }
+    }
+
+    &__withholding-table {
+        @media (min-width: 62.5rem) {
+            @include field-width(38.0625rem);
+        }
+
+        @media (max-width: 22.5rem) {
+            @include field-width(16.5rem);
+        }
+
+        .table-row {
+            @apply bg-white flex items-center justify-start border-b border-gray;
+            height: 1.875rem;
+            padding: 0.75rem 0.5rem 0.875rem 0.5rem;
+        }
+
+        .table-header {
+            @apply font-allerbold text-sm text-blue leading-stiny;
+        }
+
+        .table-cell {
+            @apply font-aller text-sm text-gray leading-stiny;
+
+            &--disabled {
+                @apply text-gray-smoke;
+            }
+        }
+
+        &--select {
+            @apply text-left px-0 m-0 text-gray-dark font-aller text-tiny;
+
+            @media (min-width: 80rem) {
+                @apply text-sm;
+            }
+        }
+
+        &--text-left {
+            @apply text-left;
+        }
+
+        &--text-center {
+            @apply text-center;
+        }
+
+        &--size-header {
+            @include field-width(9.5156rem);
+        }
+    }
+
+    &__products-table-styling {
+        .number-input-style {
+            @apply text-left lg:h-auto;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            @apply appearance-none m-0;
+        }
+    }
+
+    &__success-modal {
+        @apply text-center;
+
+        &--icon {
+            @apply mx-auto block;
+            width: 4rem;
+            height: 4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        &--title {
+            color: #0B2C4C;
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        &--description {
+            color: #4B4B4B;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.4;
+            margin-bottom: 1.75rem;
+            margin-top: 0.5rem;
+
+            p {
+                @apply m-0;
+            }
+
+            strong {
+                @apply font-bold;
+            }
+        }
+
+        &--buttons {
+            @apply flex justify-center;
+            gap: 1.75rem;
+        }
+
+        &--button {
+            @apply border-none cursor-pointer flex items-center justify-center;
+            background-color: #0B2C4C;
+            border-radius: 0.5rem;
+            color: #FFFFFF;
+            font-size: 0.875rem;
+            font-weight: 700;
+            min-width: 9.5rem;
+            height: 2rem;
+            padding: 0.5rem 1rem;
+            transition: opacity 0.2s;
+
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+    }
+}
+
+.quote-modal-wrapper {
+    width: auto !important;
+    max-width: 30rem;
+    margin: 0 auto;
+}
+
+.quote-modal-content {
+    max-width: 30rem;
+    width: auto !important;
+    padding: 1.5rem !important;
+    text-align: center;
+    
+    .quote-success-icon {
+        width: 4rem;
+        height: 4rem;
+        margin: 0 auto 0.5rem auto;
+        display: block;
+    }
+    
+    h3 {
+        color: #0B2C4C;
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin: 0 0 0.5rem 0;
+    }
+    
+    .text-gray-dark {
+        color: #4B4B4B;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.4;
+        max-width: 25rem;
+        margin: 0 auto 1.75rem auto;
+        
+        strong {
+            font-weight: 700;
+        }
+    }
+}
+
+.quote-products-table {
+    @apply mt-4.5 w-full;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    
+    &__table {
+        min-width: 100% !important;
+        width: max-content !important;
+        table-layout: auto !important;
+        border-collapse: separate !important;
+        border-spacing: 0 !important;
+        
+        thead, tbody {
+            overflow: visible !important;
+        }
+        
+        tr {
+            display: table-row !important;
+        }
+        
+        th, td {
+            display: table-cell !important;
+            vertical-align: middle !important;
+            position: relative !important;
+            box-sizing: border-box !important;
+        }
+    }
+
+    &__icon {
+        @apply cursor-pointer w-4.5 h-4.5;
+        min-width: 1.125rem;
+    }
+
+    &__number, &__selector {
+        @include field-width(2.5rem);
+    }
+
+    &__sku {
+        @include field-width(15rem);
+    }
+
+    &__description {
+        @include field-width(8.75rem);
+        min-width: 8.75rem;
+    }
+
+    &__warehouse, &__batch, &__due-date, &__unit, &__discount-rate, &__discount {
+        @include field-width(7.5rem);
+        min-width: 7.5rem;
+    }
+
+    &__quantity, &__taxes {
+        @include field-width(7.1875rem);
+        min-width: 7.1875rem;
+    }
+
+    &__unit-value {
+        @include field-width(7.8125rem);
+        min-width: 7.8125rem;
+    }
+
+    &__supplier {
+        @include field-width(8.75rem);
+        min-width: 8.75rem;
+    }
+
+    &__select {
+        width: 100% !important;
+        padding: 0.25rem !important;
+        margin: 0 !important;
+
+        textarea {
+            @apply text-sm;
+            line-height: 0.9375rem;
+            padding: 0.25rem !important;
+            width: 100% !important;
+            margin: 0 !important;
+
+            @media (max-width: 37.5rem) {
+                font-size: 0.75rem;
+                line-height: 0.75rem;
+            }
+        }
+    }
+    
+    .number-input-style {
+        @apply text-left lg:h-auto;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        @apply appearance-none m-0;
+    }
+
+    .table-field {
+        padding: 0.375rem 0.5rem !important;
+        min-height: 2.5rem !important;
+        height: auto !important;
+        overflow: visible !important;
+        position: relative !important;
+        z-index: 1 !important;
+        
+        &-text {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+            display: block;
+            width: 100%;
+            overflow: visible !important;
+        }
+    }
+
+    .table-head {
+        padding: 0.5rem !important;
+        min-height: 2.5rem !important;
+        height: auto !important;
+        white-space: nowrap;
+        overflow: visible !important;
+        position: relative !important;
+        z-index: 2 !important;
+    }
+    
+    th, td {
+        &.quote-products-table__number,
+        &.quote-products-table__selector {
+            width: 2.5rem !important;
+            min-width: 2.5rem !important;
+            max-width: 2.5rem !important;
+        }
+
+        &.quote-products-table__sku {
+            width: 15rem !important;
+            min-width: 15rem !important;
+            max-width: none !important;
+        }
+
+        &.quote-products-table__description,
+        &.quote-products-table__supplier {
+            width: 8.75rem !important;
+            min-width: 8.75rem !important;
+            max-width: none !important;
+        }
+
+        &.quote-products-table__warehouse,
+        &.quote-products-table__batch,
+        &.quote-products-table__due-date,
+        &.quote-products-table__unit,
+        &.quote-products-table__discount-rate,
+        &.quote-products-table__discount {
+            width: 7.5rem !important;
+            min-width: 7.5rem !important;
+            max-width: none !important;
+        }
+
+        &.quote-products-table__quantity,
+        &.quote-products-table__taxes {
+            width: 7.1875rem !important;
+            min-width: 7.1875rem !important;
+            max-width: none !important;
+        }
+
+        &.quote-products-table__unit-value {
+            width: 7.8125rem !important;
+            min-width: 7.8125rem !important;
+            max-width: none !important;
+        }
+    }
+}
+
+.quote-button {
+    background-color: #0B2C4C !important;
+    border: none !important;
+    border-radius: 0.5rem !important;
+    color: #FFFFFF !important;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem !important;
+    font-weight: 700 !important;
+    height: 2rem !important;
+    line-height: 1;
+    padding: 0.5rem 1rem !important;
+    transition: opacity 0.2s;
+    vertical-align: middle;
+    width: 9.5rem !important;
+    box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
+    
+    &:hover {
+        opacity: 0.9;
+    }
+    
+    &--multiline {
+            font-size: 0.875rem !important;
+        font-weight: 700 !important;
+        height: 2rem !important;
+        line-height: 1 !important;
+        padding: 0.5rem 1rem !important;
+        text-align: center;
+        white-space: normal;
+        width: 9.5rem !important;
+    }
+}
+
+.quote-form-client-button {
+    color: #00A99D;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    text-underline-position: from-font;
+}
+
+.quote-modal-content {
+    .flex.gap-6 {
+        gap: 1.75rem !important;
+        align-items: center;
+    }
+}
+
+.quote-delete-modal-wrapper {
+    width: auto !important;
+    max-width: 30rem;
+    margin: 0 auto;
+}
+
+.quote-delete-modal-content {
+    max-width: 30rem;
+    width: auto !important;
+    padding: 1.625rem !important;
+    text-align: center;
+    
+    .quote-delete-icon {
+        width: 5.625rem;
+        height: 5.625rem;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+.quote-modal-title {
+    font-size: 1.375rem !important;
+    font-weight: 700 !important;
+    color: #0B2C4C !important;
+    line-height: 1 !important;
+    margin: 0;
+}
+
+.quote-modal-text {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    color: #4B4B4B !important;
+    line-height: 1 !important;
+    margin: 0;
+    
+    strong {
+        font-weight: 700;
+    }
+}
+
+.quote-update-modal-wrapper {
+    width: auto !important;
+    max-width: 30rem;
+    margin: 0 auto;
+}
+
+.quote-update-modal-content {
+    max-width: 30rem;
+    width: auto !important;
+    padding: 1.625rem !important;
+    text-align: center;
+    
+    .quote-update-icon {
+        width: 5.625rem;
+        height: 5.625rem;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+.quote-warning-modal-wrapper,
+.quote-character-limit-modal-wrapper {
+    width: auto !important;
+    max-width: 31.75rem;
+    margin: 0 auto;
+}
+
+.quote-warning-modal-content,
+.quote-character-limit-modal-content {
+    max-width: 31.75rem;
+    width: auto !important;
+    padding: 2.875rem !important;
+    text-align: center;
+    
+    .quote-warning-icon {
+        width: 5.625rem;
+        height: 5.625rem;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+.quote-character-limit-modal-content {
+    .quote-modal-text {
+        text-align: left !important;
+        max-width: 25.9375rem;
+        margin: 0 auto 1.75rem auto;
+    }
+}
+
+.icon {
+    z-index: 1 !important;
+}
+
+.quotes-common {
+    &__title {
+        color: #0B2C4C;
+        font-weight: 700;
+        font-size: 1.125rem;
+        line-height: 1.2;
+        margin: 0;
+    }
+
+    &__description {
+        color: #4B4B4B;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.4;
+        margin-bottom: 2rem;
+    }
+
+    &__container {
+        width: 12.4375rem;
+        height: 1.375rem;
+        margin-bottom: 1rem;
+    }
+
+    &__label {
+        width: 9.8125rem;
+    }
+}
+
+.bg-famiefi-light-blue {
+    background-color: #FCFDFF;
+}
+
+$desktop-breakpoint-large: 80rem; 
+$desktop-breakpoint-medium: 64rem;
+
+.quote-generate__billing-information--container {
+    .flex.flex-col {
+        @media (min-width: $desktop-breakpoint-large) {
+            flex-direction: row !important;
+            align-items: flex-start !important;
+            gap: 1.75rem !important;
+        }
+        
+        @media (min-width: $desktop-breakpoint-medium) {
+            flex-direction: row !important;
+            align-items: flex-start !important;
+            gap: 1.75rem !important;
+        }
+    }
+    
+    @media (min-width: $desktop-breakpoint-medium) {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        width: 100% !important;
+    }
+}
+
+.billing-information {
+    @apply bg-white py-4.5 px-7 rounded;
+
+    &__shipping-cost {
+        @apply text-sm outline-none border border-gray-dark rounded pl-0.5 m-0;
+        width: 6.625rem;
+        height: 1.1875rem;
+
+        &--disabled {
+            @apply bg-gray-light text-sm outline-none border border-gray-dark rounded pl-0.5;
+            width: 6.625rem;
+            height: 1.1875rem;
+        }
+
+        input {
+            @apply m-0 p-0 w-full text-left;
+            height: 1.1875rem;
+        }
+    }
+
+    &__text-area {
+        width: 17.4781rem;
+    }
+
+    &__lower-section {
+        @apply flex flex-col items-center justify-center mt-4.5;
+        gap: 2.375rem;
+      
+        @media (min-width: 62.5rem) {
+          @apply flex-row;
+        }
+      
+        @media (max-width: 23.4375rem) {
+          width: 16.5rem;
+        }
+    }
+}
+
+.quote-subtotals {
+    &__container {
+        @apply flex flex-col;
+        min-width: 18.75rem;
+        gap: 0.125rem;
+    }
+
+    &__row {
+        @apply flex items-start justify-start w-full;
+        gap: 1.125rem;
+        min-height: 1.25rem;
+    }
+
+    &__label {
+        @apply text-right font-aller text-base;
+        flex-shrink: 0;
+        line-height: normal;
+        text-wrap: nowrap;
+        
+        &--bold {
+            @apply font-allerbold;
+        }
+        
+        &--regular {
+            @apply font-aller;
+        }
+    }
+
+    &__value {
+        @apply text-right font-aller text-base;
+        flex-shrink: 0;
+        line-height: normal;
+        text-wrap: nowrap;
+        
+        &--bold {
+            @apply font-allerbold;
+        }
+        
+        &--regular {
+            @apply font-aller;
+        }
+    }
+}
+
+.table-total {
+    @apply flex flex-col text-sm;
+    gap: 0;
+
+    &__container {
+        @apply flex justify-between items-center text-blue;
+        width: 100% !important;
+        min-height: 1rem;
+    }
+
+    &__label {
+        @apply text-sm text-blue;
+        width: 9.8125rem;
+        margin: 0 !important;
+        padding: 0 !important;
+        flex-shrink: 0;
+    }
+
+    &__value {
+        @apply text-sm text-blue;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-align: right;
+        flex: 1;
+    }
+}

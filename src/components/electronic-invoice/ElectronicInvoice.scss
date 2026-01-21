@@ -1,0 +1,275 @@
+@mixin field-width($width) {
+    width: $width !important;
+    min-width: $width !important;
+    max-width: $width !important;
+}
+
+.electronic-invoice {
+    @apply flex flex-col justify-between w-full;
+
+    .content-section {
+        @apply flex flex-col mb-7 gap-y-4.5;
+
+        .title-section {
+            @apply text-base font-allerbold text-blue;
+        }
+    }
+
+    .row-gap-8 {
+        @apply gap-y-2 mb-4.5;
+    }
+
+    .content-section-sale {
+        @apply border-1 border-black xs:mb-4.5 mb-7 p-2.5 shadow-templateDesign bg-gray-smoke flex flex-col xs:gap-y-4.5;
+
+        @include field-width(42.75rem);
+    }
+
+    .content-group-date-input {
+        @apply flex xs:flex-col lg:gap-x-3 xs:gap-y-4.5;
+
+        .input-style {
+            @apply w-38 xs:w-full;
+        }
+    }
+
+    .content-group-checkbox {
+        @apply flex flex-col gap-y-4.5;
+
+        .checkbox-rounded {
+            @apply rounded-full;
+        }
+    }
+
+    .content-radio-input {
+        @apply flex flex-col gap-y-2;
+
+        &__direction {
+            @apply md:flex-col gap-x-0 gap-y-4.5;
+        }
+
+        &__input-size-auto {
+            @include field-width(min-content);
+
+            .label-style {
+                @apply flex items-center justify-between h-full py-1 px-2;
+
+                &__size-375 {
+                    @include field-width(23.4375rem);
+                }
+
+                &__size-275 {
+                    @include field-width(17.1875rem);
+                }
+            }
+        }
+
+        .title-radio {
+            @apply text-base text-blue;
+        }
+    }
+
+    .content-group-input {
+        @apply flex flex-wrap xs:w-full mb-4.5 xs:flex-col lg:gap-x-7 gap-y-4.5 xs:gap-y-4.5 w-168.75;
+
+        .input-style {
+            @apply w-73 xs:w-full;
+
+            &__document-number {
+                @apply w-52.5 xs:w-4/5;
+            }
+
+            &__digit-number {
+                @apply w-11.2 xs:w-1/5;
+            }
+
+            &__payment-days {
+                @apply w-11.2 xs:w-1/5;
+            }
+			
+			&__input-days {
+				@apply w-38.2 xs:w-full;
+			}
+        }
+    }
+
+	.content-group-input-width-864 {
+		width: 54rem;
+	}
+
+    .content-document-number {
+        @apply flex flex-row gap-x-4.5 justify-start;
+    }
+
+    .content-section-table {
+        @apply flex flex-col mb-7;
+
+        .content-taxes-withholdings {
+            @apply flex md:flex-col lg:flex-row xs:flex-col xs:gap-y-5;
+
+            &__table-taxes {
+                @apply flex flex-col xs:w-full xs:mb-5;
+            }
+
+            &__table-withholdings {
+                @apply xs:w-full lgm:w-full xs:ml-0 md:ml-0 md:mt-4.5 lg:ml-7 lg:mt-0;
+            }
+        }
+    }
+
+    .paragraph-tiny {
+        @apply text-blue text-tiny;
+    }
+
+    .not-margin {
+        @apply m-0;
+    }
+
+    .remove-min-height {
+        min-height: 2.4375rem !important;
+
+        @media (max-width: 47.9375rem) {
+            min-height: 2.125rem !important;
+        }
+    }
+
+    .wd-19-24 {
+        @include field-width(4.75rem);
+    }
+
+    .wd-21-9 {
+        @include field-width(5.5rem);
+    }
+
+    .wd-48-1 {
+        @include field-width(11.938rem);
+    }
+
+    .w-200-4 {
+        @apply w-49.4;
+    }
+
+    .w-185-96 {
+        @apply w-44.4;
+    }
+
+    .select-search-sku {
+        .select-search__input {
+            @apply m-0 p-0;
+        }
+
+        .select-search__select {
+            @include field-width(6.375rem);
+        }
+    }
+
+    .select-search-product {
+        .select-search__input {
+            @apply m-0 p-0;
+        }
+
+        .select-search__select {
+            @include field-width(8.063rem);
+        }
+    }
+
+    .margin-select {
+        .select-search__value {
+            @apply -ml-3;
+        }
+    }
+
+    .style-label-checkbox {
+        @apply w-full text-blue text-sm bg-gray-light rounded-lg border-gray-light;
+
+        height: 2.0625rem;
+
+        &.width-260 {
+            @apply w-63 xs:w-full;
+        }
+    }
+
+    .padding-bottom {
+        &__15 {
+            @apply pb-3.75;
+        }
+
+        &__22-51 {
+            padding-bottom: 1.4069rem;
+        }
+    }
+
+    .width-0 {
+        @apply w-0;
+    }
+
+    .top-32 {
+        @apply top-8;
+    }
+
+    .without-padding-header {
+        @apply p-0 border border-gray;
+
+        min-height: 2.438rem !important;
+        height: 2.438rem;
+
+        @media (max-width: 47.9375rem) {
+            min-height: 2.1255rem !important;
+            height: 2.1875rem;
+        }
+    }
+
+    .without-padding-body {
+        @apply p-0 border border-gray;
+
+        min-height: 2.5rem !important;
+        height: 2.5rem;
+
+        @media (max-width: 47.9375rem) {
+            min-height: 1.875rem !important;
+            height: auto;
+        }
+    }
+
+    .table-summary-body {
+        @apply p-0 border border-gray;
+
+        min-height: 2.4375rem !important;
+        height: 2.4375rem;
+
+        @media (max-width: 47.9375rem) {
+            min-height: 2.125rem !important;
+            height: 2.125rem;
+        }
+    }
+
+    @media screen and (min-width: 3.125rem) and (max-width: 47.938rem) {
+        .container-checkbox {
+            @include field-width(100%);
+
+            &__width-303 {
+                @include field-width(100%);
+            }
+        }
+
+        .content-section-sale {
+            @include field-width(100%);
+        }
+
+        .content-radio-input {
+            &__input-size-auto {
+                @include field-width(inherit);
+
+                .label-style {
+                    &__size-375, &__size-275 {
+                        @include field-width(100%);
+                    }
+                }
+            }
+        }
+
+		.content-group-input-width-864 {
+			width: 100%;
+		}
+    }
+}

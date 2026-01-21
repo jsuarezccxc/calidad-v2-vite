@@ -1,0 +1,41 @@
+.steps{
+	@apply bg-white rounded items-center px-4 flex flex-row justify-between mb-3;
+	box-shadow: 0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.1);
+	width: 46.6875rem;
+	height: 4rem;
+	&__title{
+		@apply text-blue font-allerbold text-base pt-2;
+	}
+	&__substeps{
+		border-bottom: 0.031rem solid rgba(11, 44, 76, 1);
+		padding-bottom: 0.3rem;
+		margin-bottom: 1rem;
+	}
+	&__substeps-container{
+		@apply flex gap-4.5 justify-between my-4 items-center;
+	}
+	&__substeps-title{
+		@apply font-aller text-base text-blue
+	}
+
+	&__button-active{
+		@apply bg-blue text-white font-aller text-xs rounded-lg ml-2 flex items-center justify-center;
+		text-decoration: none;
+		box-shadow: 0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25);
+		width: 9.5625rem ;
+		height: 2.0625rem;
+	}
+	&__button-inactive{
+		@apply bg-gray text-white font-aller text-xs h-8 rounded-lg w-37 pointer-events-none ml-2 flex items-center justify-center;
+		text-decoration: none;
+		box-shadow: 0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25);
+	}
+	&__icon-width--step{
+		width: 1.875rem;
+		height: 1.875rem;
+	}
+	&__icon-completed{
+		width: 1.9375rem;
+		height: 1.9375rem;
+	}
+}

@@ -1,0 +1,45 @@
+@import '../../../../index.scss';
+
+.modal-expiration-plan {
+	@apply flex flex-col;
+	@include field-width(26.5625rem);
+
+	.information__expiration {
+		@apply flex flex-col;
+
+		&--header {
+			@apply flex flex-col justify-center items-center mb-7;
+
+			.icon--alert {
+				@apply mb-2;
+				width: 5.625rem;
+				height: 5.625rem;
+			}
+
+			.title--modal {
+				@apply text-xl text-blue leading-5.25 text-center font-allerbold;
+				width: 16.8125rem;
+			}
+		}
+
+		&--body {
+			@apply flex flex-col;
+
+			.description--modal {
+				@apply text-base text-gray-dark text-center w-full;
+			}
+
+			.strong--purple {
+				@apply text-purple font-allerbold;
+			}
+		}
+
+		&--footer {
+			@apply flex flex-row justify-center items-center gap-x-7 mt-7;
+
+			.button--shadow {
+				box-shadow: 0rem 0.25rem 0.25rem 0rem #00000040;
+			}
+		}
+	}
+}

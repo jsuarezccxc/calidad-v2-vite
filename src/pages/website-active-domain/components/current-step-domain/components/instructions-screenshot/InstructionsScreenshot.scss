@@ -1,0 +1,16 @@
+.instructions-screenshot {
+	@apply flex flex-col pb-7 w-full;
+
+	.container__screenshots {
+		@apply flex flex-col justify-center;
+
+		.screenshot {
+			@apply w-full mt-4.5 bg-no-repeat bg-center;
+			background-size: contain;
+
+			@media (max-width: 64rem) {
+				height: 9.375rem !important;
+			}
+		}
+	}
+}

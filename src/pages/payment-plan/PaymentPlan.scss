@@ -1,0 +1,287 @@
+@import "../../index.scss";
+
+.payment-plan {
+    @apply flex flex-col justify-between h-full xs:px-2;
+
+    &__button {
+        @apply bg-white text-blue font-allerbold rounded-lg text-xs block ml-auto mt-7 hover:bg-green hover:text-white;
+
+        width: 9.5625rem;
+        height: 2.0625rem;
+		box-shadow: 0rem 0.25rem 0.25rem 0rem #00000040;
+    }
+
+    &__table-title {
+        @apply text-green font-allerbold mb-4.5;
+    }
+
+    .canceled-plan {
+        @include field-width(28.9375rem);
+
+        padding: 1.625rem 2.8125rem;
+
+        .canceled-modal {
+            @apply flex flex-col;
+
+            &__header {
+                @apply flex flex-col gap-y-2 items-center justify-center;
+
+                .icon--style {
+                    width: 5.625rem;
+                    height: 5.625rem;
+                }
+
+                .title {
+                    @apply text-xl text-blue font-allerbold text-center w-full;
+
+                    line-height: 1.665rem;
+                }
+            }
+
+            &__body {
+                @apply flex flex-col gap-y-5 items-center justify-center mt-7;
+
+                .subtitle--modal {
+                    @apply text-purple text-base font-allerbold text-center;
+
+                    line-height: 1.2112rem;
+                }
+
+                .description--canceled {
+                    @apply text-gray-dark text-base text-center;
+
+                    line-height: 1.2112rem;
+                }
+            }
+
+            &__footer {
+                @apply flex flex-row gap-x-7 justify-center mt-7;
+
+                .button--style {
+                    box-shadow: 0rem 0.25rem 0.25rem 0rem #00000040;
+                }
+            }
+        }
+    }
+
+    .thanks-diggi {
+        @include field-width(26.4375rem);
+
+        padding: 1.625rem 2.625rem;
+
+        &__content {
+            @apply flex flex-col justify-center items-center;
+
+            .body--modal {
+                @apply flex flex-col justify-center items-center gap-y-2;
+
+                .icon--width {
+                    width: 5.625rem;
+                    height: 5.625rem;
+                }
+
+                .title--modal {
+                    @apply text-blue font-allerbold text-center;
+
+                    font-size: 1.25rem;
+                    line-height: 1.5137rem;
+                }
+            }
+
+            .footer--modal {
+                @apply flex flex-row justify-center items-center mt-7;
+            }
+        }
+    }
+
+    .cancel-plan-autorenovation {
+        @include field-width(26.5625rem);
+
+        padding: 1.625rem;
+
+        .autorenovation {
+            @apply flex flex-col;
+
+            &__header {
+                @apply flex flex-col gap-y-2 items-center justify-center;
+
+                .icon--style {
+                    width: 5.625rem;
+                    height: 5.625rem;
+                }
+
+                .title {
+                    @apply text-xl text-blue font-allerbold text-center w-full;
+
+                    line-height: 1.665rem;
+                }
+            }
+
+            &__body {
+                @apply flex flex-col gap-y-5 items-center justify-center mt-7;
+
+                .subtitle--modal {
+                    @apply text-purple text-base font-allerbold text-center;
+
+                    line-height: 1.2112rem;
+                }
+
+                .description--canceled {
+                    @apply text-gray-dark text-base text-center;
+
+                    line-height: 1.2112rem;
+                }
+            }
+
+            &__footer {
+                @apply flex flex-row gap-x-7 justify-center mt-7;
+            }
+
+            .shadow--style {
+                box-shadow: 0rem 0.25rem 0.25rem 0rem #00000040;
+                padding: 0rem 0.6875rem;
+            }
+        }
+    }
+
+    .activate-renewal-modal {
+        @include field-width(26.5625rem);
+
+        padding: 1.625rem;
+
+        .activate-renewal {
+            @apply flex flex-col;
+
+            &__header {
+                @apply flex flex-col gap-y-2 items-center justify-center;
+
+                .title--modal {
+                    @apply text-xl text-blue font-allerbold text-center w-full;
+
+                    min-width: 25.125rem;
+                    line-height: 1.665rem;
+                }
+            }
+
+            &__body {
+                @apply flex flex-col items-center justify-center mt-4.5;
+
+                .description--modal {
+                    @apply text-gray-dark text-base text-center;
+
+                    line-height: 1.2112rem;
+                }
+            }
+
+            &__footer {
+                @apply flex flex-row gap-x-7 justify-center mt-7;
+            }
+
+            .shadow--style {
+                box-shadow: 0rem 0.25rem 0.25rem 0rem #00000040;
+                padding: 0rem 0.6875rem;
+            }
+        }
+    }
+
+    .plan-table {
+        @media (max-width: 37.5rem) {
+            max-width: 23.75rem !important;
+        }
+    }
+
+    .active-table, .historical-table {
+        .table-head {
+            @apply text-left text-blue;
+
+           
+        }
+
+        .table-field {
+            line-height: 0.8125rem;
+
+            @media (min-width: 56.25rem) {
+                line-height: 0.9375rem !important;
+            }
+        }
+
+        &__field {
+            @apply text-tiny lg:text-sm flex items-center justify-between leading-3 text-gray px-2;
+
+            @media (min-width: 62.5rem) {
+                line-height: 0.875rem;
+            }
+        }
+    }
+
+    .active-plans {
+        @apply w-max;
+
+        .active-table {
+            @apply mb-7;
+
+            max-width: 35rem;
+
+            &__plan {
+                @include field-width(12.5rem);
+            }
+
+            &__purchase-date, &__expiration-date {
+                @include field-width(9.375rem);
+            }
+
+			&__button {
+				@apply bg-white;
+			}
+
+            .button--style {
+                width: 8.125rem;
+                box-shadow: 0rem 0.25rem 0.25rem 0rem #00000040;
+                padding: 0 0.6875rem;
+
+                &:hover {
+                    @apply bg-blue;
+                }
+            }
+        }
+    }
+
+    .plans-history {
+        @apply w-max;
+
+        &__filters {
+            @apply flex justify-between my-4.5;
+
+            max-width: 59.875rem;
+        }
+
+        &__date-picker {
+            @include field-width(12.5rem);
+        }
+
+        .historical-table {
+            max-width: 59.875rem;
+
+            &__plan {
+                @include field-width(12.5rem);
+            }
+
+            &__purchase-date, &__expiration-date {
+                @include field-width(11.25rem);
+            }
+
+            &__unit-value {
+                @include field-width(9.375rem);
+            }
+
+            &__discount, &__total-value {
+                @include field-width(7.75rem);
+            }
+        }
+    }
+}
+
+.cancel-w-title {
+    width: 17.4375rem;
+    min-width: 17.4375rem;
+}

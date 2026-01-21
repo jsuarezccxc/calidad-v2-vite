@@ -1,0 +1,50 @@
+@import '../../index.scss';
+
+.table-taxes {
+	@apply w-max xs:w-full;
+
+	thead {
+		tr {
+			@apply h-8.2 #{!important};
+		}
+	}
+
+	.titles-table-taxes {
+		@apply h-10;
+		@media (max-width: 48rem) {
+			height: 1.875rem;
+		}
+	}
+	
+	.header {
+		&__w-152 {
+			@include field-width(9.5156rem);
+			@apply h-8.2 #{!important};
+		}
+	}
+
+	.number-input {
+		@apply text-left w-5/6 lg:h-auto;
+
+		&--disabled {
+			@apply text-gray #{!important};
+		}
+
+		&--margin-2 {
+			@apply ml-2 #{!important};
+		}
+
+		&--text-align-center {
+			@apply text-center #{!important};
+		}
+	}
+
+	.select-search {
+		@apply text-left #{!important};
+	}
+
+	.padding-0 {
+		@apply p-0 #{!important};
+	}
+
+}

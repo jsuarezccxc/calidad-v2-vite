@@ -1,0 +1,31 @@
+.pdf-width > canvas {
+	width: 28.75rem !important;
+	height: 39.813rem !important;
+}
+
+.header-reason-reject {
+    height: 23px !important;
+    max-height: 40px !important;
+}
+
+.field-reason-reject {
+    height: 40px !important;
+    max-height: 40px !important;
+}
+
+.download {
+    @apply flex mb-7;
+
+    &__type {
+        @apply w-38.4 cursor-pointer flex bg-white shadow-templateDesign mr-4.5 justify-center items-center rounded-md px-2;
+        height: 2.875rem;
+
+        &--text {
+            @apply w-full text-sm text-center text-blue font-allerbold no-underline;
+        }
+    }
+}
+
+.field-body--text {
+    @apply items-start #{!important};
+}

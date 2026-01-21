@@ -1,0 +1,80 @@
+@import '../../index.scss';
+
+.electronic-note {
+    @apply flex flex-col justify-between w-full bg-white shadow-templateDesign px-7 py-4.5;
+
+    .style-label-checkbox {
+        @apply w-26 rounded-lg text-xs h-8.5 text-center text-blue flex justify-center items-center bg-gray-light;
+    }
+
+    .content-form-section {
+        @apply flex flex-col w-full gap-y-7 mb-7 xs:mb-4.5;
+
+        .form-section {
+            @apply flex flex-col gap-y-4.5;
+        }
+    }
+
+    .box-content-inputs {
+        @apply flex xs:flex-col w-151.50 xs:w-full gap-x-7 gap-y-4.5 flex-wrap;
+
+        .gap-date {
+            @apply gap-x-4.5;
+        }
+
+        .style-inputs {
+            @apply xs:w-full lg:w-73;
+
+            &__margin-right {
+                @apply lg:mr-7;
+            }
+
+            &__nit-input {
+                @apply lg:w-52.5;
+            }
+        }
+
+        .style-date-input {
+            @apply lg:w-38 xs:w-full;
+        }
+
+		.foreign-message {
+			@apply text-right text-green text-tiny mx-1.5 h-8.2;
+		}
+    }
+
+	.height-69 {
+		@apply h-17.1;
+	}
+
+	.not-margin {
+		@apply m-0;
+	}
+
+    .box-dv {
+        @apply flex flex-row items-center;
+    }
+
+    .d-none {
+        @apply hidden;
+    }
+
+    .without-padding {
+        @apply p-0;
+        height: 2.5rem !important;
+    }
+
+    .title-total-table {
+        @apply xs:min-h-6.75;
+    }
+
+    .label-file-format {
+        @apply lg:self-start;
+    }
+
+    @media screen and (min-width: 3.125rem) and (max-width: 47.938rem) {
+        .without-padding-body {
+            min-height: 1.875rem !important;
+        }
+    }
+}

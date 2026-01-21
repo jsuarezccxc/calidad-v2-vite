@@ -1,0 +1,26 @@
+.create-politics {
+    &__link {
+        @apply text-blue no-underline hover:no-underline;
+    }
+
+    &__return-button {
+        @apply bg-white hover:bg-green hover:text-white text-blue w-32.5 shadow-templateDesign rounded-lg mr-4.5 text-xs h-8 font-allerbold;
+        &:hover {
+            a {
+                @apply border-green #{!important};
+                color: white !important;
+            }
+        }
+        
+    }
+
+    &__text {
+        width: 46.688rem;
+    }
+
+	&__title {
+		h1 {
+			font-size: 1rem !important;
+		}
+	}
+}

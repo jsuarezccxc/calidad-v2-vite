@@ -1,0 +1,32 @@
+.main {
+	@apply fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50;
+	.modal--container {
+		max-width: 35.125rem;
+		@apply w-full relative shadow-xl p-8 rounded-2.5xl bg-gradient-to-b from-gray-200 to-gray-300;
+		.image--container {
+			@apply relative;
+			&__rocket {
+				top: -4.5rem;
+				left: 2rem;
+				@apply absolute;
+			}
+			&__cloud {
+				height: 6.75rem;
+				@apply w-full;
+			}
+		}
+		.title {
+			@apply mt-6 text-xl font-bold text-center font-aller text-blue;
+		}
+		.first--text {
+			@apply mt-5 mb-5 text-base text-center text-gray-dark;
+		}
+		.second--text {
+			@apply text-base text-center text-gray-dark;
+		}
+		.button--container {
+			@apply flex justify-center mt-3 mb-6;
+		}
+	}
+}
+

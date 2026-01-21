@@ -1,0 +1,109 @@
+@mixin field-width($width) {
+    width: $width !important;
+    min-width: $width !important;
+    max-width: $width !important;
+}
+
+.w-181 {@include field-width(11.3125rem)}
+.w-191 {@include field-width(11.9375rem)}
+.w-82 {@include field-width(5.125rem)}
+.w-136 {@include field-width(8.5rem)}
+.w-120 {@include field-width(7.5rem)}
+.w-124 {@include field-width(7.75rem)}
+.w-150 {@include field-width(9.375rem)}
+
+.icon-warning{
+    @apply w-20;
+    height: 4.375rem;
+}
+
+.break-word{
+    span {
+        max-width: 9.5625rem;
+    }
+}
+
+.input--disabled {
+	@apply border-0;
+}
+
+.w-fix {
+	@apply bg-transparent;
+	width: auto !important;
+    border: 0 !important;
+}
+
+.success-modal {
+    @apply p-6.70 bg-white rounded-2.5xl flex flex-col justify-center items-center h-auto;
+    width: 26.563rem;
+}
+
+.header-table{
+    max-height: 2.5rem !important;
+    height: 2.5rem !important;
+    min-height: 2.5rem !important;
+}
+
+.table-inventory {
+    @apply mx-auto;
+    @include field-width(56.1875rem);
+}
+
+.modal-prefix{
+    @apply flex flex-col bg-white py-11.5 px-10.5 items-center rounded-2.5xl;
+    width: 35.1875rem;
+    height: auto;
+}
+
+.modal-confirmation{
+    @apply flex flex-col bg-white py-11.5 px-11 items-center rounded-2.5xl;
+    width: 31.75rem;
+    height: 19.5rem;
+}
+
+
+.table-modal-prefix {
+    @apply mx-auto;
+    @include field-width(29.9375rem);
+    
+    &__container{
+		@apply overflow-y-auto overflow-x-hidden;
+        width: 29.9375rem;
+		height: 7.6rem;
+    }
+
+	&__type-invoice {
+		@apply whitespace-nowrap border-b-1 border-gray;
+		width: 13.5625rem;
+	}
+
+	&__prefix {
+		@apply whitespace-nowrap border-b-1 border-gray;
+		width: 5.125rem;
+	}
+
+	&__number-resolution {
+		@apply whitespace-nowrap border-b-1 border-gray;
+		width: 11.3125rem;
+	}
+}
+
+.current-number{
+    span {
+        @include field-width(5.375rem)
+    }
+}
+
+.number-resolution{
+    span{
+        @include field-width(8.9375rem) 
+    }
+}
+
+.buttons-footer{
+    @apply gap-4.5 pr-0;
+
+    button {
+        margin: 0 !important;
+    }
+}

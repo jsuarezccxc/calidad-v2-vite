@@ -1,0 +1,12 @@
+.select-search__input{
+    @apply  text-left px-0 mx-0;
+}
+
+.border_none{
+	border: none !important;
+}
+
+.import-button {
+	@apply mt-auto mb-4 inline-flex items-center justify-between p-2 text-sm h-9.5;
+	width: 10.5625rem;
+}

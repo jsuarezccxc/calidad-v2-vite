@@ -1,0 +1,66 @@
+.btn {
+    height: 2.0625rem;
+    width: 9.5625rem;
+
+    @apply text-xs
+		rounded-lg
+		font-bold
+		leading-tiny;
+
+    &:focus {
+        outline: none;
+    }
+
+    @media (max-width: 48rem) {
+        width: 8.5625rem;
+    }
+}
+
+.link {
+    @apply underline hover:underline;
+}
+
+.buttons-footer {
+    @apply flex justify-end mt-12 pr-0 md:pr-7 gap-22;
+}
+
+.gap-22 {
+    gap: 1.375rem;
+}
+
+.custom-link {
+    @apply mt-2 underline cursor-pointer text-green hover:text-blue w-max;
+}
+
+.disabled-link {
+    @apply text-gray cursor-default hover:text-gray;
+}
+
+.custom-link {
+    @apply mt-2 underline cursor-pointer text-green hover:text-blue w-max;
+}
+
+.disabled-link {
+    @apply text-gray cursor-default hover:text-gray;
+}
+
+.simple-button {
+    @apply font-allerbold;
+
+    min-width: 9.5625rem;
+    min-height: 2.1875rem;
+    font-size: 0.8125rem;
+    border-radius: 0.5rem;
+
+    &:hover {
+        @apply bg-green text-white;
+    }
+
+    &--accept {
+        @apply bg-blue text-white;
+    }
+
+    &--back {
+        @apply bg-white text-blue;
+    }
+}

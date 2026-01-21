@@ -1,0 +1,88 @@
+.columns--many-items {
+	@apply flex flex-col;
+
+	.wrapper-subcategory {
+		@apply w-80;
+	}
+}
+
+.check-rounded {
+	@apply mr-1;
+}
+
+.radio-button {
+	@apply w-0;
+}
+
+.container-full {
+	width: 100% !important;
+}
+
+.in-production {
+	background-color: #d4acec;
+}
+
+.container input:checked~.check-radio {
+	@apply border-0 bg-blue;
+}
+
+.check-radio {
+	@apply border absolute top-0 left-0 border-gray m-1;
+	width: 1.125rem;
+	height: 1.125rem;
+	border-radius: 100%;
+
+	&:hover {
+		@apply border bg-gray-light cursor-pointer;
+	}
+}
+
+.width-checkbox {
+	@apply flex justify-center items-center rounded-lg h-8 text-gray-dark;
+	width: 13.4375rem;
+}
+
+.width-item {
+	width: 15.625rem !important;
+}
+
+.subcategory {
+	@apply ml-3.5;
+}
+
+.user-detail {
+	@apply flex-1;
+
+	.icon--edit {
+		width: 2.125rem;
+		height: 1.875rem;
+	}
+
+	&__edit {
+		@apply px-2 py-2.5 flex items-center cursor-pointer justify-center bg-white rounded-md shadow-templateDesign mb-4.5;
+		width: 11.875rem;
+		height: 3.125rem;
+
+		.icon {
+			@apply pr-1;
+		}
+	}
+
+	&--subtitle {
+		@apply font-allerbold text-green mb-4.5;
+	}
+
+	&--text {
+		@apply mb-1 text-base text-blue font-allerbold;
+	}
+
+	&--subtext {
+		@apply text-tiny text-gray mb-1.5;
+	}
+}
+
+.save-modal {
+	@apply p-6.70 flex flex-col justify-center items-center bg-white shadow-templateDesign rounded-2.5xl;
+	width: 26.5625rem;
+	height: 16.5625rem;
+}

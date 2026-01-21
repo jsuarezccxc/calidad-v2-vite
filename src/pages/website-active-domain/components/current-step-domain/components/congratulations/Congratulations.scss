@@ -1,0 +1,81 @@
+.congratulations {
+	@apply flex flex-col;
+
+	&__container {
+		@apply flex flex-row py-7 w-full h-full justify-center;
+
+		@media (max-width: 48rem) {
+			@apply flex-col;
+		}
+			
+		.information__container {
+			@apply flex flex-col justify-center items-center;
+			max-width: 28.3125rem;
+			margin-right: 1.5625rem;
+
+			@media (max-width: 64rem) {
+				max-width: 27.3125rem;
+			}
+
+			@media (max-width: 48rem) {
+				@apply mr-0 max-w-max;
+			}
+			
+			.title {
+				@apply text-blue font-allerbold text-left;
+				font-size: 2.5rem;
+				min-width: 28.3125rem;
+
+				@media (max-width: 64rem) {
+					min-width: 27.3125rem;
+				}
+
+				@media (max-width: 48rem) {
+					@apply min-w-max;
+				}
+			}
+	
+			.description {
+				@apply text-blue text-xl font-normal m-0 h-auto;
+				max-width: 28.3125rem;
+
+				@media (max-width: 64rem) {
+					max-width: 27.3125rem;
+				}
+
+				@media (max-width: 48rem) {
+					@apply max-w-max;
+				}
+			}
+		}
+	
+		.image__container {
+			@apply flex flex-col justify-center items-start;
+
+			@media (max-width: 64rem) {
+				@apply justify-center items-center;
+			}
+
+			@media (max-width: 48rem) {
+				@apply justify-center items-center;
+			}
+	
+			.img--styles {
+				min-width: 15rem;
+				height: auto;
+			}
+		}
+	}
+
+	&__button {
+		@apply w-full flex justify-center items-center; 
+
+		.button--styles {
+			@apply px-9;
+
+			@media (max-width: 48rem) {
+				@apply px-7;
+			}
+		}
+	}
+}

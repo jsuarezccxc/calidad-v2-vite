@@ -1,0 +1,170 @@
+@import "../../index.scss";
+
+.purchase-invoice {
+    &__lower-section {
+        @apply flex flex-col lg:flex-row items-center justify-center;
+
+        gap: 2.375rem;
+
+        @media (max-width: 37.5rem) {
+            @apply gap-y-4.5;
+        }
+    }
+
+    &__text-area {
+        @apply w-full;
+
+        @media (min-width: 56.25rem) {
+            width: 17.5313rem;
+        }
+    }
+
+	.products-table {
+        @apply mt-4.5 overflow-x-scroll w-full #{!important};
+
+		&__border-none {
+			@apply border-none;
+		}
+
+        &__icon {
+            @apply cursor-pointer w-4.5 h-4.5;
+
+            min-width: 1.125rem;
+        }
+
+        &__number, &__selector {
+            @include field-width(2.5rem);
+        }
+
+        &__sku {
+            @include field-width(15rem);
+        }
+
+        &__description {
+            @include field-width(8.75rem);
+        }
+
+        &__warehouse, &__batch, &__due-date, &__unit, &__discount-rate, &__discount {
+            @include field-width(7.5rem);
+        }
+
+        &__quantity, &__taxes {
+            @include field-width(7.1875rem);
+        }
+
+        &__unit-value {
+            @include field-width(7.8125rem);
+        }
+
+        &__select {
+            width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+
+            textarea {
+                @apply text-sm;
+
+                line-height: 0.9375rem;
+                padding: 0 !important;
+                width: 100% !important;
+                margin: 0 !important;
+
+                @media (max-width: 37.5rem) {
+                    font-size: 0.75rem;
+                    line-height: 0.75rem;
+                }
+            }
+        }
+        
+		.number-input-style {
+			@apply text-left lg:h-auto;
+		}
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            @apply appearance-none m-0;
+        }
+    }
+
+    .optional-fields {
+        @apply h-0 flex flex-wrap gap-x-7 gap-y-4.5;
+        max-width: 38.75rem;
+
+        &--active {
+            @apply h-full;
+            height: 8.375rem;
+
+            @media (max-width: 37.5rem) {
+                height: 17.5rem;
+            }
+        }
+    }
+
+	.margin-8 {
+		@apply mb-2;
+	}
+
+    .invoice-form {
+        @apply flex flex-col gap-y-4.5 mb-4.5;
+
+        &__group {
+            @apply flex flex-col gap-x-7 lg:flex-row gap-y-4.5;
+        }
+
+		&__foreign-message {
+			@apply text-right text-green text-tiny mx-1.5 h-8.2;
+		}
+
+        &__cufe {
+            @media (min-width: 56.25rem) {
+                max-width: 38rem !important;
+            }
+        }
+
+        &__time-input {
+            margin: 0 !important;
+        }
+    }
+
+    .products-table {
+
+        .table-field{
+            @apply border-b-1 border-gray border-0
+        }
+        .fix-bg{
+            background-color: white !important;
+        }
+
+        @apply w-max;
+
+        &__selector, &__number {
+            @include field-width(2.5rem);
+        }
+
+        &__selector{
+            @apply bg-white;
+            border: none !important
+        }
+
+        &__sku {
+            @include field-width(15.375rem);
+            text-align: left !important;
+        }
+
+        &__quantity, &__taxes {
+            @include field-width(7.1875rem);
+        }
+
+        &__unit-cost, &__discount-rate {
+            @include field-width(7.8125rem);
+        }
+
+        &__discount {
+            @include field-width(7.5rem);
+        }
+
+        &__table {
+            max-width: 56.9375rem;
+        }
+    }
+}

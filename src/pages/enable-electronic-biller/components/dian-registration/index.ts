@@ -1,0 +1,1 @@
+export { DianRegistration } from './DianRegistration';

@@ -1,0 +1,168 @@
+$blue: #0B2C4C;
+
+.plans {
+    @apply pt-7;
+
+    &__title {
+        @apply text-blue font-poppinsbold flex items-center m-auto w-max;
+
+        font-size: 2.25rem;
+        gap: 0.9375rem;
+
+		@media (max-width: 22.5rem) {
+			font-size: 1.75rem;
+		}
+
+        .icon--title {
+            width: 3.3125rem;
+            height: 3.3125rem;
+        }
+    }
+
+    &__plan {
+        &-dropdown {
+            @apply mx-auto my-7 rounded-lg;
+
+            width: 20.75rem;
+            height: 2.625rem;
+            box-shadow: 0 0.25rem 0.25rem 0 #00000040;
+            font-size: 1.25rem !important;
+        }
+
+        &-input {
+            @apply bg-green-bgLight rounded-lg h-full;
+
+            border: none !important;
+
+            p {
+                @apply text-blue font-allerbold;
+
+                font-size: 1.25rem !important;
+            }
+        }
+
+        &-title {
+            @apply font-poppinsbold text-blue text-1.5xl w-max mx-auto flex gap-x-2.5 items-center;
+
+			@media (max-width: 22.5rem) {
+				font-size: 1.25rem;
+			}
+
+            .icon--section {
+                width: 1.8125rem;
+                height: 1.8125rem;
+            }
+
+        }
+    }
+
+    .card {
+        &__button {
+            @apply font-poppinsbold;
+
+            width: 9.265rem;
+            height: 2.0006rem;
+            font-size: 0.9762rem;
+            border-radius: 1.125rem;
+			border-width: 0.0313rem;
+            box-shadow: 0 0.2056rem 0.2056rem 0rem #00000040;
+
+            &--green {
+                background: linear-gradient(90deg, #1081C5 7.73%, #0C8DB9 45.69%, #05AB9E 104.73%);
+            }
+
+            &--blue {
+                background: linear-gradient(270deg, #1081C5 -0.46%, #475AA7 70.11%, #78398D 135.88%);
+            }
+
+            &--purple {
+                @apply bg-purple;
+            }
+
+            &--blueberry {
+                background: linear-gradient(270deg, #1081C5 -0.46%, #475AA7 70.11%, #78398D 135.87%);
+            }
+
+            &--green-blackberry {
+                background: linear-gradient(270deg, #00A99D -14.23%, #78398D 87.98%);
+            }
+
+            &--active {
+                @apply border-blue bg-white cursor-default text-blue;
+            }
+
+			&--unlimited {
+				@apply bg-purple text-white cursor-pointer border-none;
+				box-shadow: 0 0.2056rem 0.2056rem 0 rgba(0, 0, 0, 0.25);
+			}
+
+			&--default {
+				@apply border-purple bg-white cursor-pointer text-purple
+			}
+        }
+    }
+
+    .switch {
+        &__slider {
+            background-color: $blue;
+        }
+    }
+}
+
+.select-plan-container {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; 
+}
+
+.select-plan {
+	@apply relative my-7 max-w-full;
+
+    &__button {
+		@apply flex justify-between items-center cursor-pointer rounded-lg text-blue font-poppinsbold text-2lg;
+		background-color: #D9F2F0;
+        box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
+		padding: 0.375rem 0.5rem;
+		width: 21.875rem;
+		height: 2.625rem;	
+		max-width: 100%;
+
+		@media (max-width: 22.5rem) {
+			font-size: 1.125rem;
+		}
+	
+        .arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+            width: 1.375rem;
+            height: 1.375rem;
+        }
+
+        .arrow.open {
+            transform: rotate(180deg);
+            width: 1.375rem;
+            height: 1.375rem;
+        }
+    }
+
+    &__dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+        margin-top: 0.5rem;
+        z-index: 20;
+    }
+
+	&__option {
+		@apply p-2 text-center cursor-pointer text-blue font-allerbold text-2lg;
+
+		&:hover {
+			@apply text-white bg-blue rounded-lg;
+		}
+	}
+}

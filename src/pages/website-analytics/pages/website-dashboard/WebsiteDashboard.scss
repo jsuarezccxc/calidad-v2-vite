@@ -1,0 +1,26 @@
+.dash-information{
+	&__title{
+		@apply font-allerbold leading-8 text-blue mt-7 mx-auto;
+		font-size: 1.625rem;
+	}
+	
+}
+
+.w-185 {
+	width: 11.5625rem !important;
+}
+
+.print-div{
+	max-width: 66.25rem;
+	margin: auto;
+}
+
+.graph-icon {
+	width: 3.75rem;
+	height: 3.75rem;
+}
+
+.women-icon {
+	width: 1.9063rem;
+	height: 1.9063rem;
+}

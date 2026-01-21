@@ -1,0 +1,514 @@
+@mixin arrow-position($position) {
+    @media (max-width: 80rem) {
+        .carousel__arrow {
+            &--right {
+                right: $position;
+            }
+
+            &--left {
+                left: $position;
+            }
+        }
+    }
+}
+
+@mixin dots-position($bottom) {
+    .carousel__dots {
+        bottom: $bottom;
+    }
+}
+
+@mixin image-wrapper($height) {
+    @apply items-center justify-center;
+
+    @media (min-width: 187.5rem) {
+        display: flex !important;
+        height: $height !important;
+        min-height: $height !important;
+        max-height: $height !important;
+    }
+}
+
+@mixin carousel-dimensions($width, $height) {
+    min-width: $width;
+    width: $width !important;
+    max-width: $width !important;
+    height: $height !important;
+    max-height: $height !important;
+}
+
+.carousel {
+    @apply m-auto;
+
+    &--one,
+    &--two {
+        @include carousel-dimensions(77.5rem, 32.3125rem);
+
+        .carousel__image-data {
+            width: auto;
+            max-width: 25.5rem !important;
+        }
+    }
+
+    &--three {
+        @include arrow-position(0);
+        @include carousel-dimensions(37.5rem, 42.6981rem);
+
+        .arrow {
+            &--right {
+                @apply right-0 xl:right-6;
+            }
+
+            &--left {
+                @apply right-0 xl:left-6;
+            }
+        }
+    }
+
+    &--four {
+        @include arrow-position(0);
+        @include carousel-dimensions(37.5rem, 38.75rem);
+        @include dots-position(-1.875rem);
+    }
+
+    &--five {
+        @include arrow-position(2.75rem);
+        @include dots-position(-1.125rem);
+        @include carousel-dimensions(79.6875rem, 33.5625rem);
+    }
+
+    &--six {
+        @include arrow-position(0.625rem);
+        @include dots-position(5.625rem);
+        @include carousel-dimensions(80rem, 33.125rem);
+    }
+
+    &--seven {
+        width: 75rem;
+        max-width: 75rem !important;
+        height: 27.625rem !important;
+        max-height: 27.625rem !important;
+
+        .arrow {
+            &--right {
+                @apply right-0 xl:right-6;
+            }
+
+            &--left {
+                @apply right-0 xl:left-6;
+            }
+        }
+    }
+
+    &--eight {
+        @include arrow-position(0.5rem);
+        @include carousel-dimensions(38.75rem, 34.375rem);
+    }
+
+    &--nine {
+        @include carousel-dimensions(79.625rem, 18.9375rem);
+    }
+
+    &--ten {
+        @include arrow-position(2.125rem);
+        @include carousel-dimensions(79.625rem, 35.125rem);
+
+        min-width: 75rem;
+    }
+
+    &--eleven {
+        @include carousel-dimensions(71.875rem, 21rem);
+    }
+
+    &--twelve {
+        @include arrow-position(0.375rem);
+        @include carousel-dimensions(80.25rem, 33.9481rem);
+        @include dots-position(1.125rem);
+
+        .arrow {
+            &--right {
+                @apply right-0;
+            }
+
+            &--left {
+                @apply left-0;
+            }
+        }
+    }
+
+    &--thirteen {
+        @include arrow-position(0.375rem);
+        @include carousel-dimensions(76.75rem, 38.75rem);
+        @include dots-position(0.75rem);
+
+        .arrow {
+            &--right {
+                @apply right-0;
+            }
+
+            &--left {
+                @apply left-0;
+            }
+        }
+
+        .carousel__image-data {
+            @apply m-auto max-w-full;
+
+            max-width: 37.5rem;
+            padding: 0.9375rem 0;
+        }
+    }
+
+    &--fourteen {
+        @include carousel-dimensions(71.875rem, 21rem);
+    }
+
+    &__arrow {
+        @apply w-12 h-12 absolute z-10 top-2/4 rounded-full flex justify-center items-center cursor-pointer;
+
+        &--right {
+            @apply right-4 xl:-right-5;
+        }
+
+        &--left {
+            @apply left-4 xl:-left-5;
+        }
+
+        &-icon {
+            &:hover {
+                @apply cursor-pointer;
+            }
+        }
+
+        top: calc(50% - 2.2813rem);
+    }
+
+    &__dots {
+        @apply absolute list-none flex items-center justify-center text-center p-0 m-0 w-full gap-2;
+
+        bottom: -1.25rem;
+
+        &--up {
+            bottom: 2.5rem;
+        }
+
+        li {
+            @apply relative inline-block p-0 cursor-pointer h-2.5 w-2.5;
+
+            button {
+                @apply border-0 bg-gray rounded-full outline-none text-transparent cursor-pointer h-2.5 w-2.5 block;
+
+                height: 0.625rem;
+                width: 0.625rem;
+
+                &:hover,
+                &:focus {
+                    outline: none !important;
+                }
+            }
+        }
+    }
+
+    &__image {
+        @apply transition-all m-auto max-h-full w-full h-full;
+
+        object-fit: cover;
+
+        &-one {
+            width: 19rem !important;
+            height: 25.3125rem !important;
+        }
+
+        &-five {
+            width: 21.3125rem !important;
+            height: 28.375rem !important;
+        }
+
+        &-six {
+            @apply w-auto;
+
+            max-height: 28.4375rem !important;
+        }
+
+        &-seven {
+            border-radius: 1.75rem;
+            width: 15.0625rem;
+            height: 22.5rem;
+        }
+
+        &-eight {
+            @apply rounded-full;
+
+            width: 31.25rem;
+            height: 31.25rem;
+        }
+
+        &-twelve {
+            max-height: 28.75rem;
+        }
+
+        &-nine {
+            @apply rounded-full;
+        }
+
+        &-ten {
+            border-radius: 3.75rem;
+        }
+
+        &-thirteen {
+            max-height: 33.9375rem;
+        }
+
+        &-fourteen {
+            width: 16.875rem;
+            height: 16.875rem;
+        }
+    }
+
+    &__image-wrapper {
+        @apply flex items-center justify-center m-auto;
+
+        &-mobile {
+            max-width: 22.5rem;
+        }
+
+        &-one {
+            @include image-wrapper(28.4375rem);
+
+            width: 19rem !important;
+            height: 28.4375rem !important;
+        }
+
+        &-two {
+            @include image-wrapper(28.4375rem);
+
+            width: 19rem;
+            height: 24.5625rem;
+        }
+
+        &-three {
+            @include image-wrapper(37.5rem);
+
+            width: 36.25rem !important;
+            height: 36.25rem !important;
+        }
+
+        &-four {
+            @include image-wrapper(37.5rem);
+
+            width: 33.625rem !important;
+            height: 35.3125rem !important;
+        }
+
+        &-five {
+            @include image-wrapper(29.6875rem);
+
+            width: 21.3125rem !important;
+            height: 28.375rem !important;
+        }
+
+        &-six {
+            @include image-wrapper(28.4375rem);
+        }
+
+        &-seven {
+            @include image-wrapper(22.5rem);
+
+            max-width: 15.0625rem !important;
+        }
+
+        &-nine {
+            width: 15.625rem;
+            height: 15.625rem;
+        }
+
+        &-ten {
+            width: 15.625rem;
+            height: 31.25rem;
+        }
+
+        &-eleven,
+        &-fourteen {
+            width: 16.875rem;
+            height: 16.875rem;
+        }
+
+        &-twelve {
+            @include image-wrapper(28.75rem);
+        }
+
+        &-thirteen {
+            @include image-wrapper(37.5rem);
+
+            @apply m-auto;
+
+            max-width: 37.5rem;
+            max-height: 33.9375rem !important;
+        }
+    }
+
+    &__thumbnail {
+        &-list {
+            @apply hidden lg:flex transition-all m-auto w-max justify-center;
+
+            &--long {
+                @apply mb-4.5;
+
+                gap: 3.55rem;
+            }
+
+            &--small {
+                @apply mt-2;
+
+                gap: 2.5rem;
+                width: 37.5rem;
+            }
+        }
+
+        &-item {
+            &--round {
+                @apply rounded-full;
+
+                width: 7.8125rem;
+                height: 7.8125rem;
+            }
+
+            &--square {
+                width: 10.375rem;
+                height: 7.8125rem;
+            }
+        }
+    }
+
+    &__image-data {
+        @apply text-center py-1 m-auto;
+    }
+
+    &__image {
+        &-description,
+        &-title {
+            @apply inline-block truncate;
+
+            min-height: 1.4375rem;
+            max-width: 15rem;
+        }
+    }
+
+    &__button {
+        @apply transition-all text-xl font-allerbold truncate px-2;
+
+        width: 13.0625rem;
+        height: 3.1875rem;
+        border-width: 0.0313rem;
+
+        &--active {
+            @apply bg-blue text-white border-gray-dark;
+        }
+
+        &--inactive {
+            @apply bg-gray-light text-blue border-gray-dark opacity-80;
+        }
+
+        &:first-of-type {
+            @apply border-r-0;
+
+            border-radius: 0.25rem 0 0 0.25rem;
+        }
+
+        &:last-of-type {
+            @apply border-l-0;
+
+            border-radius: 0 0.25rem 0.25rem 0;
+        }
+    }
+
+    &--mobile {
+        @include carousel-dimensions(22.5rem, 20rem);
+
+        .carousel {
+            &__image {
+                max-height: 20rem !important;
+                min-height: 20rem !important;
+
+                &-wrapper {
+                    max-height: 20rem !important;
+                    min-height: 20rem !important;
+                }
+            }
+        }
+
+        .carousel__image-data {
+            display: none !important;
+
+            &--fourteen {
+                display: block !important;
+            }
+        }
+
+        .arrow {
+            &--right {
+                @apply right-6;
+            }
+
+            &--left {
+                @apply left-6;
+            }
+        }
+    }
+}
+
+.carousel-wrapper--mobile {
+    .carousel {
+        &--six {
+            .carousel__arrow {
+                top: 9.375rem !important;
+            }
+        }
+
+        &--eight {
+            max-height: 20rem !important;
+
+            .carousel__arrow {
+                top: 8.75rem !important;
+            }
+        }
+
+        &--fourteen {
+            .carousel__image-description {
+                display: none;
+            }
+        }
+    }
+
+    .carousel__button {
+        @apply text-sm;
+
+        text-align: center !important;
+    }
+
+    .carousel__thumbnail-list {
+        &--long {
+            gap: 0.625rem;
+            margin-bottom: 0.375rem;
+        }
+
+        &--small {
+            @apply overflow-auto;
+
+            width: 22.5rem !important;
+            gap: 1.5rem;
+        }
+    }
+
+    .carousel__thumbnail-item {
+        &--square {
+            width: 3.125rem;
+            height: 3.125rem;
+        }
+
+        &--round {
+            width: 6.25rem;
+            height: 6.25rem;
+        }
+    }
+}

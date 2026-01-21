@@ -1,0 +1,118 @@
+.cppTable {
+	&__inputs_orientation {
+		@apply pl-1;
+		text-align: left !important;
+	}
+
+	&__withScrollTable {
+		overflow-y: hidden !important;
+	}
+
+	&__footer {
+		@apply text-blue font-allerbold;
+	}
+
+	&__sales_table {
+		width: 55rem !important;
+		&__extra-inputs {
+			width: 28.125rem !important;
+		}
+	}
+
+	&__money {
+		height: 2.37rem;
+	}
+	&__height {
+		height: 2.4378rem;
+	}
+
+	&__header {
+		&-first {
+			max-width: 8.75rem !important;
+			min-width: 8.75rem !important;
+		}
+
+		&-second {
+			max-width: 9.375rem !important;
+			min-width: 9.375rem !important;
+		}
+	}
+}
+
+.pepsTable {
+	&__totalWidth {
+		width: 60.25rem !important;
+		max-width: 60.25rem !important;
+		min-width: 60.25rem !important;
+	}
+
+	&__withScrollTable {
+		overflow-y: hidden !important;
+	}
+
+	&__money {
+		height: 2.37rem;
+	}
+
+	&__height {
+		height: 2.5rem;
+	}
+
+	&__header {
+		&-first {
+			max-width: 7.5rem !important;
+			min-width: 7.5rem !important;
+		}
+
+		&-third {
+			max-width: 6.25rem !important;
+			min-width: 6.25rem !important;
+		}
+
+		&-fourth {
+			max-width: 8.75rem !important;
+			min-width: 8.75rem !important;
+		}
+
+		&-fifth {
+			max-width: 9.375rem !important;
+			min-width: 9.375rem !important;
+		}
+
+		&-sixth {
+			max-width: 11.5rem !important;
+			min-width: 11.5rem !important;
+		}
+	}
+}
+
+.footers {
+	&__height {
+		height: 2.4375rem;
+		line-height: 0.9375rem;
+
+		@media (max-width: 48rem) {
+			height: 2.1875rem !important;
+		}
+	}
+	&__money {
+		height: 2.375rem;
+
+		@media (max-width: 48rem) {
+			height: 2.1875rem !important;
+		}
+	}
+}
+
+.downloadIcons {
+	.withoutText {
+		@apply items-end flex-row-reverse gap-x-2;
+	}
+}
+
+.content-tooltip {
+	.text-tooltip {
+		@apply text-base;
+		line-height: 1.1875rem;
+	}
+}

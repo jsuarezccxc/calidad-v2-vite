@@ -1,0 +1,21 @@
+.tax-responsibilities {
+    &__button {
+        @apply mt-2 underline cursor-pointer text-green;
+
+        &:disabled {
+            @apply cursor-default text-gray;
+        }
+    }
+
+    &__field {
+        @apply w-full;
+
+        max-width: 18.125rem;
+
+        @media (min-width: 80rem) {
+            @apply w-73;
+
+            min-width: 18.125rem;
+        }
+    }
+}

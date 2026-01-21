@@ -1,0 +1,70 @@
+.current-step {
+	@apply w-full rounded-lg bg-blue py-2 px-4.5 flex flex-col justify-center;
+	min-height: 3.375rem;
+
+	&--title {
+		@apply text-base text-white font-allerbold text-left;
+
+		@media (max-width: 48rem) {
+			@apply text-sm;
+		}
+	}
+
+	&--description {
+		@apply text-base text-white font-normal m-0 text-left;
+
+		@media (max-width: 48rem) {
+			@apply text-sm;
+		}
+	}
+}
+
+.main__container {
+	@apply flex flex-row items-center justify-center;
+}
+
+.instruction-step {
+	@apply relative inline-flex flex-row w-auto justify-center;
+	margin-left: 1.3125rem;
+
+	&__current-step {
+		@apply text-lg text-green font-allerbold bg-white flex justify-center items-center;
+		width: 3.625rem;
+		height: 3.625rem;
+		border-radius: 50%;
+		border: 0.125rem solid #02BAAD;
+		position: absolute;
+		top: -0.0938rem;
+		left: -1.25rem;
+
+	}
+
+	&__information {
+		@apply rounded-lg bg-green px-11 flex items-center;
+		width: 52.5625rem;
+		height: 3.375rem;
+		padding-top: .3rem;
+		padding-bottom: .3rem;
+		padding-right: .5rem;
+
+		@media (max-width: 64rem) {
+			width: 37.5625rem;
+		}
+
+		@media (max-width: 48rem) {
+			width: 100%;
+			padding-right: 1rem;
+			min-width: 18.5625rem;
+		}
+
+		.instruction {
+			@apply text-base text-white text-left w-full font-allerbold;
+			line-height: 1.2;
+
+			@media (max-width: 48rem) {
+				@apply text-tiny inline-block;
+				line-height: 1.2;
+			}
+		}
+	}
+}

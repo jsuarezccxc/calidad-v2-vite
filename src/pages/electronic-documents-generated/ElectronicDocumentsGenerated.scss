@@ -1,0 +1,71 @@
+// @import "../../index.scss";
+
+@mixin field-width($width) {
+    width: $width !important;
+    min-width: $width !important;
+    max-width: $width !important;
+}
+
+.generated-documents {
+    @apply h-full flex flex-col;
+
+    &__caption {
+        @apply text-blue font-allerbold text-center;
+
+        font-size: 1.625rem;
+    }
+
+	.table-text-blue {
+		@apply text-blue #{!important};
+	}
+
+    .document-table {
+        max-width: 50.625rem !important;
+
+        .width--response {
+            @include field-width(9.6875rem)
+        }
+
+        &__field {
+            &--document {
+                @apply leading-none;
+
+                @include field-width(13.125rem);
+
+                @media (max-width: 48rem) {
+                    height: 2.1875rem !important;
+                }
+            }
+
+            &--standard {
+                @apply text-left leading-none text-blue;
+
+                @include field-width(9.375rem);
+            }
+        }
+    }
+
+    .filters {
+        @apply flex lg:gap-7 gap-2 flex-col lg:flex-row;
+
+        &__document-selector {
+            @apply w-full;
+
+            @media (min-width: 48rem) {
+                @include field-width(13.75rem);
+            }
+        }
+
+        &__date-picker {
+            @include field-width(12.5rem);
+        }
+
+        &__search-input {
+            @apply w-full;
+
+            @media (min-width: 48rem) {
+                @include field-width(14.375rem);
+            }
+        }
+    }
+}

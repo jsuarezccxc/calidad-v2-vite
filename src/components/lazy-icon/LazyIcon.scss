@@ -1,0 +1,8 @@
+.lazy-icon {
+    opacity: 0 !important;
+    transition: opacity 0.5s ease-in-out !important;
+
+    &.active {
+        opacity: 1 !important;
+    }
+}

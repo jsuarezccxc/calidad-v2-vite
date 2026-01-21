@@ -1,0 +1,145 @@
+@import "../../../../index.scss";
+
+.document-correction-body {
+	@apply bg-white px-7 py-4.5;
+	
+	.content-group-checkbox {
+		@apply flex flex-col gap-y-4.5;
+
+		.checkbox-rounded {
+			@apply rounded-full;
+		}
+
+		.radio-client {
+			&--label {
+				@apply w-full text-xs text-gray-dark font-aller font-normal mr-7;
+		
+				@media (min-width: 64rem) {
+					width: 25.625rem;
+				}
+			}
+		}
+	}
+
+	.content-radio-input {
+		@apply flex;
+
+
+		.title-radio {
+			@apply text-base text-blue;
+		}
+	}
+
+	.margin-8 {
+		@apply mb-2;
+	}
+
+	.sale-section-content {
+		@apply mb-4.5;
+		@include field-width(42.75rem);
+
+		.paragraph-tiny {
+			@apply w-full h-8.2 px-2 flex bg-gray-light items-center justify-between text-green mb-2;
+
+			@media (min-width: 64rem) {
+				width: 38rem;
+			}
+		}
+	}
+
+	.section-content {
+		@apply flex flex-col gap-y-4.5;
+
+		.title-section {
+			@apply text-base text-blue font-allerbold;
+		}
+
+		.group-inputs {
+			@apply flex xs:flex-col flex-wrap xs:w-full gap-x-7 gap-y-4.5;
+		}
+
+		.group-inputs-date {
+			@apply flex xs:flex-col flex-wrap xs:w-full w-151.50 gap-x-4.5 gap-y-4.5;
+		}
+	}
+
+	.not-margin {
+		@apply m-0;
+	}
+
+	.select-search__input {
+		margin-left: 0 !important;
+		padding-left: 0 !important;
+	}
+
+
+	.foreach-rate {
+		@apply flex flex-col w-73 xs:w-full;
+
+		&__message {
+			@apply text-right text-green text-tiny mx-1.5 h-8.2;
+		}
+	}
+
+	@media screen and (min-width: 3.125rem) and (max-width: 47.938rem) {
+		.sale-section-content {
+			@include field-width(100%);
+		}
+
+		.content-radio-input {
+			&__input-size-auto {
+				@include field-width(inherit);
+
+				.label-style {
+					&__size-375,
+					&__size-275 {
+						@include field-width(100%);
+					}
+				}
+			}
+		}
+	}
+}
+
+.header-correction-table {
+	height: 1.875rem !important;
+}
+
+.information-document {
+	@apply w-full flex flex-wrap lg:flex-nowrap justify-center lg:justify-between mb-2;
+
+	@media (min-width: 64rem) {
+		height: 11rem;
+	}
+
+	&__twice,
+	&__one {
+		@apply rounded flex items-center justify-center;
+		height: 14rem;
+
+		@media (min-width: 64rem) {
+			height: 11rem;
+		}
+	}
+
+	&__one {
+		@apply bg-white shadow-templateDesign mx-4.5 w-full;
+	}
+
+	&__twice {
+		@apply flex-col justify-between;
+		min-width: 12.3125rem;
+	}
+
+	&__info {
+		@apply bg-white my-4.5 lg:my-0 w-full shadow-templateDesign rounded flex justify-center items-center;
+		height: 6.75rem;
+	}
+}
+
+.invoice--number__supplier {
+	.icon {
+		min-width: 1.25rem;
+		min-height: 1.25rem;
+	}
+}

@@ -1,0 +1,35 @@
+.progress-information {
+    @apply flex items-center justify-between rounded-lg text-xs mb-6;
+	width: 60.25rem;
+	height: 2.4375rem;
+	@media (max-width: 47.9375rem) {
+		width: 100%;
+		height: 100%;
+}
+@media (min-width: 80.625rem) {
+	width: 100%;
+	height: 100%;
+}
+    &__title {
+        @apply font-allerbold p-2 text-blue text-sm;
+    }
+
+    &__documents {
+        background-color: rgba(0, 169, 157, 0.15);
+    }
+
+    &__website {
+        background-color: rgba(129, 49, 155, 0.15);
+    }
+
+    &__arrow {
+        @apply transition-transform duration-300 cursor-pointer rotate-0 transform;
+
+        width: 1.375rem;
+        height: 1.375rem;
+
+        &--active {
+            @apply rotate-180;
+        }
+    }
+}

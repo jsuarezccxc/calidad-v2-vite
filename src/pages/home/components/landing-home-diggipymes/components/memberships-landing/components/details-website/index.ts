@@ -1,0 +1,1 @@
+export { DetailsWebsite } from './DetailsWebsite';

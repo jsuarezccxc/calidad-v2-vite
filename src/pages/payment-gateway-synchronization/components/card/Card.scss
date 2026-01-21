@@ -1,0 +1,40 @@
+.payment-gateway-card {
+	&__card, &__card-instructions, &__container-card {
+		@apply bg-white shadow-templateDesign rounded-lg;
+	}
+
+	&__card-instructions {
+		@apply  flex py-1 px-4.5 gap-x-2 justify-center items-center w-max;
+
+		&__icon-step {
+			@apply h-15;
+			width: 3.75rem;
+		}
+
+		&__title {
+			@apply font-allerbold text-green;
+			width: 28.375rem;
+			line-height: 1.1875rem;
+		}
+
+		&__icon-check {
+			width: 1.9375rem;
+			height: 1.9375rem;
+		}
+	}
+
+	&__card {
+		@apply p-1 flex flex-col gap-y-1 items-center;
+		width: 19.3331rem;
+		height: auto;
+
+		&__img {
+			width: 9.1875rem;
+			height: 4.25rem;
+		}
+
+		&__title {
+			@apply text-sm text-blue font-allerbold;
+		}
+	}
+}

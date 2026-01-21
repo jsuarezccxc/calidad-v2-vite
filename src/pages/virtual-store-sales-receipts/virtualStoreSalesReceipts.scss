@@ -1,0 +1,69 @@
+.container-table {
+	margin-top: 1.3125rem;
+	text-align: left !important;
+
+	&__date {
+		@apply h-10 xs:h-8.75 #{!important};
+		width: 9.125rem;
+	}
+
+	&__sales {
+		@apply h-10 xs:h-8.75 #{!important};
+		width: 4.625rem;
+	}
+
+	&__customer {
+		@apply h-10 xs:h-8.75 #{!important};
+		width: 8rem;
+	}
+
+	&__custom-email {
+		width: 14.643125rem;
+		@media (max-width: 48rem) {
+			max-width: max-content !important;
+		}
+	}
+	&__heights {
+		height: 2.5rem;
+		@media (max-width: 47.9375rem) {
+			height: 1.8128rem;
+			}
+	}
+	&__money {
+		height: 2.375rem;
+		@media (max-width: 47.9375rem) {
+			height: 1.8128rem;
+			}
+	}
+}
+
+.letter-size {
+	font-size: 0.875rem;
+}
+
+.email-inputs{
+	width: 32.625rem;
+	@media (max-width: 47.9375rem) {
+			width: 100% !important;
+	}
+}
+
+.h-suneditor {
+	height: 11.688rem;
+}
+
+.custom-button {
+	height: 2.875rem;
+	width: 9.75rem;
+	box-shadow:  -0.125rem 0.125rem 0.3125rem #c3c3c3,
+				 0.125rem -0.125rem 0.3125rem #fdfdfd;
+}
+
+.email-modal {
+	@apply p-6.70 bg-white rounded-2.5xl flex flex-col justify-center items-center h-auto;
+	width: 26.563rem;
+}
+
+.back-button {
+	height: 2.198rem !important;
+}

@@ -1,0 +1,121 @@
+.website-card {
+	@apply flex flex-row bg-white rounded p-7;
+	width: auto;
+	max-width: 53.6875rem;
+	height: 14.0625rem;
+	max-height: 14.0625rem;
+	box-shadow: 0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25);
+
+	@media (max-width: 48rem) {
+        @apply flex-col;
+        max-width: 100%;
+        height: auto;
+        max-height: 100%;
+    }
+
+	&__content {
+		&--right {
+			@apply flex justify-center items-center;
+
+			.website__preview {
+				width: 18.625rem;
+				height: 10.5625rem;
+				background: no-repeat;
+			    background-size: cover;
+			}
+		}
+
+		&--left {
+			@apply flex flex-col justify-center items-center;
+
+
+			.details {
+				&__top {
+					@apply flex items-start justify-start w-full;
+
+					.tag-plan {
+						@apply text-lg text-blue font-allerbold text-left pl-7;
+						width: 12.3125rem;
+						background-color: rgba(0, 169, 157, 0.15);
+					}
+				}
+
+				&__middle {
+					@apply flex flex-col justify-center mb-7 w-full pl-7;
+					margin-top: 1.875rem;
+
+					.domain-information {
+						@apply flex flex-row w-full;
+
+						&--title {
+							@apply text-lg text-blue font-allerbold;
+						}
+						&--domain {
+							@apply text-sm text-gray-dark font-aller font-normal;
+						} 
+					}
+
+					.state-domain {
+						@apply flex flex-row w-full;
+
+						&--icon {
+							width: 1.125rem;
+							height: 1.125rem;
+							margin-right: 0.0313rem;
+						}
+
+						&--state {
+							@apply text-sm text-green font-aller font-normal;
+						}
+					}
+				}
+
+				&__bottom {
+					@apply flex flex-row justify-center grid-flow-row gap-x-4.5 ml-7;
+
+					@media (max-width: 48rem) {
+                        @apply flex-col ml-0 gap-y-2;
+                    }
+
+					.button {
+						&--blue {
+							@apply bg-blue text-white flex flex-row rounded-lg py-1 px-2.75 justify-center text-center;
+							box-shadow: 0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25);
+							font-size: 0.8125rem;
+
+							&:hover {
+								@apply bg-green;
+							}
+
+							&-disabled {
+								@apply bg-gray text-white flex flex-row rounded-lg py-1 px-2.75 justify-center text-center cursor-default;
+								box-shadow: 0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25);
+								font-size: 0.8125rem;
+							}
+						}
+						&--purple {
+							@apply bg-purple text-white flex flex-row rounded-lg py-1 px-2.75 justify-center text-center;
+							box-shadow: 0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25);
+							font-size: 0.8125rem;
+
+							&:hover {
+								@apply bg-green;
+							}
+
+							&-disabled {
+								@apply bg-gray text-white flex flex-row rounded-lg py-1 px-2.75 justify-center text-center cursor-default;
+								box-shadow: 0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25);
+								font-size: 0.8125rem;
+							}
+						}
+						&--icon {
+							@apply mr-2;
+							width: 1.375rem;
+							height: 1.375rem;
+						}
+					}
+				}
+			}
+		}
+	}
+}

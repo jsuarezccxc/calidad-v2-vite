@@ -1,0 +1,82 @@
+.image-modal {
+    &__content {
+        @apply bg-white shadow-card border-none;
+
+        width: 29.8125rem;
+        border-radius: 1.125rem;
+        padding: 2.25rem;
+    }
+
+	&__content-five {
+        width: 48.6875rem !important;
+        max-width: 48.6875rem !important;
+
+    }
+
+	&__content-file {
+		@apply flex-col items-start;
+		align-items: flex-start !important;
+
+		&-has-image {
+			@apply flex-col justify-center;
+			align-items: flex-start !important;
+
+		}
+	}
+
+	&__file {
+		width: 100% !important;
+		height: 100% !important;
+	}
+
+	&__input {
+		@apply w-full;
+		height: 5.3125rem !important;
+	}
+}
+
+.button-modal {
+    &__text-input {
+        @apply my-2;
+
+        width: 20.5625rem;
+    }
+
+    &__content {
+        @apply bg-gray-light;
+
+        width: 47.6875rem;
+        border-radius: 1.125rem;
+        padding: 2.25rem;
+    }
+
+    &__fields {
+        @apply overflow-y-auto pr-2;
+
+        max-height: 31.25rem;
+    }
+
+    &__link {
+        @apply text-green text-sm underline outline-none transition-all mt-4.5;
+    }
+
+    &__product-input {
+        width: 20.5625rem;
+    }
+}
+
+.image-modal, .button-modal {
+    .input-image {
+        height: 5.3125rem;
+
+        &__check-icon {
+            top: 0.0313rem;
+        }
+    }
+
+    &__input {
+        &--disabled {
+            @apply bg-white border-transparent;
+        }
+    }
+}

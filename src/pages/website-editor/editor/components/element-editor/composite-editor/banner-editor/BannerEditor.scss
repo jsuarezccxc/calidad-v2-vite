@@ -1,0 +1,55 @@
+.discount-modal {
+    &__content {
+        @apply p-9 bg-gray-light;
+
+        width: 47.6875rem;
+        border-radius: 1.125rem;
+    }
+
+    &__fields {
+        @apply overflow-y-auto;
+
+        max-height: 31.25rem;
+    }
+
+    &__description {
+        @apply text-gray-dark text-center;
+    }
+
+    &__image-input {
+        @apply flex-1;
+
+        .box {
+            height: 7.3125rem;
+            width: 22.1875rem;
+        }
+    }
+
+    &__product-information {
+        @apply text-gray-dark text-xtiny leading-3;
+
+        margin-top: 0.3125rem;
+    }
+
+    &__product-item {
+        @apply flex gap-4.5;
+    }
+
+    &__select {
+        @apply flex flex-col w-73;
+    }
+
+    &__title {
+        @apply mb-2 text-xl text-blue font-allerbold text-center;
+    }
+
+    &__trash-icon {
+        @apply block ml-auto mt-4.5 mb-2;
+    }
+
+    .select__text {
+        @apply truncate;
+
+        max-width: 18.125rem;
+    }
+}

@@ -1,0 +1,135 @@
+	.react-datepicker {
+		&-wrapper {
+			@apply w-full;
+		}
+		@apply bg-gray-light;
+		&__day--selected {
+			@apply bg-blue rounded-none hover:bg-blue hover:rounded-none;
+		}
+		&__year-option--selected {
+			left: .9375rem;
+		}
+		&__year-text--selected {
+			@apply bg-blue rounded-none hover:bg-blue hover:rounded-none;
+		}
+		&__year-text {
+			@apply min-w-44;
+		}
+		&__year-wrapper {
+			@apply inline-grid justify-center;
+		}
+		&__month-text--keyboard-selected {
+			@apply bg-blue rounded-none;
+		}
+		&__current-month {
+			@apply text-blue;
+		}
+		&-year-header {
+			@apply text-blue;
+		}
+		&__header {
+			@apply bg-gray-light;
+		}
+		&__day-name {
+			@apply text-blue;
+		}
+		&__header {
+			@apply mx-3;
+		}
+		&__navigation {
+			width: 2rem !important;
+			height: 2rem !important;
+		}
+		&__navigation-icon {
+			@apply mt-4;
+			top: -0.0625rem;
+			font-size: 1.25rem;
+			
+			span {
+				width: .5625rem;
+				height: .5625rem;
+			}
+
+			&--next {
+				left: -0.125rem;
+
+				&::before {
+					left: -.4375rem;
+				}
+			}
+
+			&--previous {
+				right: -0.125rem;
+
+				&::before {
+					right: -.4375rem;
+				}
+			}
+
+			&::before {
+				width: .5625rem;
+				height: .5625rem;
+				border-width: .1875rem .1875rem 0 0 !important;
+				top: .375rem;
+			}
+		}
+		&__month-option {
+			line-height: 1.25rem;		
+		}
+		&__year-option {
+			line-height: 1.25rem;
+		}
+		&__month-dropdown{
+			@apply  left-1;
+			top: 1.875rem;
+		}
+		&__month-dropdown-container{
+			@apply  mr-4 px-5   bg-white border-solid border-1.1 border-gray rounded-md ;
+		}
+		&__year-dropdown-container{
+			@apply  mr-4 px-5   bg-white border-solid border-1.1 border-gray rounded-md ;
+		}
+		&__month-dropdown-container--scroll{
+			@apply  mt-1 ;
+				}
+		&__year-dropdown{
+			@apply left-1/2;
+			top: 1.875rem;
+		}
+		&__month-dropdown-container--select{
+			@apply border-gray-dark bg-white;
+		}
+		&__month-select{
+			@apply border-solid border-gray-dark;
+		}
+		&__month-read-view--down-arrow{
+			@apply mt-1;
+			width: .5625rem;
+			height: .5625rem;
+			right: -1rem;
+			border-width: .1875rem .1875rem 0 0;
+		}
+		&__year-read-view--down-arrow{
+			@apply mt-1;
+			width: .5625rem;
+			height: .5625rem;
+			right: -1rem;
+			border-width: .1875rem .1875rem 0 0;
+		}
+		&__navigation--years{
+			height: 1.5rem !important;
+			background-image:url('/assets/images/arrow-down-gray.svg');
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: contain;
+			top: .25rem;
+		}
+		&__navigation--years-upcoming{
+			height: 1.5rem !important;
+			background-image:url('/assets/images/arrow-up-gray.svg');	
+			background-position:center center;
+			background-repeat: no-repeat;
+			background-size: contain;
+			top: -.25rem;
+		}
+	}

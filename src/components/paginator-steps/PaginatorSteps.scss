@@ -1,0 +1,38 @@
+.paginator-steps {
+	@apply flex flex-row rounded bg-white;
+	max-width: 6.375rem;
+	min-width: 6.375rem;
+	height: 1.3838rem;
+	border: 0.0313rem solid #0B2C4C; 
+
+	&__button {
+		&-right {
+			@apply flex justify-center items-center cursor-pointer;
+			max-width: 1.375rem;
+			border-left: 0.0313rem solid #0B2C4C;
+
+			.icon--styles {
+				width: 1.375rem;
+			}
+		}
+		&-left {
+			@apply flex justify-center items-center cursor-pointer;
+			border-right: 0.0313rem solid #0B2C4C;
+			max-width: 1.375rem;
+			.icon--styles {
+				width: 1.375rem;
+			}
+		}
+	}
+
+	&__page {
+		@apply text-tiny text-blue font-normal flex flex-row justify-center items-center;
+		max-width: 3.625rem;
+		width: 3.625rem;
+
+		.number--page {
+			@apply text-tiny text-blue font-normal flex justify-center items-center text-center;
+			width: 1.375rem;
+		}
+	}
+}

@@ -1,0 +1,17 @@
+.material-tooltip {
+    @apply flex bg-white p-2 z-50 shadow-templateDesign rounded;
+    width: 19.625rem;
+ 
+    &__small {
+        width: 15.375rem;
+    }
+
+	@media (max-width: 64rem) {
+		width: 15rem;
+	}
+
+    &__info-templates {
+        @apply w-83;
+        padding-right: 0.7rem;
+    }
+}

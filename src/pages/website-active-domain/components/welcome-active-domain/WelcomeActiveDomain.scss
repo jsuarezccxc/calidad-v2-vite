@@ -1,0 +1,68 @@
+.welcome-active-domain {
+	@apply flex flex-col w-full h-auto;
+
+	&__title {
+		@apply w-full mb-4.5;
+
+		.title {
+			@apply text-26lg text-blue font-allerbold text-center w-full;
+			@media (max-width: 48rem) {
+				line-height: 1.1;
+			}
+		}
+	}
+
+	&__content {
+		@apply flex flex-row;
+
+		@media (max-width: 48rem) {
+			@apply flex-col-reverse;
+		}
+
+		.description {
+			&__container {
+				@apply flex flex-col mr-7;
+
+				@media (max-width: 48rem) {
+					@apply mr-0;
+				}
+
+				.options-domain__container {
+					@apply flex flex-col mt-9;
+		
+					.option {
+						@apply my-3.5;
+					}
+				}
+			}
+
+			&--title {
+				@apply mb-2;
+			}
+
+			&--bold {
+				@apply text-base text-blue font-allerbold;
+			}
+
+			&--text {
+				@apply text-base text-gray-dark font-normal m-0;
+			}
+		}
+
+		.definitions__container {
+			@apply flex flex-col mt-6;
+
+			@media (max-width: 48rem) {
+				@apply justify-center items-center mt-0;
+			}
+
+			.alert__container {
+				@apply flex mb-4 justify-end pr-11.5;
+			}
+
+			.definition {
+				@apply mb-4.5;
+			}
+		}
+	}
+}

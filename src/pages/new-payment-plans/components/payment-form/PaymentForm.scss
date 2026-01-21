@@ -1,0 +1,31 @@
+.payment-form {
+    @apply mt-4.5 flex flex-col gap-y-4.5 mb-7;
+
+    &__group {
+        @apply bg-white rounded-lg shadow-card;
+
+        padding: 1.125rem 0.6875rem;
+    }
+
+    &__fields {
+        @apply flex gap-x-7 gap-y-4.5 mb-4.5 flex-wrap flex-col lg:flex-row;
+
+        &-title {
+            @apply text-blue font-allerbold;
+        }
+    }
+
+    &__check-text {
+        @apply text-gray-dark text-base font-aller;
+    }
+}
+
+.payment-method {
+    &__radio-button {
+        @apply w-4.5 h-4.5 border border-gray rounded-full;
+
+        &--checked {
+            @apply border-transparent bg-blue;
+        }
+    }
+}

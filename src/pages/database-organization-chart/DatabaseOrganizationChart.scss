@@ -1,0 +1,100 @@
+.database-organization-chart {
+	.filter-area {
+		@apply w-45 mt-4.5;
+	}
+
+	.link--style {
+		@apply text-sm text-green underline cursor-pointer;
+	}
+	
+	.link--disabled {
+		@apply text-sm text-gray underline;
+	}
+
+	.trash-width {
+		@apply xs:w-full;
+		max-width: 45.375rem;
+	}
+
+	.table-data {
+		@apply w-max;
+
+		&__header {
+			.column-title {
+				@apply py-3 px-2 text-blue text-sm font-allerbold text-left;
+
+				&:nth-child(1), &:nth-child(4) {
+					width: 2.375rem;
+				}
+
+				&:nth-child(2) {
+					@apply border-b-1 border-gray bg-green-extraLight py-3 px-2;
+					width: 27.5rem;
+				}
+				&:nth-child(3) {
+					@apply border-b-1 border-gray bg-green-extraLight py-3 px-2;
+					width: 15.625rem;
+				}
+			}
+		}
+
+		&__item {
+			.column-field-odd {
+				@apply bg-white px-2 border-b-1 border-gray;
+			}
+
+			.column-field-even {
+				@apply bg-gray-light px-2 border-b-1 border-gray;
+			}
+
+			.column-field-transparent {
+				@apply bg-transparent px-2;
+			}
+
+			.width-checkbox {
+				width: 1.25rem;
+
+				* {
+					padding-left: 0;
+				}
+			}
+
+			.width-area {
+				width: 27.5rem;
+			}
+
+			.width-rol {
+				width: 15.625rem;
+				max-width: 15.625rem;
+			}
+
+			.input--styles {
+				border: none !important;
+				background-color: transparent;
+				min-width: auto;
+				max-width: 100%;
+
+
+				.bg--input {
+					@apply bg-transparent text-gray;
+					min-height: auto;
+					max-width: 100%;
+				}
+			}
+
+			.input-rol--styles {
+				border: none !important;
+				background-color: transparent;
+				min-width: auto;
+				max-width: 14.375rem;
+
+				.bg--input {
+					@apply bg-transparent text-gray;
+					min-height: auto;
+					min-width: auto;
+					max-width: 14.375rem;
+				}
+			}
+		}
+	}
+}

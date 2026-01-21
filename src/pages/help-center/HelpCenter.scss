@@ -1,0 +1,127 @@
+$green-color: #00A99D;
+$gray-color: #F4F4F4;
+
+.help-center {
+    @apply h-full flex flex-col;
+
+    &__caption {
+        @apply text-blue font-allerbold text-center;
+
+        font-size: 1.625rem;
+    }
+
+    &__search-input {
+        @apply m-auto;
+
+        width: 18.125rem !important;
+        margin-bottom: 2.625rem;
+
+        .input {
+            min-width: 16.75rem !important;
+            width: 16.75rem !important;
+            padding-right: 0 !important;
+        }
+    }
+
+	.scroll-options-container {
+		scrollbar-color: $green-color $gray-color !important;
+	}
+
+    .instructions {
+        @apply bg-white rounded gap-x-7 flex justify-center flex-col lg:flex-row items-center;
+
+        padding: 0.9375rem 4.4375rem 1.75rem 4.4375rem;
+
+        .card {
+            @apply shadow-card px-7 pt-7 cursor-pointer;
+
+            width: 15.375rem;
+            height: 22.5rem;
+            border-radius: 0.5rem;
+
+            &__title {
+                @apply mt-4.5 mb-2 text-purple text-left font-allerbold;
+
+                line-height: 1.1875rem;
+            }
+
+            &__description {
+                @apply text-gray-dark;
+            }
+        }
+    }
+
+    .definitions {
+        > .cards {
+            @apply flex justify-center gap-4.5 flex-wrap bg-white rounded p-7;
+
+            .card {
+                @apply shadow-card flex items-center gap-2 cursor-pointer;
+
+                width: 17rem;
+                height: 5.875rem;
+                border-radius: 0.5rem;
+                padding: 0 0.4688rem;
+
+                &__line {
+                    @apply bg-purple;
+
+                    min-width: 0.1875rem;
+                    height: 3.4375rem;
+                }
+            }
+        }
+    }
+
+    .contact {
+        @apply bg-white rounded py-7 flex justify-center flex-col lg:flex-row px-6 lg:px-0 gap-4 lg:gap-0;
+
+        &__data {
+            @apply flex items-center justify-center m-auto lg:m-0;
+        }
+
+        &__title {
+            @apply text-green font-allerbold text-26lg;
+
+            margin-bottom: 1.875rem;
+            margin-top: 1.5625rem;
+        }
+
+        &__line {
+            @apply bg-green h-full hidden lg:block;
+
+            width: 0.1875rem;
+            margin-left: 5.5625rem;
+        }
+
+        &__form {
+            @apply bg-gray-background py-4.5 flex flex-col items-center justify-center gap-4.5 box-border;
+
+            width: 22.4375rem;
+            height: max-content;
+            margin-left: 3.8125rem;
+
+            @media (max-width: 37.5rem) {
+                @apply w-full ml-0;
+            }
+        }
+
+        &__field {
+            @apply w-full;
+
+            max-width: 17.9375rem;
+        }
+
+        .file-field {
+            @apply h-8;
+
+            img {
+                @apply hidden;
+            }
+        }
+
+		.input-form__file {
+            width: 18.25rem !important;
+        }
+    }
+}

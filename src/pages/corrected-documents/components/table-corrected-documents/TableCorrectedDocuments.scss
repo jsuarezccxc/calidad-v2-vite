@@ -1,0 +1,48 @@
+@import '../../../../index.scss';
+
+.table-corrected-documents {
+	@apply w-max;
+
+	&__header {
+		@apply pt-1 pb-1.25;
+
+		&__field-with-210 {
+			@include field-width(13.125rem);
+		}
+
+		&__title {
+			@apply items-center leading-stiny break-words gap-x-1;
+
+			& button {
+				@apply contents;
+
+				& img {
+					@apply w-4.5;
+				}
+			}
+		}
+
+		&__content-text-icon {
+			@apply flex items-center justify-center;
+
+			& p {
+				@apply text-sm font-allerbold leading-4 xs:text-tiny w-9/12 text-blue h-auto ml-1;
+			}
+		}
+	}
+
+	&__body {
+		&__number {
+			@apply text-left;
+		}
+	}
+
+	&__color-blue {
+		@apply text-blue #{!important};
+	}
+}
+
+.width--response {
+	@include field-width(9.6875rem);
+	@include field-height(2.5rem);
+}

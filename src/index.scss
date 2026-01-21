@@ -1,0 +1,1645 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$green: rgba(0, 169, 157, 1);
+$white: rgb(244, 244, 244);
+$gray: #EFF0F2;
+$purple: #81319B;
+
+/* Font Faces - outside @layer for Vite compatibility */
+@font-face {
+    font-family: Aller;
+        font-weight: 400;
+        src: url("/fonts/Aller_Rg.ttf");
+    }
+
+    @font-face {
+        font-family: AllerBold;
+        font-weight: 700;
+        src: url("/fonts/Aller_Bd.ttf");
+    }
+
+    @font-face {
+        font-family: AllerBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/Aller_BdIt.ttf");
+    }
+
+    @font-face {
+        font-family: AllerItalic;
+        font-weight: 400;
+        src: url("/fonts/Aller_It.ttf");
+    }
+
+    @font-face {
+        font-family: Archivo;
+        font-weight: 400;
+        src: url("/fonts/Archivo-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: ArchivoBold;
+        font-weight: 700;
+        src: url("/fonts/Archivo-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: ArchivoBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/Archivo-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: ArchivoItalic;
+        font-weight: 400;
+        src: url("/fonts/Archivo-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: Montserrat;
+        font-weight: 400;
+        src: url("/fonts/Montserrat-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: MontserratBold;
+        font-weight: 700;
+        src: url("/fonts/Montserrat-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: MontserratBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/Montserrat-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: MontserratItalic;
+        font-weight: 400;
+        src: url("/fonts/Montserrat-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: Roboto;
+        font-weight: 400;
+        src: url("/fonts/Roboto-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: RobotoBold;
+        font-weight: 700;
+        src: url("/fonts/Roboto-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: RobotoBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/Roboto-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: RobotoItalic;
+        font-weight: 400;
+        src: url("/fonts/Roboto-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: OpenSans;
+        font-weight: 400;
+        src: url("/fonts/OpenSans-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: OpenSansBold;
+        font-weight: 700;
+        src: url("/fonts/OpenSans-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: OpenSansBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/OpenSans-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: OpenSansItalic;
+        font-weight: 400;
+        src: url("/fonts/OpenSans-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: Lato;
+        font-weight: 400;
+        src: url("/fonts/Lato-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: LatoBold;
+        font-weight: 700;
+        src: url("/fonts/Lato-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: LatoBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/Lato-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: LatoItalic;
+        font-weight: 400;
+        src: url("/fonts/Lato-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: Poppins;
+        font-weight: 400;
+        src: url("/fonts/Poppins-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: PoppinsMedium;
+        font-weight: 500;
+        src: url("/fonts/Poppins-Medium.ttf");
+    }
+
+    @font-face {
+        font-family: PoppinsSemiBold;
+        font-weight: 600;
+        src: url("/fonts/Poppins-SemiBold.ttf");
+    }
+
+    @font-face {
+        font-family: PoppinsBold;
+        font-weight: 700;
+        src: url("/fonts/Poppins-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: PoppinsBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/Poppins-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: PoppinsItalic;
+        font-weight: 400;
+        src: url("/fonts/Poppins-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: Barlow;
+        font-weight: 400;
+        src: url("/fonts/Barlow-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: BarlowBold;
+        font-weight: 700;
+        src: url("/fonts/Barlow-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: BarlowBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/Barlow-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: BarlowItalic;
+        font-weight: 400;
+        src: url("/fonts/Barlow-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: FiraSans;
+        font-weight: 400;
+        src: url("/fonts/FiraSans-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: FiraSansBold;
+        font-weight: 700;
+        src: url("/fonts/FiraSans-Bold.otf");
+    }
+
+	@font-face {
+        font-family: FiraSansBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/FiraSans-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: FiraSansItalic;
+        font-weight: 400;
+        src: url("/fonts/FiraSans-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: Epilogue;
+        font-weight: 400;
+        src: url("/fonts/Epilogue-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: EpilogueBold;
+        font-weight: 700;
+        src: url("/fonts/Epilogue-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: EpilogueBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/Epilogue-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: EpilogueItalic;
+        font-weight: 400;
+        src: url("/fonts/Epilogue-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: LibreFranklin;
+        font-weight: 400;
+        src: url("/fonts/LibreFranklin-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: LibreFranklinBold;
+        font-weight: 700;
+        src: url("/fonts/librefranklin-bold.ttf");
+    }
+
+    @font-face {
+        font-family: LibreFranklinBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/LibreFranklin-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: LibreFranklinItalic;
+        font-weight: 400;
+        src: url("/fonts/LibreFranklin-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: Raleway;
+        font-weight: 400;
+        src: url("/fonts/Raleway-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: RalewayBold;
+        font-weight: 700;
+        src: url("/fonts/Raleway-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: RalewayBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/Raleway-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: RalewayItalic;
+        font-weight: 400;
+        src: url("/fonts/Raleway-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: AlegreyaSans;
+        font-weight: 400;
+        src: url("/fonts/AlegreyaSans-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: AlegreyaSansBold;
+        font-weight: 700;
+        src: url("/fonts/AlegreyaSans-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: AlegreyaSansBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/AlegreyaSans-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: AlegreyaSansItalic;
+        font-weight: 400;
+        src: url("/fonts/AlegreyaSans-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: BigShoulder;
+        font-weight: 400;
+        src: url("/fonts/BigShoulder-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: BigShoulderBold;
+        font-weight: 700;
+        src: url("/fonts/BigShoulder-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: BodoniModa;
+        font-weight: 400;
+        src: url("/fonts/BodoniModa-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: BodoniModaBold;
+        font-weight: 700;
+        src: url("/fonts/BodoniModa-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: BodoniModaBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/BodoniModa-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: BodoniModaItalic;
+        font-weight: 400;
+        src: url("/fonts/BodoniModa-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: Cabin;
+        font-weight: 400;
+        src: url("/fonts/Cabin-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: CabinBold;
+        font-weight: 700;
+        src: url("/fonts/Cabin-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: CabinBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/Cabin-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: CabinItalic;
+        font-weight: 400;
+        src: url("/fonts/Cabin-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: Cinzel;
+        font-weight: 400;
+        src: url("/fonts/Cinzel-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: CinzelBold;
+        font-weight: 700;
+        src: url("/fonts/Cinzel-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: CormorantGaramond;
+        font-weight: 400;
+        src: url("/fonts/CormorantGaramond-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: CormorantGaramondBold;
+        font-weight: 700;
+        src: url("/fonts/CormorantGaramond-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: CormorantGaramondBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/CormorantGaramond-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: CormorantGaramondItalic;
+        font-weight: 400;
+        src: url("/fonts/CormorantGaramond-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: CourierPrime;
+        font-weight: 400;
+        src: url("/fonts/CourierPrime-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: CourierPrimeBold;
+        font-weight: 700;
+        src: url("/fonts/CourierPrime-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: CourierPrimeBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/CourierPrime-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: CourierPrimeItalic;
+        font-weight: 400;
+        src: url("/fonts/CourierPrime-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: CrimsonPro;
+        font-weight: 400;
+        src: url("/fonts/CrimsonPro-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: CrimsonProBold;
+        font-weight: 700;
+        src: url("/fonts/CrimsonPro-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: CrimsonProBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/CrimsonPro-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: CrimsonProItalic;
+        font-weight: 400;
+        src: url("/fonts/CrimsonPro-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: DancingScript;
+        font-weight: 400;
+        src: url("/fonts/DancingScript-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: DancingScriptBold;
+        font-weight: 700;
+        src: url("/fonts/DancingScript-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: DynaPuff;
+        font-weight: 400;
+        src: url("/fonts/DynaPuff-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: DynaPuffBold;
+        font-weight: 700;
+        src: url("/fonts/DynaPuff-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: Exo;
+        font-weight: 400;
+        src: url("/fonts/Exo-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: ExoBold;
+        font-weight: 700;
+        src: url("/fonts/Exo-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: ExoBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/Exo-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: ExoItalic;
+        font-weight: 400;
+        src: url("/fonts/Exo-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: Fredoka;
+        font-weight: 400;
+        src: url("/fonts/Fredoka-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: FredokaBold;
+        font-weight: 700;
+        src: url("/fonts/Fredoka-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: Manrope;
+        font-weight: 400;
+        src: url("/fonts/Manrope-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: ManropeBold;
+        font-weight: 700;
+        src: url("/fonts/Manrope-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: Mulish;
+        font-weight: 400;
+        src: url("/fonts/Mulish-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: MulishBold;
+        font-weight: 700;
+        src: url("/fonts/Mulish-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: MulishBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/Mulish-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: MulishItalic;
+        font-weight: 400;
+        src: url("/fonts/Mulish-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: PlayfairDisplay;
+        font-weight: 400;
+        src: url("/fonts/PlayfairDisplay-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: PlayfairDisplayBold;
+        font-weight: 700;
+        src: url("/fonts/PlayfairDisplay-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: PlayfairDisplayBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/PlayfairDisplay-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: PlayfairDisplayItalic;
+        font-weight: 400;
+        src: url("/fonts/PlayfairDisplay-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: Quicksand;
+        font-weight: 400;
+        src: url("/fonts/Quicksand-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: QuicksandBold;
+        font-weight: 700;
+        src: url("/fonts/Quicksand-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: Rubik;
+        font-weight: 400;
+        src: url("/fonts/Rubik-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: RubikBold;
+        font-weight: 700;
+        src: url("/fonts/Rubik-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: RubikBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/Rubik-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: RubikItalic;
+        font-weight: 400;
+        src: url("/fonts/Rubik-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: SpaceMono;
+        font-weight: 400;
+        src: url("/fonts/SpaceMono-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: SpaceMonoBold;
+        font-weight: 700;
+        src: url("/fonts/SpaceMono-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: SpaceMonoBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/SpaceMono-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: SpaceMonoItalic;
+        font-weight: 400;
+        src: url("/fonts/SpaceMono-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: SpectralSC;
+        font-weight: 400;
+        src: url("/fonts/SpectralSC-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: SpectralSCBold;
+        font-weight: 700;
+        src: url("/fonts/SpectralSC-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: SpectralSCBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/SpectralSC-BoldItalic.ttf");
+    }
+
+    @font-face {
+        font-family: SpectralSCItalic;
+        font-weight: 400;
+        src: url("/fonts/SpectralSC-Italic.ttf");
+    }
+
+    @font-face {
+        font-family: ZillaSlab;
+        font-weight: 400;
+        src: url("/fonts/ZillaSlab-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: ZillaSlabBold;
+        font-weight: 700;
+        src: url("/fonts/ZillaSlab-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: ZillaSlabBoldItalic;
+        font-weight: 700;
+        src: url("/fonts/ZillaSlab-BoldItalic.ttf");
+    }
+
+@font-face {
+    font-family: ZillaSlabItalic;
+    font-weight: 400;
+    src: url("/fonts/ZillaSlab-Italic.ttf");
+}
+
+/* Base styles layer */
+@layer base {
+    * {
+        box-sizing: border-box !important;
+    }
+
+    html {
+        @media (min-width: 90rem) {
+            font-size: calc(16px + (100vw - 1280px) / 80);
+        }
+    }
+
+    html,
+    body,
+    #root {
+        height: 100%;
+
+        @apply xs:h-screen;
+
+        background-color: $gray;
+    }
+
+    .sun-editor .se-btn {
+        font-size: .75rem;
+        width: 2.125rem;
+        height: 1.4375rem !important;
+        border-radius: .25rem;
+        line-height: 1.6875rem;
+    }
+
+    .sun-editor button svg {
+        width: 1rem !important;
+        height: 1rem !important;
+    }
+
+    .items-print {
+        display: none;
+
+        @media print {
+            display: block;
+        }
+    }
+
+    @media print {
+        @page {
+            size: landscape;
+            margin: 1cm !important;
+        }
+
+        div.page-table,
+        div.chart {
+            page-break-after: always;
+        }
+    }
+
+    #root {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
+    h1 {
+        @apply text-xl font-bold tracking-normal leading-xl;
+    }
+
+    h2 {
+        @apply text-lg font-bold tracking-normal leading-lg;
+    }
+
+    p {
+        @apply text-base font-normal tracking-normal leading-base;
+    }
+
+    a {
+        @apply text-sm underline font-normal tracking-normal leading-base;
+    }
+
+    .bg-white-important {
+        background: white !important;
+    }
+
+    .mt-banner-86 {
+        margin-top: 3.75rem;
+    }
+
+    .coming-soon__text {
+        @apply text-ntiny text-center text-white  h-4.5 bg-purple rounded-xl no-underline;
+
+        min-width: 4.8125rem;
+        width: 4.8125rem;
+    }
+
+    .coming-soon {
+        width: 16.625rem !important;
+        padding: 0.4562rem;
+
+        @apply flex justify-between rounded-md bg-gray-light;
+    }
+
+    .position-edit-icon {
+        @apply relative -top-1;
+    }
+
+    .coming-soon__item {
+        @apply text-sm text-gray-dark;
+    }
+
+    .margin-none {
+        margin: 0 !important;
+    }
+
+    .margin-x-auto {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .aller {
+        font-family: Aller, "sans-serif";
+    }
+
+    .allerbold {
+        font-family: AllerBold, "sans-serif";
+    }
+
+    .allerbolditalic {
+        font-family: AllerBoldItalic, "sans-serif";
+    }
+
+    .alleritalic {
+        font-family: AllerItalic, "sans-serif";
+    }
+
+    .montserrat {
+        font-family: Montserrat, "sans-serif";
+    }
+
+    .montserratbold {
+        font-family: MontserratBold, "sans-serif";
+    }
+
+    .montserratbolditalic {
+        font-family: MontserratBoldItalic, "sans-serif";
+    }
+
+    .montserratitalic {
+        font-family: MontserratItalic, "sans-serif";
+    }
+
+    .archivo {
+        font-family: Archivo, "sans-serif";
+    }
+
+    .archivobold {
+        font-family: ArchivoBold, "sans-serif";
+    }
+
+    .archivobolditalic {
+        font-family: ArchivoBoldItalic, "sans-serif";
+    }
+
+    .archivoitalic {
+        font-family: ArchivoItalic, "sans-serif";
+    }
+
+    .opensans {
+        font-family: OpenSans, "sans-serif";
+    }
+
+    .opensansbold {
+        font-family: OpenSansBold, "sans-serif";
+    }
+
+    .opensansbolditalic {
+        font-family: OpenSansBoldItalic, "sans-serif";
+    }
+
+    .opensansitalic {
+        font-family: OpenSansItalic, "sans-serif";
+    }
+
+    .poppins {
+        font-family: Poppins, "sans-serif";
+    }
+
+    .poppinsmedium {
+        font-family: PoppinsMedium, "sans-serif";
+    }
+
+    .poppinssemiBold {
+        font-family: PoppinsSemiBold, "sans-serif";
+    }
+
+    .poppinsbold {
+        font-family: PoppinsBold, "sans-serif";
+    }
+
+    .poppinsbolditalic {
+        font-family: PoppinsBoldItalic, "sans-serif";
+    }
+
+    .poppinsitalic {
+        font-family: PoppinsItalic, "sans-serif";
+    }
+
+    .raleway {
+        font-family: Raleway, "sans-serif";
+    }
+
+    .ralewaybold {
+        font-family: RalewayBold, "sans-serif";
+    }
+
+    .ralewaybolditalic {
+        font-family: RalewayBoldItalic, "sans-serif";
+    }
+
+    .ralewayitalic {
+        font-family: RalewayItalic, "sans-serif";
+    }
+
+    .roboto {
+        font-family: Roboto, "sans-serif";
+    }
+
+    .robotobold {
+        font-family: RobotoBold, "sans-serif";
+    }
+
+    .robotobolditalic {
+        font-family: RobotoBoldItalic, "sans-serif";
+    }
+
+    .robotoitalic {
+        font-family: RobotoItalic, "sans-serif";
+    }
+
+    .librefranklin {
+        font-family: LibreFranklin, "sans-serif";
+    }
+
+    .librefranklinbold {
+        font-family: LibreFranklinBold, "sans-serif";
+    }
+
+    .librefranklinbolditalic {
+        font-family: LibreFranklinBoldItalic, "sans-serif";
+    }
+
+    .librefranklinitalic {
+        font-family: LibreFranklinItalic, "sans-serif";
+    }
+
+    .lato {
+        font-family: Lato, "sans-serif";
+    }
+
+    .latobold {
+        font-family: LatoBold, "sans-serif";
+    }
+
+    .latobolditalic {
+        font-family: LatoBoldItalic, "sans-serif";
+    }
+
+    .latoitalic {
+        font-family: LatoItalic, "sans-serif";
+    }
+
+    .firasans {
+        font-family: FiraSans, "sans-serif";
+    }
+
+    .firasansbold {
+        font-family: FiraSansBold, "sans-serif";
+    }
+
+	.firasansbolditalic {
+        font-family: FiraSansBoldItalic, "sans-serif";
+    }
+
+    .firasansitalic {
+        font-family: FiraSansItalic, "sans-serif";
+    }
+
+    .epilogue {
+        font-family: Epilogue, "sans-serif";
+    }
+
+    .epiloguebold {
+        font-family: EpilogueBold, "sans-serif";
+    }
+
+    .epiloguebolditalic {
+        font-family: EpilogueBoldItalic, "sans-serif";
+    }
+
+    .epilogueitalic {
+        font-family: EpilogueItalic, "sans-serif";
+    }
+
+    .barlow {
+        font-family: Barlow, "sans-serif";
+    }
+
+    .barlowbold {
+        font-family: BarlowBold, "sans-serif";
+    }
+
+    .barlowbolditalic {
+        font-family: BarlowBoldItalic, "sans-serif";
+    }
+
+    .barlowitalic {
+        font-family: BarlowItalic, "sans-serif";
+    }
+
+    .alegreyasans {
+        font-family: AlegreyaSans, sans-serif;
+    }
+
+    .alegreyasansbold {
+        font-family: AlegreyaSansBold, sans-serif;
+    }
+
+    .bigshoulder {
+        font-family: BigShoulder, sans-serif;
+    }
+
+    .bigshoulderbold {
+        font-family: BigShoulderBold, sans-serif;
+    }
+
+    .bodonimoda {
+        font-family: BodoniModa, sans-serif;
+    }
+
+    .bodonimodabold {
+        font-family: BodoniModaBold, sans-serif;
+    }
+
+    .cabin {
+        font-family: Cabin, sans-serif;
+    }
+
+    .cabinbold {
+        font-family: CabinBold, sans-serif;
+    }
+
+    .cinzel {
+        font-family: Cinzel, sans-serif;
+    }
+
+    .cinzelbold {
+        font-family: CinzelBold, sans-serif;
+    }
+
+    .cormorantgaramond {
+        font-family: CormorantGaramond, sans-serif;
+    }
+
+    .cormorantgaramondbold {
+        font-family: CormorantGaramondBold, sans-serif;
+    }
+
+    .courierprime {
+        font-family: CourierPrime, sans-serif;
+    }
+
+    .courierprimebold {
+        font-family: CourierPrimeBold, sans-serif;
+    }
+
+    .crimsonpro {
+        font-family: CrimsonPro, sans-serif;
+    }
+
+    .crimsonprobold {
+        font-family: CrimsonProBold, sans-serif;
+    }
+
+    .dancingscript {
+        font-family: DancingScript, sans-serif;
+    }
+
+    .dancingscriptbold {
+        font-family: DancingScriptBold, sans-serif;
+    }
+
+    .dynapuff {
+        font-family: DynaPuff, sans-serif;
+    }
+
+    .dynapuffbold {
+        font-family: DynaPuffBold, sans-serif;
+    }
+
+    .exo {
+        font-family: Exo, sans-serif;
+    }
+
+    .exobold {
+        font-family: ExoBold, sans-serif;
+    }
+
+    .fredoka {
+        font-family: Fredoka, sans-serif;
+    }
+
+    .fredokabold {
+        font-family: FredokaBold, sans-serif;
+    }
+
+    .manrope {
+        font-family: Manrope, sans-serif;
+    }
+
+    .manropebold {
+        font-family: ManropeBold, sans-serif;
+    }
+
+    .mulish {
+        font-family: Mulish, sans-serif;
+    }
+
+    .mulishbold {
+        font-family: MulishBold, sans-serif;
+    }
+
+    .playfairdisplay {
+        font-family: PlayfairDisplay, sans-serif;
+    }
+
+    .playfairdisplaybold {
+        font-family: PlayfairDisplayBold, sans-serif;
+    }
+
+    .quicksand {
+        font-family: Quicksand, sans-serif;
+    }
+
+    .quicksandbold {
+        font-family: QuicksandBold, sans-serif;
+    }
+
+    .rubik {
+        font-family: Rubik, sans-serif;
+    }
+
+    .rubikbold {
+        font-family: RubikBold, sans-serif;
+    }
+
+    .rubikbolditalic {
+        font-family: RubikBoldItalic, sans-serif;
+    }
+
+    .rubikitalic {
+        font-family: RubikItalic, sans-serif;
+    }
+
+    .spacemono {
+        font-family: SpaceMono, sans-serif;
+    }
+
+    .spacemonobold {
+        font-family: SpaceMonoBold, sans-serif;
+    }
+
+    .spectralsc {
+        font-family: SpectralSC, sans-serif;
+    }
+
+    .spectralscbold {
+        font-family: SpectralSCBold, sans-serif;
+    }
+
+    .zillaslab {
+        font-family: ZillaSlab, sans-serif;
+    }
+
+    .zillaslabbold {
+        font-family: ZillaSlabBold, sans-serif;
+    }
+
+    .btn-bin-table {
+        width: 6.25rem;
+        height: 2.063rem;
+        border-radius: 0.5rem;
+        font-size: 0.813rem;
+        font-weight: 700;
+        line-height: 0.875rem;
+    }
+}
+
+.link-button {
+    height: 2.0625rem;
+    width: 9.5625rem;
+
+    @apply rounded-lg bg-blue text-center flex no-underline align-middle items-center justify-center leading-tiny;
+
+    &__span {
+        @apply text-xs text-white font-bold;
+    }
+
+    &:hover {
+        @apply bg-green text-white;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    @media (max-width: 48rem) {
+        width: 8.5625rem;
+    }
+}
+
+.spacing-content {
+    @apply xs:p-0 xs:mx-5;
+}
+
+.website-page {
+    @apply px-6 #{!important};
+}
+
+@layer components {
+    .container-desktop {
+        height: calc(100vh - theme("spacing.16"));
+
+        @apply overflow-y-auto;
+    }
+
+    @media (max-width: theme("screens.xs.max")) {
+        .xs\:container-mobile {
+            height: calc(100vh - theme("spacing.11"));
+
+            @apply overflow-y-auto;
+        }
+    }
+
+    .bg-green-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: $green rgba($green, 0.2);
+
+        &::-webkit-scrollbar {
+            width: 0.375rem;
+        }
+
+        &::-webkit-scrollbar-track {
+            @apply rounded-full;
+
+            background-color: rgba($green, 0.2);
+        }
+
+        &::-webkit-scrollbar-thumb {
+            @apply rounded-full;
+
+            background-color: $green;
+
+            &:hover {
+                background-color: darken($green, 5%);
+            }
+        }
+    }
+
+    .green-scrollbar-document {
+        @apply overflow-x-auto overflow-y-hidden;
+
+        // scrollbar in firefox
+        scrollbar-width: thin;
+        scrollbar-color: $green white;
+
+        &::-webkit-scrollbar {
+            @apply w-1.5 h-1.5;
+        }
+
+        &::-webkit-scrollbar-track {
+            @apply bg-green bg-opacity-20 rounded-md;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            @apply bg-green rounded-md xs:bg-opacity-70;
+        }
+    }
+
+    .bg-scrollbar-container {
+        @apply mt-1;
+
+        // scrollbar in firefox
+        scrollbar-width: thin;
+        scrollbar-color: $green white;
+
+        &::-webkit-scrollbar {
+            @apply w-1.5 h-1.5;
+        }
+
+        &::-webkit-scrollbar-track {
+            @apply bg-white bg-opacity-20 rounded-none;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            @apply bg-green rounded-md xs:bg-opacity-70;
+        }
+    }
+
+    .bg-white-scrollbar-landing {
+        @apply mt-1;
+
+        &::-webkit-scrollbar {
+            @apply xs:w-0 xs:h-0;
+        }
+    }
+
+    .invisible-scroll-bar {
+        @apply overflow-y-scroll;
+
+        // Only firefox
+        scrollbar-width: none;
+    }
+
+    .invisible-scroll-bar::-webkit-scrollbar {
+        // Firefox doesn't work
+        @apply w-0;
+    }
+
+    .text-left-important {
+        text-align: left !important;
+    }
+
+    .custom-text-class {
+        @apply text-gray-dark;
+    }
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+@mixin field-width($width) {
+    width: $width !important;
+    min-width: $width !important;
+    max-width: $width !important;
+}
+
+@mixin field-height($height) {
+    height: $height !important;
+    min-height: $height !important;
+
+    @media (max-width: 37.5rem) {
+        height: 1.875rem !important;
+        min-height: 1.875rem !important;
+        max-height: 1.875rem !important;
+    }
+}
+
+#root ~ iframe {
+    @apply hidden;
+}
+
+@media print {
+    body, html, .print-container, div {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+.page-subtitle {
+    @apply text-blue font-allerbold text-center;
+
+    font-size: 1.625rem;
+}
+
+.table-field {
+    @apply text-tiny lg:text-sm px-2 text-gray-dark;
+
+    @include field-height(2.5rem);
+
+    &--disabled {
+        @apply text-gray;
+    }
+}
+
+.table-head {
+    @apply text-blue font-allerbold text-tiny lg:text-sm;
+
+    @include field-height(2.5rem);
+
+    @extend .table-field;
+}
+
+table {
+    .table-field {
+        @apply text-tiny lg:text-sm px-2 text-gray-dark border border-transparent border-collapse;
+
+        @include field-height(2.5rem);
+
+        &--required {
+            border: 0.0625rem solid $purple !important;
+        }
+
+        &--disabled {
+            @apply text-gray;
+        }
+    }
+}
+
+.table-head {
+    @apply text-blue font-allerbold text-tiny lg:text-sm;
+
+    @include field-height(2.5rem);
+
+    @extend .table-field;
+}
+
+.page-subtitle {
+    @apply text-blue font-allerbold text-center text-26lg mb-4.5;
+}
+
+.form-field {
+    @apply w-full;
+
+    @media (min-width: 56.25rem) {
+        max-width: 18.125rem;
+        min-width: 18.125rem;
+    }
+}
+
+.remember-modal {
+    @include field-width(28.375rem);
+
+    padding: 1.625rem 3.75rem;
+
+    &__content {
+        @apply flex flex-col justify-center items-center gap-y-7;
+
+        .title--modal {
+            @apply text-xl text-blue font-allerbold text-center;
+
+            max-width: 16.8125rem;
+            line-height: 1.665rem;
+        }
+
+        .container__buttons {
+            @apply flex flex-row gap-x-7 justify-center items-center;
+        }
+    }
+}
+
+.automatic-renovation {
+    @include field-width(26.5625rem);
+
+    padding: 1.625rem;
+
+    &__content {
+        @apply flex flex-col justify-center items-center;
+
+        .title--modal {
+            @apply text-xl text-blue font-allerbold text-center;
+
+            max-width: 16.8125rem;
+            line-height: 1.665rem;
+        }
+
+        .description--modal {
+            @apply text-base text-gray-dark font-normal mt-2 w-full text-center;
+
+            line-height: 1.2112rem;
+        }
+
+        .container__buttons {
+            @apply flex flex-row gap-x-7 justify-center items-center mt-7;
+        }
+
+        .shadow--style {
+            box-shadow: 0rem 0.25rem 0.25rem 0rem #00000040;
+            padding: 0rem 0.6875rem;
+        }
+    }
+}
+
+.activate-renewal-modal {
+    @include field-width(26.5625rem);
+
+    padding: 1.625rem;
+
+    .activate-renewal {
+        @apply flex flex-col;
+
+        &__header {
+            @apply flex flex-col gap-y-2 items-center justify-center;
+
+            .title--modal {
+                @apply text-xl text-blue font-allerbold text-center w-full;
+
+                min-width: 25.125rem;
+                line-height: 1.665rem;
+            }
+        }
+
+        &__body {
+            @apply flex flex-col items-center justify-center mt-4.5;
+
+            .description--modal {
+                @apply text-gray-dark text-base text-center;
+
+                line-height: 1.2112rem;
+            }
+        }
+
+        &__footer {
+            @apply flex flex-row gap-x-7 justify-center mt-7;
+        }
+
+        .shadow--style {
+            box-shadow: 0rem 0.25rem 0.25rem 0rem #00000040;
+            padding: 0rem 0.6875rem;
+        }
+    }
+}
+
+.renewal-plan {
+    @include field-width(28.9375rem);
+
+    padding: 1.625rem;
+
+    .renewal-plan-modal {
+        @apply flex flex-col;
+
+        &__header {
+            @apply flex flex-col gap-y-2 items-center justify-center;
+
+            .icon--style {
+                width: 5.625rem;
+                height: 5.625rem;
+            }
+
+            .title {
+                @apply text-xl text-blue font-allerbold text-center;
+
+                max-width: 16.8125rem;
+                line-height: 1.665rem;
+            }
+        }
+
+        &__body {
+            @apply flex flex-col gap-y-5 items-center justify-center mt-7;
+        }
+
+        &__footer {
+            @apply flex flex-row gap-x-7 justify-center mt-7;
+
+            .button--style {
+                box-shadow: 0rem 0.25rem 0.25rem 0rem #00000040;
+            }
+        }
+    }
+}
+
+.plan-expires {
+    @include field-width(26.5625rem);
+
+    padding: 1.625rem;
+
+    .plan-expires-modal {
+        @apply flex flex-col;
+
+        &__header {
+            @apply flex flex-col gap-y-2 items-center justify-center;
+
+            .icon--style {
+                width: 5.625rem;
+                height: 5.625rem;
+            }
+
+            .title {
+                @apply text-xl text-blue font-allerbold text-center;
+
+                max-width: 16.8125rem;
+                line-height: 1.665rem;
+            }
+        }
+
+        &__body {
+            @apply flex flex-col gap-y-5 items-center justify-center mt-7;
+        }
+
+        &__footer {
+            @apply flex flex-row gap-x-7 justify-center mt-7;
+
+            .button--style {
+                box-shadow: 0rem 0.25rem 0.25rem 0rem #00000040;
+            }
+        }
+    }
+}
+
+.modal-maintenance {
+    height: 23.688rem;
+    min-height: 23.688rem;
+    max-height: 23.688rem;
+    width: 27.188rem;
+    min-width: 27.188rem;
+    max-width: 27.188rem;
+    padding: 3rem 0 !important;
+
+    @media (max-width: 48rem) {
+        .modal-maintenance {
+            margin-top: -4rem;
+            height: 26rem !important;
+            min-height: none !important;
+            max-height: none !important;
+            width: 20rem;
+            min-width: 20rem;
+            max-width: 20rem;
+            padding-bottom: 3rem !important;
+        }
+    }
+}
+
+.modal-code-bad-request {
+    width: 27.188rem;
+    min-width: 27.188rem;
+    max-width: 27.188rem;
+    height: 16.563rem;
+    min-height: 16.563rem;
+    max-height: 16.563rem;
+
+    @media (max-width: 28.125rem) {
+        .modal-code-bad-request {
+            width: 20rem;
+            min-width: 20rem;
+            max-width: 20rem;
+        }
+    }
+}
+
+#bodyApp {
+    background-color: rgba(252, 253, 255, 1);
+}

@@ -1,0 +1,57 @@
+.table-history-modification {
+	.header-table {
+		@apply border border-solid border-red-600 m-auto bg-gray-light text-center py-8 xs:p-0;
+	}
+
+	.field-header-history {
+		@apply text-sm xs:text-tiny border border-gray border-collapse bg-gray-light text-center cursor-default justify-center items-center font-allerbold leading-none text-blue lg:h-10;
+	}
+
+	.table-text {
+		word-break: normal !important;
+	}
+
+	.width-user {
+		width: 12.2125rem !important;
+	}
+
+	.width-module {
+		width: 12.2125rem !important;
+	}
+
+	.width-date {
+		width: 7.98rem !important;
+	}
+
+	.width-hour {
+		width: 8.105625rem !important;
+	}
+
+	.width-action {
+		width: 18.3475rem !important;
+	}
+
+	.body-table-modifications {
+		@apply text-center border border-gray border-collapse bg-gray-light h-10;
+	}
+
+	.text-product {
+		@apply xs:mx-1 px-1.5 pt-1 m-auto cursor-default flex justify-center items-center text-sm leading-none xs:text-tiny text-gray-dark break-normal;
+	}
+
+	.text-product-sku {
+		@apply xs:mx-1 px-1.5 pt-0.5 pb-1 m-auto cursor-default flex justify-center items-center text-sm leading-none xs:text-tiny text-gray-dark break-normal;
+	}
+
+	@media (max-width: 48rem) {
+		.height-header {
+			height: 1.875rem;
+		}
+	}
+
+	@media (max-width: 40rem) {
+		.height-body {
+			height: 1.875rem;
+		}
+	}
+}

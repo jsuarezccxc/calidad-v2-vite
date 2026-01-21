@@ -1,0 +1,32 @@
+.onboarding-principal {
+	@apply flex justify-between items-center text-left w-full px-1.5 rounded-lg mb-3;
+	text-decoration: none;
+
+	&__title {
+		@apply font-aller p-1.5 text-blue text-sm;
+	}
+
+	&__documents{
+		background-color: rgba(0, 169, 157, 0.15);
+	}
+	&__website{
+		background-color: rgba(129, 49, 155, 0.15);
+	}
+	&__arrow {
+		@apply transition-transform duration-300 cursor-pointer;
+		width: 1.375rem;
+		height: 1.375rem;
+		transform: rotate(270deg);
+	}
+
+	&__card_container{
+		width: 964px;
+		@media (max-width: 767px) {
+				width: 100%;
+		}
+		@media (min-width: 1290px) {
+			width: 100%;
+		
+	}
+	}
+}

@@ -1,0 +1,45 @@
+.homeLanding {
+    &__without-access {
+        @apply flex-1 lg:w-11/12 xs:w-full md:w-full xs:mr-2 lg:m-auto lg:ml-52 lgx:m-auto;
+
+        &__main-container {
+            @apply justify-end  md:m-auto md:w-full xs:ml-2;
+
+            &__home-logo-container {
+                @apply relative flex flex-col mb-14 lg:px-12 xl:px-12 lgx:m-auto lgx:pl-0;
+            }
+
+            &__buttons {
+                @apply grid gap-4 grid-cols-2 grid-rows-2 md:w-full justify-start lg:w-119.5 w-72 mt-8 mr-2 h-37 xs:w-full xs:mr-0 xs:h-22.25 xs:justify-items-center xs:px-8 xs:mt-7.3;
+            }
+        }
+    }
+
+    &__with-access {
+        @apply flex flex-col w-full h-full md:justify-between xs:justify-center;
+
+        &__header-button-main-container {
+            @apply flex flex-row justify-between xs:justify-center xs:flex-col;
+        }
+
+        &__header-button-sub-container {
+            @apply justify-end xs:justify-center xs:mr-0 mt-9 xs:mb-4.5 mr-17 xs:mt-11;
+        }
+
+        &__middle-container {
+            @apply flex flex-row md:justify-between xs:justify-center xs:flex-col;
+
+            &__button-cards-container {
+                @apply grid grid-cols-2 grid-rows-2 gap-4.5 xs:mt-4.5 xs:ml-4.5 xs:mr-4.5;
+            }
+        }
+
+        &__footer-container {
+            @apply flex flex-row justify-center;
+
+            &__cards-container {
+                @apply md:flex xs:mt-4.5 md:flex-row xs:grid xs:grid-cols-2 xs:grid-rows-2  xs:gap-4.5 md:justify-between md:space-x-2.5;
+            }
+        }
+    }
+}

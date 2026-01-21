@@ -1,0 +1,10 @@
+.text-element {
+    @apply  text-blue border-blue p-0 w-full h-auto outline-none resize-none block;
+    background-color: transparent !important;
+}
+
+.draggable {
+    .text-element {
+        width: 100% !important;
+    }
+}

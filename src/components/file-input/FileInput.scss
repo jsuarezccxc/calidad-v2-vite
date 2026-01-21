@@ -1,0 +1,24 @@
+.file-input {
+    &__box {
+        @apply border border-gray rounded-md flex items-center justify-center flex-col gap-1;
+
+        width: 18.125rem;
+        height: 7.3125rem;
+    }
+
+    &__instruction {
+        @apply text-tiny text-gray;
+    }
+
+    &__uploaded-file {
+        @apply flex bg-blue rounded-md justify-between text-white items-center px-2 text-tiny;
+
+        width: 14.625rem;
+        min-height: 2.0387rem;
+    }
+
+    &__icon {
+        width: 1.4419rem;
+        height: 1.4344rem;
+    }
+}

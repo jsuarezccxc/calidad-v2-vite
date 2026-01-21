@@ -1,0 +1,188 @@
+$greenUltraLight: rgba(217, 242, 240, 1);
+$gray: #eff0f2;
+$greenOpacity: #00a99d26;
+
+.supplier-database {
+    @apply flex flex-col;
+
+    &__select {
+        @apply xs:w-full;
+
+        width: 14.3125rem;
+
+        @media (max-width: 48rem) {
+            width: 100%;
+        }
+    }
+
+    &__table {
+        @apply mt-1.5 overflow-x-auto;
+
+        max-width: fit-content;
+        margin-bottom: 2.4375rem;
+
+        @media (max-width: 48rem) {
+            margin-bottom: 1rem;
+        }
+
+        &-column {
+            &-first {
+				@apply py-0 #{!important};
+                min-width: 2.5rem;
+                max-width: 2.5rem;
+            }
+
+            &-second {
+				@apply py-0 #{!important};
+                min-width: 10.875rem;
+                max-width: 10.875rem;
+            }
+
+            &-third {
+				@apply py-0 #{!important};
+                min-width: 5.625rem;
+                max-width: 5.625rem;
+            }
+
+            &-other {
+				@apply py-0 #{!important};
+                min-width: 10.625rem;
+                max-width: 10.625rem;
+            }
+
+			&__legal-name {
+				@apply py-0 #{!important};
+				max-width: 10.5625rem;
+				min-width: 10.5625rem;
+			}
+			
+        }
+    }
+
+    &__table-detail {
+        @apply mt-1.5 overflow-x-auto;
+
+        max-width: fit-content;
+        margin-bottom: 2.4375rem;
+
+        &-column {
+            &-first {
+                min-width: 18.1875rem;
+                max-width: 18.1875rem;
+                padding: 0;
+            }
+
+            &-second {
+                min-width: 20.3125rem;
+                max-width: 20.3125rem;
+                padding: 0;
+            }
+
+            &-third {
+                min-width: 17.125rem;
+                max-width: 17.125rem;
+                padding: 0;
+            }
+        }
+
+        &-column-value {
+            @apply text-left text-gray;
+        }
+    }
+
+    &__table-delete {
+        @apply border-b border-gray mt-1.5 overflow-x-auto h-full;
+
+        max-width: 26.25rem;
+        min-width: 26.25rem;
+
+        &-column {
+            &-first {
+                min-width: 13.734375rem;
+                max-width: 13.734375rem;
+                padding: 0;
+            }
+
+            &-second {
+                min-width: 12.485625rem;
+                max-width: 12.485625rem;
+                padding: 0;
+            }
+        }
+    }
+
+    &__modal-not-delete {
+        .shared-modal {
+            &__content {
+                @apply p-6.70 bg-white rounded-2.5xl flex flex-col justify-center items-center h-auto outline-none;
+
+                width: 29.5rem;
+            }
+        }
+		.unique-client {
+			width: 26.5625rem !important;
+		}
+    }
+
+    &__total-supplier {
+        &-title {
+            @apply h-10 text-blue py-2.5 xs:h-8.75 px-2 border-b border-gray text-sm font-allerbold xs:text-tiny;
+
+            background-color: $greenUltraLight;
+            width: 22.5rem;
+        }
+
+        &-result {
+            @apply flex items-center w-32 h-10 border-b border-gray xs:h-8.75 px-2 py-3 text-sm bg-white text-gray xs:text-tiny;
+        }
+    }
+
+    .bg-checkbox {
+        background-color: $gray;
+    }
+
+    .card-add-supplier {
+        @apply bg-white rounded-lg shadow-card my-4.5 p-4.5;
+
+        &__content-information {
+            @apply border-b pb-4.5;
+
+            border-color: $greenOpacity;
+        }
+
+        &__basic-field, &__name-field {
+            @apply w-41 text-blue font-allerbold border-b pb-1.5;
+
+            border-color: $greenOpacity;
+        }
+
+		&__name-field {
+			@apply w-max #{!important};
+		}
+
+		&__field-responsibilities {
+			@apply w-41 text-tiny text-gray mt-1.5 border-b-1 pb-1.5;
+            border-color: $greenOpacity;
+		}
+
+        &__checkbox {
+            @apply border-gray border;
+        }
+
+        .select-search__input {
+            text-align: left;
+            margin-left: 0;
+            padding-left: 0;
+        }
+    }
+
+    .placeholder-dark {
+        .select-search {
+            &__input {
+                &::placeholder {
+                    @apply text-gray-dark;
+                }
+            }
+        }
+    }
+}

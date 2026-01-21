@@ -1,0 +1,39 @@
+.class-header-table {
+	@apply leading-3 text-tiny lg:text-sm font-allerbold text-blue;
+
+	&__number {
+		width: 2.5rem;
+		max-width: 2.5rem;
+	}
+
+	&__user {
+		width: 18.75rem !important;
+		max-width: 18.75rem !important;
+		min-width: 18.75rem !important;
+	}
+
+	&__email {
+		width: 19.125rem !important;
+		max-width: 19.125rem !important;
+		min-width: 19.125rem !important;
+	}
+
+	&__permissions {
+		width: 19.75rem !important;
+		max-width: 19.75rem !important;
+		min-width: 19.75rem !important;
+
+		&-admin {
+			width: 288px !important;
+			min-width: 18rem !important;
+			max-width: 18rem !important;
+		}
+	}
+}
+
+.user-table {
+	&__td-checkbox {
+		@apply bg-gray-background;
+		width: 2.0625rem !important;
+	}
+}

@@ -1,0 +1,33 @@
+.color-picker {
+    @apply flex flex-col gap-1 relative w-max;
+
+    &__box {
+        @apply border border-blue flex items-center pl-2 pr-1;
+
+        width: 6.75rem;
+        height: 1.625rem;
+        border-radius: 0.25rem;
+    }
+
+    &__label {
+        @apply text-blue font-allerbold text-tiny;
+    }
+
+    &__palette-container {
+        @apply absolute z-50 shadow-card;
+
+        top: 3.25rem;
+    }
+
+    &__selected-color {
+        @apply w-4.5 h-4.5 inline-block;
+
+        min-width: 1.125rem;
+    }
+
+    &__value {
+        @apply text-tiny text-gray-dark ml-1 truncate;
+
+        min-width: 3.375rem;
+    }
+}

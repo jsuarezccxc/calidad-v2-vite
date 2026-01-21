@@ -1,0 +1,28 @@
+.modal{
+	&--container{
+		@apply flex flex-col items-center py-11 px-4;
+
+		width: 26.5625rem;
+		min-width: 26.5625rem !important;
+
+		&.modal--container__big {
+			height: 20.625rem;
+		}
+
+		&.modal--container__base {
+			height: 18.9375rem;
+		}
+
+		&.modal--container__small {
+			height: 17.75rem;
+		}
+
+		&__info{
+			width: 23.3125rem;
+		}
+
+		&__icon{
+			@apply w-20 h-20;
+		}
+	}
+}

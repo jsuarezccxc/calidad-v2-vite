@@ -1,0 +1,53 @@
+@import '../../../../index.scss';
+
+.header-table-note {
+	@apply xs:max-h-8.5 xs:h-8.75 lg:h-10;
+
+	.field-record-index {
+		@apply w-10 text-center;
+	}
+
+	.field-sku {
+		@apply w-60;
+	}
+
+	.field-unit-value {
+		@include field-width(7.8125rem);
+	}
+
+	.fields-width-115 {
+		@include field-width(7.1875rem);
+	}
+
+	.field-description {
+		@include field-width(8.75rem);
+	}
+
+	.fields-width-120 {
+		@apply w-29;
+	}
+
+	.fields-mandate {
+		@include field-width(8.75rem);
+	}
+
+	.table-title {
+		@apply m-0;
+	}
+
+	.content-text-icon {
+		@apply flex items-center justify-center;
+
+		& p {
+			@apply text-sm font-allerbold leading-4 xs:text-tiny w-9/12 text-blue h-auto ml-1;
+		}
+
+		&__title-percentage {
+			@apply lg:w-22;
+		}
+	}
+
+	.info-icon {
+		@apply cursor-pointer;
+	}
+}

@@ -1,0 +1,23 @@
+.edit-email-template {
+    &--image {
+        @media (min-width: 64rem) {
+            width: 29.1875rem;
+            height: 7.3125rem;
+            background-color: transparent !important;
+        }
+    }
+
+    &--input {
+
+		.sun-editor {
+			.se-toolbar, .se-wrapper {
+				@apply z-0 #{!important};
+
+			}
+		}
+
+        @media (min-width: 64rem) {
+            width: 29.1875rem;
+        }
+    }
+}

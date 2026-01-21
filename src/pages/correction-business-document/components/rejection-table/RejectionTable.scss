@@ -1,0 +1,38 @@
+.field-body-rejection {
+	height: 2.5rem !important
+}
+
+.table-correction-document {
+	@apply lg:h-5.75 xs:h-8.6 p-0;
+
+	&__w-170 {
+		width: 10.625rem !important;
+		padding: 0 !important;
+	}
+
+	&__w-164-82 {
+		width: 10.301rem !important;
+		padding: 0 !important;
+	}
+
+	&__w-149 {
+		width: 9.313rem !important;
+		padding: 0.0625rem 0.125rem !important;
+	}
+
+	&__w-282 {
+		width: 17.625rem !important;
+		padding: 0 !important;
+	}
+
+	&__w-194 {
+		width: 12.125rem !important;
+		padding: 0.188rem !important;
+	}
+
+	@media screen and (min-width:50px) and (max-width:767px) {
+		&__w-194 {
+			padding: 0.0625rem 1rem !important;
+		}
+	}
+}

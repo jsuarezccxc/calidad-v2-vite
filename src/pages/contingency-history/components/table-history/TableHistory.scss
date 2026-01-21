@@ -1,0 +1,60 @@
+@import '../../../../index.scss';
+
+.table-contingency-history {
+	@apply mb-4.5 w-max;
+
+	&__header {
+		&__number {
+			@apply w-10;
+		}
+
+		&__date {
+			@include field-width(8.5625rem);
+		}
+
+		&__hour {
+			@include field-width(7.3125rem);
+		}
+
+		&__description {
+			@include field-width(13.5rem);
+		}
+
+		&__state {
+			@include field-width(10.8125rem);
+		}
+
+		&__icon {
+			@apply w-7.5;
+		}
+	}
+
+	&__body {
+		@apply h-10 xs:h-8.2;
+
+		&__paragraph {
+			@apply pl-2 text-gray text-sm;
+		}
+
+		&--gray {
+			@apply bg-gray-light;
+		}
+
+		&--white {
+			@apply bg-white;
+		}
+	}
+}
+
+.contingency-total {
+	@apply flex border-b mt-7 mb-14 border-gray w-max;
+
+	&__title {
+		@apply h-10 xs:h-8.2 px-2 py-3 text-blue bg-green-bgLight font-allerbold text-sm;
+		@include field-width(13.4375rem);
+	}
+
+	&__count {
+		@apply h-10 xs:h-8.2 px-2 py-3 text-gray bg-white w-32 text-sm;
+	}
+}

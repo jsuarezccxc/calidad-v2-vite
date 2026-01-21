@@ -1,0 +1,107 @@
+@mixin small-arrow($container-size, $arrow-size) {
+    width: $container-size;
+    height: $container-size;
+
+    svg {
+        width: $arrow-size;
+        height: $arrow-size;
+    }
+}
+
+.carousel {
+    @apply flex justify-center items-center m-auto transition-all;
+}
+
+.carousel__arrow {
+    @apply w-12 h-12 absolute z-10 rounded-full flex justify-center items-center cursor-pointer bg-gray-light;
+}
+
+@mixin small-arrow($container-size, $arrow-size) {
+    width: $container-size;
+    height: $container-size;
+
+    svg {
+        width: $arrow-size;
+        height: $arrow-size;
+    }
+}
+
+.carousel {
+    @apply flex justify-center items-center m-auto transition-all;
+}
+
+.carousel__arrow {
+    @apply w-12 h-12 absolute z-10 rounded-full flex justify-center items-center cursor-pointer bg-gray-light;
+}
+
+.carousel__arrow--right-one, .carousel__arrow--right-three {
+    @apply right-0;
+}
+
+.carousel__arrow--right-two, .carousel__arrow--right-four, .carousel__arrow--right-five {
+    @apply -right-6;
+}
+
+.carousel__arrow--left-one, .carousel__arrow--left-three {
+    @apply left-0;
+}
+
+.carousel__arrow--left-two, .carousel__arrow--left-four, .carousel__arrow--left-five {
+    @apply -left-6;
+}
+
+.carousel__arrow-icon:hover {
+    @apply cursor-pointer;
+}
+
+.carousel__image {
+    @apply w-full h-full transition-all duration-300 ease-in pointer-events-none;
+}
+
+.carousel__image-description,
+.carousel__image-title {
+    @apply w-max m-auto;
+
+    min-height: 1.4375rem;
+    max-width: 15rem;
+}
+
+.carousel__dots {
+    @apply absolute w-full gap-2 bottom-1 flex-center;
+
+    &--eight {
+        @apply invisible;
+    }
+}
+
+.carousel__button {
+    @apply transition-all text-xl font-allerbold truncate px-1 py-1.5;
+
+    min-width: 6.6875rem;
+    min-height: 1.25rem;
+    border-width: 0.0313rem;
+}
+
+.carousel__button--active {
+    @apply bg-blue text-white border-gray-dark;
+}
+
+.carousel__button--inactive {
+    @apply bg-gray-light text-blue border-gray-dark opacity-80;
+}
+
+.carousel__button:first-of-type {
+    border-radius: 0.25rem 0 0 0.25rem;
+
+    @apply border-r-0;
+}
+
+.carousel__button:last-of-type {
+    @apply border-l-0;
+
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.flex-center {
+    @apply flex justify-center items-center;
+}

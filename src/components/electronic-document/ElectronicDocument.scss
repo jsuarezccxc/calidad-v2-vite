@@ -1,0 +1,23 @@
+.electronic-document {
+	.d-none{
+		@apply hidden;
+	}
+	.without-padding {
+		@apply p-0;
+		height: 2.5rem !important;
+	}
+	.select-search__input {
+		@apply text-left
+	}
+	.margin-check {
+		margin-left: 0.75rem !important;
+	}
+}
+
+.padding-0 {
+	padding: 0 !important;
+}
+
+.margin-check {
+	margin-left: 1.175rem !important;
+}

@@ -1,0 +1,148 @@
+$green-extra-light: #00A99D26;
+
+@mixin input-text {
+    border: none !important;
+
+    @apply text-tiny font-allerbold bg-white;
+}
+
+@mixin table-cell {
+    @apply font-allerbold text-sm text-left px-2 border-b-1 border-gray;
+
+    background-color: $green-extra-light;
+}
+
+@mixin responsive-input {
+    @media (max-width: 47.9375rem) {
+        width: 100%;
+    }
+}
+
+.warehouse-detail {
+    &__edit {
+        @apply flex bg-white justify-center items-center p-2 gap-2 rounded-md shadow-templateDesign mt-2 cursor-pointer;
+
+        width: 10.8125rem;
+        height: 3.125rem;
+    }
+
+    &__icon {
+        width: 1.3438rem;
+        height: 1.6656rem;
+    }
+
+    &__basic-information {
+        @apply bg-white rounded-lg shadow-templateDesign p-4.5;
+
+        margin-top: 1.0625rem;
+    }
+
+    &__input-label {
+        font-size: 1rem !important;
+
+        @apply text-base text-blue font-allerbold;
+    }
+
+    &__input {
+        border: none !important;
+
+        @apply bg-white;
+    }
+
+    &__input-text {
+        @apply text-gray rounded-none;
+
+        border-radius: 0 !important;
+        border-bottom: 0.0625rem solid;
+    }
+
+    &__location {
+        @apply mt-3 flex pt-4.5 xs:flex-col;
+
+        gap: 3rem;
+        border-top: 0.0625rem solid $green-extra-light;
+
+        @media (max-width: 47.9375rem) {
+            gap: 1.125rem;
+        }
+
+        &-name {
+            width: 10.375rem;
+        }
+
+        &-country {
+            width: 10.375rem;
+
+            @include responsive-input;
+        }
+
+        &-department, &-city {
+            width: 10.3125rem;
+
+            @include responsive-input;
+        }
+
+        &_address {
+            width: 8.8125rem;
+        }
+    }
+
+    &__table-container {
+        width: 57.8125rem;
+    }
+
+    &__table-wrapper {
+        @media (max-width: 47.9375rem) {
+            width: 100%;
+        }
+    }
+
+    &__table-n,
+    &__table-name,
+    &__table-last-movement,
+    &__table-quantity {
+        @include table-cell;
+    }
+
+    &__table-n {
+        width: 2.5rem !important;
+        height: 2.5rem;
+    }
+
+    &__table-name {
+        width: 29.875rem !important;
+    }
+
+    &__table-last-movement {
+        width: 12.75rem !important;
+    }
+
+    &__table-quantity {
+        width: 12.6875rem !important;
+    }
+
+    &__units-available {
+        @apply flex pt-2 mt-2.5;
+
+        &--text {
+            @apply flex items-center pl-2 border-b-1 border-gray text-center;
+
+            background-color: $green-extra-light;
+            width: 45.1875rem;
+            height: 2.5rem;
+
+            @media (max-width: 47.9375rem) {
+                height: 2.1875rem !important;
+                width: 12.5rem;
+            }
+        }
+
+        &--quantity {
+            @apply flex items-center pl-2 border-b-1 border-gray flex-1;
+
+            @media (min-width: 47.9375rem) {
+                min-width: 12.6875rem;
+            }
+        }
+    }
+}

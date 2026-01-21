@@ -1,0 +1,19 @@
+.config-dns {
+	@apply flex flex-col;
+
+	.description--instruction {
+		@apply flex flex-wrap;
+
+		span {
+			@apply inline-block;
+
+			img {
+				@apply inline-block h-auto align-middle;
+			}
+		}
+	}
+
+	&__content {
+		@apply flex w-full justify-center pt-4.5;
+	}
+}

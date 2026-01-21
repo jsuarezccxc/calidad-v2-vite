@@ -1,0 +1,40 @@
+.add-politics {
+	&__link {
+		@apply text-blue no-underline hover:no-underline hover:text-white;
+	}
+
+	&__return-button {
+		@apply bg-white hover:bg-green hover:text-white text-blue w-32.5 shadow-templateDesign rounded-lg mr-4.5 text-xs h-8 font-allerbold;
+		&:hover {
+			span {
+				color: white !important;
+			}
+		}
+	}
+
+	&__title {
+		h1 {
+			font-size: 1rem !important;
+		}
+	}
+
+	&__modal {
+		@apply p-6.70 bg-white rounded-2.5xl flex flex-col justify-center items-center h-auto;
+		width: 26.563rem;
+	}
+
+	&__file-input {
+		@apply bg-transparent;
+	}
+
+	&__content-file-input {
+		width: 14.625rem !important;
+	}
+
+	&__file-label {
+		width: 16rem !important;
+	}
+    &__file-input {
+        @apply bg-transparent;
+    }
+}

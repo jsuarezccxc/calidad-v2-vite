@@ -1,0 +1,267 @@
+$green-extra-light: #00A99D26;
+
+@mixin header-cell {
+    @apply border-b border-gray bg-green-extraLight px-2 font-allerbold text-blue text-sm text-left;
+}
+
+.product-catalog {
+    &__download-icons {
+        @apply w-7.5 bg-white shadow-templateDesign rounded mr-2;
+
+        height: 1.875rem;
+    }
+
+    &__button-add {
+        @apply bg-green flex rounded-lg text-sm text-white justify-center items-center gap-2;
+
+        width: 13.25rem;
+        height: 2.875rem;
+    }
+
+    &__select-tax {
+        @apply w-full;
+
+        @media (min-width: 48rem) {
+            width: 14.375rem !important;
+        }
+    }
+
+    &__no-taxes {
+        width: 10.75rem;
+    }
+
+    &__table {
+        &-item {
+            @include header-cell;
+        }
+
+        &-image {
+            @include header-cell;
+
+            width: 4.125rem !important;
+        }
+
+        &-name {
+            @include header-cell;
+
+            width: 15.625rem !important;
+        }
+
+        &-classification, &-unit-measure, &-sku, &-taxes, &-sale-channel, &-category {
+            @include header-cell;
+
+            width: 6.25rem;
+        }
+
+        &-unit-value {
+            @include header-cell;
+
+            width: 8.125rem;
+        }
+
+        &-check {
+            border-bottom: 0 !important;
+        }
+
+        &-row {
+            @apply border-b border-gray pl-1;
+        }
+
+        &-detail {
+            &--variants, &--name, &--sku, &--value, &--mandate, &--image {
+                @include header-cell;
+            }
+
+            &--variants {
+                @apply h-10;
+
+                width: 12.5rem;
+            }
+
+            &--name {
+                width: 10rem;
+            }
+
+            &--sku {
+                width: 5.6875rem;
+            }
+
+            &--value {
+                width: 8.3125rem;
+            }
+
+            &--mandate {
+                width: 7.1875rem;
+            }
+
+            &--image {
+                width: 5.625rem;
+            }
+
+            &--container {
+                width: 49.375rem;
+            }
+
+            &--row {
+                height: 4.6875rem;
+            }
+        }
+    }
+
+    &__image {
+        width: 3.125rem;
+        height: 3.125rem;
+        border-radius: 0.5rem;
+    }
+
+    &__wrapper {
+        @apply flex flex-col;
+
+        @media (min-width: 40rem) {
+            width: fit-content;
+        }
+    }
+
+    &__total {
+        @apply h-10 flex mt-2 ml-10;
+
+        width: 21.4375rem;
+
+        &-text {
+            @apply bg-green-extraLight border-b border-gray flex justify-start items-center font-allerbold px-2 text-sm;
+
+            width: 13.4375rem;
+        }
+
+        &-number {
+            @apply bg-white border-b border-gray text-gray flex items-center px-2;
+
+            width: 8rem;
+        }
+    }
+
+    &__detail {
+        &-edit {
+            @apply h-12.5 shadow-templateDesign rounded-md font-allerbold text-sm flex justify-center items-center gap-1 pl-4.5 bg-white mt-2 leading-4;
+
+            width: 13.5rem;
+        }
+
+        &-container {
+            @apply bg-white rounded-lg shadow-templateDesign mt-4.5 p-4.5 w-full;
+
+            @media (min-width: 77.5rem) {
+                width: 58.1875rem;
+            }
+        }
+
+        &-subtitle {
+            @apply text-green;
+
+            font-size: 1rem !important;
+        }
+    }
+
+    &__input {
+        &-label {
+            @apply font-allerbold text-base text-blue;
+
+            white-space: nowrap;
+            margin-bottom: 0 !important;
+            margin-left: 0 !important;
+        }
+
+        &-text {
+            @apply text-gray text-tiny w-full;
+
+            border-radius: 0 !important;
+            border-bottom: 0.0625rem solid $green-extra-light !important;
+            padding-left: 0 !important;
+        }
+
+        &-wrapper {
+            @apply rounded-none bg-white w-full;
+
+            border: 0;
+        }
+
+        &-name {
+            width: 12.0625rem !important;
+
+            @media (max-width: 48rem) {
+                width: 100%;
+            }
+        }
+
+        &-category {
+            width: 10.3125rem;
+        }
+
+        &-unit-measure {
+            width: 11.125rem !important;
+        }
+
+        &-sale-channel {
+            width: 10.25rem !important;
+        }
+    }
+
+    &__separator {
+        @apply w-full border-b mt-4.5;
+
+        border-bottom: 0.0625rem solid $green-extra-light !important;
+    }
+
+    &__title-table {
+        @apply text-blue mt-4.5 mb-2.5;
+
+        font-size: 1rem !important;
+    }
+
+    &__title-tax {
+        @apply text-gray-dark mt-4.5;
+
+        font-size: 1rem !important;
+    }
+
+    &__modal {
+        &-delete {
+            @apply items-center p-6.70 text-white;
+
+            width: 26.5625rem !important;
+            height: 17.75rem !important;
+
+            @media (max-width: 37.5rem) {
+                @apply rounded-none items-center justify-center;
+
+                width: 100vw !important;
+                height: 100vh !important;
+            }
+        }
+
+        &-button {
+            @apply rounded-lg bg-blue hover:bg-green;
+
+            width: 9.5625rem;
+            height: 2.0625rem;
+        }
+
+        &-error-delete {
+            padding: 1.625rem !important;
+            width: 26.5625rem;
+
+            @media (max-width: 37.5rem) {
+                @apply rounded-none items-center justify-center;
+
+                width: 100vw !important;
+                height: 100vh !important;
+                z-index: 10 !important;
+            }
+        }
+
+        &-error-table {
+            padding: 1.625rem !important;
+            width: 29.5rem;
+        }
+    }
+}

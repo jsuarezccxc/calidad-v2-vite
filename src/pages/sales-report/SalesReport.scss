@@ -1,0 +1,186 @@
+.sales-report {
+    @apply flex-1 pr-0 lg:pr-3;
+
+	.icon--graph {
+		width: 3.75rem;
+		height: 3.75rem;
+	}
+
+	.icon--line {
+		width: .1875rem;
+		height: 3.4375rem;
+	}
+
+	.icon-line-space {
+		width: 1.1875rem;
+		height: 3.4375rem;
+	}
+
+	.icon--arrow-up {
+		width: .8125rem;
+		height: 1.25rem;
+	}
+
+	&__title {
+		@apply  w-full text-center text-26lg text-blue font-allerbold;
+	}
+
+	&__download-day {
+		@apply m-0 -mt-3 leading-4 text-tiny text-blue font-aller;
+	}
+
+	&__sub-title {
+		@apply flex items-center mb-2;
+
+		&--icon {
+			@apply w-4.5 h-4.5 cursor-pointer;
+		}
+
+		&--title {
+			@apply text-lg text-blue font-allerbold;
+		}
+	}
+
+	&__paragraph {
+		@apply text-gray-dark mb-4.5;
+	}
+
+	&__form {
+		@apply flex flex-col lg:flex-row;
+
+		&--print {
+			@apply justify-start;
+		}
+
+		&--desktop {
+			@apply justify-between items-center;
+		}
+
+		&__icon-pdf {
+			@apply ml-2 mb-2 lg:mb-0 bg-white rounded px-0.5 py-0.75 cursor-pointer hover:scale-110 transition shadow-templateDesign;
+		}
+	}
+
+    &__dates {
+        @apply flex flex-wrap lg:flex-nowrap;
+
+		&--desktop {
+			@apply w-full mb-7 gap-x-4.5 xs:justify-center;
+		}
+
+		&--print {
+			@apply gap-x-4.5 mb-2 justify-center w-full;
+		}
+
+        &--date, &--margin {
+            @apply shadow-templateDesign mb-4.5 lg:mb-0 bg-white rounded-lg p-2 flex flex-col justify-center items-center;
+            height: 7.25rem;
+        }
+
+		&--date {
+			min-width: 14.0625rem;
+            width: auto;
+		}
+
+		&--content {
+			@apply flex items-center justify-center w-full gap-x-2;
+		}
+
+		&--paragraph {
+			@apply flex items-start w-min text-left;
+			min-width: fit-content;
+
+			& p {
+				@apply text-sm leading-4 text-blue;
+			}
+		}
+
+        &--margin {
+           margin-right: 0 !important;
+        }
+
+        &--title {
+            @apply font-allerbold font-bold text-sm text-blue mb-2;
+        }
+    }
+
+	&__graphics {
+		@apply flex gap-x-2;
+
+		&--print {
+			@apply justify-center;
+		}
+
+		&--desktop {
+			@apply flex-wrap lg:flex-nowrap;
+		}
+	}
+
+	&__footer-buttons {
+		@apply flex items-end justify-end my-0 text-right xs:flex xs:items-center xs:justify-center;
+	}
+
+    .input--container .input {
+        padding-left: 0;
+    }
+
+    &__isPrint-chart {
+		width: 29.375rem !important;
+		.recharts-responsive-container .recharts-wrapper .recharts-surface {
+			width: 29.375rem !important;
+		}
+    }
+
+    &__isPrint-line {
+        @apply mr-4.5;
+		width: 29rem !important;
+
+		.recharts-responsive-container .recharts-wrapper .recharts-surface {
+			width: 29rem !important;
+		}
+    }
+
+    &__bar-chart,
+    &__top-buyer {
+        @apply shadow-templateDesign rounded-md flex flex-col items-center bg-white w-full overflow-x-auto lg:overflow-hidden;
+        @media (min-width: 64rem) {
+            width: 29.375rem;
+        }
+    }
+
+    &__bar-chart {
+        @apply justify-center relative pt-4.5;
+    }
+
+    &__top-buyer {
+        @apply mb-3 mt-2.5;
+    }
+
+    &__line-chart {
+        @apply bg-white lg:mr-4.5 shadow-templateDesign mb-3 rounded-md px-2.5 w-full overflow-x-auto lg:overflow-hidden;
+
+        @media (min-width: 64rem) {
+            width: 29rem;
+
+        }
+    }
+
+    .react-datepicker {
+        @apply border-none shadow-templateDesign;
+
+        &__month-container {
+            width: 17.125rem;
+            height: 13rem;
+        }
+
+        &__month-wrapper {
+            @apply mb-2 flex;
+        }
+
+        &__month-text {
+            @apply flex justify-center items-center capitalize;
+            width: 5.25rem;
+            height: 1.9375rem;
+        }
+    }
+}

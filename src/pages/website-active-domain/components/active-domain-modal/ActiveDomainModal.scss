@@ -1,0 +1,36 @@
+.active-modal {
+	@apply flex;
+	min-width: auto;
+	padding: 1.625rem;
+
+	&__content {
+		@apply flex flex-col;
+		max-width: 23.3125rem;
+
+		&-image {
+			@apply flex flex-col justify-center items-center w-auto;
+
+			.alert--styles {
+				width: 5.625rem;
+				height: 5.625rem;
+			}
+
+			.title--advertisement {
+				@apply text-xl text-blue font-allerbold w-full text-center;
+			}
+		}
+
+		&-description {
+			@apply flex mt-4.5;
+
+			.description {
+				@apply text-base text-gray-dark text-center font-normal font-aller m-0;
+				line-height: 1.2112rem;
+			}
+		}
+
+		&-button {
+			@apply flex w-auto mt-7 justify-center items-center;
+		}
+	}
+}

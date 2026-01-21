@@ -1,0 +1,25 @@
+# Node modules (evitar copiar las dependencias locales)
+node_modules/
+
+# Archivos de logs
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Directorios de compilación o build previos
+build/
+
+# Archivos de sistema de control de versiones
+.git
+.gitignore
+
+# Archivos de editor
+.vscode/
+.idea/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de pruebas y cobertura
+coverage/

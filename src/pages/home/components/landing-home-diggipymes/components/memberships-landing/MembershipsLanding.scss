@@ -1,0 +1,96 @@
+.memberships-section {
+	background-image: url("/assets/images/landing/memberships-background.svg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin-top: -.25rem;
+	padding: 2rem;
+
+	&__paragraph{
+		@apply text-center mt-2 text-1.5xl font-normal text-gray-dark font-poppins leading-2xl;
+	}
+
+	&__button-container{
+		@apply flex justify-center my-7 ;
+
+		&--button{
+			@apply font-poppins text-lg xs:text-base bg-purple hover:bg-green shadow-templateDesign;
+
+			border-radius: 1.75rem;
+            width: 18.125rem;
+            height: 3.3125rem;
+			color: white;
+
+			&:disabled {
+				@apply cursor-not-allowed;
+
+				&:hover {
+					@apply bg-purple;
+				}
+			}
+		}
+	}
+
+	&__container {
+		@apply flex justify-center items-center gap-7 my-6;
+
+        &.centered {
+            flex-wrap: wrap; 
+        }
+    }
+
+	&__button-details{
+		@apply font-allerbold bg-green-bgLight hover:bg-green text-1.5xl xs:text-base shadow-templateDesign text-blue;
+
+		border-radius: 0.5rem;
+		width: 9.0625rem;
+		height: 2.8125rem;
+		padding: 0.5rem 0.75rem;
+
+		&:hover {
+			@apply bg-green;
+		}	
+	}
+
+	&__divider{
+		margin: 2rem 0rem;
+		width: 100%;
+		height: 2.5rem;
+		background: radial-gradient(46.07% 47.99% at 52.29% 49.95%, #00ab9d1a 0%, rgba(0, 171, 158, 0) 100%);
+	}
+}
+
+@media (max-width: 48rem) {
+	.memberships-section {
+		margin-top: 0rem;
+		padding: 1.5rem;
+
+		&__paragraph{
+			
+		}
+	
+		&__button-container{
+	
+			&--button{
+				width: 100%;
+				margin-top: 2rem;
+			}
+		}
+	
+		&__container {
+			flex-wrap: wrap;
+			width: 15.25rem;
+		}
+	
+		&__button-details{
+			width: 15.25rem;
+			margin: 1rem 0rem;
+		}
+	
+		&__divider{
+			margin: .5rem 0rem;
+			width: 100%;
+		}
+	}
+}
+
+

@@ -1,0 +1,68 @@
+.instructions-payu {
+    @apply flex-1 pr-0.5;
+
+    &__title {
+        @apply mt-7;
+        h1 {
+            @apply text-base;
+        }
+    }
+
+    &__help{
+        &-text {
+            @apply bg-blue py-2 pl-2.5 pr-4 rounded-lg shadow-templateDesign mb-4.5 relative;
+            width: 11.125rem;
+            height: 3.125rem;
+        }
+
+        &-card {
+            @apply px-2.5 py-4.5 bg-white mb-4.5 rounded-lg shadow-templateDesign cursor-pointer;
+            width: 17.688rem;
+        }
+    }
+
+    &__steps-container {
+        @apply w-full bg-white px-12 pt-4.5 rounded flex flex-col justify-between items-center;
+
+        @media (max-width: 48rem) {
+            @apply px-5;
+        }
+
+		&__description {
+			@apply relative flex items-center pl-16.5 bg-green h-14;
+			border-radius: 18.75rem 5rem 5rem 18.75rem;
+		}
+    }
+
+	&__steps-title {
+        @apply text-white bg-blue rounded-lg mb-4.5 ;
+        padding: 1.09375rem;
+    }
+
+    &__steps-subtitle {
+        @apply text-blue font-allerbold;
+        font-size: 2.5rem;
+    }
+
+    &__steps-link {
+        @apply no-underline font-allerbold text-xs text-white hover:text-white hover:no-underline flex justify-center items-center w-full h-full #{!important};
+        line-height: 0.875rem;
+    }
+
+    &__steps-divider {
+        width: 0.063rem;
+        background-color: rgba(0, 169, 157, 0.15);
+    }
+
+    &__steps-button-step {
+        @apply  rounded-lg bg-blue hover:bg-green shadow-templateDesign;
+        width: 17.5rem;
+        height: 2.0625rem;
+    }
+
+    &__next-page-button {
+        @apply rounded-lg bg-blue hover:bg-green shadow-templateDesign;
+        height: 2.0625rem;
+        width: 10.0625rem;
+    }
+}

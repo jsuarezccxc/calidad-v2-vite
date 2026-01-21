@@ -1,0 +1,126 @@
+.plans {
+    .electronic-documents {
+        .card {
+            @apply bg-white font-poppins;
+
+            width: 11.3125rem;
+			border-radius: 0.5rem;
+            box-shadow: 0 0.2056rem 0.2056rem 0 rgba(0, 171, 158, 0.25);
+            height: 13.75rem;
+
+			&__recomend {
+				@apply  h-8 px-2 py-1 text-center font-poppinsbold text-white;
+				background: linear-gradient(180deg, #36a7c7, #40c7b7);
+				border-top-left-radius: 0.5rem;
+				border-top-right-radius: 0.5rem;
+			}
+
+            &__documents {
+                @apply text-blue text-center font-poppinsbold;
+
+
+                &--value {
+                    @apply block mb-1.5;
+
+                    font-size: 2.3138rem;
+                }
+
+                &--text {
+                    @apply block;
+
+                    font-size: 1.0281rem;
+                }
+
+                &--unlimited {
+					margin-top: 0.25rem;
+                    font-size: 1.375rem;
+                    
+                }
+            }
+
+            &__body {
+                @apply flex flex-col items-center justify-center;
+            }
+
+            &__plan {
+                @apply flex text-blue font-poppinsbold text-center mt-3;
+
+                font-size: 1.125rem;
+                font-weight: 800;
+            }
+
+            &__price {
+				@apply text-blue font-poppinsbold text-center mt-4 block items-center;
+
+                font-weight: 800;
+                font-size: 2rem;
+            }
+
+            &__objective {
+                @apply mt-1 text-xs text-center text-blue block;
+            }
+
+            &__button {
+                width: 9.265rem;
+                height: 2.0006rem;
+            }
+        }
+
+        .details {
+            @apply hidden justify-center flex-wrap mx-auto h-0 mb-0;
+
+            max-width: 70.125rem;
+            column-gap: 3.375rem;
+            row-gap: 1.25rem;
+            transition: .4s all;
+
+            &--active {
+                @apply visible h-full mb-4.5 flex;
+
+                height: 13.3125rem;
+
+                @media (max-width: 37.5rem) {
+                    height: 41.25rem;
+                }
+            }
+        }
+
+        .detail {
+            @apply flex gap-2;
+
+            width: 18.125rem;
+            height: 3.5rem;
+
+            &__image-container {
+                @apply flex items-center justify-center border border-gray-smoke border-l-0 border-t-0 border-b-0;
+
+                width: 2.8125rem;
+                height: 2.8125rem;
+                min-width: 2.8125rem;
+                min-height: 2.8125rem;
+
+                .icon--service {
+                    width: 2.1875rem;
+                    height: 2.125rem;
+                }
+            }
+
+            &__information {
+                @apply flex items-center gap-2;
+            }
+
+            &__description {
+                @apply text-blue;
+
+                font-size: 0.8125rem;
+                line-height: 0.9838rem;
+            }
+        }
+    }
+}
+
+.grid__documents {
+    @media (max-width: 79.875rem) {
+        flex-wrap: wrap;
+    }
+}

@@ -1,0 +1,71 @@
+.table-invoice {
+	@apply w-max #{!important};
+
+	&--required {
+		@apply border-purple;
+	}
+
+	.input {
+		&--disabled {
+			@apply bg-transparent rounded-none;
+			
+			.select__text {
+				@apply text-gray #{!important};
+			}
+		}
+	}
+
+	.text-NA {
+		@apply px-2 text-gray text-tiny lg:text-sm;
+	}
+
+	.header-width {
+		@apply p-0;
+
+		height: 2.5rem !important;
+	}
+
+	.header {
+		height: auto !important;
+	}
+
+	.select-search {
+		@apply text-left ml-2 pl-0 #{!important};
+	}
+
+	.number-input-style {
+		@apply text-left lg:h-auto;
+	}
+
+	.without-padding-body {
+        @apply p-0 border-b;
+
+        min-height: 2.438rem !important;
+        height: 2.438rem;
+
+        @media (max-width: 47.9375rem) {
+            min-height: 2.1255rem !important;
+            height: 2.1875rem;
+        }
+    }
+
+	@media screen and (min-width: 3.125rem) and (max-width: 47.938rem) {
+        .header-width {
+            height: 1.875rem !important;
+        }
+
+        .body {
+            &__text-description {
+                @apply leading-4 min-h-8 max-h-8.5;
+            }
+
+            &__margin-input {
+                @apply xs:mx-0;
+            }
+        }
+
+        .without-padding-body {
+            min-height: 1.875rem !important;
+        }
+	}
+}

@@ -1,0 +1,12 @@
+export const SUCCESS_RESPONSE = [200, 201, 202];
+export const BAD_RESPONSE = [400, 422];
+export const BAD_RESPONSE_MODAL = [400, 404, 409, 406, 500, 300];
+export const SUCCESS_RESPONSE_CODE = 200;
+export const BAD_CODE = 400;
+export const CONFLICT = [409];
+export const BAD_RESPONSE_ERROR = 'Bad response error';
+export const MODAL_BAD_REQUEST = 'MODAL_BAD_REQUEST';
+export const FAILED_FETCH_MESSAGE = 'Failed to fetch';
+export const UNAUTHORIZED = 401;
+export const FORBIDDEN = 403;
+export const INTERNAL_ERROR = 500;

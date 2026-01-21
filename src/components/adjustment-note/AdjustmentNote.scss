@@ -1,0 +1,41 @@
+.adjustment-note {
+	@apply gap-y-4.5 flex flex-col justify-between w-full bg-white shadow-templateDesign px-7 py-4.5;
+
+	.content-form {
+		@apply flex flex-col gap-y-4.5;
+
+		&__section-inputs {
+			@apply flex flex-wrap gap-y-4.5 gap-x-7 xs:flex-col xs:w-full w-151.50;
+		}
+
+		&__input-style {
+			@apply xs:w-full lg:w-72;
+		}
+	}
+
+	.not-margin {
+		@apply m-0;
+	}
+
+	&__tooltip-number {
+		& div {
+			& span {
+				& img {
+					width: 1.5219rem !important;
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: 3.125rem) and (max-width: 47.938rem) {
+		&__tooltip-number {
+			& div {
+				& span {
+					& img {
+						width: 2.1631rem !important;
+					}
+				}
+			}
+		}
+	}
+}

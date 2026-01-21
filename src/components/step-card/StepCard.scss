@@ -1,0 +1,25 @@
+.step-card {
+    @apply flex shadow-card bg-white w-max items-center cursor-pointer outline-none  mx-auto lg:mx-0;
+
+    border-radius: 0.5rem;
+    padding: 0.25rem 1.125rem;
+
+    .icon--step {
+        width: 3.75rem;
+        height: 3.75rem;
+    }
+
+    .icon--completed {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    &__information {
+        @apply text-sm lg:text-base;
+
+        @media (max-width: 37.5rem) {
+            max-width: 10.625rem !important;
+            width: 10.625rem !important;
+        }
+    }
+}

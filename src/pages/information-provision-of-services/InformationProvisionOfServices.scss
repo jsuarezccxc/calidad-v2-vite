@@ -1,0 +1,16 @@
+.select-search__input {
+	@apply text-center pr-4 xs:pr-0 xs:pl-0 xs:text-tiny ml-0;
+}
+.border-purple-error {
+	border-top: 0.064rem solid purple;
+	border-right: 0.064rem solid purple;
+	border-left: 0.0645rem solid purple;
+	border-bottom: 0.066rem solid purple;
+
+	@media (max-width: 47.93rem) {
+		max-width: 8.125rem;
+	}
+	.total {
+		@apply font-allerbold text-blue;
+	}
+}

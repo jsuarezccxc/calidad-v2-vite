@@ -1,0 +1,122 @@
+$black-shadow: rgba(0, 0, 0, 0.75);
+$blue: #0B2C4C;
+$view-border: #151e27;
+$view-shadow: rgba(0, 0, 0, 0.4);
+$gray: #E7E7E7;
+$dark-gray: #4B4B4B;
+
+.gantt {
+    @apply h-full flex flex-col;
+
+    &__list-header {
+        @apply flex items-center h-12 px-2 text-sm border xl:border-r-0 gap-1;
+
+        min-width: 30rem !important;
+
+        @media (max-width: 37.5rem) {
+            min-width: 37.5rem !important;
+        }
+    }
+
+    &__table {
+        &-row {
+            @apply flex items-center h-12.5 border xl:border-r-0 border-t-0 text-sm px-2;
+        }
+
+        &-text {
+            @apply flex-1 text-sm text-gray-dark;
+        }
+    }
+
+    &__task {
+        &-tooltip {
+            @apply p-3 bg-white rounded-sm w-max absolute left-0 right-0 m-auto;
+
+            box-shadow: 0 0 0.3125rem 0 $black-shadow;
+        }
+
+        &-form {
+            @media (max-width: 37.5rem) {
+                @apply m-auto;
+            }
+        }
+    }
+
+    &__slider-container {
+        @apply flex items-center gap-4 p-5 rounded-md border-gray-dark relative border;
+    }
+
+    &__input-range {
+        -webkit-appearance: none;
+        background-image: linear-gradient($blue, $blue);
+
+        @apply bg-no-repeat rounded-md bg-gray-300 w-full h-1.5 relative;
+
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            cursor: ew-resize;
+
+            @apply bg-blue h-5 w-5 rounded-full;
+        }
+    }
+
+    &__slider-marker {
+        @apply absolute -top-12 bg-blue text-white h-10 w-10;
+
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(-45deg);
+    }
+
+    &__slider-value {
+        @apply absolute bottom-2.5 text-center text-tiny w-10;
+
+        transform: rotate(45deg);
+    }
+
+    &__view-mode {
+        @apply flex items-center justify-center px-2.5 bg-blue cursor-pointer;
+
+        border-right: 0.0625rem solid $view-border;
+
+        &:first-child {
+            border-radius: 0.25rem 0 0 0.25rem;
+        }
+
+        &:last-child {
+            border-radius: 0 0.25rem 0.25rem 0;
+            border-right: 0;
+        }
+    }
+
+    &__active-view {
+        box-shadow: 0 0 0.0625rem 0.1875rem $view-shadow;
+    }
+
+    &__date-picker {
+        border: 0.0625rem solid $dark-gray !important;
+    }
+
+    ._KxSXS {
+        @apply relative;
+    }
+
+    ._3lLk3 {
+        min-width: 10rem !important;
+
+        @media (max-width: 37.5rem) {
+            min-width: 12.5rem !important;
+        }
+    }
+
+    ._3eULf {
+        @apply overflow-y-auto w-full;
+    }
+
+    ._CZjuD {
+        @apply overflow-x-auto;
+
+        &::-webkit-scrollbar {
+            @apply hidden;
+        }
+    }
+}

@@ -1,0 +1,114 @@
+@mixin field-width($width) {
+    @apply px-1 py-0 xs:p-0;
+
+    width: $width;
+    min-width: $width;
+    max-width: $width;
+}
+
+.header-table-invoice {
+    @apply xs:max-h-8.5 xs:h-8.75 lg:h-10;
+
+    .field-header--uneditable {
+        padding: 0 !important;
+        &__text {
+            flex-direction: row !important;
+            justify-content: flex-start !important;
+            margin: 0 !important;
+            width: 100% !important;
+            padding: 0.5rem !important;
+
+            .icon {
+                min-width: 1.125rem;
+                min-height: 1.125rem;
+            }
+        }
+    }
+
+    .field-record-index {
+        @include field-width(2.5rem);
+    }
+
+    .fields-width-240 {
+        @include field-width(15rem);
+    }
+    
+    .field-description {
+        @include field-width(8.75rem);
+    }
+
+    .field-store {
+        @include field-width(7.5rem);
+
+    }
+
+    .field-product {
+        @include field-width(11.25rem);
+    }
+
+    .field-batch {
+        @include field-width(8.3125rem);
+    }
+
+    .field-date {
+        @include field-width(8.5rem);
+    }
+
+    .field-quantity {
+        @include field-width(7.1875rem);
+    }
+
+
+    .field-measure {
+        @include field-width(12rem);
+    }
+
+    .fields-mandate {
+        @include field-width(9rem);
+    }
+
+	.fields-percentage {
+		@apply pr-0.5 #{!important};
+		@include field-width(7.6875rem);
+	}
+
+	.fields-width-117 {
+		@include field-width(7.3125rem);
+	}
+  
+	.field-taxes {
+        @include field-width(9.375rem);
+    }
+
+	.field-taxes {
+        @include field-width(9.375rem);
+    }
+
+    .unit-value-field {
+        @include field-width(7.8125rem);
+    }
+
+    .consumption-field {
+        @include field-width(9.0625rem);
+    }
+
+    .table-title {
+        @apply m-0;
+    }
+
+    .content-text-icon {
+        @apply flex items-center justify-center;
+
+		& p {
+			@apply text-sm font-allerbold leading-4 xs:text-tiny w-9/12 text-blue h-auto mx-auto;
+		}
+
+		&__title-percentage {
+			@apply lg:w-22 #{!important};
+		}
+    }
+
+    .info-icon {
+        @apply cursor-pointer;
+    }
+}

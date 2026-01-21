@@ -1,0 +1,71 @@
+header {
+	@apply mx-4 items-center;
+	display: flex;
+	justify-content: space-between;
+	height: 3.625rem;
+
+	.logo__container{
+		img{
+			@apply cursor-pointer
+		}
+	}
+
+	.buttons__container{
+		@apply flex gap-4 font-poppinsbold;
+
+		&--dark{
+			button {
+				@apply text-white underline border-none hover:bg-transparent hover:text-green text-lg;
+				background-color: transparent;
+			}
+	
+			div {
+				@apply bg-transparent text-white hover:bg-green border border-green cursor-pointer px-4.5 py-0 hover:text-white focus:bg-transparent rounded-md;
+				
+				height: 1.75rem;
+				align-items: center;
+				display: flex;
+				gap: .5rem
+			}
+		}
+
+		&--light{
+			button {
+				@apply text-blue underline border-none hover:bg-transparent hover:text-green text-lg;
+				background-color: transparent;
+			}
+	
+			div {
+				@apply bg-transparent text-green hover:bg-green border border-green cursor-pointer px-4.5 py-0 hover:text-white focus:bg-transparent rounded-md;
+				
+				height: 1.75rem;
+				align-items: center;
+				display: flex;
+				gap: .5rem
+			}
+		}
+
+		.button-text {
+			vertical-align: sub;
+		}
+	}
+}
+
+@media (max-width: 64rem) {
+	.header-mobile {
+		@apply flex-wrap h-auto gap-y-2;
+	}
+	.logo__container{
+		img{
+			width: 7.5rem;	
+		}
+	}
+	.buttons-header-mobile{
+		@apply mt-2 flex-wrap;
+	}
+	.position-mobile{
+		@apply flex absolute justify-end w-32;
+		right: 5%;
+		top: 2.188rem;
+	}
+}

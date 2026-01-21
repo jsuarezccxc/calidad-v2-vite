@@ -1,0 +1,21 @@
+.landing-footer {
+	@apply lg:py-7 bg-blue;
+
+    &--body {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @apply  xs:mt-0 z-1;
+    }
+
+    &--information {
+        margin-top: 1.4rem;
+        text-align: center;
+        @apply xs:px-2 xs:text-xtiny text-white font-poppins;
+    }
+
+    &--icon {
+        cursor: pointer;
+    }
+}

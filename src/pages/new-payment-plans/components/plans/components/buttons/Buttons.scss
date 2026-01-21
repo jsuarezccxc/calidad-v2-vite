@@ -1,0 +1,16 @@
+.detail-button {
+    @apply rounded-lg py-1.5 px-2 m-auto bg-green-bgLight flex justify-between mt-7 text-blue font-allerbold cursor-pointer;
+
+    width: 9rem;
+    height: 2.1875rem;
+    margin-bottom: 2.375rem;
+}
+
+.toggle-switch {
+    @apply font-poppins flex justify-center items-center mx-auto mt-7 gap-4 bg-white text-sm text-blue w-full;
+
+    max-width: 22.5625rem;
+    height: 2.125rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 0.25rem 0 #00000040;
+}

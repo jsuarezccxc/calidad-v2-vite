@@ -1,0 +1,142 @@
+.product-management {
+    &__title {
+        @apply w-full text-center text-26lg mb-2.5;
+    }
+
+    &__method-add, &__price-code, &__images-add, &__inventory-add, &__sale-product &__add-images, &__add-taxes, &__massive-upload {
+        @apply bg-white rounded-lg p-4.5 mb-4.5 shadow-templateDesign;
+
+        @media (max-width: 80rem) {
+            max-width: 60.25rem;
+        }
+    }
+
+    &__input-add {
+        width: 19.0625rem;
+    }
+
+    &__input-classification {
+        @apply justify-start pl-2;
+
+        width: 6.5rem;
+    }
+
+    &__images-button {
+        @apply bg-green flex rounded-lg text-sm text-white justify-center items-center gap-1 mt-4.5;
+
+        width: 10.5625rem;
+        height: 2.25rem;
+    }
+
+    &__inventory-button {
+        @apply bg-green flex rounded-lg text-sm text-white justify-center items-center gap-1 mt-4.5;
+
+        width: 13.5625rem;
+        height: 2.25rem;
+    }
+    &__inventory-button-disabled {
+        @apply bg-gray flex rounded-lg text-sm text-white justify-center items-center gap-1 mt-4.5 pointer-events-none;
+
+        width: 13.5625rem;
+        height: 2.25rem;
+    }
+
+    &__category-container {
+        scrollbar-color: #00A99D #00A99D26;
+        scrollbar-width: thin;
+
+        &::-webkit-scrollbar {
+            width: 0.375rem; 
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: #00A99D26;
+            border-radius: 0.3125rem !important;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #00A99D;
+            border-radius: 0.3125rem !important;
+            border: 0.125rem solid transparent;
+            background-clip: content-box;
+        }
+    }
+
+    &__add-images {
+        @apply bg-white rounded-lg p-4.5 mb-4.5 shadow-templateDesign;
+
+        @media (max-width: 80rem) {
+            max-width: 60.25rem;
+        }
+    }
+
+    &__input-images {
+        width: 7.625rem !important;
+        height: 8.25rem !important;
+    }
+
+    &__render-image {
+        width: 7.625rem !important;
+        height: 8.625rem !important;
+
+        @apply rounded bg-cover bg-center;
+
+        &:hover {
+            .product-management__hover-image {
+                @apply visible;
+            }
+        }
+    }
+
+    &__render-preview {
+        width: 35.9375rem !important;
+        height: 24.1875rem !important;
+
+        @apply rounded bg-cover bg-center;
+
+        &:hover {
+            .product-management__hover-image {
+                @apply visible;
+            }
+        }
+    }
+
+    &__render-image-table {
+        width: 3.125rem !important;
+        height: 3.125rem !important;
+
+        @apply rounded bg-cover bg-center;
+
+        &:hover {
+            .product-management__hover-image {
+                @apply visible;
+            }
+        }
+    }
+
+    &__hover-image {
+        @apply rounded absolute flex flex-col justify-center items-center invisible w-full h-full text-center px-2.5;
+
+        background: rgba(11, 44, 76, 0.54);
+    }
+
+    &__hover-image-table {
+        @apply rounded absolute flex flex-col justify-center items-center w-full h-full text-center px-2.5;
+
+        background: rgba(11, 44, 76, 0.54);
+    }
+
+    &__sub-title {
+        @apply font-allerbold text-base text-left;
+    }
+
+    .no-arrows::-webkit-outer-spin-button,
+    .no-arrows::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+	.tooltip-product {
+		@apply pr-2.75 break-all;
+    }
+}

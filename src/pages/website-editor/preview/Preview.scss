@@ -1,0 +1,23 @@
+.preview-page {
+    @apply absolute top-0 z-50 flex flex-col w-screen h-full overflow-y-auto;
+
+    &__mobile-screen {
+        @apply border border-black ml-auto text-center mx-auto bg-white overflow-y-auto;
+        width: 22.75rem !important;
+        height: 38.75rem !important;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    &__header {
+        @apply flex flex-col items-center justify-center w-full h-25 bg-blue;
+
+        &-title {
+            @apply mb-2 text-xl text-white font-allerbold;
+        }
+
+        &-container-icons {
+            @apply flex justify-around w-20 h-6 border rounded-lg cursor-pointer bg-gray-light border-gray-light;
+        }
+    }
+}

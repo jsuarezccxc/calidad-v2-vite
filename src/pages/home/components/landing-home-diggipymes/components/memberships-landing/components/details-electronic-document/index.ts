@@ -1,0 +1,1 @@
+export { DetailsElectronicDocuments } from './DetailsElectronicDocuments';

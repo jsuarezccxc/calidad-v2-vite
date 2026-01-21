@@ -1,0 +1,30 @@
+.editor {
+    .sun-editor {
+        width: 16.125rem !important;
+
+        .se {
+            &-btn {
+                &-select {
+                    width: 5rem !important;
+                    font-size: 0.625rem !important;
+                }
+            }
+
+            &-toolbar {
+                height: 2rem !important;
+            }
+        }
+
+        ._se {
+            &_command {
+
+                &_bold,
+                &_underline,
+                &_italic {
+                    width: 1.2rem !important;
+                    height: 1.2rem !important;
+                }
+            }
+        }
+    }
+}

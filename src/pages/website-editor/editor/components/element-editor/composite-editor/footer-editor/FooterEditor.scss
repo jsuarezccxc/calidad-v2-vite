@@ -1,0 +1,26 @@
+.footer-editor {
+    &__image {
+        .input-image {
+            @apply w-57;
+            height: 4.313rem;
+        }
+    }
+
+    &__color {
+        @apply h-6.5;
+        width: 6.938rem;
+    }
+
+    .switch {
+        @apply ml-2;
+    }
+
+    &__email {
+        @apply w-45 h-5 px-1.5 border-1 border-gray-otherGray rounded-lg text-blue text-tiny font-allerbold font-bold;
+
+        &::placeholder {
+            @apply text-blue text-tiny font-allerbold font-bold;
+
+        }
+    }
+}

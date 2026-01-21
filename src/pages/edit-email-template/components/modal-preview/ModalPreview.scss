@@ -1,0 +1,57 @@
+.modal-preview {
+    @apply xs:h-screen bg-gray-light px-11.5 pt-7 pb-7.3 shadow-templateDesign rounded-2xl flex flex-col justify-between;
+
+    @media (min-width: 50rem) {
+        width: 40.625rem !important;
+        height: 41.5rem !important;
+        max-height: 41.5rem !important;
+    }
+
+	&__title {
+		@apply text-lg xs:ml-8 mb-4.5 text-gray-dark font-allerbold leading-lg;
+	}
+
+    &__content {
+		@apply xs:mx-21 xs:mt-1;
+		margin-bottom: 24px;
+    }
+
+	&__content-body {
+		@apply flex flex-col rounded-lg;
+		height: 31.8125rem;
+
+		&__content-img {
+			@apply flex items-center rounded-lg justify-center xs:flex-col-reverse xs:items-end bg-gray;
+			height: 15.30624rem;
+
+			&--img {
+				@apply self-center w-auto rounded-lg;
+				height: inherit;
+			}
+		}
+	}
+
+	&__footer {
+		@apply flex justify-end xs:justify-center;
+	}
+
+    &__mail-body {
+        @apply w-full py-4.5 px-5 overflow-y-auto rounded-b-lg bg-white;
+        height: 16.50625rem;
+
+		&__title {
+			@apply text-lg break-words text-gray-dark font-allerbold font-bold;
+		}
+    }
+
+    &-content {
+        p {
+            @apply mb-5 text-base text-gray-dark last:mb-0 break-words;
+        }
+    }
+}
+
+.btn-back-preview {
+    min-width: 9.563rem;
+    min-height: 2.063rem;
+}

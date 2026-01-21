@@ -1,0 +1,79 @@
+.current-step-domain {
+	@apply flex flex-col w-full h-auto;
+
+	&__title {
+		@apply w-full mb-4.5;
+
+		.title {
+			@apply text-26lg text-blue font-allerbold text-center w-full;
+			@media (max-width: 48rem) {
+				line-height: 1.1;
+			}
+		}
+	}
+
+	&__content {
+		@apply flex flex-col w-full;
+
+		.subtitle {
+			&__container {
+				@apply flex flex-col w-full;
+
+				.title {
+					@apply mb-4.5;
+	
+					&--bold {
+						@apply text-base text-blue font-allerbold;
+					}
+				}
+			}
+		}
+
+		.instruction {
+			@apply flex mt-5;
+			
+			.text--paginator {
+				@apply inline-block w-full text-base text-gray-dark font-normal text-center;
+				
+				.element--paginator {
+					@apply inline-block mx-1 h-auto align-middle;
+				}
+			}
+		}
+	}
+
+	&__info-step {
+		@apply flex flex-col pt-4.5 bg-white rounded mt-4.5;
+		padding-right: 2.875rem;
+		padding-left: 2.875rem;
+
+		@media (max-width: 48rem) {
+			padding-right: 1rem;
+			padding-left: 1rem;
+		}
+
+		.instruction__content {
+			@apply w-full flex justify-center py-7;
+
+			.instruction {
+				&--text {
+					@apply text-base text-gray-dark font-normal w-full text-left break-words;
+					line-height: 1.1875rem;
+				}
+
+				&--text-gl {
+					@apply text-base text-gray font-normal;
+					line-height: 1.1875rem;
+				}
+
+				&--bold {
+					@apply text-base text-gray-dark font-allerbold;
+				}
+			}
+		}
+
+		.paginator__container {
+			@apply w-full flex justify-center;
+		}
+	}
+}

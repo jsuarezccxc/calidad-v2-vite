@@ -1,0 +1,40 @@
+.invoice-header {
+	@apply flex xs:flex-col gap-x-4.5 mb-2 xs:gap-y-2;
+	min-height: 11rem;
+	height: auto;
+	max-height: max-content;
+
+	&__card_style {
+		@apply bg-white shadow-templateDesign rounded-lg flex items-center justify-center;
+
+		&--text {
+
+			@apply flex flex-col justify-center;
+
+			p {
+				@apply text-xs text-center leading-15.74 text-blue;
+			}
+		}
+	}
+
+	.width-197 {
+		width: 15.6875rem;
+		min-width: 15.68755rem;
+	}
+
+	.height-108 {
+		min-height: 6.75rem;
+		height: auto;
+		max-height: max-content;
+	}
+
+	@media screen and (min-width: 3.125rem) and (max-width: 47.9375rem) {
+		.width-197 {
+			width: 100%;
+		}
+	}
+}
+
+.paragraph-invoice-header {
+	@apply w-full mb-4.55 text-blue text-tiny leading-tiny;
+}

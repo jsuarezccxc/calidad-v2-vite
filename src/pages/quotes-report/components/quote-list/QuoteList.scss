@@ -1,0 +1,236 @@
+@import "../../../../index.scss";
+
+@mixin field-width($width) {
+    width: $width;
+    min-width: $width;
+    max-width: $width;
+}
+
+.quote-list {
+    &__create-button {
+        @apply bg-green border-none rounded-md text-white cursor-pointer inline-flex items-center gap-2 flex-shrink-0 relative outline-none;
+        @apply p-2 transition-all duration-200 ease-in-out;
+        box-shadow: 0 0.25rem 0.25rem 0 rgba(0,0,0,0.25);
+        
+        &:hover:not(.disabled) {
+            @apply -translate-y-1 bg-green-dark;
+            box-shadow: 0 0.25rem 0.75rem theme('colors.green.extraLight');
+        }
+        
+        &:active:not(.disabled) {
+            @apply translate-y-0;
+            box-shadow: 0 0.125rem 0.25rem theme('colors.green.extraLight');
+        }
+        
+        &:focus-visible {
+            outline: 2px solid theme('colors.green.DEFAULT');
+            outline-offset: 2px;
+        }
+        
+        &--disabled {
+            @apply bg-gray cursor-not-allowed opacity-60;
+            
+            .quote-list__button-text {
+                @apply text-gray-dark;
+            }
+        }
+    }
+
+    &__icon-container {
+        @apply relative w-5 h-5 flex items-center justify-center flex-shrink-0;
+    }
+
+    &__icon {
+        @apply relative w-full h-full text-current;
+    }
+
+    &__button-text {
+        @apply text-white whitespace-nowrap flex-shrink-0 text-sm font-bold;
+        line-height: normal;
+    }
+
+    &__download-icon {
+        @apply bg-white rounded-md inline-flex items-start gap-2.5 cursor-pointer border-none outline-none justify-center;
+        @apply transition-all duration-200 ease-in-out;
+        box-shadow: 0 0.25rem 0.25rem 0 rgba(0,0,0,0.25);
+        padding: 0.3125rem 0.375rem;
+        height: 2.625rem;
+        width: 2.5rem;
+
+        &:hover {
+            @apply -translate-y-1;
+            box-shadow: 0 0.375rem 0.5rem 0 rgba(0,0,0,0.3);
+        }
+
+        &:active {
+            @apply translate-y-0;
+            box-shadow: 0 0.125rem 0.25rem 0 rgba(0,0,0,0.25);
+        }
+    }
+}
+
+
+.quotes-report-table {
+    @apply overflow-x-scroll w-full;
+    
+    &__table {
+        min-width: 50rem;
+    }
+
+    &__selector {
+        @include field-width(2.5rem);
+        @apply bg-transparent border-none;
+        
+        &.table-field {
+            @apply bg-transparent border-none;
+            
+            &:first-child {
+                @apply border-l-0;
+            }
+        }
+    }
+
+    &__number,
+    &__date,
+    &__client,
+    &__email,
+    &__status {
+        @include field-width(11.6875rem);
+    }
+
+    &__header {
+        @apply text-left font-bold text-sm text-blue;
+        line-height: 0.9375rem;
+    }
+
+    &__header-text {
+        @apply block text-left text-sm font-allerbold leading-4 text-blue;
+    }
+    
+    tr[style*="background-color"] {
+        th.table-field.quotes-report-table__selector {
+            background: transparent !important;
+            background-color: transparent !important;
+            border: none !important;
+            border-style: none !important;
+        }
+    }
+    
+    tr.bg-gray-light,
+    tr.bg-white,
+    tr.tr-gray,
+    tr.tr-white {
+        td.table-field.quotes-report-table__selector {
+            background: transparent !important;
+            background-color: transparent !important;
+            border: none !important;
+            border-style: none !important;
+        }
+    }
+}
+
+.table-field-text {
+    @apply text-left font-normal text-sm leading-4 text-gray-400;
+}
+
+.table-field {
+    padding: 0;
+    
+    &.quotes-report-table__selector {
+        background: transparent !important;
+        border: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-top: none !important;
+        border-bottom: none !important;
+    }
+}
+
+div.quotes-report-table table.table tbody tr td.table-field.quotes-report-table__selector,
+div.quotes-report-table table.table thead tr th.table-field.quotes-report-table__selector {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-style: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+.quotes-report {
+    @apply min-h-screen w-full;
+    background-color: #FCFDFF;
+}
+
+.quotes-report-table {
+    &__cell-selector {
+        width: 2.5rem;
+        min-width: 2.5rem;
+        max-width: 2.5rem;
+        padding: 0.5rem 0.375rem;
+        text-align: center;
+    }
+
+    &__cell-standard {
+        width: 11.6875rem;
+        min-width: 11.6875rem;
+        max-width: 11.6875rem;
+        padding: 0.25rem 0.5rem 0.3125rem 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    &__header-bg {
+        @apply bg-green-ultraLight;
+    }
+
+    &__link-purple {
+        @apply text-purple;
+    }
+}
+
+.quote-filter-input {
+    width: 16.25rem;
+}
+
+.quote-filter-wide {
+    width: 27.1875rem;
+}
+
+.quote-filter-text {
+    &--filled {
+        @apply text-blue text-sm font-normal;
+    }
+    
+    &--placeholder {
+        @apply text-sm font-normal;
+        color: #D9D9D9;
+    }
+    
+    &--center {
+        text-align: center;
+    }
+    
+    &--start-date,
+    &--end-date,
+    &--search,
+    &--select {
+        @apply text-blue text-sm font-normal;
+        
+        &--empty {
+            color: #D9D9D9;
+        }
+    }
+    
+    &--start-date,
+    &--end-date {
+        @apply text-center;
+    }
+}
+
+.date-input-placeholder {
+    &::placeholder {
+        @apply text-center text-sm font-normal;
+        color: #D9D9D9;
+    }
+}

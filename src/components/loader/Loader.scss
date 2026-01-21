@@ -1,0 +1,15 @@
+#loader {
+	@apply bg-blue rounded-full border-gray-light;
+	border-width: 0.5625rem;
+
+	&::before {
+		border: .15rem solid rgba(0, 169, 157, 1);
+		border-top: .15rem solid rgba(11, 44, 76, 0);
+		content: "";
+		@apply w-16 h-16 rounded-full absolute z-10 animate-loader-spin;
+	}
+
+	img {
+		padding: .65rem;
+	}
+}

@@ -1,0 +1,54 @@
+.payment-plans {
+    @apply flex flex-col justify-between h-full w-full items-center;
+
+	&__container{
+		@apply flex flex-col;
+		width: 60.25rem;
+		
+		@media (max-width: 48rem){
+			margin: 0rem 1rem;
+			width: 20.25rem;
+		}
+		
+	}
+
+    &__button {
+        @apply bg-white text-blue font-allerbold rounded-lg text-xs block ml-auto mt-7;
+
+        width: 9.5625rem;
+        height: 2.0625rem;
+    }
+
+    .card {
+        width: 12.6875rem;
+    }
+
+    .pse {
+        width: 6.5rem;
+    }
+
+    &__table-title {
+        @apply text-blue font-allerbold text-1.5xl flex items-center gap-2.5 justify-center mb-4.5;
+
+        .icon-purchase {
+            width: 2.9375rem;
+            height: 3.125rem;
+        }
+    }
+
+    .table-field {
+        @apply text-center border;
+    }
+
+	&__buttons-footer {
+		@apply flex w-full justify-end;
+		
+		padding: 0rem 2rem 2rem 0rem;
+		
+		@media (max-width: 48rem) {
+			@apply justify-center;
+
+			padding: 0rem 0rem 0rem 0rem;
+		}
+	} 
+}

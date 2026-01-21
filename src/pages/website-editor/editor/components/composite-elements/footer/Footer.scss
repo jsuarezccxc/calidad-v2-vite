@@ -1,0 +1,324 @@
+.footer {
+	@apply flex flex-col items-center;
+	width: 100%;
+
+	&__logo {
+		@apply mb-5.5 mt-7 flex justify-center;
+		width: 30%;
+		height: 2.938rem;
+
+		&-text {
+			@apply text-blue text-xl font-allerbold font-bold text-center;
+		}
+	}
+
+	&__links {
+		@apply w-full flex justify-center mb-3;
+
+		&-item {
+			@apply px-10 py-2.5 cursor-pointer text-blue font-aller;
+		}
+	}
+
+	&__social-networks {
+		@apply flex mb-4 justify-between;
+		width: 11.875rem;
+
+		.icon {
+			@apply cursor-pointer w-8.5 h-8.5;
+		}
+	}
+
+	&__container {
+		@apply w-full bg-blue flex flex-col items-center py-4;
+
+
+		&-text {
+			@apply mb-4 text-white text-tiny;
+		}
+
+
+		&-politic {
+			@apply text-white text-tiny mb-4;
+		}
+
+		&-contact {
+			@apply text-blue bg-white px-10 py-2.5 rounded-lg font-allerbold font-bold w-40.80;
+		}
+	}
+
+	&__container-three {
+		@apply w-full bg-blue flex items-center py-4;
+		padding-left: 9.5rem;
+		padding-right: 9.5rem;
+
+		&-social {
+			@apply flex flex-col items-center justify-center;
+			height: 6.375rem;
+		}
+
+		&-contact {
+			@apply text-blue mt-4 bg-white px-10 py-2.5 rounded-lg font-allerbold font-bold w-40.80;
+		}
+
+		&-text {
+			@apply w-full text-white text-tiny flex flex-col items-center justify-center;
+		}
+
+		&-descriptions {
+			@apply text-white text-tiny flex flex-col mb-4;
+		}
+
+		&-politics {
+			@apply text-white text-tiny;
+		}
+	}
+
+	&__container-four {
+		@apply w-full bg-blue flex items-center py-4;
+		height: 16.875rem;
+		padding-left: 9.5rem;
+		padding-right: 9.5rem;
+
+		&-social {
+			@apply flex flex-col items-center justify-center;
+			width: 15.813rem;
+		}
+
+		&-contact {
+			@apply text-blue bg-white px-10 py-2.5 rounded-lg font-allerbold font-bold w-40.80;
+		}
+
+		&-text {
+			@apply text-white text-tiny h-full flex flex-col items-center justify-around;
+			width: 50rem;
+		}
+
+		&-description {
+			@apply text-white text-tiny flex flex-col mb-4;
+		}
+
+		&-politics {
+			@apply text-white text-tiny;
+		}
+
+	}
+
+	&__container-five {
+		@apply w-full bg-blue flex flex-col items-center;
+		padding-left: 4.688rem;
+		padding-right: 4.688rem;
+		padding-top: 2.188rem;
+		padding-top: 1.875rem;
+
+		&-top {
+			@apply flex w-full justify-between;
+		}
+
+		&-image {
+			@apply flex items-center pl-6.70 w-1/2 border-r-2 border-white;
+
+		}
+
+		&-form {
+			@apply flex flex-col items-center pt-3.5 w-1/2;
+			height: 7.813rem;
+
+			&-text {
+				@apply flex flex-col;
+
+				#input-form {
+					@apply px-1.5 py-2 bg-blue border border-white mb-2.5;
+					width: 17.813rem;
+					border-radius: 0.125rem 0 0 0.125rem;
+				}
+			}
+		}
+
+		&-contact {
+			@apply text-blue bg-white px-10 py-2.5 h-11 w-39;
+
+		}
+
+		&-bottom {
+			@apply w-full flex flex-col justify-center items-center pt-5 border-t-2 border-white mt-2.5;
+		}
+
+		&-text {
+			@apply text-white text-base h-full flex flex-col items-center justify-around;
+			width: 50rem;
+		}
+
+		&-descriptions {
+			@apply text-white text-tiny flex flex-col mb-4 font-allerbold font-bold;
+		}
+
+		&-politics {
+			@apply text-white text-tiny;
+		}
+	}
+
+	&__container-six {
+		@apply w-full bg-blue flex flex-col items-center justify-evenly pb-2.5 pt-5;
+		height: 10.5rem;
+
+		&-top {
+			@apply flex items-center justify-around w-full;
+			height: 7.688rem;
+		}
+
+		&-social {
+			@apply flex flex-col items-center;
+		}
+
+		&-image {
+			width: 13.75rem;
+		}
+
+		&-contact {
+			@apply text-blue bg-white px-10 py-2.5 rounded-lg font-allerbold font-bold w-40.80 mt-3;
+		}
+
+		&-text {
+			@apply text-white text-tiny flex flex-col;
+		}
+
+		&-descriptions {
+			@apply text-white text-tiny flex flex-col mb-4;
+		}
+
+		&-politics {
+			@apply text-white text-tiny;
+		}
+	}
+
+	&-mobile {
+		width: auto !important;
+
+		&__logo-text {
+			@apply text-base;
+		}
+
+		&__links-item {
+			@apply p-0 mr-5.5 w-16 flex items-center justify-center;
+			font-size: 0.875rem !important;
+		}
+
+		&__social-networks {
+			@apply justify-center;
+
+			.icon {
+				@apply w-6 h-6 mr-2;
+			}
+		}
+
+		&__container-contact {
+			@apply p-0 h-5.5 w-26.2 text-tiny;
+		}
+
+		&__container-three {
+			@apply p-0 py-4 flex flex-col;
+
+			&-contact {
+				@apply mt-0 p-0 h-5.5 w-26.2 text-tiny;
+			}
+
+			&-social {
+				@apply flex flex-row mx-7.3 h-auto;
+			}
+
+			&-text {
+				@apply mt-4;
+			}
+		}
+
+		&__container-four {
+			@apply p-0 py-4 flex flex-col;
+			height: auto !important;
+
+			&-social {
+				@apply flex-row justify-center;
+
+				img {
+					width: 7.5rem;
+					height: 3.75rem;
+				}
+			}
+
+			&-text {
+				@apply mt-4;
+				width: auto !important;
+				height: auto !important;
+			}
+		}
+
+		&__container-five {
+			@apply p-0 py-4 h-auto;
+
+			&-top {
+				@apply flex-col mb-4.5;
+			}
+
+			&-image {
+				@apply border-0 w-full justify-between px-6.70;
+
+				img {
+					@apply w-auto;
+					max-width: 7.5rem;
+				}
+
+				p {
+					@apply text-tiny;
+				}
+			}
+
+			&-form {
+				@apply w-auto h-auto p-0 mt-4.5;
+
+				&-text {
+					#input-form {
+						@apply m-0;
+						width: 14.375rem;
+						height: 1.5rem;
+
+						&::placeholder {
+							@apply text-xtiny;
+						}
+					}
+				}
+			}
+
+			&-bottom {
+				@apply w-76 m-0;
+			}
+
+			&-text {
+				@apply w-full;
+			}
+
+			&-contact {
+				@apply w-29 h-6 p-0 text-tiny mt-4.5;
+			}
+		}
+
+		&__container-six {
+			@apply h-auto;
+
+			&-image {
+				max-width: 7.5rem;
+
+				img {
+					@apply w-auto;
+				}
+			}
+
+			&-contact {
+				@apply w-29 h-6 p-0 text-tiny;
+			}
+
+			&-top {
+				@apply flex-col h-auto;
+			}
+		}
+	}
+}

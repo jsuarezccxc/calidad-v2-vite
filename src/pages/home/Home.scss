@@ -1,0 +1,75 @@
+.home {
+    @apply flex justify-center sm:flex-col sm:items-center pt-8 lg:pt-16 xs:pb-10;
+
+    &__container {
+        max-width: 75rem;
+
+        @apply lg:flex lg:w-full lg:px-2 gap-2 flex-row;
+    }
+
+    &__principal {
+        @apply justify-between block lg:flex lg:w-full lg:px-2 xl:px-10 gap-2 flex-wrap;
+    }
+
+    &__logo {
+        @apply relative block m-auto;
+
+        @media (min-width: 81.25rem) {
+            bottom: 1.25rem;
+        }
+    }
+
+    &__slogan {
+        @apply mr-16 font-light text-right text-purple sm:text-lg md:text-2lg leading-6;
+    }
+
+    &__content {
+        @apply m-auto xs:-mt-10 lg:mt-0 text-blue;
+    }
+
+    &__buttons-container {
+        @apply flex justify-between xs:mt-10 sm:mt-8;
+    }
+
+    &__politics {
+        @apply m-auto mt-10 text-center sm:hidden;
+    }
+
+    &__full-politics {
+        @apply hidden p-2 mt-10 sm:block lg:px-5;
+    }
+
+    &__modal-title {
+        @apply text-white font-aller text-2lg absolute -top-10 text-center w-full left-0;
+    }
+
+    &__account-button {
+        @apply absolute -bottom-16 border m-auto block;
+
+        left: calc(50% - 4.7188rem);
+    }
+
+    &__modal-content {
+        @apply flex flex-col items-center justify-center h-full xs:px-10 m-auto w-full;
+
+        @media (max-width: 20rem) {
+            padding: 0 3.75rem;
+        }
+    }
+
+    .home-text {
+        @apply xs:text-sm sm:text-base;
+    }
+}
+
+.extension-logo {
+    @apply text-xl italic  text-blue xs:text-center w-max  xs:w-full;
+}
+
+.principal-page {
+    @apply flex justify-center m-auto sm:flex-col sm:items-center pt-16 sm:pt-0;
+}
+
+#widget2 {
+	display: block !important;
+}

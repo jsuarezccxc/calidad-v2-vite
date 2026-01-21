@@ -1,0 +1,200 @@
+.tooltip-display {
+	@apply text-tiny invisible text-left top-10 flex flex-col justify-end items-start absolute z-30 bg-white rounded-xl shadow-md;
+}
+
+.overlay-close {
+	position: fixed;
+	background-color: transparent;
+
+	@apply w-full h-full z-10;
+}
+
+.tooltip--icon-width {
+	width: 1.75rem;
+}
+
+.menu--icon-width {
+	width: 1.375rem;
+}
+
+.tooltip {
+	@apply relative flex content-center xs:hidden;
+}
+
+.tooltip-item {
+	@apply tooltip-display w-max text-blue font-allerbold py-2 px-3;
+}
+
+.tooltip-item-menu {
+	@apply tooltip-display w-max text-blue font-allerbold py-2 px-3;
+}
+
+.tooltip-item-style {
+	@apply tooltip-display w-35 text-blue font-allerbold py-2 px-3 -ml-10 h-12;
+}
+
+.tooltip-item-style:hover {
+	@apply visible;
+}
+
+.tooltip:hover .tooltip-item {
+	@apply visible;
+}
+
+.tooltip-options {
+	@apply tooltip-display overflow-hidden;
+
+	left: calc(100% - 7.3125rem);
+
+	&__notification {
+		@apply text-tiny text-gray-dark font-allerbold text-center mx-5 py-2 h-auto border-b-1 border-gray w-full;
+		line-height: 0.9375rem;
+	}
+
+	&__title {
+		@apply text-tiny text-purple font-allerbold underline w-full text-left h-auto;
+		line-height: 0.9375rem;
+
+		&:hover {
+			@apply w-full bg-blue border-transparent text-white;
+		}
+	}
+
+	&__link,
+	&__item {
+		@apply text-sm text-blue pb-2 no-underline hover:no-underline w-full cursor-pointer h-auto pl-4 flex items-end;
+		width: calc(100% - 0.875rem);
+
+		* {
+			@apply text-blue;
+		}
+
+		&:hover {
+			@apply w-full bg-blue border-transparent ;
+
+			* {
+				@apply text-white;
+			}
+		}
+
+		&:hover .initial-icon {
+			@apply hidden;
+		}
+
+		&:hover .finish-icon {
+			@apply inline;
+		}
+	}
+	&__item-notification {
+		@apply text-sm text-blue py-2 px-4.5 no-underline hover:no-underline w-full cursor-pointer h-auto flex items-end box-border;
+
+		* {
+			@apply text-blue;
+		}
+
+		&:hover {
+			@apply w-full bg-blue border-transparent;
+
+			* {
+				@apply text-white;
+			}
+		}
+	}
+
+	.link-option {
+		@apply underline text-purple hover:text-blue pb-4.5 pt-2 text-center mt-0 mx-5 border-t-1 border-gray;
+	}
+
+	&__profile {
+		@apply flex items-center justify-center my-auto text-xl font-bold bg-white rounded-full cursor-pointer xs:w-7 xs:h-7 text-green overflow-hidden;
+		width: 3.0625rem;
+		height: 3.0625rem;
+	}
+}
+
+.date-notification {
+	@apply text-sm text-blue;
+	width: 3.625rem;
+	height: 0.9377rem;
+}
+
+.border__item-notification {
+	@apply border-b-1 border-gray mx-4.5;
+	width: calc(100% - 2.25rem);
+}
+
+.profile-options {
+	@apply -left-40 2xl:-left-36;
+}
+
+.support-options {
+	&:hover {
+		@apply p-2;
+	}
+}
+
+.search-input {
+	@apply my-auto;
+
+	background-color: #fff !important;
+}
+
+.current-notification {
+	@apply absolute m-auto font-bold leading-3 text-center text-white rounded-full bg-red-notification top-3 left-1/2;
+	width: 0.9375rem;
+	height: 0.9375rem;
+	font-size: 0.6875rem;
+}
+
+.search-results {
+	@apply justify-start overflow-y-auto visible w-full left-0 top-9;
+
+	max-height: 29.1875rem;
+}
+
+.hide-options {
+	display: none !important;
+}
+
+.show-options {
+	visibility: visible !important;
+}
+
+.screen-smooth-logout {
+	* {
+		scroll-behavior: inherit;
+	}
+}
+
+.help-tooltip {
+	@apply overflow-hidden p-0 flex flex-col bg-gray-light;
+
+	margin: -1.063rem 0px !important;
+	padding: 0 !important;
+	width: 15.625rem;
+	height: 11.25rem;
+	border-radius: 0.5rem;
+
+	&__title {
+		@apply py-2 text-xs text-center font-allerbold text-gray-dark;
+	}
+
+	&__option {
+		@apply hover:bg-blue flex flex-1 items-center px-4.5 gap-2.5 w-full;
+
+		&:hover svg path {
+			fill: white;
+		}
+
+		&:hover p {
+			@apply text-white;
+		}
+
+		&-name {
+			@apply text-xs text-left text-blue font-allerbold;
+
+			line-height: 0.9838rem;
+			width: 11.375rem;
+		}
+	}
+}

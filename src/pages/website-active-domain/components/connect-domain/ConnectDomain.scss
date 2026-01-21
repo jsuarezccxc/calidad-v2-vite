@@ -1,0 +1,103 @@
+.connect-domain {
+	@apply flex flex-col w-full h-auto;
+
+	&__title {
+		@apply w-full mb-4.5;
+
+		.title {
+			@apply text-26lg text-blue font-allerbold text-center w-full;
+		}
+	}
+
+	&__content {
+		@apply flex flex-col w-full;
+
+		.subtitle {
+			&__container {
+				@apply flex flex-col w-full;
+
+				.title {
+					@apply mb-4.5;
+	
+					&--bold {
+						@apply text-base text-blue font-allerbold;
+					}
+				}
+			}
+		}
+	}
+
+	&__info {
+		@apply flex flex-col bg-white rounded px-4.5 py-7 mt-4.5;
+
+		.step {
+			&--description {
+				@apply text-base text-black font-normal;
+			}
+
+			&--bold {
+				@apply text-base text-black font-allerbold;
+			}
+
+			&--text-italic {
+				@apply text-base italic font-normal font-aller;
+			}
+
+			&--description-gray {
+				@apply text-base text-gray-dark font-normal;
+			}
+		}
+
+		.container__input {
+			@apply flex justify-center items-center;
+
+			.verify__content {
+				@apply flex flex-row gap-x-2 items-end my-7;
+
+				@media (max-width: 48rem) {
+					@apply flex-col gap-y-2 justify-center items-center w-full;
+				}
+
+				.label-input {
+					@apply text-base text-black font-normal font-aller;
+				}
+
+				.with--message {
+					bottom: -1rem;
+
+					@media (max-width: 48rem) {
+						bottom: auto;
+					}
+				}
+
+				.name-domain {
+					min-width: 25.4375rem;
+
+					@media (max-width: 48rem) {
+						min-width: 100%;
+					}
+				}
+
+				.domain {
+					max-width: 8rem;
+
+					@media (max-width: 48rem) {
+						min-width: 100%;
+					}
+				}
+			}
+		}
+
+		.active__container {
+			@apply flex justify-center w-full mt-7;
+		}
+	}
+}
+
+.wrapper--border {
+	@apply border-blue;
+
+	.text-input {
+		@apply italic font-aller;
+	}
+}

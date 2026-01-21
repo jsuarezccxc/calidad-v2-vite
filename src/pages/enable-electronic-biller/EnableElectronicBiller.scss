@@ -1,0 +1,179 @@
+.electronic-biller {
+    @apply h-full flex flex-col xs:px-2;
+
+    .aid-image {
+        width: 13.5625rem;
+        height: 4.375rem;
+    }
+
+    &__aid-description {
+        @apply text-center text-sm text-gray-dark;
+
+        width: 16.4375rem;
+        line-height: 1.0594rem;
+    }
+
+    &__help-card {
+        @apply shadow-card bg-white;
+
+        width: 17.6875rem;
+        border-radius: 0.5rem;
+        padding: 1.125rem 0.625rem;
+    }
+
+    &__welcome-title {
+        @apply text-26lg font-allerbold text-center my-4.5 text-blue;
+    }
+
+    &__container-success {
+        height: 31.25rem;
+    }
+
+    &__steps-subtitle {
+        @apply text-green font-allerbold mb-2;
+
+        font-size: 2.5rem;
+        line-height: 3.0275rem;
+    }
+
+    &__next-button {
+        @apply bg-blue hover:bg-green text-white rounded-lg shadow-templateDesign cursor-pointer px-2.75 py-0 text-xs;
+        width: 9.5625rem;
+        height: 2.0625rem;
+        line-height: .875rem;
+    }
+
+    .dian-registration {
+        &__step-content {
+            @apply bg-white rounded flex flex-col mt-4.5;
+
+            height: max-content;
+            padding: 1.125rem 2.875rem 0 3.25rem;
+
+            @media (min-width: 80rem) {
+                height: 31.25rem;
+            }
+        }
+
+        &__end-button {
+            @apply mt-7 mx-auto px-2.75 shadow-card block text-xs text-center;
+            width: 17.5rem;
+            height: 2.0625rem;
+        }
+    }
+
+    .enablement {
+        &__step-content {
+            @apply bg-white rounded flex flex-col mt-4.5;
+
+            padding: 1.125rem 2.875rem 0 3.25rem;
+            height: 31.25rem;
+        }
+
+        &__end-button {
+            @apply mx-auto shadow-card block;
+
+            width: 10.625rem;
+        }
+
+        &__testing-button {
+            margin-top: 4.8125rem !important;
+        }
+
+        .bottom-text {
+            @apply text-gray-dark text-center;
+
+            &--four {
+                margin-bottom: 4.6875rem;
+            }
+
+            &--five {
+                margin-bottom: 5.5rem;
+            }
+
+            &--six {
+                margin-bottom: 1.75rem;
+            }
+        }
+    }
+
+    .company-information {
+        &__field {
+            @apply w-full;
+
+            @media (min-width: 80rem) {
+                @apply w-73;
+
+                min-width: 18.125rem;
+            }
+        }
+
+        &__fields {
+            @apply bg-white;
+
+            padding: 1.125rem 0.6875rem;
+            border-radius: 0.5rem;
+        }
+
+        &__activity-field {
+            @apply w-full;
+
+            @media (min-width: 80rem) {
+                width: 38rem;
+            }
+        }
+
+        &__button {
+            @apply mt-2 underline cursor-pointer text-green;
+
+            &:disabled {
+                @apply cursor-default text-gray;
+            }
+        }
+
+        .select-search__input {
+            @apply text-sm text-gray-dark text-left leading-4;
+
+            margin: 0 !important;
+            padding-left: 0 !important;
+        }
+
+        .select--dark-placeholder {
+            @media (min-width: 80rem) {
+                width: 18.125rem !important;
+                min-width: 18.125rem !important;
+            }
+
+            input {
+                &::placeholder {
+                    @apply text-gray-dark;
+                }
+            }
+        }
+    }
+
+    .steps {
+        @apply flex flex-col lg:flex-row gap-6;
+
+        @media (min-width: 80rem) {
+            gap: 5.8125rem;
+        }
+
+        &__cards {
+            @apply lg:flex-1;
+
+            @media (min-width: 80rem) {
+                width: 36.75rem;
+            }
+        }
+
+        &__instructions {
+            @apply w-full text-gray-dark mb-7;
+        }
+    }
+
+    &__input-test {
+        min-width: 18.125rem;
+        margin-top: 6.3125rem;
+    }
+}

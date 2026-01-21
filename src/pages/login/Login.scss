@@ -1,0 +1,17 @@
+.modal--login {
+	@apply sm:min-w-login
+	py-9
+	xs:py-0
+	p-0;
+	width: 26.75rem !important;
+	padding: 2.875rem 2.875rem 1.875rem  !important;
+}
+
+.modal--recover-password {
+	width: 27.125rem;
+	height: 16.625rem;
+}
+
+.icon-closeLogin {
+	@apply absolute cursor-pointer w-8.5 h-8.5 top-3 right-4 xs:hidden;
+}

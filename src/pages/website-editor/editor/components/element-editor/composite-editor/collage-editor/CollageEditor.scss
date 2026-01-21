@@ -1,0 +1,19 @@
+.editor {
+    &-collage {
+        &__image {
+            @apply mb-2.5 w-57;
+            height: 4.313rem;
+        }
+    }
+
+
+    .input-image {
+        &__preview {
+            @apply h-1/2;
+        }
+
+        &__trash-icon {
+            @apply right-20;
+        }
+    }
+}

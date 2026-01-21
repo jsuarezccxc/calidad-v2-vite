@@ -1,0 +1,30 @@
+.save-buttons {
+    &__modal-publish {
+        @apply bg-white rounded-2.5xl flex flex-col justify-center items-center p-6.70;
+        width: 26.563rem;
+    }
+
+    &__save {
+        @apply flex items-center pl-3 text-xs text-white rounded-lg shadow-templateDesign bg-blue;
+        height: 2.0625rem;
+        width: 9.5625rem;
+    }
+
+    &__published {
+        @apply flex items-center pl-3 text-xs bg-white rounded-lg shadow-templateDesign text-blue;
+        height: 2.0625rem;
+        width: 9.5625rem;
+    }
+
+    &__save--disabled {
+        @apply flex items-center pointer-events-none pl-3 text-xs text-gray rounded-lg shadow-templateDesign bg-blue;
+        height: 2.0625rem;
+        width: 9.5625rem;
+    }
+
+    &__published--disabled {
+        @apply flex items-center pointer-events-none pl-3 text-xs text-gray rounded-lg shadow-templateDesign bg-blue;
+        height: 2.0625rem;
+        width: 9.5625rem;
+    }
+}

@@ -1,0 +1,7 @@
+.payment-methods {
+	&__body {
+		.select-search__input {
+			@apply text-left pl-0 ml-0;
+		}
+	}
+}

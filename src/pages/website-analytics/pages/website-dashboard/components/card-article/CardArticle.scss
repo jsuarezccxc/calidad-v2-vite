@@ -1,0 +1,37 @@
+.card{
+	@apply p-2 text-center bg-white rounded-lg shadow-card ;
+	
+	&__small{
+		
+		max-width: 14.0625rem !important;
+		min-width: 14.0625rem !important;
+		height: 7.75rem;
+	}
+	&__medium{
+		@apply xs:overflow-auto;
+		
+ 		width: 28.375rem !important;
+ 		max-width: 28.375rem !important;
+
+		@media (max-width: 31.25rem) {
+			width: 21.25rem !important;
+			min-width: 21.25rem;
+		}
+	}
+
+	&__double{
+		&-one{
+			height: 8.1875rem;
+		}
+		
+		&-two{
+			height: 8.5rem;
+		}
+	}
+
+	&-lineChart{
+		max-height:15.0625rem !important;
+		height: 15.0625rem;
+	}
+
+}

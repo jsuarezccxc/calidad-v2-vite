@@ -1,0 +1,59 @@
+.steps-active-domain {
+	@apply flex flex-col w-full h-auto;
+
+	&__title {
+		@apply w-full mb-4.5;
+
+		.title {
+			@apply text-26lg text-blue font-allerbold text-center w-full;
+			@media (max-width: 48rem) {
+				line-height: 1.1;
+			}
+		}
+	}
+
+	&__content {
+		@apply flex flex-row w-full;
+
+		@media (max-width: 48rem) {
+			@apply flex-col-reverse;
+		}
+
+		.description {
+			&__container {
+				@apply flex flex-col;
+				flex: 1;
+
+				.steps-domain__container {
+					@apply flex-col grid gap-4;
+				}
+			}
+
+			&--title {
+				@apply mb-7;
+			}
+
+			&--bold {
+				@apply text-base text-blue font-allerbold;
+			}
+		}
+
+		.helps__container {
+			@apply flex flex-col w-auto;
+			margin-top: 3.75rem;
+
+			@media (max-width: 48rem) {
+				margin-top: 0;
+				@apply justify-center items-center;
+			}
+
+			.alert__container {
+				@apply flex mb-4 justify-end pr-11.5;
+			}
+
+			.definition {
+				@apply mb-4.5;
+			}
+		}
+	}
+}

@@ -1,0 +1,127 @@
+.dashboard-electronic-documents {
+	@apply flex flex-col gap-y-4.5 lg:mb-7 xs:px-2;
+
+	.react-datepicker-popper {
+		width: 17.125rem;
+	}
+
+	.react-datepicker {
+		@apply w-full bg-white border-none shadow-select rounded-md;
+
+
+		&__triangle {
+			@apply hidden;
+		}
+
+		&__header {
+			@apply pt-3 pb-2 bg-white text-sm font-normal;
+		}
+
+		&__month {
+			@apply my-3 mx-2.5;
+
+			&--selected {
+				@apply text-white #{!important};
+
+				&:hover {
+					@apply bg-blue;
+				}
+			}
+
+			&--disabled {
+				@apply text-gray bg-gray-light;
+			}
+		}
+
+		&__month-wrapper {
+			@apply mt-2;
+		}
+
+		&__month-container {
+			@apply w-full;
+		}
+
+		&__month-text {
+			@apply m-0 w-20.4 h-8.3 content-center text-tiny text-gray-dark;
+
+			&--keyboard-selected {
+				@apply text-white;
+
+				&:hover {
+					@apply text-gray-dark;
+				}
+			}
+
+			&:hover {
+				@apply rounded-none;
+			}
+		}
+	}
+
+	.padding-0 {
+		@apply p-0;
+	}
+
+	.custom-cards-color {
+		width: 15.625rem;
+	}
+
+	.margin-x-0-5{
+		margin-left: 0.03125rem;
+		margin-right: 0.03125rem;
+	}
+
+	.height-91 {
+		height: 5.6875rem;
+	}
+
+	.height-108 {
+		height: 6.75rem;
+	}
+
+	.content-top-card {
+		@apply flex flex-wrap gap-x-3.5 gap-y-3.5 xs:flex-col xs:ml-0 ml-2;
+	}
+
+	.content-bottom-card {
+		@apply flex flex-col gap-y-2;
+
+		&__form {
+			@apply flex items-center xs:items-start xs:flex-col gap-x-2 gap-y-2;
+
+			& label {
+				@apply font-allerbold text-sm leading-16.95px text-blue;
+			}
+		}
+
+		&__left-cards {
+			@apply flex xs:flex-col gap-x-4.5 gap-y-2 xs:w-full w-max;
+		}
+
+		&__center-card {
+			@apply pt-4.5 pl-2.5 gap-y-4.5 xs:w-full w-117;
+		}
+
+		&__right-cards {
+			@apply flex flex-col lg:pt-1 gap-y-2 xs:w-full w-55.4;
+
+			&--content-little-card {
+				@apply pt-4.5 pb-2.5 px-2.5 gap-y-2;
+			}
+
+			&--little-card {
+				@apply flex flex-col gap-y-2;
+			}
+		}
+	}
+
+	@media screen and (min-width: 3.125rem) and (max-width: 47.938rem) {
+		.react-datepicker-popper {
+			width: 100%;
+		}
+
+		.custom-cards-color {
+			width: 100%;
+		}
+	}
+}

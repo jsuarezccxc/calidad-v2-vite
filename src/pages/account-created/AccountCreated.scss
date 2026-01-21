@@ -1,0 +1,23 @@
+.container-modal {
+	@apply pl-1 pr-4 md:overflow-y-auto md:overflow-x-hidden xs:p-0 w-86 xs:w-72 xs:mt-9;
+
+	h2 {
+      @apply text-xl mb-4.55 font-allerbold text-blue xs:text-center;
+	}
+}
+
+.icon-close {
+	@apply absolute cursor-pointer w-8.5 h-8.5 top-3 right-4 xs:hidden;
+}
+
+.recaptcha-style{
+	margin: auto !important;
+	width: 19.125rem !important;
+	display: flex !important;
+	justify-content: center !important;
+}
+
+.password-check-icon{
+	@apply ml-1 text-blue self-center;
+	width: 0.688rem;
+}

@@ -1,0 +1,61 @@
+.information {
+    &__icon {
+        @apply mb-2 text-base leading-lg font-allerbold flex flex-row items-start;
+    }
+
+    &__title {
+        @apply mb-2 text-base leading-lg font-allerbold flex flex-row items-center;
+    }
+
+    &__description {
+        @apply m-0 leading-base text-gray-dark;
+    }
+
+    .custom-description {
+        @apply text-gray-dark;
+    }
+
+    .description-icon {
+        @apply inline mr-1;
+
+        width: 0.9375rem;
+    }
+}
+
+.information-electronic-document {
+    @apply flex justify-between gap-y-4.5 xs:flex-col mr-3.75 flex-wrap mb-4.5;
+
+    &__content-title {
+        @apply flex flex-col gap-y-2;
+
+        & h1 {
+            @apply text-lg text-blue font-allerbold leading-lg;
+        }
+    }
+
+    &__tooltip {
+        @apply rounded;
+
+        height: 5.25rem;
+    }
+
+    &__card {
+        @apply w-51.3 bg-white shadow-templateDesign h-auto text-center rounded-lg;
+
+        & h1 {
+            @apply text-base text-blue leading-19.38px h-9.5;
+        }
+    }
+}
+
+.subtitle {
+    @apply text-lg text-gray-dark font-allerbold mb-4.5;
+}
+
+.information-tooltip {
+    @apply bg-white rounded border;
+
+    width: 19.625rem;
+    height: 6.3125rem;
+    border-color: white !important;
+}

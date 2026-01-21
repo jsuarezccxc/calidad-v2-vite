@@ -1,0 +1,45 @@
+.details {
+	@apply hidden justify-center flex-wrap mx-auto h-0 mb-0 rounded shadow shadow-md p-2;
+
+	max-width: 63rem;
+	column-gap: 3.375rem;
+	row-gap: 1.25rem;
+	transition: .4s all;
+
+	&--active {
+		@apply visible h-full my-4.5 flex bg-white;
+
+		height: 14.375rem;
+
+		@media (max-width: 37.5rem) {
+			height: 42.25rem;
+		}
+	}
+}
+
+.detail {
+	@apply flex gap-2 items-center;
+
+	width: 18.125rem;
+	height: 3.5rem;
+
+	&__image-container {
+		@apply flex items-center justify-center border border-gray-smoke border-l-0 border-t-0 border-b-0;
+
+		width: 2.8125rem;
+		height: 2.8125rem;
+		min-width: 2.8125rem;
+		min-height: 2.8125rem;
+	}
+
+	&__information {
+		@apply flex items-center gap-2;
+	}
+
+	&__description {
+		@apply text-blue;
+
+		font-size: 0.8125rem;
+		line-height: 0.9838rem;
+	}
+}

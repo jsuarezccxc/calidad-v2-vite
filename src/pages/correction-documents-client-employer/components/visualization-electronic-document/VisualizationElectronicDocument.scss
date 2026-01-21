@@ -1,0 +1,52 @@
+.visualization-container {
+    .react-pdf__Page__canvas {
+        margin: 0 auto;
+        width: 28.125rem !important;
+        height: 39.75rem !important;
+    }
+}
+
+.actions {
+    @apply bg-white p-7;
+
+    .divider {
+        @apply absolute h-4.5 w-0.25 bg-green;
+        top: 2.875rem;
+        left: 1.4375rem;
+    }
+
+    &__preview {
+        @apply rounded-md cursor-pointer shadow-templateDesign relative overflow-hidden;
+        padding: 0.9375rem 0.5625rem 1rem 0.6875rem;
+        background-color: rgba(0, 169, 157, 0.15);
+        width: 26.8125rem;
+        height: 30.6875rem;
+
+        &--pdf {
+            @apply flex justify-center items-center absolute z-10 cursor-pointer;
+            background: radial-gradient(100% 100% at 50.11% 0%, rgba(255, 255, 255, 0.41) 0%, rgba(11, 44, 76, 0.41) 100%);
+            top: 0.9375rem;
+            height: 28.75rem;
+            width: 25.5625rem;
+        }
+
+        .react-pdf__Page__canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .react-pdf__Page__textContent {
+            @apply hidden;
+        }
+    }
+
+    &__input-date {
+        padding: 0 !important;
+        text-align: left !important;
+    }
+
+    &__response-icon {
+        @apply flex items-center justify-center border rounded-full border-green mr-7;
+        height: 2.875rem;
+    }
+}

@@ -1,0 +1,68 @@
+.option-card {
+	@apply flex flex-row rounded-lg py-1 px-4.5 bg-white cursor-pointer;
+	min-width: 35.86rem;
+	width: 36.75rem;
+	height: 4.25rem;
+	box-shadow: 0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25);
+	margin-right: 3.8125rem;
+
+	@media (max-width: 48rem) {
+		min-width: 100%;
+		width: 100%;
+		margin-right: 0;
+	}
+
+	&__content {
+		@apply flex flex-row;
+
+		.icon--styles {
+			@apply mr-3.25 my-auto;
+			width: 3.125rem;
+			height: 3.125rem;
+		}
+
+		.container__information {
+			@apply flex flex-col mr-auto justify-center w-full h-full;
+
+			&--title {
+				@apply text-base text-green font-allerbold text-left;
+				@media (max-width: 48rem) {
+					line-height: 1.2112rem;
+					@apply text-xs;
+				}
+			}
+
+			&--description {
+				@apply text-base text-gray-dark font-normal text-left;
+				@media (max-width: 48rem) {
+					line-height: 1.2112rem;
+					@apply text-xs;
+				}
+			}
+		}
+	}
+
+	.container__arrow {
+		@apply ml-auto flex justify-center items-center;
+
+		.arrow--styles {
+			width: 1.375rem;
+			height: 1.375rem;
+			filter: drop-shadow(0rem 0.25rem 0.25rem 0rem rgb(0, 0, 0.25));
+		}
+	}
+
+	.container__completed {
+		@apply ml-2 flex justify-center items-center;
+
+		.completed {
+			width: 1.9375rem;
+			height: 1.9375rem;
+		}
+	}
+}
+
+.mr--completed {
+	margin-right: 3.25rem;
+	width: 100%;
+}

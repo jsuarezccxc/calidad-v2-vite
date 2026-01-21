@@ -1,0 +1,9 @@
+.sale-product {
+    &__container {
+        @apply bg-white rounded-lg p-4.5 mb-4.5 shadow-templateDesign;
+
+        @media (max-width: 80rem) {
+            max-width: 60.25rem;
+        }
+    }
+}

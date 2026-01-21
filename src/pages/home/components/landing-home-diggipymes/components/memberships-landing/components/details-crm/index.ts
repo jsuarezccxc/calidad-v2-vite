@@ -1,0 +1,1 @@
+export { DetailsCrm } from './DetailsCrm';

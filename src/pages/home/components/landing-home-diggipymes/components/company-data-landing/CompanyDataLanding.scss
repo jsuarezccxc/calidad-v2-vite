@@ -1,0 +1,25 @@
+.text-title-company-landing{
+	font-size: 2.188rem;
+}
+.container-button{
+	margin: 2.5rem;
+}
+
+@media (max-width: 48rem){
+	.text-title-company-landing{
+		line-height: 2rem;
+	}
+	.container-company-data-landing{
+		padding: 1.5rem;
+	}
+	.container-button{
+		flex-direction: column;
+		row-gap: 1rem;
+		margin: 2.5rem 0rem;
+
+		&__button-footer{
+			width: 100%;
+			margin: auto;
+		}
+	}
+}

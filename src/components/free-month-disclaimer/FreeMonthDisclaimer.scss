@@ -1,0 +1,17 @@
+.free-month-disclaimer {
+	@apply text-white bg-purple font-poppins float-right absolute;
+	z-index: 2;
+}
+
+.calculate-width {
+	width: calc(100% - 19.516875rem);
+
+	@media (max-width: 95.9375rem) {
+		width: calc(100% - 17.5rem);
+	}
+
+	@media (max-width: 47.938rem) {
+		width: 100%;
+	}
+
+}

@@ -1,0 +1,39 @@
+.search_container {
+	input[type=search]::-ms-clear {
+		@apply hidden w-0 h-0;
+	}
+	input[type=search]::-ms-reveal {
+		@apply hidden w-0 h-0;
+	}
+	input[type="search"]::-webkit-search-decoration,
+	input[type="search"]::-webkit-search-cancel-button,
+	input[type="search"]::-webkit-search-results-button,
+	input[type="search"]::-webkit-search-results-decoration {
+		@apply hidden;
+	}
+
+	@apply grid place-content-center mt-4.5;
+}
+
+.search_icon{
+	@apply w-3.5 py-1.5;
+	height: 1.625rem;
+}
+
+.icon-file {
+	width: 3.0625rem;
+	height: 3rem;
+}
+
+.icon-line {
+	width: .1875rem;
+	height: 3.4375rem;
+}
+
+.padding-right-none{
+	padding-right: 0 !important;
+}
+
+.cursor-inherit{
+	cursor:inherit;
+}

@@ -1,0 +1,36 @@
+.draft-documents {
+    @apply flex-1;
+    
+    .header {
+        &-title, &-date, &-totals {
+            @apply border-b border-gray;
+        }
+
+        &-title {
+            width: 13.125rem;
+        }
+
+        &-date {
+            width: 9.375rem;
+        }
+		&-totals {
+			width: 11.5rem;
+		}
+    }
+
+    .table-custom-new {
+        .field-header--uneditable {
+            h1 {
+                @apply xs:px-1 xs:py-1;
+            }
+        }
+
+        .report-table--tbody {
+            @apply h-8.2 lg:h-10;
+        }
+    }
+
+	.text-align-left  {
+		@apply text-left #{!important};
+	}
+}

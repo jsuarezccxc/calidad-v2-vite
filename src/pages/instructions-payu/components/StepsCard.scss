@@ -1,0 +1,18 @@
+.steps-card {
+    @apply shadow-templateDesign flex bg-white items-center justify-between rounded-lg mb-4 pr-4.5 pl-7.3 cursor-pointer;
+    width: 36.75rem;
+    height: 4.25rem;
+
+    @media (max-width: 48rem) {
+        @apply w-auto #{!important};
+        height: 6rem !important;
+
+        p {
+            width: 10.5rem !important; 
+        }
+    }
+
+    &__icon {
+        width: 39.1875rem;
+    }
+}

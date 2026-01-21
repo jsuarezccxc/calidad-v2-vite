@@ -1,0 +1,71 @@
+.database-employees {
+	@apply w-full flex flex-col xs:px-2;
+
+	.filter-columns {
+		@apply flex justify-end h-full;
+		width: 14.3125rem;
+
+		@media (max-width: 48rem) {
+			width: 100%;
+		}
+	}
+
+	.header-database-employees {
+		@apply md:h-10 xs:h-auto;
+
+		.w-col-header {
+			.container__tooltip {
+				@apply flex flex-row;
+
+				.tooltip-w {
+					width: 1.125rem;
+					height: 1.125rem;
+				}
+
+				p {
+					@apply xs:min-h-7.5 text-sm leading-4 font-allerbold text-left xs:p-0 xs:text-tiny text-blue m-auto;
+				}
+			}
+			
+			&:nth-child(1) {
+				width: 2.5625rem;
+			}
+			&:nth-child(2) {
+				width: 9.8125rem;
+			}
+			&:nth-child(3), &:nth-child(5) {
+				width: 5.5625rem;
+			}
+			&:nth-child(4) {
+				width: 5.875rem;
+			}
+			&:nth-child(6) {
+				width: 5.8125rem;
+			}
+			&:nth-child(7) {
+				width: 6.625rem;
+			}
+			&:nth-child(8) {
+				width: 7rem;
+			}
+			&:nth-child(9) {
+				width: 6.125rem;
+			}
+			&:nth-child(10) {
+				width: 5.3125rem;
+			}
+		}
+	}
+
+	.total__container {
+		@apply flex flex-row border-b-1 border-gray max-w-max mt-10;
+
+		.total--text {
+			@apply flex px-2 py-3 text-sm text-left bg-green-bgLight text-blue font-allerbold w-53;
+		}
+
+		.total--number {
+			@apply px-2 py-3 text-sm text-left bg-white text-gray w-32;
+		}
+	}
+}

@@ -1,0 +1,67 @@
+.domains {
+	@apply flex flex-col;
+
+	.space--blank {
+		width: 2.5rem;
+		height: 2.5rem;
+	}
+
+	&__header {
+		@apply flex flex-row justify-center items-center;
+
+		.header--item {
+			@apply flex justify-center items-center py-3 px-2 border-b-1 border-gray;
+			background: rgba(0, 169, 157, 0.15);
+			min-width: 15.9375rem;
+
+			.title {
+				@apply text-sm text-blue font-allerbold;
+			}
+		}
+	}
+
+	&__body {
+		@apply flex flex-col justify-center items-center;
+
+		.body--item {
+			@apply flex flex-row justify-center items-center;
+
+			&:nth-child(even) {
+				background: rgba(244, 244, 244, 1);
+			}
+
+			.name__container {
+				@apply flex justify-start items-center py-3 px-2 border-b-1 border-gray;
+				min-width: 15.9375rem;
+
+				&--domain {
+					@apply text-sm text-gray font-normal w-full;
+				}
+			}
+
+			.icon__container {
+				@apply flex justify-center items-center py-3 px-2 bg-white relative;
+
+				@media (max-width: 48rem) {
+					@apply pr-0;
+				}
+
+				.icon--copy {
+					@apply cursor-pointer;
+					width: 1.375rem;
+					height: 1.375rem;
+				}
+
+				.copy--text {
+					@apply absolute text-sm font-aller font-normal text-gray ml-2;
+					left: 1.75rem;
+
+					@media (max-width: 48rem) {
+						@apply bottom-0 ml-0;
+						left: -0.25rem;
+					}
+				}
+			}
+		}
+	}
+}

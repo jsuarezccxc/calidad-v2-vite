@@ -1,0 +1,172 @@
+$color-shadow: rgba(0, 0, 0, 0.25);
+
+.header {
+	&__container {
+		 @apply h-17.5 flex justify-between items-center px-2.5 bg-white;
+		 
+		width: 80rem;
+	    box-shadow: 0 0.25rem 0.25rem 0 $color-shadow;
+		margin: 0;
+
+		&.preview-mode {
+			position: absolute !important;
+			width: 100% !important;
+			max-width: 80rem;
+			overflow-x: hidden;
+			
+			&.header-mobile {
+				width: 22.75rem !important;
+				max-width: 22.75rem;
+				height: 2.875rem !important;
+			}
+		}
+	}
+   
+
+    &__social-networks {
+        @apply flex mr-4;
+
+        .icon {
+            @apply mr-5;
+        }
+    }
+
+    &__link {
+        &-item {
+            @apply text-center cursor-pointer text-blue;
+
+            width: 4.5575rem;
+        }
+
+        &-tooltip-item {
+            @apply absolute bg-gray-neutral rounded-lg text-blue text-tiny w-full min-w-max h-8.2 hidden leading-4;
+
+            padding: 0.46875rem 0.78125rem;
+            top: 4.2rem;
+        }
+
+        &-item:hover ~ &-tooltip-item {
+            @apply block xs:hidden;
+        }
+    }
+
+    &__see-more {
+        @apply relative mr-7.3;
+
+        &-button {
+            @apply flex text-center cursor-pointer text-blue w-full;
+
+            width: 6rem;
+        }
+
+        &-links {
+            @apply hidden cursor-pointer absolute bg-white;
+
+            width: 11.75rem;
+            box-shadow: 0.125rem 0.125rem 0.25rem 0 $color-shadow;
+
+            &.active {
+                @apply block;
+            }
+        }
+
+        &-link {
+            @apply text-center w-full flex flex-col items-center justify-center hover:bg-blue hover:text-white;
+
+            height: 2.063rem;
+
+            &-item {
+                @apply border-b border-gray h-full flex items-center justify-center hover:border-transparent text-sm text-blue hover:text-white;
+
+                width: 10.5rem;
+            }
+        }
+    }
+
+    &-contact {
+        @apply text-white rounded-lg bg-blue py-2.5 px-5 mr-4.5;
+    }
+
+    &__logo {
+        @apply  flex items-center justify-center;
+
+        &-text {
+            @apply text-xl font-bold text-blue font-allerbold;
+        }
+
+        .preview-mode & {
+            max-width: 19rem;
+            overflow: hidden;
+            
+            img {
+                max-width: 100%;
+                height: auto;
+                object-fit: contain;
+            }
+        }
+
+        .preview-mode.header-mobile & {
+            max-width: 8rem;
+        }
+    }
+
+    &__links {
+        @apply h-15 flex items-center justify-evenly w-max;
+
+        max-width: 33.438rem;
+        column-gap: 0.9694rem;
+    }
+
+    &__session {
+        @apply h-15 text-base text-blue flex items-center justify-between;
+
+        &-user {
+            @apply rounded-full flex items-center justify-center bg-blue text-white text-xl font-allerbold font-bold;
+
+            width: 2.188rem;
+            height: 2.188rem;
+        }
+    }
+
+    &-two {
+        &__links {
+            @apply h-15 flex items-center justify-evenly;
+
+            width: 27.25rem;
+        }
+    }
+
+    &-mobile {
+		height: 2.875rem;
+        &__logo {
+
+            &-text {
+                @apply text-tiny w-14;
+
+                line-height: 1rem;
+                word-wrap: break-word;
+            }
+        }
+
+        &-contact {
+            @apply text-tiny p-0 mr-2;
+
+            width: 5.313rem;
+            height: 1.438rem;
+        }
+
+        &__social-networks {
+            @apply m-0;
+
+            .icon {
+                @apply w-5 h-5 mr-2;
+            }
+        }
+    }
+
+    &__pages {
+        @apply flex items-center;
+
+        column-gap: 0.9694rem;
+    }
+}

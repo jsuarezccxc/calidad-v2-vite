@@ -1,0 +1,7 @@
+.custom-footer-button {
+	@apply flex items-center justify-end font-allerbold;
+
+	&__button-center {
+		@apply inline-flex items-center justify-center px-2.75 py-0.5;
+	}
+}

@@ -1,0 +1,132 @@
+$shadow-green: #5B7EF8;
+$shadow-blue: #00A99D;
+$shadow-purple: #0B2C4C;
+$shadow-blueberry: #81319B;
+
+@mixin card-shadow($color) {
+    box-shadow: 0 0.25rem 0.625rem 0 $color;
+}
+
+.icon--info {
+    width: 1.375rem;
+    height: 1.375rem;
+}
+
+.plans {
+    .website {
+        .card {
+            @apply bg-white font-poppins;
+
+            width: 12.8125rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.2056rem 0.2056rem 0 rgba(0, 171, 158, 0.25);
+            height: 15.1875rem;
+
+            &__header {
+				@apply flex items-center justify-center;
+				gap: 0.1563rem;
+            }
+
+			&__recomend {
+				@apply  h-8 px-2 py-1 text-center font-poppinsbold text-white;
+				background: linear-gradient(180deg, #1280C3 0%, #00AB9E 100%);
+				border-top-left-radius: 0.5rem;
+				border-top-right-radius: 0.5rem;
+			}
+
+            &__plan {
+                @apply font-poppinsbold text-blue;
+                
+                .icon--info-free {
+                    width: 1.1875rem;
+                    height: 1.2131rem;
+                }
+            }
+
+            &__payment-period {
+                @apply text-blue font-poppinsbold text-center block mt-2;
+
+                font-size: 0.8331rem;
+                margin-bottom: 1.0419rem;
+            }
+
+            &__body {
+                @apply mt-7 flex flex-col justify-center items-center;
+            }
+
+            &__price {
+                @apply text-blue font-poppinsbold text-center mt-4 block items-center;
+
+                font-weight: 800;
+                font-size: 2rem;
+            }
+
+            &__button {
+                width: 9.375rem;
+                height: 2rem;
+            }
+        }
+
+        .details {
+            @apply hidden gap-4.5 justify-center flex-wrap items-start h-0;
+
+            transition: .4s all;
+
+            &--active {
+                @apply flex gap-4.5;
+
+                height: 56.25rem;
+
+                @media (max-width: 37.5rem) {
+                    height: 225rem;
+                }
+            }
+        }
+
+        .detail {
+            @apply bg-white py-7 px-2.5 flex flex-col gap-y-4.5;
+
+            width: 11.125rem;
+            border-radius: 1rem;
+
+            .icon--detail {
+                width: 1.125rem;
+                height: 1.125rem
+            }
+
+            &__description {
+                @apply flex items-start text-sm;
+
+                gap: 0.6875rem;
+
+                &--disabled {
+                    color: #CBCDD6;
+                }
+            }
+
+            &--green {
+                @include card-shadow($shadow-green);
+            }
+
+            &--blue {
+                @include card-shadow($shadow-blue);
+            }
+
+            &--purple {
+                @include card-shadow($shadow-purple);
+            }
+
+            &--blueberry {
+                @include card-shadow($shadow-blueberry);
+            }
+        }
+    }
+}
+
+.desing-padding {
+	padding: 2.375rem 0.875rem 1.75rem 0.875rem;
+}
+
+.premium-padding {
+	padding: 0 0 1.75rem 0;
+}

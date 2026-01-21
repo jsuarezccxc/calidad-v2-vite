@@ -1,0 +1,66 @@
+.notification-center {
+	@apply flex flex-col justify-between h-full;
+
+	.title--style {
+		@apply font-allerbold text-center text-blue;
+		font-size: 1.625rem;
+	}
+
+	.width__download-container {
+		@media (min-width: 80.0625rem) {
+			max-width: 60.25rem;
+		}
+	}
+
+	.field-body--uneditable {
+		* {
+			@apply text-gray;
+		}
+	}
+
+	.terms-modal {
+		width: 31.25rem;
+		&__content {
+			@media (max-width: 37.5rem) {
+				width: 80%;
+			}
+		}
+	}
+
+	.padding-x-0-3 {
+		padding-left: 0.019rem;
+		padding-right: 0.019rem;
+	}
+
+	.business-container {
+		@apply relative w-45.2;
+		background-color: transparent !important;
+		border: none !important;
+	}
+
+	.max-w--columns {
+		max-width: 9.375rem;
+		min-width: 9.375rem;
+
+		@media (max-width: 48rem) {
+			@apply xs:pt-3 xs:pl-2;
+
+			max-width: 9.375rem;
+			min-width: 9.375rem;
+		}
+	}
+
+	.notification-field {
+		@apply xs:pt-1 xs:h-7;
+		width: 41.5rem;
+		max-width: 41.5rem;
+	}
+}
+
+.double-select-text{
+	@apply text-tiny leading-3;
+}
+
+.initial-select {
+	@apply border border-gray-400;
+}

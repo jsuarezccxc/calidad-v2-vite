@@ -1,0 +1,8 @@
+
+.input-radio{
+	min-width: 12.125rem !important;
+}
+
+.required-field {
+	@apply border-1 border-l-0.5 border-r-0.5 border-t-0.5 border-b-1.1 border-purple-700;
+}

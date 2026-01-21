@@ -1,0 +1,21 @@
+.informationCardLanding {
+	@apply text-center lg:w-39 lg:h-28 bg-gray-light shadow-template xs:h-24 xs:w-32 md:h-24 md:w-30 xs:pr-2 xs:pl-2;
+
+	&__title{
+		line-height: .90rem;
+		@apply mt-2 lg:font-aller xs:text-ntiny md:text-ntiny lg:text-mtiny;
+	}
+
+	&__subtitle{
+		@apply font-aller text-green text-ntiny;
+	}
+
+	&__information{
+		font-size: 1.625rem;
+		@apply text-purple font-aller xs:text-sm;
+	}
+	
+	&__date {
+		@apply text-purple font-aller text-xntiny;
+	}
+}

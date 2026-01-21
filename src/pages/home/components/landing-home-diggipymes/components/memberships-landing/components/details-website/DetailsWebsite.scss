@@ -1,0 +1,56 @@
+$shadow-purple: #0B2C4C;
+$shadow-blueberry: #81319B;
+
+@mixin card-shadow($color) {
+    box-shadow: 0 0.25rem 0.625rem 0 $color;
+}
+
+.details-website {
+	@apply hidden gap-4.5 justify-center flex-wrap items-start h-0;
+
+	transition: .4s all;
+
+	&--active {
+		@apply flex gap-4.5 my-4.5;
+
+		height: auto;
+		max-height: 45.125rem;
+
+		@media (max-width: 48rem) {
+			height: auto;
+			max-height: max-content;
+		}
+	}
+}
+
+.detail-website {
+	@apply bg-white p-4 flex flex-col gap-y-4.5;
+
+	height: auto;
+	max-height: 45.125rem;
+	width: 18.125rem;
+	border-radius: 1rem;
+
+	&__icon {
+		width: 1.0625rem;
+		height: 1.0625rem
+	}
+
+	&__description {
+		@apply flex items-start text-sm;
+
+		gap: 0.6875rem;
+
+		&--disabled {
+			color: #CBCDD6;
+		}
+	}
+
+	&--purple {
+		@include card-shadow($shadow-purple);
+	}
+
+	&--blueberry {
+		@include card-shadow($shadow-blueberry);
+	}
+}

@@ -1,0 +1,17 @@
+.card-method {
+	@apply flex flex-col w-full bg-white p-4.5 rounded-lg gap-y-4.5;
+	height: 9.9375rem;
+	box-shadow: 0rem 0.25rem 0.25rem 0rem #00000040;
+
+	&--title {
+		@apply text-base text-green font-normal m-0;
+	}
+
+	.option {
+		@apply flex flex-col gap-y-2;
+		
+		&--title {
+			@apply text-base text-gray-dark font-normal m-0;
+		}
+	}
+}

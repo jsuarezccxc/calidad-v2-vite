@@ -1,0 +1,144 @@
+@mixin field-width($width) {
+    width: $width !important;
+    min-width: $width !important;
+    max-width: $width !important;
+}
+
+@mixin field-height($height) {
+    height: $height !important;
+    min-height: $height !important;
+
+    @media (max-width: 37.5rem) {
+        height: 1.875rem !important;
+        min-height: 1.875rem !important;
+        max-height: 1.875rem !important;
+    }
+}
+
+.shipping-cost {
+    @apply xs:px-2;
+
+    &__destination-field {
+        @include field-width(36.5rem);
+    }
+
+    &__place-field {
+        @media (max-width: 80rem) {
+            @include field-width(18.25rem);
+        }
+    }
+
+    &__time-field {
+        line-height: 0.749rem !important;
+
+        @include field-width(10.125rem);
+    }
+
+    &__cost-field {
+        @include field-width(8.625rem);
+    }
+
+    &__product-field {
+        @include field-width(18.875rem);
+    }
+
+    &__field-title {
+        @apply font-allerbold text-blue text-tiny lg:text-sm leading-4 px-2;
+
+        @include field-height(2.5rem);
+    }
+
+    &__check-field {
+        width: 1.124rem;
+    }
+
+    &__check {
+        @apply w-4.5 h-4.5 border top-4;
+
+        border-radius: 0.25rem;
+        margin-right: 0.625rem !important;
+    }
+
+    &__link {
+        @apply ml-3 text-left underline cursor-pointer text-tiny lg:text-sm text-green w-max;
+    }
+
+    &__add-item {
+        @apply underline cursor-pointer text-green mt-2 w-max;
+    }
+
+    &__disabled-link {
+        @apply text-gray cursor-default pointer-events-none;
+    }
+
+    &__free-shipping {
+        @apply flex overflow-x-auto h-10 w-full lg:w-max;
+
+        &-title {
+            @apply border  flex items-center justify-center flex-1 border-r text-tiny lg:text-sm font-allerbold text-blue border-gray;
+
+            background-color: rgba(0, 169, 157, 0.15);
+
+            @include field-width(19.8125rem);
+            @include field-height(2.5rem);
+        }
+
+        &-value {
+            @apply flex items-center justify-center flex-1 border border-l-0 border-gray relative;
+
+            @include field-width(19.8125rem);
+            @include field-height(2.5rem);
+
+            .field-money {
+                @apply inset-0 m-auto;
+
+                &__input {
+                    height: 1.8rem !important;
+                }
+            }
+        }
+    }
+
+    .field-height {
+        @include field-height(2.5rem);
+    }
+
+    .custom-field-height {
+        height: 2.45rem !important;
+        min-height: 2.45rem !important;
+
+        @media (max-width: 37.5rem) {
+            height: 1.80rem !important;
+            min-height: 1.80rem !important;
+            max-height: 1.80rem !important;
+        }
+    }
+
+    .select-search {
+        @apply z-50;
+
+        &__value {
+            @apply text-tiny lg:text-sm leading-4 px-2;
+        }
+
+        &__input {
+            &::placeholder {
+                @apply text-gray-dark;
+            }
+        }
+    }
+
+    &__container-modal {
+        max-width: 26.5625rem !important;
+        min-width: 26.5625rem !important;
+        width: 26.5625rem !important;
+        padding-top: 1.625rem !important;
+        padding-bottom: 1.625rem !important;
+    }
+
+    &__title {
+        @apply mb-2 text-xl font-bold text-blue font-allerbold;
+
+        height: 1.6875rem;
+    }
+}

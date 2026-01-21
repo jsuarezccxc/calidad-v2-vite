@@ -1,0 +1,34 @@
+@Library('mySharedLib') _
+
+// Ramas y nombre de la maquina para credenciales automatizadas
+def environments = [
+    'calidad-viejo'     : 'calidad-v1',
+    'master'            : 'production-v1',
+    'calidad'           : 'calidad-v2',
+    'main'              : 'production-v2'
+]
+
+// Nombre del repositorio en git
+def repoName = 'famiefi-front'
+
+if (!environments.containsKey(env.BRANCH_NAME)) {
+    error "La rama '${env.BRANCH_NAME}' no tiene un entorno configurado en el mapa 'environments'."
+}
+
+// Definición de ambiente segun la rama
+def environment = environments[env.BRANCH_NAME]
+
+// Credenciales en Jenkins
+def credentialParams = [
+    ec2_credentials:    "${environment}-ec2-ssh-${repoName}",           // Nombre de la credencial delarada en Jenkins para el ssh 
+    id_instance:        "${environment}-id-instance-${repoName}",       // Nombre de la credencial delarada en Jenkins para el id de la instancia de AWS 
+    path_deployment:    "${environment}-path-deployment-${repoName}",   // Nombre de la credencial delarada en Jenkins para la ruta donde se va a desplegar dentro del servidor
+    env_secret_file_id:  "${repoName}-${environment}-env"               // Nombres de la credencial declarada en Jenkins para determinar el archivo .env a utilizar
+]
+
+// Otros parametros que no son credenciales en Jenkins
+def otherParams = [
+    folder_output:      'build'                                         // Nombre de la carpeta de salida donde quedan los archivos compilados del front
+]
+
+deployFrontend(credentialParams + otherParams)

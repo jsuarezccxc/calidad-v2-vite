@@ -1,0 +1,61 @@
+.purchase-invoice-notes {
+	@apply flex flex-col gap-4.5 w-full;
+
+	&__note-form-card {
+		@apply w-full bg-white shadow-templateDesign px-7 py-4.5 flex flex-col gap-4.5;
+	}
+
+	&__title-form {
+		@apply text-base text-blue font-allerbold;
+	}
+
+	.input-style {
+		@apply w-73 xs:w-full;
+
+		&__large {
+			@apply w-151.50 xs:w-full;
+		}
+	}
+
+	.input-textarea {
+		width: 17.8438rem;
+
+		&--height {
+			@apply h-17.1;
+		}
+	}
+
+	.main-form, .note-form {
+		@apply flex flex-col gap-y-4.5;
+
+		&__group {
+			@apply flex xs:flex-col gap-y-4.5 gap-x-7;
+		}
+
+		&__input-date {
+			@apply w-38 xs:w-full;
+		}
+
+		&__collapse {
+			@apply mb-0;
+		}
+	}
+
+	.margin-0 {
+		@apply m-0;
+	}
+
+	.totals-section {
+		@apply flex w-full xs:flex-col gap-7;
+
+		&__group-textarea {
+			@apply flex gap-x-9 gap-y-4.5 xs:flex-col;
+		}
+	}
+
+	@media screen and (min-width: 3.125rem) and (max-width: 47.938rem) {
+		.input-textarea {
+			width: 100%;
+		}		
+	}
+}

@@ -1,0 +1,7 @@
+.custom-tooltip-line-chart {
+	@apply flex items-center justify-center p-2 bg-black border rounded shadow-lg;
+
+	& p {
+		@apply text-white text-tiny;
+	}
+}

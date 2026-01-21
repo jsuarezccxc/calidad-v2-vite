@@ -1,0 +1,37 @@
+.container-contact-form{
+	@apply bg-white rounded p-7 shadow-card w-full mt-4.5 mx-auto;
+	max-width: 59.375rem;
+	min-height: 11.438rem;
+}
+.contact-form-company{
+	column-gap: 1.5rem;
+	row-gap: 1rem;
+	&__input{
+		width: 17.625rem;
+		background-color: #fff;
+	}
+	&__input-dv{
+		width: 2.875rem;
+		background-color: #f4f4f4;
+		border: none;
+	}
+	&__input-disabled{
+		width: 17.625rem;
+		background-color: #f4f4f4;
+		border: none;
+	}
+}
+
+@media (max-width: 48rem){
+	.contact-form-company{
+	&__input{
+		width: 100%;
+	}
+	&__input-dv{
+		width: 100%;
+	}
+	&__input-disabled{
+		width: 100%;
+	}
+}
+}

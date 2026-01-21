@@ -1,0 +1,40 @@
+.document-correction-ccxc {
+	@apply h-full flex flex-col mb-0;
+
+	.correction-table {
+		@apply w-max;
+
+		.header-document-correction {
+			@apply xs:p-0.25;
+			
+			&__document-number {
+				width: 10.3125rem;
+			}
+			&__error-date {
+				width: 9.3125rem;
+			}
+			&__error-description {
+				width: 31.125rem;
+			}
+			&__time {
+				width: 8.6875rem;
+			}
+		}
+
+		.body-row-register {
+			border-bottom: 0.0625rem solid #AEAEAF;
+			&:first-child {
+				border-top: 0.0625rem solid #AEAEAF;
+			}
+			&:nth-child(odd) {
+				background-color: #ffffff !important;
+			}
+			&:nth-child(even) {
+				background-color: #f4f4f4 !important;
+			}
+			* {
+				color: #AEAEAF;
+			}
+		}
+	}
+}

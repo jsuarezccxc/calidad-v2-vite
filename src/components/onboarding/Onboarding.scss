@@ -1,0 +1,32 @@
+.onboarding {
+    @apply justify-between;
+
+    &__information {
+        @apply flex flex-col gap-y-4.5 lg:mb-7;
+    }
+
+    &__steps {
+        @apply bg-white py-4.5 px-7 rounded h-auto w-11/12 m-auto transition-all duration-300;
+
+        &--hidden {
+            @apply opacity-0 max-h-0 overflow-hidden;
+        }
+
+        &--visible {
+            @apply opacity-100;
+        }
+    }
+
+    &__skip {
+        @apply text-gray-dark font-aller text-base mt-6;
+    }
+
+    &__skip--link {
+        @apply text-purple font-aller text-base cursor-pointer;
+    }
+
+	&__banner-container {
+		width: 964px;
+		height: 39px;
+	}
+}
