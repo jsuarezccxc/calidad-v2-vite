@@ -1,0 +1,50 @@
+@import "../../../../../index.scss";
+
+.quote-generate {
+    &__withholding-table {
+        @media (min-width: 62.5rem) {
+            @include field-width(38.0625rem);
+        }
+
+        @media (max-width: 22.5rem) {
+            @include field-width(16.5rem);
+        }
+
+        .table-row {
+            @apply bg-white flex items-center justify-start border-b border-gray p-3 py-3.5;
+            height: 1.875rem;
+        }
+
+        .table-header {
+            @apply font-allerbold text-sm text-blue leading-stiny;
+        }
+
+        .table-cell {
+            @apply font-aller text-sm text-gray leading-stiny;
+
+            &--disabled {
+                @apply text-gray-smoke;
+            }
+        }
+
+        &--select {
+            @apply text-left px-0 m-0 text-gray-dark font-aller text-tiny;
+
+            @media (min-width: 80rem) {
+                @apply text-sm;
+            }
+        }
+
+        &--text-left {
+            @apply text-left;
+        }
+
+        &--text-center {
+            @apply text-center;
+        }
+
+        &--size-header {
+            @include field-width(9.5156rem);
+        }
+    }
+}

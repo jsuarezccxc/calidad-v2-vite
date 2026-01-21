@@ -1,0 +1,245 @@
+@import "../../../../../index.scss";
+
+.quote-generate {
+    &__billing-information {
+        @apply bg-white rounded py-3.5 px-5 w-full;
+
+        &--main-container {
+            @apply flex flex-col gap-7 w-full;
+        }
+
+        &--lower-section {
+            @apply flex flex-col justify-center mt-6;
+            gap: 2.375rem;
+
+            @media (min-width: 62.5rem) {
+              @apply flex-row;
+            }
+
+            @media (max-width: 23.4375rem) {
+              width: 16.5rem;
+            }
+        }
+
+        &--shipping-cost {
+            @apply outline-none rounded border border-gray-dark bg-white text-gray-dark text-sm px-2 py-1;
+            @include field-width(6.625rem);
+            height: 1.1875rem;
+
+            &--disabled{
+                @apply outline-none rounded border border-gray-dark bg-gray-light text-gray-dark text-sm px-2 py-1;
+                @include field-width(6.625rem);
+                height: 1.1875rem;
+            }
+
+            input {
+                @apply m-0 p-0 w-full text-left outline-none border-0 bg-transparent h-full;
+                color: inherit;
+            }
+        }
+
+        &--text-area {
+            width: 17.53125rem;
+
+            textarea {
+                @apply p-3 text-sm;
+                height: 2rem !important;
+                min-height: 2rem !important;
+            }
+        }
+
+        &--container {
+            @apply w-full overflow-visible;
+            min-height: 6rem;
+            max-width: 75rem;
+
+            .flex.flex-col {
+                @apply w-full;
+                min-height: inherit;
+
+                @media (min-width: 80rem) {
+                    @apply flex-row items-start justify-between gap-5 #{!important};
+                }
+
+                @media (min-width: 64rem) {
+                    @apply flex-row items-start justify-between gap-5 #{!important};
+                }
+            }
+
+            @media (min-width: 64rem) {
+                @apply w-full flex flex-row items-start #{!important};
+                max-width: 75rem !important;
+                min-height: 6rem;
+            }
+        }
+    }
+}
+
+.billing-information {
+    @apply bg-white py-4.5 px-7 rounded;
+
+    &__text-area {
+        width: 17.53125rem;
+
+        textarea {
+            @apply p-3 text-sm;
+            height: 4.3125rem !important;
+            min-height: 4.3125rem !important;
+        }
+    }
+
+    &__shipping-cost {
+        @apply text-sm outline-none border border-gray-dark rounded pl-0.5 m-0;
+        width: 6.625rem;
+        height: 1.1875rem;
+
+        &--disabled {
+            @apply bg-gray-light text-sm outline-none border border-gray-dark rounded pl-0.5;
+            width: 6.625rem;
+            height: 1.1875rem;
+        }
+
+        input {
+            @apply m-0 p-0 w-full text-left;
+            height: 1.1875rem;
+        }
+    }
+
+    &__lower-section {
+        @apply flex flex-col justify-center mt-4.5;
+        gap: 2.375rem;
+
+        @media (min-width: 62.5rem) {
+          @apply flex-row;
+        }
+
+        @media (max-width: 23.4375rem) {
+          width: 16.5rem;
+        }
+    }
+}
+
+.quote-subtotals {
+    &__container {
+        @apply flex flex-col gap-0.5;
+        min-width: 18.75rem;
+    }
+
+    &__row {
+        @apply flex items-start justify-start w-full;
+        gap: 1.125rem;
+        min-height: 1.25rem;
+    }
+
+    &__label {
+        @apply text-right font-aller text-base flex-shrink-0;
+        line-height: normal;
+        text-wrap: nowrap;
+
+        &--bold {
+            @apply font-allerbold;
+        }
+
+        &--regular {
+            @apply font-aller;
+        }
+    }
+
+    &__value {
+        @apply text-right font-aller text-base flex-shrink-0;
+        line-height: normal;
+        text-wrap: nowrap;
+
+        &--bold {
+            @apply font-allerbold;
+        }
+
+        &--regular {
+            @apply font-aller;
+        }
+    }
+}
+
+.table-total {
+    @apply flex flex-col text-sm gap-0;
+
+    &__container {
+        @apply flex flex-row justify-between items-center text-blue w-full #{!important};
+        min-height: 1rem;
+    }
+
+    &__label {
+        @apply text-sm text-blue m-0 p-0 flex-shrink-0 inline-block #{!important};
+        width: 9.8125rem;
+    }
+
+    &__value {
+        @apply text-sm text-blue m-0 p-0 text-right flex-1 inline-block #{!important};
+    }
+}
+
+.products-table {
+    @apply mt-4.5 overflow-x-scroll w-full #{!important};
+
+    &__icon {
+        @apply cursor-pointer w-4.5 h-4.5;
+        min-width: 1.125rem;
+    }
+
+    &__number, &__selector {
+        @include field-width(2.5rem);
+    }
+
+    &__sku {
+        @include field-width(15rem);
+    }
+
+    &__description {
+        @include field-width(8.75rem);
+    }
+
+    &__warehouse, &__batch, &__due-date, &__unit, &__discount-rate, &__discount {
+        @include field-width(7.5rem);
+    }
+
+    &__quantity, &__taxes {
+        @include field-width(7.1875rem);
+    }
+
+    &__unit-value {
+        @include field-width(7.8125rem);
+    }
+
+    &__select {
+        @apply w-full p-0 m-0 #{!important};
+
+        textarea {
+            @apply text-sm w-full p-0 m-0 #{!important};
+            line-height: 0.9375rem;
+
+            @media (max-width: 37.5rem) {
+                @apply text-xs;
+                line-height: 0.75rem;
+            }
+        }
+    }
+
+    .number-input-style {
+        @apply text-left lg:h-auto;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        @apply appearance-none m-0;
+    }
+
+    .table-title {
+        @apply text-tiny lg:text-sm font-allerbold text-blue px-1.5;
+        line-height: 0.875rem;
+    }
+
+    .table-text {
+        @apply text-tiny lg:text-sm text-gray-dark px-1.5;
+        line-height: 0.875rem;
+    }
+}

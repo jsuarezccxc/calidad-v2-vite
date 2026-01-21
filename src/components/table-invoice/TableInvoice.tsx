@@ -24,7 +24,6 @@ import { Paginator } from '@components/paginator';
 import { TableError } from '@components/table-error';
 import { COMMA } from '@components/electronic-invoice';
 import { SelectSearch } from '@components/select-search';
-import { NotFindElements } from '@components/not-find-elements';
 import { NumberFormatInput, PercentageFormatInput, Text, TextArea } from '@components/table-input';
 import { HeaderTableInvoice } from './components/header-table-invoice';
 import { ITableInvoiceProps, defaultPropsInputNumber } from '.';
@@ -436,7 +435,6 @@ export const TableInvoice: React.FC<ITableInvoiceProps> = ({
                             );
                         })}
                 </Table>
-                {!lengthGreaterThanZero(data) && <NotFindElements customText={DETAILS_INVOICE.NOT_ELEMENTS} withoutData />}
                 {data.length > ITEMS_PAGE && <Paginator {...paginator} />}
                 {messages.map((message, index) => (
                     <TableError key={index} customText={message} />

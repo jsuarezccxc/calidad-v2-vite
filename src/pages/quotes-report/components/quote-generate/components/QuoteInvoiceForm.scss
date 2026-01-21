@@ -1,0 +1,39 @@
+@import "../../../../../index.scss";
+
+.quote-generate {
+    &__invoice-form {
+        @apply mb-4.5;
+
+        &--select-search {
+            line-height: 0.6875rem;
+            max-height: 2rem;
+        }
+
+        &--group {
+            @apply flex flex-col lg:flex-row gap-4.5 lg:gap-7;
+        }
+
+        &__customer-button {
+            @apply underline cursor-pointer text-green font-aller text-base mt-2;
+
+            &:disabled {
+                @apply text-gray;
+            }
+        }
+    }
+}
+
+.quote-form-client-button {
+    @apply text-green text-base font-normal leading-4 underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    text-underline-position: from-font;
+
+    &:hover:not(:disabled) {
+        @apply text-green-dark;
+    }
+
+    &:disabled {
+        @apply text-gray cursor-not-allowed;
+    }
+}

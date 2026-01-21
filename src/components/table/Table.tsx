@@ -25,6 +25,7 @@ import { IError } from '@models/Error';
 import { RootState } from '@redux/rootReducer';
 import { getChecked, handleChecked } from '@utils/Checkboxs';
 import { getWordWrap } from '@utils/Text';
+import { generateId, ModuleApp, ActionElementType, ElementType } from '@utils/GenerateId';
 import { CITY_ID, ITableProps, ITdProps, NOT_APPLY, NA, IFieldTypeTextComponent } from '.';
 import './Table.scss';
 
