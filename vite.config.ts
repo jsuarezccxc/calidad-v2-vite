@@ -23,8 +23,8 @@ export default defineConfig(({ mode }) => {
     define: envDefine,
     plugins: [
     react({
-      // Use React 17 JSX transform
-      jsxRuntime: 'classic',
+      // Use React 18 JSX transform
+      jsxRuntime: 'automatic',
     }),
   ],
   resolve: {
@@ -68,6 +68,7 @@ export default defineConfig(({ mode }) => {
           'redux-vendor': ['redux', 'react-redux', 'redux-persist', 'redux-thunk'],
           'ui-vendor': ['@mui/material', '@emotion/react', '@emotion/styled'],
           'charts-vendor': ['recharts'],
+          'fullcalendar-vendor': ['@fullcalendar/react', '@fullcalendar/daygrid', '@fullcalendar/interaction', '@fullcalendar/timegrid'],
         },
       },
     },
@@ -105,6 +106,10 @@ export default defineConfig(({ mode }) => {
       'dayjs',
       'i18next',
       'react-i18next',
+      '@fullcalendar/react',
+      '@fullcalendar/daygrid',
+      '@fullcalendar/interaction',
+      '@fullcalendar/timegrid',
     ],
     // FullCalendar 6.x is now compatible with Vite
     exclude: [],
