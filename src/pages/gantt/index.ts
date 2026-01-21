@@ -1,4 +1,4 @@
-import { Task } from 'gantt-task-react';
+import { Task } from './components/GanttTypes';
 import { Section } from '@components/bread-crumb';
 import { Routes } from '@constants/Paths';
 import { getRoute, getRouteName } from '@utils/Paths';

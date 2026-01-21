@@ -1,6 +1,6 @@
 import React from 'react';
 import { ElementType, generateId, ModuleApp, ActionElementType } from '@utils/GenerateId';
-import { VIEW_MODES, IViewModesProps } from '.';
+import { VIEW_MODES, IViewModesProps } from './index';
 
 export const ViewModes: React.FC<IViewModesProps> = ({ viewMode, setViewMode }) => (
     <div className="hidden h-10 text-white cursor-pointer xl:flex">

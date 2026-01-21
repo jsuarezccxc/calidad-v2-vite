@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Task } from 'gantt-task-react';
+import { Task } from './GanttTypes';
 import { getDateFormat } from '@utils/Date';
 
 export const TaskListTable: React.FC<{ tasks: Task[] }> = ({ tasks }) => (

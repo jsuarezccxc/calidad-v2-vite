@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Task } from 'gantt-task-react';
+import { Task } from './GanttTypes';
 import { getDateFormat, SubtractDays } from '@utils/Date';
 
 export const TaskTooltip: React.FC<{ task: Task }> = ({ task }) => {

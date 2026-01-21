@@ -1,4 +1,4 @@
-import { Task } from 'gantt-task-react';
+import { Task } from '@pages/gantt/components/GanttTypes';
 import { ActionKeys, GanttActions } from './types';
 
 interface ICalendar {

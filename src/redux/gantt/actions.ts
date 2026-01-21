@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { Task } from 'gantt-task-react';
+import { Task } from '@pages/gantt/components/GanttTypes';
 import { RootState } from '@redux/rootReducer';
 import { urls } from '@api/urls';
 import { apiDeleteBinnacle, apiGetBinnacle, apiPostBinnacle, apiPutBinnacle } from '@api/binnacle';

@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { Gantt as GanttDiagram, Task, ViewMode } from 'gantt-task-react';
-import 'gantt-task-react/dist/index.css';
+import { GanttChart, Task, ViewMode } from './components';
 import { TitleButtons } from '@constants/Buttons';
 import { Routes } from '@constants/Paths';
 import { LANGUAGE_KEY } from '@constants/Translate';
@@ -126,7 +125,7 @@ const Gantt: React.FC = () => {
                     <ViewModes setViewMode={setViewMode} viewMode={viewMode} />
                 </div>
                 {!!tasks.length && (
-                    <GanttDiagram
+                    <GanttChart
                         columnWidth={viewMode === ViewMode.Year ? yearColumn : otherColumn}
                         tasks={tasks}
                         {...(!disabledInputs && {

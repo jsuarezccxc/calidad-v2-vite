@@ -1,8 +1,9 @@
 import React from 'react';
-import { Task } from 'gantt-task-react';
-import { ViewMode } from 'gantt-task-react';
 import styled from '@emotion/styled';
+import { Task, ViewMode } from './GanttTypes';
 
+export * from './GanttTypes';
+export * from './GanttChart';
 export * from './Slider';
 export * from './TaskForm';
 export * from './TaskListHeader';

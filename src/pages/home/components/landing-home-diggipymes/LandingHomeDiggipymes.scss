@@ -1,6 +1,6 @@
 .landing {
 	&--section-one{
-		background-image: url("/assets/images/landing/section-one-background.svg");
+		background-image: url("../../../../assets/images/landing/section-one-background.svg");
 		background-size: cover;
 		background-repeat: no-repeat;
 		display: flex;
@@ -9,7 +9,7 @@
 	}
 
 	&--section-contact{
-		background-image: url("/assets/images/landing/contact-background.svg");
+		background-image: url("../../../../assets/images/landing/contact-background.svg");
 		background-size: cover;
 		background-repeat: no-repeat;
 	}

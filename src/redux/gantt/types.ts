@@ -1,4 +1,4 @@
-import { Task } from 'gantt-task-react';
+import { Task } from '@pages/gantt/components/GanttTypes';
 
 export enum ActionKeys {
     SET_TASKS = 'SET_TASKS',
