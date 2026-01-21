@@ -21,7 +21,7 @@ export const PurchaseInvoiceCards: React.FC<ICardsProps> = ({ invoiceData, compa
             invoiceData?.prefix_id,
             isEdit
                 ? invoiceData.number || FIRST_PURCHASE_INVOICE
-                : (last_consecutive_number || number) + FIRST_PURCHASE_INVOICE ?? FIRST_PURCHASE_INVOICE,
+                : ((last_consecutive_number || number) + FIRST_PURCHASE_INVOICE) || FIRST_PURCHASE_INVOICE,
         ];
     }, [invoiceData, storePrefix, isEdit]);
 

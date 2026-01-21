@@ -51,13 +51,13 @@ export const ProductsTable: React.FC<IProductTableProps> = ({
 
     const reCalculateTaxes = (taxes: IGenericRecord, unitCost: number, quantity: number): IGenericRecord[] => {
         const taxCalculations = {
-            [eTaxes.IVA]: (tax: IGenericRecord): number => (parseFloat(tax.tax_rate) / HUNDRED) * unitCost ?? ZERO,
-            [eTaxes.ICUI]: (tax: IGenericRecord): number => tax.tax_rate * unitCost ?? ZERO,
-            [eTaxes.INC]: (tax: IGenericRecord): number => tax.tax_rate * unitCost ?? ZERO,
+            [eTaxes.IVA]: (tax: IGenericRecord): number => ((parseFloat(tax.tax_rate) / HUNDRED) * unitCost) || ZERO,
+            [eTaxes.ICUI]: (tax: IGenericRecord): number => (tax.tax_rate * unitCost) || ZERO,
+            [eTaxes.INC]: (tax: IGenericRecord): number => (tax.tax_rate * unitCost) || ZERO,
             [eTaxes.IBUA]: (tax: IGenericRecord): number =>
-                (tax.unit_measure_content === MILLILITER
+                ((tax.unit_measure_content === MILLILITER
                     ? (tax.unit_measure_milliliters / HUNDRED) * tax.tax_rate
-                    : (tax.unit_measure_milliliters / THOUSAND) * TEN * tax.tax_rate) * stringToFloat(quantity) ?? ZERO,
+                    : (tax.unit_measure_milliliters / THOUSAND) * TEN * tax.tax_rate) * stringToFloat(quantity)) || ZERO,
         };
 
         return taxes.map((tax: IGenericRecord) => ({
