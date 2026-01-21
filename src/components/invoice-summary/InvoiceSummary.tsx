@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuid } from 'uuid';
+import FileSaver from 'file-saver';
 import { RootState } from '@redux/rootReducer';
 import { getInvoice } from '@redux/rejected-invoices/actions';
 import { downloadXml } from '@redux/electronic-invoice/actions';
@@ -114,7 +115,12 @@ const InvoiceSummary: React.FC = () => {
     };
 
     const download = async (): Promise<void> => {
-        await dispatch(downloadXml(invoice.file_name_extension, false, invoice.xml_token));
+        if (invoice?.xml_url) {
+            const [fileName] = invoice?.file_name_extension?.split('.');
+            FileSaver.saveAs(invoice.xml_url, `${fileName}.xml`);
+        } else {
+            await dispatch(downloadXml(invoice.file_name_extension, false, invoice.xml_token));
+        }
     };
 
     const checkInputs = (): IGenericRecord => {

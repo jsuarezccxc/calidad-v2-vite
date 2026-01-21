@@ -286,7 +286,7 @@ const getPSEParameters = (data: IGenericRecord): IGenericRecord => ({
  * @returns IGenericRecord
  */
 const getCardParameters = (data: IGenericRecord, user: IGenericRecord): IGenericRecord => ({
-    expirationDate: getDateFromUnix(data.card_expiration, 'yyyy/MM').dateFormat,
+    expirationDate: getDateFromUnix(data.card_expiration, 'YYYY/MM').dateFormat,
     identificationNumber: data?.holder_document_number || data?.document_number,
     name: data?.holder_name || data?.client_name,
     number: data?.card_number,

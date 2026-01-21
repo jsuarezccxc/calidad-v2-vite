@@ -169,6 +169,16 @@ const usePermissions = (): IUsePermissions => {
         if (accessRoutesElectronicDocuments) {
             routeElectronicDocument = ACCESS_ELECTRONIC_DOCUMENTOS_INTERNAL_ROUTES.includes(currentUrl);
         }
+
+        if (!routeElectronicDocument && lengthEqualToZero(modulesWithPermissions) && lengthGreaterThanZero(activeModules)) {
+            const accessRoutesElectronicDocumentsLocal = activeModules?.find(
+                (module: IGenericRecord) => module.name === getRouteName(Routes.ELECTRONIC_DOCUMENTS)
+            );
+            if (accessRoutesElectronicDocumentsLocal) {
+                routeElectronicDocument = ACCESS_ELECTRONIC_DOCUMENTOS_INTERNAL_ROUTES.includes(currentUrl);
+            }
+        }
+
         const currentModule = findModule(currentUrl, routeTree);
 
         if (modulesWithPermissions?.find((module: IGenericRecord) => module.name === getRouteName(Routes.WEBSITE_MENU))) {

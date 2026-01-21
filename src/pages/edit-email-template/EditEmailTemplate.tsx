@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import SunEditor from 'suneditor-react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { RootState } from '@redux/rootReducer';
-import { sendEmailTemplate } from '@redux/quotes/actions';
+import { sendEmailTemplate, sendQuoteEmail, getQuoteById } from '@redux/quotes/actions';
 import { sendMailAttachment } from '@redux/electronic-invoice/actions';
 import { ZERO } from '@pages/website-editor';
 import { ChangeEvent } from '@components/input';
@@ -16,6 +16,7 @@ import { ModuleApp } from '@utils/GenerateId';
 import usePermissions from '@hooks/usePermissions';
 import { Routes } from '@constants/Paths';
 import { INVOICE_TYPE } from '@constants/InvoiceType';
+import { DOCUMENT_TYPE_PARAMS } from '@constants/DocumentType';
 import { REQUIRED_FIELD } from '@constants/FieldsValidation';
 import { SUPPORT_DOCUMENTS_SUBTITLE } from '@constants/DocumentTexts';
 import { Form } from '@components/form';
@@ -47,11 +48,21 @@ const EditEmailTemplate: React.FC<IGenericRecord> = ({
 }) => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const location = useLocation();
     const { disabledInputs } = usePermissions();
-    const { detail, electronicDocument } = useSelector((state: RootState) => ({
+    
+    const queryParams = new URLSearchParams(location.search);
+    const documentType = queryParams.get('type');
+    const documentId = queryParams.get('id');
+    const isQuote = documentType === DOCUMENT_TYPE_PARAMS.QUOTE;
+
+    const { detail, electronicDocument, quoteData } = useSelector((state: RootState) => ({
         electronicDocument: state.electronicInvoice.document,
+        quoteData: state.quotes.quoteData,
         detail: state.company.information,
     }));
+    
+    const document = isQuote ? quoteData : electronicDocument;
     const [information, setInformation] = useState({
         subject: '',
         client_email: '',
@@ -74,18 +85,24 @@ const EditEmailTemplate: React.FC<IGenericRecord> = ({
         warning: false,
     });
 
-    const rejections = useMemo(() => Object.keys(electronicDocument).includes('reason_rejections'), [electronicDocument]);
+    const rejections = useMemo(() => Object.keys(document).includes('reason_rejections'), [document]);
 
     useEffect(() => {
-        electronicDocument &&
+        if (documentId && isQuote) {
+            dispatch(getQuoteById(documentId));
+        }
+    }, [documentId, isQuote]);
+
+    useEffect(() => {
+        document &&
             setInformation({
                 ...information,
-                invoice_id: electronicDocument.id,
-                name_user: electronicDocument.client_name,
-                client_email: electronicDocument.client_email,
-                invoice_pdf_url: electronicDocument.invoice_pdf_url,
+                invoice_id: document.id,
+                name_user: document.client_name,
+                client_email: document.client_email,
+                invoice_pdf_url: document.invoice_pdf_url,
             });
-    }, []);
+    }, [document]);
 
     useEffect(() => {
         validateEmails(information.client_email);
@@ -119,25 +136,18 @@ const EditEmailTemplate: React.FC<IGenericRecord> = ({
 
     const validateRejection = (): string => {
         if (rejections) return REJECTED;
-        return electronicDocument?.invoice_type || INVOICE_TYPE.INVOICE;
+        return document?.invoice_type || INVOICE_TYPE.INVOICE;
     };
 
     const handleSendEmail = async (): Promise<void> => {
         if (validate() && !areEmails) return;
         const imageFile = file[ZERO].files;
         let statusCode;
-        if (!sendEmailCustom && !(history.location.pathname === getRoute(Routes.EDIT_EMAIL_TEMPLATE_DOCUMENT))) {
+        if (isQuote || sendEmailCustom || history.location.pathname === getRoute(Routes.EDIT_EMAIL_TEMPLATE_DOCUMENT)) {
+            const emailAction = isQuote ? sendQuoteEmail : methodSendEmail;
             statusCode = await dispatch(
-                sendMailAttachment(
-                    { ...information, type: INVOICE_TYPE.INVOICE },
-                    lengthGreaterThanZero(file) ? imageFile : [],
-                    contentArticle
-                )
-            );
-        } else {
-            statusCode = await dispatch(
-                methodSendEmail(
-                    electronicDocument.id,
+                emailAction(
+                    document.id,
                     information.subject,
                     contentArticle,
                     validateRejection(),
@@ -145,9 +155,17 @@ const EditEmailTemplate: React.FC<IGenericRecord> = ({
                     information.client_email
                 )
             );
+        } else {
+            statusCode = await dispatch(
+                sendMailAttachment(
+                    { ...information, type: INVOICE_TYPE.INVOICE },
+                    lengthGreaterThanZero(file) ? imageFile : [],
+                    contentArticle
+                )
+            );
         }
-        if (isCorrectResponse(Number(statusCode))) {
-            setShowModal({ ...showModal, success: true });
+        if (isCorrectResponse(Number(statusCode?.statusCode))) {
+            setShowModal(prev => ({ ...prev, preview: false, success: true }));
             setInformation({
                 ...information,
                 subject: '',
@@ -159,7 +177,7 @@ const EditEmailTemplate: React.FC<IGenericRecord> = ({
             setContentArticle('');
             setFile([{ name: 'email', files: [] }]);
         } else {
-            setShowModal({ ...showModal, warning: !showModal.warning });
+            setShowModal(prev => ({ ...prev, preview: false, warning: !prev.warning }));
         }
     };
 
@@ -179,6 +197,8 @@ const EditEmailTemplate: React.FC<IGenericRecord> = ({
         return setAreEmails(true);
     };
 
+    const breadcrumbRoutes = lengthGreaterThanZero(routesComponent) ? routesComponent : routes(isQuote, documentId || '');
+
     return (
         <>
             <ModalPreview
@@ -190,6 +210,7 @@ const EditEmailTemplate: React.FC<IGenericRecord> = ({
                 handleSendEmail={(): Promise<void> => handleSendEmail()}
             />
             <ModalType
+                moduleId={`${ModuleApp.ELECTRONIC_DOCUMENTS}-email-success`}
                 open={showModal.success}
                 handleClosed={(): void => setShowModal({ ...showModal, success: !showModal.success })}
                 iconName="checkMulticolor"
@@ -198,12 +219,16 @@ const EditEmailTemplate: React.FC<IGenericRecord> = ({
                     description: '¡El correo se ha enviado con éxito al destinatario!',
                 }}
                 finalAction={(): void => {
-                    if (!sendEmailCustom) history.push(getRoute(route));
-                    if (sendEmailCustom)
-                        history.push(getRoute(route)) || setGenerateRejection((e: boolean) => setGenerateRejection(!e));
+                    const targetRoute = isQuote ? Routes.QUOTES_REPORT : route;
+                    if (!sendEmailCustom) history.push(getRoute(targetRoute));
+                    if (sendEmailCustom) {
+                        history.push(getRoute(targetRoute));
+                        setGenerateRejection((e: boolean) => !e);
+                    }
                 }}
             />
             <ModalType
+                moduleId={`${ModuleApp.ELECTRONIC_DOCUMENTS}-email-error`}
                 open={showModal.warning}
                 handleClosed={(): void => setShowModal({ ...showModal, warning: !showModal.warning })}
                 iconName="warning"
@@ -212,8 +237,12 @@ const EditEmailTemplate: React.FC<IGenericRecord> = ({
                     description: '¡Su correo no ha sido enviado!',
                 }}
                 finalAction={(): void => {
-                    if (!sendEmailCustom) history.push(getRoute(route));
-                    if (sendEmailCustom) history.push(getRoute(route)) || (setGenerateRejection && setGenerateRejection(false));
+                    const targetRoute = isQuote ? Routes.QUOTES_REPORT : route;
+                    if (!sendEmailCustom) history.push(getRoute(targetRoute));
+                    if (sendEmailCustom) {
+                        history.push(getRoute(targetRoute));
+                        if (setGenerateRejection) setGenerateRejection(false);
+                    }
                 }}
             />
             <div className="flex flex-col w-full h-full">
@@ -221,17 +250,18 @@ const EditEmailTemplate: React.FC<IGenericRecord> = ({
                     title={pageTitle || getRouteName(Routes.EDIT_EMAIL_TEMPLATE_DOCUMENT)}
                     pageContent={!pageTitle ? SUPPORT_DOCUMENTS_SUBTITLE : ''}
                 />
-                <BreadCrumb routes={lengthGreaterThanZero(routesComponent) ? routesComponent : routes()} />
+                <BreadCrumb routes={breadcrumbRoutes} />
                 <h3 className="font-bold text-center text-26lg text-blue font-allerbold mb-7">
-                    Consulte los documentos electrónicos generados
+                    {isQuote ? 'Cómo generar y transmitir Factura electrónica de venta y Documento soporte' : 'Consulte los documentos electrónicos generados'}
                 </h3>
                 <Information classNameTitle="text-blue" title={titleInformation} description={descriptionInformation} />
                 <Form className="flex flex-col justify-between mt-4.5">
                     <div className="mb-4.5">
                         <FileInput
+                            id="edit-email-template-file-input"
                             name="email"
                             labelText="Agregar imagen:"
-                            instructions="Agregar imagen"
+                            instructions="Subir archivo png, jpg, jpge"
                             classesWrapperInput="edit-email-template--image"
                             classesWrapper={classImage}
                             file={file}
@@ -243,6 +273,7 @@ const EditEmailTemplate: React.FC<IGenericRecord> = ({
                     </div>
                     <div className="mb-4.5">
                         <TextInput
+                            id="edit-email-template-client-email"
                             name="client_email"
                             labelText="Correo electrónico:"
                             value={information.client_email}
@@ -266,6 +297,7 @@ const EditEmailTemplate: React.FC<IGenericRecord> = ({
                     </div>
                     <div className="mb-4.5">
                         <TextInput
+                            id="edit-email-template-subject"
                             labelText="*Asunto:"
                             onChange={handleChange}
                             value={information.subject}

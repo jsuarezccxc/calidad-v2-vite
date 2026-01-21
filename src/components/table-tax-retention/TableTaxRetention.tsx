@@ -23,6 +23,9 @@ export const TableTaxRetention: React.FC<ITablesTaxesRetentionProps> = ({
     isDisabledWithholdings = false,
     showTaxes = false,
     isSupportOrAdjustment = false,
+    thousandSeparator = '.',
+    decimalSeparator = ',',
+    placeholder,
 }) => {
     const { PERCENTAGE } = TableNameInputs;
     const { disabledInputs } = usePermissions();
@@ -100,6 +103,9 @@ export const TableTaxRetention: React.FC<ITablesTaxesRetentionProps> = ({
                                             inputClass="w-5/6 pr-2 lg:h-auto"
                                             name="value"
                                             fixedDecimalScale
+                                            thousandSeparator={thousandSeparator}
+                                            decimalSeparator={decimalSeparator}
+                                            placeholder="000,000,000"
                                         />
                                     </td>
                                     <td className="xs:h-8.2 lg:h-10 field-body--uneditable md:text-sm text-gray-dark">
@@ -141,6 +147,9 @@ export const TableTaxRetention: React.FC<ITablesTaxesRetentionProps> = ({
                                             inputClass="w-5/6 lg:h-auto"
                                             name="value"
                                             fixedDecimalScale
+                                            thousandSeparator={thousandSeparator}
+                                            decimalSeparator={decimalSeparator}
+                                            placeholder="000,000,000"
                                         />
                                     </td>
                                 </tr>
@@ -167,18 +176,20 @@ export const TableTaxRetention: React.FC<ITablesTaxesRetentionProps> = ({
                                     </th>
                                 </tr>
                             )}
-                            <tr className="titles-table-taxes">
-                                <th colSpan={4} className="field-header--uneditable">
-                                    <Title
-                                        text="Retenciones"
-                                        disabled
-                                        color="blue"
-                                        className="header__padding-width"
-                                        sectionTooltip="withholdings"
-                                        showInformation={isElectronicInvoice}
-                                    />
-                                </th>
-                            </tr>
+                            {showTaxes && (
+                                <tr className="titles-table-taxes">
+                                    <th colSpan={4} className="field-header--uneditable">
+                                        <Title
+                                            text="Retenciones"
+                                            disabled
+                                            color="blue"
+                                            className="header__padding-width"
+                                            sectionTooltip="withholdings"
+                                            showInformation={isElectronicInvoice}
+                                        />
+                                    </th>
+                                </tr>
+                            )}
                         </>
                     )}
                     {tableRetentions.map(({ disabled = false, ...item }, index) => {
@@ -196,23 +207,31 @@ export const TableTaxRetention: React.FC<ITablesTaxesRetentionProps> = ({
                                     />
                                 </td>
                                 <td className="h-8.2 field-body--uneditable">
-                                    <NumberFormatInput
-                                        id={generateId({
-                                            module: ModuleApp.ELECTRONIC_DOCUMENTS,
-                                            submodule: `${ModuleApp.TABLE}-tax-retention-base`,
-                                            action: ActionElementType.INPUT,
-                                            elementType: ElementType.TXT,
-                                        })}
-                                        handleChange={({ target: { value } }): void =>
-                                            onChangeTableRetention(eventToNumber(value), 'base', item)
-                                        }
-                                        inputClass="number-input number-input--disabled mx-2"
-                                        containerClass="number-input--margin-2"
-                                        value={item.base}
-                                        withIcon={false}
-                                        prefix={symbol}
-                                        disabled
-                                    />
+                                    {item.base === 0 && placeholder ? (
+                                        <div className="number-input number-input--disabled mx-2 text-gray-400">
+                                            {symbol}{placeholder}
+                                        </div>
+                                    ) : (
+                                        <NumberFormatInput
+                                            id={generateId({
+                                                module: ModuleApp.ELECTRONIC_DOCUMENTS,
+                                                submodule: `${ModuleApp.TABLE}-tax-retention-${index}-base`,
+                                                action: ActionElementType.INPUT,
+                                                elementType: ElementType.TXT,
+                                            })}
+                                            handleChange={({ target: { value } }): void =>
+                                                onChangeTableRetention(eventToNumber(value), 'base', item)
+                                            }
+                                            inputClass="number-input number-input--disabled mx-2"
+                                            containerClass="number-input--margin-2"
+                                            value={item.base}
+                                            withIcon={false}
+                                            prefix={symbol}
+                                            disabled
+                                            thousandSeparator={thousandSeparator}
+                                            decimalSeparator={decimalSeparator}
+                                        />
+                                    )}
                                 </td>
                                 <td
                                     className={`h-8.2 field-body--uneditable ${
@@ -227,7 +246,7 @@ export const TableTaxRetention: React.FC<ITablesTaxesRetentionProps> = ({
                                         <SelectSearch
                                             id={generateId({
                                                 module: ModuleApp.ELECTRONIC_DOCUMENTS,
-                                                submodule: `${ModuleApp.TABLE}-tax-retention-percentage`,
+                                                submodule: `${ModuleApp.TABLE}-tax-retention-${index}-percentage`,
                                                 action: ActionElementType.INPUT,
                                                 elementType: ElementType.DRP,
                                             })}
@@ -254,7 +273,7 @@ export const TableTaxRetention: React.FC<ITablesTaxesRetentionProps> = ({
                                         <PercentageFormatInput
                                             id={generateId({
                                                 module: ModuleApp.ELECTRONIC_DOCUMENTS,
-                                                submodule: `${ModuleApp.TABLE}-tax-retention-percentage`,
+                                                submodule: `${ModuleApp.TABLE}-tax-retention-${index}-percentage`,
                                                 action: ActionElementType.INPUT,
                                                 elementType: ElementType.TXT,
                                             })}
@@ -274,23 +293,32 @@ export const TableTaxRetention: React.FC<ITablesTaxesRetentionProps> = ({
                                     )}
                                 </td>
                                 <td className="h-8.2 field-body--uneditable">
-                                    <NumberFormatInput
-                                        id={generateId({
-                                            module: ModuleApp.ELECTRONIC_DOCUMENTS,
-                                            submodule: `${ModuleApp.TABLE}-tax-retention-value`,
-                                            action: ActionElementType.INPUT,
-                                            elementType: ElementType.TXT,
-                                        })}
-                                        handleChange={({ target: { value } }): void =>
-                                            onChangeTableRetention(eventToNumber(value), 'value', item)
-                                        }
-                                        inputClass="number-input number-input--disabled mx-2"
-                                        containerClass="number-input--margin-2"
-                                        value={item.value}
-                                        withIcon={false}
-                                        prefix={symbol}
-                                        disabled
-                                    />
+                                    {item.value === 0 && placeholder ? (
+                                        <div className="number-input number-input--disabled mx-2 text-gray-400">
+                                            {symbol}{placeholder}
+                                        </div>
+                                    ) : (
+                                        <NumberFormatInput
+                                            id={generateId({
+                                                module: ModuleApp.ELECTRONIC_DOCUMENTS,
+                                                submodule: `${ModuleApp.TABLE}-tax-retention-${index}-value`,
+                                                action: ActionElementType.INPUT,
+                                                elementType: ElementType.TXT,
+                                            })}
+                                            handleChange={({ target: { value } }): void =>
+                                                onChangeTableRetention(eventToNumber(value), 'value', item)
+                                            }
+                                            inputClass="number-input number-input--disabled mx-2"
+                                            containerClass="number-input--margin-2"
+                                            value={item.value}
+                                            withIcon={false}
+                                            prefix={symbol}
+                                            disabled
+                                            thousandSeparator={thousandSeparator}
+                                            decimalSeparator={decimalSeparator}
+                                            placeholder="000,000,000"
+                                        />
+                                    )}
                                 </td>
                             </tr>
                         );

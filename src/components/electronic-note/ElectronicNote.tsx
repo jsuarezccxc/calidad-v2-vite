@@ -45,6 +45,7 @@ import { multiOptionsSelect } from '@utils/ElectronicNote';
 import { lengthEqualToZero, lengthGreaterThanZero } from '@utils/Length';
 import { findItemOption, includeArray, someArrayObject } from '@utils/Array';
 import { getDateFromDays, getDateFromUnix, getUnixFromDate } from '@utils/Date';
+import { ActionElementType, ElementType, generateId, ModuleApp } from '@utils/GenerateId';
 import { ONE } from '@constants/Numbers';
 import { RETE_ICA, RETE_IVA } from '@constants/Tax';
 import { Routes } from '@constants/Paths';

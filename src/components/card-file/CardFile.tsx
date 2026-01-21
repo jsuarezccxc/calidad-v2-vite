@@ -33,8 +33,11 @@ export const CardFile: React.FC<ICardFileProps> = ({
 
     const imageUrl = file?.name ? createImage(file) : url;
 
+    const isLogoSupport = typeLogo === TypeFile.LOGO_SUPPORT;
+    const cardFileClass = `card-file ${isLogoSupport ? 'card-file--logo-container' : ''} ${className}`;
+
     return (
-        <div className={`card-file ${className}`}>
+        <div className={cardFileClass}>
             {imageUrl ? (
                 <>
                     <img className="max-h-full" src={imageUrl} alt="File" />

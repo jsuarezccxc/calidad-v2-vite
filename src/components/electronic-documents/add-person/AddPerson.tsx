@@ -135,13 +135,25 @@ export const AddPerson: React.FC<IAddPersonProps> = ({ isClient, toggleModal, ba
             if (data.id) {
                 delete data.id;
             }
-            dispatch(updateClient(data?.client_id, data, data?.customerId));
+            const filteredFiscalResponsibilities = data?.fiscal_responsibilities?.filter(
+                (item: IGenericRecord) => item.id && item.id !== ''
+            ) || [];
+            const clientDataToUpdate = {
+                ...data,
+                fiscal_responsibilities: filteredFiscalResponsibilities,
+            };
+            const statusCode = await dispatch(updateClient(data?.client_id, clientDataToUpdate, data?.customerId));
             await dispatch(getClientsThin());
-            return { statusCode: SUCCESS_RESPONSE_CODE };
+            return { statusCode: statusCode || SUCCESS_RESPONSE_CODE, data: { customer: { client_id: data.client_id } } };
         }
         const [option] = optionsTaxpayer;
         const response: IGenericRecord = await dispatch(
-            createClient(formatPersonRequest({ ...data, person_type: option.name }, utils))
+            createClient(formatPersonRequest({
+                ...data,
+                person_type: option.name,
+                type_taxpayer_id: option.id,
+                type_taxpayer_name: option.value,
+            }, utils))
         );
         await dispatch(getClientsThin());
         return response;

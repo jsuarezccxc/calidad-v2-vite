@@ -1,4 +1,21 @@
 import React, { useContext, useMemo } from 'react';
+
+// Vite dynamic imports for element images (text, image, button, etc.)
+const textImages = import.meta.glob<{ default: string }>('/src/assets/images/text/*.svg', { eager: true });
+const imageImages = import.meta.glob<{ default: string }>('/src/assets/images/image/*.svg', { eager: true });
+const buttonImages = import.meta.glob<{ default: string }>('/src/assets/images/button/*.svg', { eager: true });
+const formImages = import.meta.glob<{ default: string }>('/src/assets/images/form/*.svg', { eager: true });
+const getElementImage = (type: string, option: string): string => {
+    const typeLower = type.toLowerCase();
+    const path = `/src/assets/images/${typeLower}/element-${option}.svg`;
+    const imageMap: Record<string, Record<string, { default: string }>> = {
+        text: textImages,
+        image: imageImages,
+        button: buttonImages,
+        form: formImages,
+    };
+    return imageMap[typeLower]?.[path]?.default || '';
+};
 import { useSelector } from 'react-redux';
 import { RootState } from '@redux/rootReducer';
 import { ElementOption, ElementType } from '@models/WebsiteNode';
@@ -10,13 +27,6 @@ import { CompositeEditor } from '../element-editor/composite-editor';
 import { ElementsContext, SidebarContext } from '../../context';
 import { DraggableTab } from '..';
 import { getElementText, ELEMENT_OPTIONS } from '.';
-
-// Vite dynamic imports for element images (all subdirectories)
-const elementImages = import.meta.glob<{ default: string }>('/src/assets/images/*/element-*.svg', { eager: true });
-const getElementImage = (type: string, option: string): string => {
-    const path = `/src/assets/images/${type.toLowerCase()}/element-${option}.svg`;
-    return elementImages[path]?.default || '';
-};
 
 export const Element: React.FC = () => {
     const { activePage } = useSelector((state: RootState) => state.websiteNode);

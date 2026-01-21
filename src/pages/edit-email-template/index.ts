@@ -8,9 +8,36 @@ export { default } from './EditEmailTemplate';
 /**
  * This function return bread crumbs page
  *
+ * @typeParam isQuote: boolean - Optional param to indicate if it's a quote
+ * @typeParam documentId: string - Optional document ID for building quote view route
  * @returns Section[]
  */
-export const routes = (): Section[] => {
+export const routes = (isQuote = false, documentId = ''): Section[] => {
+    if (isQuote) {
+        return [
+            {
+                name: 'Documentos electrónicos',
+                route: getRoute(Routes.DASHBOARD_ELECTRONIC_DOCUMENT),
+            },
+            {
+                name: 'Cómo generar y transmitir Factura electrónica de venta y Documento soporte',
+                route: getRoute(Routes.DASHBOARD_ELECTRONIC_DOCUMENT),
+            },
+            {
+                name: 'Cotizaciones',
+                route: getRoute(Routes.QUOTES_REPORT),
+            },
+            {
+                name: 'Visualización cotización',
+                route: documentId ? `${getRoute(Routes.CONSULT_ELECTRONIC_DOCUMENT)}?id=${documentId}&type=QUOTE_VIEW` : '#',
+            },
+            {
+                name: 'Editar plantilla de correo',
+                route: '#',
+            },
+        ];
+    }
+
     return [
         {
             name: getRouteName(Routes.ELECTRONIC_DOCUMENTS),

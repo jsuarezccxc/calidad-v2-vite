@@ -7,6 +7,7 @@ interface IQuotesState {
     quoteData: IGenericRecord;
     error: string;
     emailResponse: IGenericRecord;
+    consecutive: IGenericRecord;
 }
 
 const initialState: IQuotesState = {
@@ -14,6 +15,7 @@ const initialState: IQuotesState = {
     quoteData: {},
     error: '',
     emailResponse: {},
+    consecutive: {},
 };
 
 export const reducer = (state: IQuotesState = initialState, action: QuotesActions): IQuotesState => {
@@ -44,6 +46,12 @@ export const reducer = (state: IQuotesState = initialState, action: QuotesAction
             return {
                 ...state,
                 emailResponse: action.response,
+                error: '',
+            };
+        case ActionKeys.SET_QUOTE_CONSECUTIVE:
+            return {
+                ...state,
+                consecutive: action.consecutive,
                 error: '',
             };
         default:

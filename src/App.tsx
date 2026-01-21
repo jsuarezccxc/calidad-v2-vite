@@ -37,7 +37,7 @@ import { ZERO } from '@pages/website-editor';
 import { LandingHomeDiggipymes } from '@pages/home/components/landing-home-diggipymes/LandingHomeDiggipymes';
 import { RootState } from '@redux/rootReducer';
 import { getContingency } from '@redux/contingency/actions';
-import { getActiveModules, getDocumentTypes, setDateMembership } from '@redux/company/actions';
+import { getActiveModules, getDocumentTypes, getInformationCompany, setDateMembership } from '@redux/company/actions';
 import {
     getActiveMaintenance,
     getHasSeenModal,
@@ -190,6 +190,18 @@ const App: React.FC = (): React.ReactElement => {
         localStorage.removeItem(MODAL_BAD_REQUEST);
         if (accessToken) dispatch(getContingency());
     }, [accessToken]);
+
+    useEffect(() => {
+        if (accessToken && !information?.name) {
+            dispatch(getInformationCompany());
+        }
+    }, [accessToken, information]);
+
+    useEffect(() => {
+        if (accessToken && lengthEqualToZero(activeMemberships)) {
+            dispatch(getActiveModules());
+        }
+    }, [accessToken, activeMemberships]);
 
     useEffect(() => {
         membership_selected?.length &&

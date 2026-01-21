@@ -1,711 +1,709 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 $green: rgba(0, 169, 157, 1);
 $white: rgb(244, 244, 244);
 $gray: #EFF0F2;
 $purple: #81319B;
 
-/* Font Faces - outside @layer for Vite compatibility */
-@font-face {
-    font-family: Aller;
+@layer base {
+    @font-face {
+        font-family: Aller;
         font-weight: 400;
-        src: url("/fonts/Aller_Rg.ttf");
+        src: url("./assets/fonts/Aller_Rg.ttf");
     }
 
     @font-face {
         font-family: AllerBold;
         font-weight: 700;
-        src: url("/fonts/Aller_Bd.ttf");
+        src: url("./assets/fonts/Aller_Bd.ttf");
     }
 
     @font-face {
         font-family: AllerBoldItalic;
         font-weight: 700;
-        src: url("/fonts/Aller_BdIt.ttf");
+        src: url("./assets/fonts/Aller_BdIt.ttf");
     }
 
     @font-face {
         font-family: AllerItalic;
         font-weight: 400;
-        src: url("/fonts/Aller_It.ttf");
+        src: url("./assets/fonts/Aller_It.ttf");
     }
 
     @font-face {
         font-family: Archivo;
         font-weight: 400;
-        src: url("/fonts/Archivo-Regular.ttf");
+        src: url("./assets/fonts/Archivo-Regular.ttf");
     }
 
     @font-face {
         font-family: ArchivoBold;
         font-weight: 700;
-        src: url("/fonts/Archivo-Bold.ttf");
+        src: url("./assets/fonts/Archivo-Bold.ttf");
     }
 
     @font-face {
         font-family: ArchivoBoldItalic;
         font-weight: 700;
-        src: url("/fonts/Archivo-BoldItalic.ttf");
+        src: url("./assets/fonts/Archivo-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: ArchivoItalic;
         font-weight: 400;
-        src: url("/fonts/Archivo-Italic.ttf");
+        src: url("./assets/fonts/Archivo-Italic.ttf");
     }
 
     @font-face {
         font-family: Montserrat;
         font-weight: 400;
-        src: url("/fonts/Montserrat-Regular.ttf");
+        src: url("./assets/fonts/Montserrat-Regular.ttf");
     }
 
     @font-face {
         font-family: MontserratBold;
         font-weight: 700;
-        src: url("/fonts/Montserrat-Bold.ttf");
+        src: url("./assets/fonts/Montserrat-Bold.ttf");
     }
 
     @font-face {
         font-family: MontserratBoldItalic;
         font-weight: 700;
-        src: url("/fonts/Montserrat-BoldItalic.ttf");
+        src: url("./assets/fonts/Montserrat-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: MontserratItalic;
         font-weight: 400;
-        src: url("/fonts/Montserrat-Italic.ttf");
+        src: url("./assets/fonts/Montserrat-Italic.ttf");
     }
 
     @font-face {
         font-family: Roboto;
         font-weight: 400;
-        src: url("/fonts/Roboto-Regular.ttf");
+        src: url("./assets/fonts/Roboto-Regular.ttf");
     }
 
     @font-face {
         font-family: RobotoBold;
         font-weight: 700;
-        src: url("/fonts/Roboto-Bold.ttf");
+        src: url("./assets/fonts/Roboto-Bold.ttf");
     }
 
     @font-face {
         font-family: RobotoBoldItalic;
         font-weight: 700;
-        src: url("/fonts/Roboto-BoldItalic.ttf");
+        src: url("./assets/fonts/Roboto-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: RobotoItalic;
         font-weight: 400;
-        src: url("/fonts/Roboto-Italic.ttf");
+        src: url("./assets/fonts/Roboto-Italic.ttf");
     }
 
     @font-face {
         font-family: OpenSans;
         font-weight: 400;
-        src: url("/fonts/OpenSans-Regular.ttf");
+        src: url("./assets/fonts/OpenSans-Regular.ttf");
     }
 
     @font-face {
         font-family: OpenSansBold;
         font-weight: 700;
-        src: url("/fonts/OpenSans-Bold.ttf");
+        src: url("./assets/fonts/OpenSans-Bold.ttf");
     }
 
     @font-face {
         font-family: OpenSansBoldItalic;
         font-weight: 700;
-        src: url("/fonts/OpenSans-BoldItalic.ttf");
+        src: url("./assets/fonts/OpenSans-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: OpenSansItalic;
         font-weight: 400;
-        src: url("/fonts/OpenSans-Italic.ttf");
+        src: url("./assets/fonts/OpenSans-Italic.ttf");
     }
 
     @font-face {
         font-family: Lato;
         font-weight: 400;
-        src: url("/fonts/Lato-Regular.ttf");
+        src: url("./assets/fonts/Lato-Regular.ttf");
     }
 
     @font-face {
         font-family: LatoBold;
         font-weight: 700;
-        src: url("/fonts/Lato-Bold.ttf");
+        src: url("./assets/fonts/Lato-Bold.ttf");
     }
 
     @font-face {
         font-family: LatoBoldItalic;
         font-weight: 700;
-        src: url("/fonts/Lato-BoldItalic.ttf");
+        src: url("./assets/fonts/Lato-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: LatoItalic;
         font-weight: 400;
-        src: url("/fonts/Lato-Italic.ttf");
+        src: url("./assets/fonts/Lato-Italic.ttf");
     }
 
     @font-face {
         font-family: Poppins;
         font-weight: 400;
-        src: url("/fonts/Poppins-Regular.ttf");
+        src: url("./assets/fonts/Poppins-Regular.ttf");
     }
 
     @font-face {
         font-family: PoppinsMedium;
         font-weight: 500;
-        src: url("/fonts/Poppins-Medium.ttf");
+        src: url("./assets/fonts/Poppins-Medium.ttf");
     }
 
     @font-face {
         font-family: PoppinsSemiBold;
         font-weight: 600;
-        src: url("/fonts/Poppins-SemiBold.ttf");
+        src: url("./assets/fonts/Poppins-SemiBold.ttf");
     }
 
     @font-face {
         font-family: PoppinsBold;
         font-weight: 700;
-        src: url("/fonts/Poppins-Bold.ttf");
+        src: url("./assets/fonts/Poppins-Bold.ttf");
     }
 
     @font-face {
         font-family: PoppinsBoldItalic;
         font-weight: 700;
-        src: url("/fonts/Poppins-BoldItalic.ttf");
+        src: url("./assets/fonts/Poppins-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: PoppinsItalic;
         font-weight: 400;
-        src: url("/fonts/Poppins-Italic.ttf");
+        src: url("./assets/fonts/Poppins-Italic.ttf");
     }
 
     @font-face {
         font-family: Barlow;
         font-weight: 400;
-        src: url("/fonts/Barlow-Regular.ttf");
+        src: url("./assets/fonts/Barlow-Regular.ttf");
     }
 
     @font-face {
         font-family: BarlowBold;
         font-weight: 700;
-        src: url("/fonts/Barlow-Bold.ttf");
+        src: url("./assets/fonts/Barlow-Bold.ttf");
     }
 
     @font-face {
         font-family: BarlowBoldItalic;
         font-weight: 700;
-        src: url("/fonts/Barlow-BoldItalic.ttf");
+        src: url("./assets/fonts/Barlow-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: BarlowItalic;
         font-weight: 400;
-        src: url("/fonts/Barlow-Italic.ttf");
+        src: url("./assets/fonts/Barlow-Italic.ttf");
     }
 
     @font-face {
         font-family: FiraSans;
         font-weight: 400;
-        src: url("/fonts/FiraSans-Regular.ttf");
+        src: url("./assets/fonts/FiraSans-Regular.ttf");
     }
 
     @font-face {
         font-family: FiraSansBold;
         font-weight: 700;
-        src: url("/fonts/FiraSans-Bold.otf");
+        src: url("./assets/fonts/FiraSans-Bold.otf");
     }
 
 	@font-face {
         font-family: FiraSansBoldItalic;
         font-weight: 700;
-        src: url("/fonts/FiraSans-BoldItalic.ttf");
+        src: url("./assets/fonts/FiraSans-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: FiraSansItalic;
         font-weight: 400;
-        src: url("/fonts/FiraSans-Italic.ttf");
+        src: url("./assets/fonts/FiraSans-Italic.ttf");
     }
 
     @font-face {
         font-family: Epilogue;
         font-weight: 400;
-        src: url("/fonts/Epilogue-Regular.ttf");
+        src: url("./assets/fonts/Epilogue-Regular.ttf");
     }
 
     @font-face {
         font-family: EpilogueBold;
         font-weight: 700;
-        src: url("/fonts/Epilogue-Bold.ttf");
+        src: url("./assets/fonts/Epilogue-Bold.ttf");
     }
 
     @font-face {
         font-family: EpilogueBoldItalic;
         font-weight: 700;
-        src: url("/fonts/Epilogue-BoldItalic.ttf");
+        src: url("./assets/fonts/Epilogue-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: EpilogueItalic;
         font-weight: 400;
-        src: url("/fonts/Epilogue-Italic.ttf");
+        src: url("./assets/fonts/Epilogue-Italic.ttf");
     }
 
     @font-face {
         font-family: LibreFranklin;
         font-weight: 400;
-        src: url("/fonts/LibreFranklin-Regular.ttf");
+        src: url("./assets/fonts/LibreFranklin-Regular.ttf");
     }
 
     @font-face {
         font-family: LibreFranklinBold;
         font-weight: 700;
-        src: url("/fonts/librefranklin-bold.ttf");
+        src: url("./assets/fonts/librefranklin-bold.ttf");
     }
 
     @font-face {
         font-family: LibreFranklinBoldItalic;
         font-weight: 700;
-        src: url("/fonts/LibreFranklin-BoldItalic.ttf");
+        src: url("./assets/fonts/LibreFranklin-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: LibreFranklinItalic;
         font-weight: 400;
-        src: url("/fonts/LibreFranklin-Italic.ttf");
+        src: url("./assets/fonts/LibreFranklin-Italic.ttf");
     }
 
     @font-face {
         font-family: Raleway;
         font-weight: 400;
-        src: url("/fonts/Raleway-Regular.ttf");
+        src: url("./assets/fonts/Raleway-Regular.ttf");
     }
 
     @font-face {
         font-family: RalewayBold;
         font-weight: 700;
-        src: url("/fonts/Raleway-Bold.ttf");
+        src: url("./assets/fonts/Raleway-Bold.ttf");
     }
 
     @font-face {
         font-family: RalewayBoldItalic;
         font-weight: 700;
-        src: url("/fonts/Raleway-BoldItalic.ttf");
+        src: url("./assets/fonts/Raleway-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: RalewayItalic;
         font-weight: 400;
-        src: url("/fonts/Raleway-Italic.ttf");
+        src: url("./assets/fonts/Raleway-Italic.ttf");
     }
 
     @font-face {
         font-family: AlegreyaSans;
         font-weight: 400;
-        src: url("/fonts/AlegreyaSans-Regular.ttf");
+        src: url("./assets/fonts/AlegreyaSans-Regular.ttf");
     }
 
     @font-face {
         font-family: AlegreyaSansBold;
         font-weight: 700;
-        src: url("/fonts/AlegreyaSans-Bold.ttf");
+        src: url("./assets/fonts/AlegreyaSans-Bold.ttf");
     }
 
     @font-face {
         font-family: AlegreyaSansBoldItalic;
         font-weight: 700;
-        src: url("/fonts/AlegreyaSans-BoldItalic.ttf");
+        src: url("./assets/fonts/AlegreyaSans-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: AlegreyaSansItalic;
         font-weight: 400;
-        src: url("/fonts/AlegreyaSans-Italic.ttf");
+        src: url("./assets/fonts/AlegreyaSans-Italic.ttf");
     }
 
     @font-face {
         font-family: BigShoulder;
         font-weight: 400;
-        src: url("/fonts/BigShoulder-Regular.ttf");
+        src: url("./assets/fonts/BigShoulder-Regular.ttf");
     }
 
     @font-face {
         font-family: BigShoulderBold;
         font-weight: 700;
-        src: url("/fonts/BigShoulder-Bold.ttf");
+        src: url("./assets/fonts/BigShoulder-Bold.ttf");
     }
 
     @font-face {
         font-family: BodoniModa;
         font-weight: 400;
-        src: url("/fonts/BodoniModa-Regular.ttf");
+        src: url("./assets/fonts/BodoniModa-Regular.ttf");
     }
 
     @font-face {
         font-family: BodoniModaBold;
         font-weight: 700;
-        src: url("/fonts/BodoniModa-Bold.ttf");
+        src: url("./assets/fonts/BodoniModa-Bold.ttf");
     }
 
     @font-face {
         font-family: BodoniModaBoldItalic;
         font-weight: 700;
-        src: url("/fonts/BodoniModa-BoldItalic.ttf");
+        src: url("./assets/fonts/BodoniModa-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: BodoniModaItalic;
         font-weight: 400;
-        src: url("/fonts/BodoniModa-Italic.ttf");
+        src: url("./assets/fonts/BodoniModa-Italic.ttf");
     }
 
     @font-face {
         font-family: Cabin;
         font-weight: 400;
-        src: url("/fonts/Cabin-Regular.ttf");
+        src: url("./assets/fonts/Cabin-Regular.ttf");
     }
 
     @font-face {
         font-family: CabinBold;
         font-weight: 700;
-        src: url("/fonts/Cabin-Bold.ttf");
+        src: url("./assets/fonts/Cabin-Bold.ttf");
     }
 
     @font-face {
         font-family: CabinBoldItalic;
         font-weight: 700;
-        src: url("/fonts/Cabin-BoldItalic.ttf");
+        src: url("./assets/fonts/Cabin-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: CabinItalic;
         font-weight: 400;
-        src: url("/fonts/Cabin-Italic.ttf");
+        src: url("./assets/fonts/Cabin-Italic.ttf");
     }
 
     @font-face {
         font-family: Cinzel;
         font-weight: 400;
-        src: url("/fonts/Cinzel-Regular.ttf");
+        src: url("./assets/fonts/Cinzel-Regular.ttf");
     }
 
     @font-face {
         font-family: CinzelBold;
         font-weight: 700;
-        src: url("/fonts/Cinzel-Bold.ttf");
+        src: url("./assets/fonts/Cinzel-Bold.ttf");
     }
 
     @font-face {
         font-family: CormorantGaramond;
         font-weight: 400;
-        src: url("/fonts/CormorantGaramond-Regular.ttf");
+        src: url("./assets/fonts/CormorantGaramond-Regular.ttf");
     }
 
     @font-face {
         font-family: CormorantGaramondBold;
         font-weight: 700;
-        src: url("/fonts/CormorantGaramond-Bold.ttf");
+        src: url("./assets/fonts/CormorantGaramond-Bold.ttf");
     }
 
     @font-face {
         font-family: CormorantGaramondBoldItalic;
         font-weight: 700;
-        src: url("/fonts/CormorantGaramond-BoldItalic.ttf");
+        src: url("./assets/fonts/CormorantGaramond-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: CormorantGaramondItalic;
         font-weight: 400;
-        src: url("/fonts/CormorantGaramond-Italic.ttf");
+        src: url("./assets/fonts/CormorantGaramond-Italic.ttf");
     }
 
     @font-face {
         font-family: CourierPrime;
         font-weight: 400;
-        src: url("/fonts/CourierPrime-Regular.ttf");
+        src: url("./assets/fonts/CourierPrime-Regular.ttf");
     }
 
     @font-face {
         font-family: CourierPrimeBold;
         font-weight: 700;
-        src: url("/fonts/CourierPrime-Bold.ttf");
+        src: url("./assets/fonts/CourierPrime-Bold.ttf");
     }
 
     @font-face {
         font-family: CourierPrimeBoldItalic;
         font-weight: 700;
-        src: url("/fonts/CourierPrime-BoldItalic.ttf");
+        src: url("./assets/fonts/CourierPrime-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: CourierPrimeItalic;
         font-weight: 400;
-        src: url("/fonts/CourierPrime-Italic.ttf");
+        src: url("./assets/fonts/CourierPrime-Italic.ttf");
     }
 
     @font-face {
         font-family: CrimsonPro;
         font-weight: 400;
-        src: url("/fonts/CrimsonPro-Regular.ttf");
+        src: url("./assets/fonts/CrimsonPro-Regular.ttf");
     }
 
     @font-face {
         font-family: CrimsonProBold;
         font-weight: 700;
-        src: url("/fonts/CrimsonPro-Bold.ttf");
+        src: url("./assets/fonts/CrimsonPro-Bold.ttf");
     }
 
     @font-face {
         font-family: CrimsonProBoldItalic;
         font-weight: 700;
-        src: url("/fonts/CrimsonPro-BoldItalic.ttf");
+        src: url("./assets/fonts/CrimsonPro-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: CrimsonProItalic;
         font-weight: 400;
-        src: url("/fonts/CrimsonPro-Italic.ttf");
+        src: url("./assets/fonts/CrimsonPro-Italic.ttf");
     }
 
     @font-face {
         font-family: DancingScript;
         font-weight: 400;
-        src: url("/fonts/DancingScript-Regular.ttf");
+        src: url("./assets/fonts/DancingScript-Regular.ttf");
     }
 
     @font-face {
         font-family: DancingScriptBold;
         font-weight: 700;
-        src: url("/fonts/DancingScript-Bold.ttf");
+        src: url("./assets/fonts/DancingScript-Bold.ttf");
     }
 
     @font-face {
         font-family: DynaPuff;
         font-weight: 400;
-        src: url("/fonts/DynaPuff-Regular.ttf");
+        src: url("./assets/fonts/DynaPuff-Regular.ttf");
     }
 
     @font-face {
         font-family: DynaPuffBold;
         font-weight: 700;
-        src: url("/fonts/DynaPuff-Bold.ttf");
+        src: url("./assets/fonts/DynaPuff-Bold.ttf");
     }
 
     @font-face {
         font-family: Exo;
         font-weight: 400;
-        src: url("/fonts/Exo-Regular.ttf");
+        src: url("./assets/fonts/Exo-Regular.ttf");
     }
 
     @font-face {
         font-family: ExoBold;
         font-weight: 700;
-        src: url("/fonts/Exo-Bold.ttf");
+        src: url("./assets/fonts/Exo-Bold.ttf");
     }
 
     @font-face {
         font-family: ExoBoldItalic;
         font-weight: 700;
-        src: url("/fonts/Exo-BoldItalic.ttf");
+        src: url("./assets/fonts/Exo-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: ExoItalic;
         font-weight: 400;
-        src: url("/fonts/Exo-Italic.ttf");
+        src: url("./assets/fonts/Exo-Italic.ttf");
     }
 
     @font-face {
         font-family: Fredoka;
         font-weight: 400;
-        src: url("/fonts/Fredoka-Regular.ttf");
+        src: url("./assets/fonts/Fredoka-Regular.ttf");
     }
 
     @font-face {
         font-family: FredokaBold;
         font-weight: 700;
-        src: url("/fonts/Fredoka-Bold.ttf");
+        src: url("./assets/fonts/Fredoka-Bold.ttf");
     }
 
     @font-face {
         font-family: Manrope;
         font-weight: 400;
-        src: url("/fonts/Manrope-Regular.ttf");
+        src: url("./assets/fonts/Manrope-Regular.ttf");
     }
 
     @font-face {
         font-family: ManropeBold;
         font-weight: 700;
-        src: url("/fonts/Manrope-Bold.ttf");
+        src: url("./assets/fonts/Manrope-Bold.ttf");
     }
 
     @font-face {
         font-family: Mulish;
         font-weight: 400;
-        src: url("/fonts/Mulish-Regular.ttf");
+        src: url("./assets/fonts/Mulish-Regular.ttf");
     }
 
     @font-face {
         font-family: MulishBold;
         font-weight: 700;
-        src: url("/fonts/Mulish-Bold.ttf");
+        src: url("./assets/fonts/Mulish-Bold.ttf");
     }
 
     @font-face {
         font-family: MulishBoldItalic;
         font-weight: 700;
-        src: url("/fonts/Mulish-BoldItalic.ttf");
+        src: url("./assets/fonts/Mulish-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: MulishItalic;
         font-weight: 400;
-        src: url("/fonts/Mulish-Italic.ttf");
+        src: url("./assets/fonts/Mulish-Italic.ttf");
     }
 
     @font-face {
         font-family: PlayfairDisplay;
         font-weight: 400;
-        src: url("/fonts/PlayfairDisplay-Regular.ttf");
+        src: url("./assets/fonts/PlayfairDisplay-Regular.ttf");
     }
 
     @font-face {
         font-family: PlayfairDisplayBold;
         font-weight: 700;
-        src: url("/fonts/PlayfairDisplay-Bold.ttf");
+        src: url("./assets/fonts/PlayfairDisplay-Bold.ttf");
     }
 
     @font-face {
         font-family: PlayfairDisplayBoldItalic;
         font-weight: 700;
-        src: url("/fonts/PlayfairDisplay-BoldItalic.ttf");
+        src: url("./assets/fonts/PlayfairDisplay-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: PlayfairDisplayItalic;
         font-weight: 400;
-        src: url("/fonts/PlayfairDisplay-Italic.ttf");
+        src: url("./assets/fonts/PlayfairDisplay-Italic.ttf");
     }
 
     @font-face {
         font-family: Quicksand;
         font-weight: 400;
-        src: url("/fonts/Quicksand-Regular.ttf");
+        src: url("./assets/fonts/Quicksand-Regular.ttf");
     }
 
     @font-face {
         font-family: QuicksandBold;
         font-weight: 700;
-        src: url("/fonts/Quicksand-Bold.ttf");
+        src: url("./assets/fonts/Quicksand-Bold.ttf");
     }
 
     @font-face {
         font-family: Rubik;
         font-weight: 400;
-        src: url("/fonts/Rubik-Regular.ttf");
+        src: url("./assets/fonts/Rubik-Regular.ttf");
     }
 
     @font-face {
         font-family: RubikBold;
         font-weight: 700;
-        src: url("/fonts/Rubik-Bold.ttf");
+        src: url("./assets/fonts/Rubik-Bold.ttf");
     }
 
     @font-face {
         font-family: RubikBoldItalic;
         font-weight: 700;
-        src: url("/fonts/Rubik-BoldItalic.ttf");
+        src: url("./assets/fonts/Rubik-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: RubikItalic;
         font-weight: 400;
-        src: url("/fonts/Rubik-Italic.ttf");
+        src: url("./assets/fonts/Rubik-Italic.ttf");
     }
 
     @font-face {
         font-family: SpaceMono;
         font-weight: 400;
-        src: url("/fonts/SpaceMono-Regular.ttf");
+        src: url("./assets/fonts/SpaceMono-Regular.ttf");
     }
 
     @font-face {
         font-family: SpaceMonoBold;
         font-weight: 700;
-        src: url("/fonts/SpaceMono-Bold.ttf");
+        src: url("./assets/fonts/SpaceMono-Bold.ttf");
     }
 
     @font-face {
         font-family: SpaceMonoBoldItalic;
         font-weight: 700;
-        src: url("/fonts/SpaceMono-BoldItalic.ttf");
+        src: url("./assets/fonts/SpaceMono-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: SpaceMonoItalic;
         font-weight: 400;
-        src: url("/fonts/SpaceMono-Italic.ttf");
+        src: url("./assets/fonts/SpaceMono-Italic.ttf");
     }
 
     @font-face {
         font-family: SpectralSC;
         font-weight: 400;
-        src: url("/fonts/SpectralSC-Regular.ttf");
+        src: url("./assets/fonts/SpectralSC-Regular.ttf");
     }
 
     @font-face {
         font-family: SpectralSCBold;
         font-weight: 700;
-        src: url("/fonts/SpectralSC-Bold.ttf");
+        src: url("./assets/fonts/SpectralSC-Bold.ttf");
     }
 
     @font-face {
         font-family: SpectralSCBoldItalic;
         font-weight: 700;
-        src: url("/fonts/SpectralSC-BoldItalic.ttf");
+        src: url("./assets/fonts/SpectralSC-BoldItalic.ttf");
     }
 
     @font-face {
         font-family: SpectralSCItalic;
         font-weight: 400;
-        src: url("/fonts/SpectralSC-Italic.ttf");
+        src: url("./assets/fonts/SpectralSC-Italic.ttf");
     }
 
     @font-face {
         font-family: ZillaSlab;
         font-weight: 400;
-        src: url("/fonts/ZillaSlab-Regular.ttf");
+        src: url("./assets/fonts/ZillaSlab-Regular.ttf");
     }
 
     @font-face {
         font-family: ZillaSlabBold;
         font-weight: 700;
-        src: url("/fonts/ZillaSlab-Bold.ttf");
+        src: url("./assets/fonts/ZillaSlab-Bold.ttf");
     }
 
     @font-face {
         font-family: ZillaSlabBoldItalic;
         font-weight: 700;
-        src: url("/fonts/ZillaSlab-BoldItalic.ttf");
+        src: url("./assets/fonts/ZillaSlab-BoldItalic.ttf");
     }
 
-@font-face {
-    font-family: ZillaSlabItalic;
-    font-weight: 400;
-    src: url("/fonts/ZillaSlab-Italic.ttf");
-}
+    @font-face {
+        font-family: ZillaSlabItalic;
+        font-weight: 400;
+        src: url("./assets/fonts/ZillaSlab-Italic.ttf");
+    }
 
-/* Base styles layer */
-@layer base {
     * {
         box-sizing: border-box !important;
     }
@@ -1366,7 +1364,7 @@ $purple: #81319B;
 @media print {
     body, html, .print-container, div {
         -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
+        color-adjust: exact;
     }
 }
 

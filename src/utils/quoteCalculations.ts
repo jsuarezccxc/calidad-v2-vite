@@ -1,16 +1,21 @@
-import type { 
-    IQuoteFormData, 
-    IQuoteProduct, 
-    IProductTax, 
-    IUserData 
+import type {
+    IQuoteFormData,
+    IQuoteProduct,
+    IProductTax,
+    IUserData
 } from '@models/QuoteGeneration';
 import { IGenericRecord } from '@models/GenericRecord';
+
+import { NA } from '@constants/ElectronicInvoice';
+import { QUOTE_ID_KEY, QUOTE_PRODUCT_TABLE_HEADERS, QUOTE_REQUIRED_TABLE_FIELDS } from '@constants/QuoteViewLabels';
+
 import { lengthGreaterThanZero } from '@utils/Length';
 import { calculatePercentage } from '@utils/Number';
 import { stringToFloat } from '@utils/ElectronicInvoice';
 import { getDateFromUnix, getUnixFromDate } from '@utils/Date';
-import { NA } from '@constants/ElectronicInvoice';
-import { QUOTE_ID_KEY } from '@constants/QuoteViewLabels';
+
+// Re-export constants from QuoteViewLabels for backward compatibility
+export { QUOTE_PRODUCT_TABLE_HEADERS, QUOTE_REQUIRED_TABLE_FIELDS };
 
 /**
  * Valid Colombian document types accepted directly
@@ -31,6 +36,42 @@ const getQuoteDiscount = ({ percentage_discount: discount = 0, unit_value: unitV
 };
 
 /**
+ * Infer document type ID based on taxpayer type when document_type is null
+ * Used when client has missing document_type but valid type_taxpayer_name
+ * 
+ * @typeParam taxpayerTypeName: string | undefined - Type of taxpayer (Persona jurídica, Persona natural, etc.)
+ * @typeParam documentTypes: IGenericRecord[] - Available document types from utils
+ * @returns Inferred document type ID or null
+ */
+export const inferDocumentTypeId = (
+    taxpayerTypeName: string | undefined,
+    documentTypes: IGenericRecord[]
+): string | null => {
+    if (!taxpayerTypeName || !documentTypes?.length) return null;
+
+    // Si es persona jurídica, buscar NIT
+    if (taxpayerTypeName.toLowerCase().includes('jurídica')) {
+        const nitType = documentTypes.find(type =>
+            type.value?.toUpperCase() === 'NIT' ||
+            type.name?.toUpperCase() === 'NIT'
+        );
+        return nitType?.id || null;
+    }
+
+    // Si es persona natural, buscar CC
+    if (taxpayerTypeName.toLowerCase().includes('natural')) {
+        const ccType = documentTypes.find(type =>
+            type.value?.toUpperCase() === 'CC' ||
+            type.name?.toUpperCase() === 'CC' ||
+            type.value?.toUpperCase().includes('CÉDULA')
+        );
+        return ccType?.id || null;
+    }
+
+    return null;
+};
+
+/**
  * Extracts document type value from user data with priority fallback
  * Handles multiple possible sources for document type information
  * 
@@ -38,22 +79,19 @@ const getQuoteDiscount = ({ percentage_discount: discount = 0, unit_value: unitV
  * @returns Document type value string
  */
 export const getDocumentTypeValue = (userData: IUserData): string => {
-    // Priority 1: Direct document types (CC, TI, RC)
     if (userData.document_type && VALID_DOCUMENT_TYPES.includes(userData.document_type)) {
         return userData.document_type;
     }
-    
-    // Priority 2: Alternative document type field
+
     if (userData.type_document) {
         return userData.type_document;
     }
-    
-    // Priority 3: Extract from document type name
+
     if (userData.document_type_name) {
         const match = userData.document_type_name.match(/\(([^)]+)\)/);
         return match ? match[1] : userData.document_type_name;
     }
-    
+
     return '';
 };
 
@@ -79,143 +117,6 @@ export const handleExchangeRateChange = (
         foreign_exchange_rate: integers.length > NINE ? formData?.foreign_exchange_rate : floatValue,
     });
 };
-
-/**
- * Generate product table headers based on invoice type and mandate status
- * Provides dynamic headers configuration for quote product tables with tooltips
- * 
- * @typeParam isMandate: boolean - Whether the invoice requires mandate fields
- * @typeParam isPurchaseInvoice: boolean - Whether this is a purchase invoice (affects unit cost vs unit value)
- * @returns Array of header configuration objects with tooltips
- */
-export const QUOTE_PRODUCT_TABLE_HEADERS = (isMandate: boolean, isPurchaseInvoice: boolean): IGenericRecord[] => [
-    {
-        className: 'selector',
-    },
-    {
-        title: 'No.',
-        className: 'number',
-    },
-    {
-        title: '*SKU/Código - Producto/Servicio',
-        className: 'sku',
-        tooltip: {
-            title: 'SKU/Código - Producto/Servicio:',
-            description: 'es el código único de identificación y el nombre de sus productos/servicios.',
-        },
-    },
-    {
-        title: 'Descripción',
-        className: 'description',
-        tooltip: {
-            title: 'Descripción:',
-            description: 'información adicional para la venta del producto/servicio.',
-        },
-    },
-    {
-        title: '*Bodega',
-        className: 'warehouse',
-        tooltip: {
-            title: 'Bodega:',
-            description: 'es el nombre de la(s) bodega(s) en las que está almacenado el producto.',
-        },
-    },
-    {
-        title: '*Lote',
-        className: 'batch',
-        tooltip: {
-            title: 'Lote:',
-            description: 'es la identificación del lote del producto.',
-        },
-    },
-    {
-        title: '*Fecha de vencimiento',
-        className: 'due-date',
-        tooltip: {
-            title: 'Fecha de vencimiento:',
-            description: 'es la fecha en la que el producto dejará de ser apto para su consumo.',
-        },
-    },
-    {
-        title: '*Cantidad',
-        className: 'quantity',
-        tooltip: {
-            title: 'Cantidad:',
-            description: 'es la cantidad de producto/servicio a vender.',
-        },
-    },
-    {
-        title: `*Valor ${isPurchaseInvoice ? 'unitario de compra' : 'unitario'}`,
-        className: 'unit-cost',
-        tooltip: {
-            title: `Valor ${isPurchaseInvoice ? 'unitario de compra' : 'unitario'}:`,
-            description: `es el precio ${isPurchaseInvoice ? 'de compra ' : ''}de la unidad del producto/servicio.`,
-        },
-    },
-    {
-        title: '% Desc.',
-        className: 'discount',
-        tooltip: {
-            title: '% Desc.:',
-            description: 'es el porcentaje de descuento aplicado al producto/servicio.',
-        },
-    },
-    {
-        title: 'Valor total',
-        className: 'total',
-        tooltip: {
-            title: 'Valor total:',
-            description: 'es el precio total del producto/servicio.',
-        },
-    },
-    ...(isMandate
-        ? [
-              {
-                  title: '*Proveedor',
-                  className: 'supplier',
-                  tooltip: {
-                      title: 'Proveedor:',
-                      description: 'es el nombre del proveedor del producto/servicio.',
-                  },
-              },
-          ]
-        : []),
-];
-
-/**
- * Generate required table fields list based on supplier validation requirements
- * Provides field mapping for quote product table validation
- * 
- * @typeParam validateSupplier: boolean - Whether supplier validation is required
- * @returns Array of field configuration objects with name and display value
- */
-export const QUOTE_REQUIRED_TABLE_FIELDS = (validateSupplier: boolean): { name: string; value: string }[] => [
-    {
-        name: 'sku_internal',
-        value: 'SKU/Código - Producto/Servicio',
-    },
-    {
-        name: 'warehouse_name',
-        value: 'Bodega',
-    },
-    {
-        name: 'batch_number',
-        value: 'Lote',
-    },
-    {
-        name: 'date_expiration',
-        value: 'Fecha de vencimiento',
-    },
-    {
-        name: 'quantity',
-        value: 'Cantidad',
-    },
-    {
-        name: 'unit_cost',
-        value: 'Valor unitario',
-    },
-    ...(validateSupplier ? [{ name: 'mandate_id', value: 'Proveedor' }] : []),
-];
 
 /**
  * Assign quote products with processed tax and stock information
@@ -281,7 +182,7 @@ export const calculateQuoteVat = (taxes: IGenericRecord[] = [], base: number): n
  * @typeParam products: IQuoteProduct[] - Array of quote products to process
  * @returns Array of products with calculated tax amounts
  */
-export const calculateQuoteProductTaxes = (products: IQuoteProduct[]): IQuoteProduct[] => {
+export const calculateQuoteProductTaxes = (products: IQuoteProduct[]): (IQuoteProduct & { total_buy: number; taxes?: Array<{ company_tax_id: string; tax_value: number }> })[] => {
     return products.map(item => {
         if (!lengthGreaterThanZero(item.product_taxes) || !item.quantity || !item.unit_cost) return item;
         const base = calculateQuoteBase(item);
@@ -327,7 +228,7 @@ export const getQuotePerishableErrors = (productData: IGenericRecord[]): string[
  * @returns True if both arrays are valid
  */
 export const isStateDataReadyForTotals = (details: IGenericRecord[] | null, retentions: IGenericRecord[] | null): boolean => {
-    return Boolean(details && Array.isArray(details) && retentions && Array.isArray(retentions));
+    return Boolean(details && Array.isArray(details) && lengthGreaterThanZero(details) && retentions && Array.isArray(retentions));
 };
 
 /**
@@ -351,7 +252,6 @@ export const updatePersonalFields = (
     authorizedData?: IGenericRecord,
     unauthorizedData?: IGenericRecord
 ): void => {
-    // Default fallback values if constants not provided
     const defaultAuthorizedData = {
         client_id: '',
         name: '',

@@ -149,8 +149,7 @@ const ElectronicDocumentsGenerated: React.FC = () => {
                         name: getRouteName(Routes.ELECTRONIC_DOCUMENTS),
                         moduleName: getRouteName(Routes.ELECTRONIC_DOCUMENTS),
                     },
-                    TitleButtons.NEXT,
-                    getRoute(Routes.NUMBER_RANGE)
+                    TitleButtons.NEXT
                 )}
             />
         </div>

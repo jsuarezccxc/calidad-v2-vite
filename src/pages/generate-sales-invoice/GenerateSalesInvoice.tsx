@@ -6,7 +6,7 @@ import { BreadCrumb } from '@components/bread-crumb';
 import { SalesCards, PageDirections, AddPerson } from '@components/electronic-documents';
 import { SharedModal } from '@components/modal';
 import { PageTitle } from '@components/page-title';
-import { BillingInformation, FORM_DATA, UNAUTHORIZED_DATA } from './components';
+import { BillingInformation, FORM_DATA, UNAUTHORIZED_DATA, assignProducts, INVOICE_TYPES } from './components';
 import { Routes } from '@constants/Paths';
 import { TypeFile } from '@constants/ElectronicInvoice';
 import { SUPPORT_DOCUMENTS_SUBTITLE } from '@constants/DocumentTexts';
@@ -22,11 +22,12 @@ import { MODULE_TITLES } from '@constants/ElectronicDocuments';
 import useParam from '@hooks/useParam';
 import { INFORMATION } from '@information-texts/GenerateSalesInvoice';
 import { IGenericRecord } from '@models/GenericRecord';
+import { IInvoiceDetails, ITableTaxesAndRetention } from '@models/ElectronicInvoice';
 import { RootState } from '@redux/rootReducer';
 import { getUtils } from '@redux/utils/actions';
 import { getSuppliers } from '@redux/suppliers/actions';
 import { getClientsThin } from '@redux/clients/actions';
-import { getInformationCompany } from '@redux/company/actions';
+import { getCompanyTaxes, getInformationCompany } from '@redux/company/actions';
 import { getClientById, setClientSelected } from '@redux/client-portal/actions';
 import { getFilesCompanyAction } from '@redux/parameterization-customization-electronic-invoice/actions';
 import {
@@ -38,8 +39,10 @@ import {
 } from '@redux/electronic-invoice/actions';
 import { getDocumentType } from '@utils/ElectronicInvoice';
 import { getRoute, getRouteName } from '@utils/Paths';
+import { AssignDataToObject } from '@utils/Json';
 import { ModuleApp } from '@utils/GenerateId';
-import { getRoutes, FORM, PREFIXES } from '.';
+import { loadQuoteForInvoice } from '@redux/quotes/actions';
+import { getRoutes, FORM, PREFIXES, QUOTE_DATA_TEMPLATE, QUOTE_QUERY_PARAM, CLIENT_QUERY_PARAM, buildWithholdingTable, findNameById } from '.';
 import './GenerateSalesInvoice.scss';
 
 const GenerateSalesInvoice: React.FC<{ isInsertedPage?: boolean; isContingency?: boolean }> = ({
@@ -50,7 +53,7 @@ const GenerateSalesInvoice: React.FC<{ isInsertedPage?: boolean; isContingency?:
     const [history, { pathname }] = [useHistory(), useLocation()];
     const isContingencyInInvoice = getRoute(Routes.GENERATE_CONTINGENCY_INVOICE) === pathname;
 
-    const { information, utils, quantityInvoices } = useSelector(
+    const { information, utils, quantityInvoices, products } = useSelector(
         ({ utils, company, electronicInvoice, clientPortal }: RootState) => ({
             ...utils,
             ...company,
@@ -58,11 +61,14 @@ const GenerateSalesInvoice: React.FC<{ isInsertedPage?: boolean; isContingency?:
             ...clientPortal,
         })
     );
-    const { queryParam } = useParam(FORM);
+    const { queryParam, id: queryId } = useParam('invoice');
     const [formData, setFormData] = useState<IGenericRecord>({ ...FORM_DATA, ...UNAUTHORIZED_DATA });
     const [openModal, setOpenModal] = useState<boolean>(false);
     const [stepInstructions, setStepInstructions] = useState<IGenericRecord | null>(null);
     const [addClient, setAddClient] = useState(false);
+    const [quoteProductData, setQuoteProductData] = useState<IInvoiceDetails[] | undefined>(undefined);
+    const [quoteWithholdingData, setQuoteWithholdingData] = useState<ITableTaxesAndRetention[] | undefined>(undefined);
+    const [quoteSendingCharge, setQuoteSendingCharge] = useState<number | undefined>(undefined);
 
     const personTexts = queryParam ? INFORMATION[queryParam] : {};
     const { prefix_id: prefixId, client_id: clientId } = formData;
@@ -96,12 +102,59 @@ const GenerateSalesInvoice: React.FC<{ isInsertedPage?: boolean; isContingency?:
         };
     }, []);
 
+    useEffect(() => {
+        const loadQuoteData = async (): Promise<void> => {
+            if (
+                queryParam === QUOTE_QUERY_PARAM &&
+                queryId &&
+                utils?.payment_types &&
+                utils?.payment_methods &&
+                utils?.foreign_exchange &&
+                products &&
+                products.length > 0
+            ) {
+                const quote = await dispatch(loadQuoteForInvoice(queryId));
+
+                if (quote) {
+                    const quoteData = quote as IGenericRecord;
+                    const mappedData = AssignDataToObject(QUOTE_DATA_TEMPLATE, quoteData);
+                    const hasClientId = Boolean(quoteData.client_id);
+
+                    const operationTypeName = findNameById(INVOICE_TYPES, mappedData.operation_type_id, 'value');
+
+                    const updatedFormData = {
+                        ...FORM_DATA,
+                        ...mappedData,
+                        operation_type: operationTypeName,
+                        not_information_customer: hasClientId,
+                    };
+
+                    setFormData(updatedFormData);
+
+                    if (quoteData.client_id) {
+                        dispatch(getClientById(quoteData.client_id));
+                    }
+
+                    const assignedProducts = assignProducts(quoteData.invoice_details || [], products);
+                    const builtWithholdings = buildWithholdingTable(quoteData);
+
+                    setQuoteProductData(assignedProducts);
+                    setQuoteWithholdingData(builtWithholdings);
+                    setQuoteSendingCharge(quoteData.sending_charge || 0);
+                }
+            }
+        };
+
+        loadQuoteData();
+    }, [queryParam, queryId, utils, products]);
+
     const getData = async (): Promise<void> => {
         await Promise.all([
             dispatch(getUniqueProductStock()),
             dispatch(getClientsThin()),
             dispatch(getSuppliers(true)),
             dispatch(getInformationCompany()),
+            dispatch(getCompanyTaxes()),
             dispatch(getPrefixCompany(PREFIXES)),
             dispatch(getUtils([PAYMENT_TYPES, PAYMENT_METHODS, FOREIGN_EXCHANGE, OPERATION_TYPES, LANGUAGES, ...PERSON_UTILS])),
             dispatch(getFilesCompanyAction(TypeFile.LOGO_INVOICE)),
@@ -154,7 +207,7 @@ const GenerateSalesInvoice: React.FC<{ isInsertedPage?: boolean; isContingency?:
                     <h2 className="page-subtitle">{MODULE_TITLES.INVOICE}</h2>
                 </>
             )}
-            {addClient || queryParam ? (
+            {addClient || queryParam === CLIENT_QUERY_PARAM ? (
                 <AddPerson
                     isClient
                     toggleModal={(clientId, isNotShow): void => {
@@ -183,6 +236,9 @@ const GenerateSalesInvoice: React.FC<{ isInsertedPage?: boolean; isContingency?:
                         toggleModal={toggleModal}
                         isInsertedPage={isInsertedPage}
                         isContingency={isContingencyInInvoice}
+                        initialProductData={quoteProductData}
+                        initialWithholdingData={quoteWithholdingData}
+                        initialSendingCharge={quoteSendingCharge}
                     />
                 </>
             )}

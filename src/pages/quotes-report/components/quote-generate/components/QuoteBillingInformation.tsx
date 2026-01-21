@@ -1,51 +1,65 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ActionElementType, ElementType, generateId, ModuleApp } from '@utils/GenerateId';
+
 import { ChangeEvent, TextArea } from '@components/input';
 import { SharedModal } from '@components/modal';
-import { ContingencyState } from '@constants/ContingencyActivation';
-import { INVOICE_CALCULATES } from '@constants/ElectronicInvoice';
+
+import { ProductsTable } from '@pages/generate-sales-invoice/components';
+
 import { MANDATE } from '@constants/Invoice';
+import { ContingencyState } from '@constants/ContingencyActivation';
+import { DATA_WITHHOLDINGS, INVOICE_CALCULATES } from '@constants/ElectronicInvoice';
 import { ModalType } from '@constants/Modal';
-import { INFORMATION } from '@information-texts/GenerateSalesInvoice';
-import { Form as FormQuery } from '@models/ElectronicDocuments';
-import { IInvoiceDetails } from '@models/ElectronicInvoice';
-import { IGenericRecord } from '@models/GenericRecord';
-import { FieldName, Modal } from '@models/SalesInvoice';
-import { getSpecificDocument, setSpecificDocument } from '@redux/cancellation-electronic-document/actions';
-import { setClientSelected } from '@redux/client-portal/actions';
-import { getInvoiceCalculations as getTotals, setInvoiceCalculations, setStateInvoice } from '@redux/electronic-invoice/actions';
-import { ISetInvoiceCalculations } from '@redux/electronic-invoice/types';
-import { RootState } from '@redux/rootReducer';
+import { MINIMUM_VALUE } from '@constants/QuoteViewLabels';
+import { ActionElementType, ElementType, generateId, ModuleApp } from '@utils/GenerateId';
+
 import useModal from '@hooks/useModal';
 import useParam from '@hooks/useParam';
 import usePermissions from '@hooks/usePermissions';
 import useTable from '@hooks/useTable';
-import { useBillingTableHandlers } from '../hooks/useBillingTableHandlers';
+
+import { INFORMATION } from '@information-texts/GenerateSalesInvoice';
+
+import { Form as FormQuery } from '@models/ElectronicDocuments';
+import { IInvoiceDetails, ITableTaxesAndRetention } from '@models/ElectronicInvoice';
+import { IQuoteProduct } from '@models/QuoteGeneration';
+import { FieldName, Modal } from '@models/SalesInvoice';
+
+import { getSpecificDocument, setSpecificDocument } from '@redux/cancellation-electronic-document/actions';
+import { setClientSelected } from '@redux/client-portal/actions';
+import { getInvoiceCalculations as getTotals, setInvoiceCalculations } from '@redux/electronic-invoice/actions';
+import { ISetInvoiceCalculations } from '@redux/electronic-invoice/types';
+import { RootState } from '@redux/rootReducer';
+
+import { calculateQuoteVat } from '@utils/quoteCalculations';
+
 import {
     calculateQuoteProductTaxes,
     calculateWithholdingValues,
-    createTableConfig,
     getQuotePerishableErrors,
     IQuoteBillingInformationProps,
+    IQuoteInvoiceState,
     isDraftDocumentReady,
     isStateDataReadyForTotals,
     processDraftDocument,
-    QUOTE_MODALS,
     QUOTE_PAYMENT_METHOD,
     QUOTE_REQUIRED_TABLE_FIELDS,
-    QUOTE_WITHHOLDING_DATA,
-    QuoteFinancialSummary,
     QuoteInvoiceForm,
-    QuoteProductsTable,
+    QuoteSubTotals,
+    QuoteWithholdingTable,
+    VARIABLE_TYPE,
 } from '.';
+
+import './QuoteBillingInformation.scss';
 
 export const QuoteBillingInformation: React.FC<IQuoteBillingInformationProps> = ({
     formData,
     openForm,
     updateFormData,
     isContingency,
+    validate,
     onProductsChange,
+    onWithholdingsChange,
 }) => {
     const dispatch = useDispatch();
     const { queryParam: quoteId }: { queryParam: string } = useParam('ID');
@@ -61,10 +75,12 @@ export const QuoteBillingInformation: React.FC<IQuoteBillingInformationProps> = 
     );
 
     const [consultTotals, setConsulTotals] = useState<boolean>(false);
-    const [productData, setProductData] = useState<IInvoiceDetails[]>([]);
+    const [productData, setProductData] = useState<IQuoteProduct[]>([]);
     const [sendingCharge, setSendingCharge] = useState<number>(0);
-    const [withholdingTable, setWithholdingData] = useState<IGenericRecord[]>(QUOTE_WITHHOLDING_DATA);
+    const [withholdingTable, setWithholdingData] = useState<ITableTaxesAndRetention[]>(DATA_WITHHOLDINGS());
     const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+    const [pendingDeleteProducts, setPendingDeleteProducts] = useState<IQuoteProduct[]>([]);
+    const [isLoadingFromState, setIsLoadingFromState] = useState<boolean>(false);
     const includeSupplier = formData?.[FieldName.OperationType] === MANDATE;
 
     const productsWithTaxes = useMemo(() => {
@@ -72,8 +88,7 @@ export const QuoteBillingInformation: React.FC<IQuoteBillingInformationProps> = 
     }, [productData]);
 
     const { errorMessages } = useTable(productData, QUOTE_REQUIRED_TABLE_FIELDS(includeSupplier));
-    const { toggleModal } = useModal(QUOTE_MODALS);
-
+    const { toggleModal } = useModal({ [Modal.ErrorDIAN]: false });
     const { disabledInputs } = usePermissions();
 
     useEffect(() => {
@@ -101,10 +116,6 @@ export const QuoteBillingInformation: React.FC<IQuoteBillingInformationProps> = 
     }, [invoiceValues]);
 
     useEffect(() => {
-        setWithholdingData(calculateWithholdings());
-    }, [productsWithTaxes]);
-
-    useEffect(() => {
         getQuoteTotals();
     }, [consultTotals, sendingCharge]);
 
@@ -117,33 +128,57 @@ export const QuoteBillingInformation: React.FC<IQuoteBillingInformationProps> = 
     }, [stateInvoice]);
 
     useEffect(() => {
-        if (onProductsChange) onProductsChange(productsWithTaxes);
+        if (isLoadingFromState) {
+            return;
+        }
+        setWithholdingData(calculateWithholdings());
+    }, [productsWithTaxes]);
+
+    useEffect(() => {
+        if (onProductsChange) {
+            const invoiceDetails: IInvoiceDetails[] = productsWithTaxes.map(product => ({
+                ...product,
+                batch_number: product.batch_number || null,
+            })) as IInvoiceDetails[];
+            onProductsChange(invoiceDetails);
+        }
     }, [productsWithTaxes, onProductsChange]);
 
-    const draftDocumentAssign = (): void => {
-        const { processedProducts, sendingCharge, withholdings } = processDraftDocument(
-            draftDocument,
-            formData,
-            updateFormData,
-            products
-        );
+    useEffect(() => {
+        if (onWithholdingsChange) onWithholdingsChange(withholdingTable);
+    }, [withholdingTable]);
 
-        setProductData([...processedProducts]);
-        setSendingCharge(sendingCharge);
-        setWithholdingData([...withholdings]);
+    useEffect(() => {
+        if (sendingCharge !== formData.sending_charge) {
+            updateFormData({ ...formData, sending_charge: sendingCharge });
+        }
+    }, [sendingCharge]);
+
+    const draftDocumentAssign = (): void => {
+        const result: IQuoteInvoiceState = processDraftDocument(draftDocument, formData, updateFormData, products as IQuoteProduct[]);
+
+        setProductData([...result.productData]);
+        setSendingCharge(result.sendingCharge);
+        setWithholdingData([...result.withholdingTable]);
         setConsulTotals(true);
     };
 
+    const calculateWithholdings = (): ITableTaxesAndRetention[] => {
+        return calculateWithholdingValues(productsWithTaxes as IInvoiceDetails[], withholdingTable, calculateQuoteVat);
+    };
+
     const getQuoteTotals = (): ISetInvoiceCalculations | void => {
-        if (!productData.length) return dispatch(setInvoiceCalculations({ ...INVOICE_CALCULATES }));
+        if (productData.length === MINIMUM_VALUE) return dispatch(setInvoiceCalculations({ ...INVOICE_CALCULATES }));
         if (consultTotals) {
+            const calculatedWithholdings = calculateWithholdings();
+
             dispatch(
                 getTotals({
                     products: productsWithTaxes.map(item => ({
                         ...item,
                         taxes: item?.product_taxes ?? [],
                     })),
-                    withholdings: calculateWithholdings(),
+                    withholdings: calculatedWithholdings,
                     sending_charge: sendingCharge,
                 })
             );
@@ -151,14 +186,13 @@ export const QuoteBillingInformation: React.FC<IQuoteBillingInformationProps> = 
         }
     };
 
-    const calculateWithholdings = (): IGenericRecord[] => {
-        return calculateWithholdingValues(productsWithTaxes, withholdingTable);
-    };
-
     const assignToState = async (): Promise<void> => {
         const { formData: form, productData: details, sendingCharge: charge, withholdingTable: retentions } = stateInvoice || {};
+
+        setIsLoadingFromState(true);
+
         if (form) updateFormData({ ...form });
-        if (typeof charge === 'number') setSendingCharge(charge);
+        if (typeof charge === VARIABLE_TYPE.NUMBER) setSendingCharge(charge);
         if (details && Array.isArray(details)) setProductData(details);
         if (isStateDataReadyForTotals(details, retentions)) {
             await dispatch(
@@ -170,45 +204,51 @@ export const QuoteBillingInformation: React.FC<IQuoteBillingInformationProps> = 
             );
         }
         if (retentions && Array.isArray(retentions)) setWithholdingData([...retentions]);
+
+        setTimeout(() => {
+            setIsLoadingFromState(false);
+        }, 100);
     };
 
     const handleValueChange = ({ target: { name, value } }: ChangeEvent): void => updateFormData({ ...formData, [name]: value });
 
     const toggleTotalsQuery = useCallback((): void => setConsulTotals(!consultTotals), [consultTotals]);
 
-    const showDeleteConfirmation = (): void => {
-        const hasSelectedItems = productData.some(item => item.checked);
-        if (hasSelectedItems) {
-            setShowDeleteModal(true);
-        }
-    };
-
     const perishableErrors = getQuotePerishableErrors(productData);
 
-    const tableConfig = createTableConfig(productData, errorMessages, perishableErrors);
-    const tableHandlers = useBillingTableHandlers(setProductData, toggleTotalsQuery, showDeleteConfirmation);
-
     const handleToClientPage = (): void => {
-        dispatch(setStateInvoice({ formData, productData, withholdingTable, sendingCharge }));
         openForm(FormQuery.Client);
     };
 
     const updateSendingChargeCallback = useCallback(({ value }: { value: number }): void => setSendingCharge(value), []);
 
-    const handleCloseDeleteModal = (): void => setShowDeleteModal(false);
+    const handleUpdateData = useCallback(
+        (products: IInvoiceDetails[]): void => {
+            const hasDeletedItems = products.length < productData.length;
+            const hasCheckedItems = productData.some(item => item.checked);
 
-    const handleConfirmDelete = async (): Promise<void> => {
-        try {
-            setProductData(productData.filter(item => !item.checked));
+            if (hasDeletedItems && hasCheckedItems) {
+                setPendingDeleteProducts([...products] as unknown as IQuoteProduct[]);
+                setShowDeleteModal(true);
+                return;
+            }
+
+            setProductData([...products] as unknown as IQuoteProduct[]);
             toggleTotalsQuery();
-            setShowDeleteModal(false);
-        } catch (error) {
-            updateFormData({
-                ...formData,
-                hasDeleteError: true,
-                deleteErrorMessage: 'Error eliminando productos seleccionados',
-            });
-        }
+        },
+        [productData, toggleTotalsQuery]
+    );
+
+    const handleConfirmDelete = (): void => {
+        setProductData(pendingDeleteProducts);
+        toggleTotalsQuery();
+        setShowDeleteModal(false);
+        setPendingDeleteProducts([]);
+    };
+
+    const handleCloseDeleteModal = (): void => {
+        setShowDeleteModal(false);
+        setPendingDeleteProducts([]);
     };
 
     return (
@@ -216,42 +256,41 @@ export const QuoteBillingInformation: React.FC<IQuoteBillingInformationProps> = 
             <div className="w-full">
                 <QuoteInvoiceForm
                     formData={formData}
-                    validate={false}
+                    validate={validate}
                     openForm={handleToClientPage}
                     isContingency={isContingency}
                     updateFormData={updateFormData}
                 />
                 <p className="text-tiny text-blue my-4.5">{INFORMATION.PRODUCT_TABLE_INDICATION}</p>
-                <QuoteProductsTable
-                    tableConfig={tableConfig}
-                    tableHandlers={tableHandlers}
-                    tableOptions={{
-                        isMandate: formData?.[FieldName.OperationType] === MANDATE,
-                    }}
+                <ProductsTable
+                    symbol="$"
+                    data={productData as unknown as IInvoiceDetails[]}
+                    validate={validate}
+                    errorMessages={errorMessages}
+                    perishableErrors={perishableErrors}
+                    toggleTotalsQuery={toggleTotalsQuery}
+                    foreignExchangeRate={1}
+                    isMandate={formData?.[FieldName.OperationType] === MANDATE}
+                    updateData={handleUpdateData}
                 />
                 <div className="flex flex-col w-full gap-4 lg:flex-row">
                     <div>
-                        <QuoteFinancialSummary
+                        <QuoteWithholdingTable
                             withholdingData={withholdingTable}
-                            updateWithholdingData={(data: IGenericRecord[]): void => setWithholdingData(data)}
-                            totals={invoiceValues}
-                            sendingCharge={sendingCharge}
-                            updateSendingCharge={updateSendingChargeCallback}
-                            disableShippingCost={!productData.some(product => product.sku_internal)}
+                            updateWithholdingData={(data: ITableTaxesAndRetention[]): void => setWithholdingData(data)}
                             toggleTotalsQuery={toggleTotalsQuery}
-                            isOnlyWithholdingTable={true}
                         />
-                        <div className="quote-generate__billing-information--lower-section">
+                        <div className="billing-information__lower-section">
                             <TextArea
                                 id={generateId({
                                     module: ModuleApp.QUOTES,
-                                    submodule: `observations`,
+                                    submodule: `generate-observations`,
                                     action: ActionElementType.INPUT,
-                                    elementType: ElementType.DRP,
+                                    elementType: ElementType.TXT,
                                 })}
-                                classesWrapper="quote-generate__billing-information--text-area"
-                                labelText="Observaciones:"
-                                rows={3}
+                                classesWrapper="billing-information__text-area"
+                                labelText="Observaciones:" // cspell: disable-line
+                                rows={4}
                                 onChange={handleValueChange}
                                 value={formData.note}
                                 name="note"
@@ -260,13 +299,13 @@ export const QuoteBillingInformation: React.FC<IQuoteBillingInformationProps> = 
                             <TextArea
                                 id={generateId({
                                     module: ModuleApp.QUOTES,
-                                    submodule: `internal-notes`,
+                                    submodule: `generate-internal-notes`,
                                     action: ActionElementType.INPUT,
-                                    elementType: ElementType.DRP,
+                                    elementType: ElementType.TXT,
                                 })}
-                                classesWrapper="quote-generate__billing-information--text-area"
-                                labelText="Comentario para uso interno:"
-                                rows={3}
+                                classesWrapper="billing-information__text-area"
+                                labelText="Comentario para uso interno:" // cspell: disable-line
+                                rows={4}
                                 onChange={handleValueChange}
                                 value={formData.internal_notes}
                                 name="internal_notes"
@@ -275,21 +314,18 @@ export const QuoteBillingInformation: React.FC<IQuoteBillingInformationProps> = 
                             />
                         </div>
                     </div>
-                    <QuoteFinancialSummary
-                        withholdingData={withholdingTable}
-                        updateWithholdingData={(data: IGenericRecord[]): void => setWithholdingData(data)}
+                    <QuoteSubTotals
                         totals={invoiceValues}
                         sendingCharge={sendingCharge}
                         updateSendingCharge={updateSendingChargeCallback}
                         disableShippingCost={!productData.some(product => product.sku_internal)}
                         toggleTotalsQuery={toggleTotalsQuery}
-                        isOnlySubTotals={true}
                     />
                 </div>
             </div>
 
             <SharedModal
-                moduleId={`${ModuleApp.QUOTES}-delete`}
+                moduleId={`${ModuleApp.QUOTES}-delete-product`}
                 open={showDeleteModal}
                 type={ModalType.Delete}
                 handleClosed={handleCloseDeleteModal}

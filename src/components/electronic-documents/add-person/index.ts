@@ -2,6 +2,7 @@ import { v4 as uuid } from 'uuid';
 import { IGenericRecord } from '@models/GenericRecord';
 import { FieldName } from '@models/Company';
 import { DEFAULT_RESPONSIBILITY } from '@utils/Company';
+import { DEFAULT_FISCAL_RESPONSIBILITIES } from '@pages/supplier-database';
 
 export { AddPerson } from './AddPerson';
 
@@ -42,16 +43,17 @@ export const getRequiredFields = (isColombia: boolean): string[] => [
  * @returns IGenericRecord
  */
 export const formatPersonRequest = ({ document_type, ...data }: IGenericRecord, utils: IGenericRecord): IGenericRecord => {
-    const isFiscalResponsibilities = data.fiscal_responsibilities[0]?.id;
     return{
     ...data,
     email: data?.email ?? null,
-    fiscal_responsibilities: isFiscalResponsibilities? data.fiscal_responsibilities : [],
+    fiscal_responsibilities: data?.fiscal_responsibilities?.map((item: IGenericRecord) =>
+        item.id ? item : DEFAULT_FISCAL_RESPONSIBILITIES
+    ) || [],
     is_update: false,
-    tax_details_code: utils?.tax_details?.find((item: IGenericRecord) => item.value === data.tax_detail)?.code,
-    tax_details_name: data.tax_detail,
-    type_taxpayer_name: utils?.type_tax_payer?.find(({ value }: IGenericRecord) => value === data?.person_type)?.value,
-    type_taxpayer_id: utils?.type_tax_payer?.find(({ value }: IGenericRecord) => value === data?.person_type)?.id,
+    tax_details_code: utils?.tax_details?.find((item: IGenericRecord) => item.value === data.tax_detail)?.code || 'ZZ',
+    tax_details_name: data.tax_detail || 'No aplica',
+    type_taxpayer_name: data?.type_taxpayer_name ?? utils?.type_tax_payer?.find(({ value }: IGenericRecord) => value === data?.person_type)?.value,
+    type_taxpayer_id: data?.type_taxpayer_id ?? utils?.type_tax_payer?.find(({ value }: IGenericRecord) => value === data?.person_type)?.id,
     document_type: utils?.document_types?.find((item: IGenericRecord) => item.value === document_type || item.id === document_type)?.id,
     name_legal_representative: data?.name_legal_representative ?? null,
     receive_email: true,
@@ -83,7 +85,6 @@ export const REQUIRED_FIELDS = [
     FieldName.ClientName,
     FieldName.DocumentType,
     FieldName.DocumentNumber,
-    FieldName.PersonType,
 ];
 
 /**

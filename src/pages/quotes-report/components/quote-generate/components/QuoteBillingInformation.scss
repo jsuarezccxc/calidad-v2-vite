@@ -67,7 +67,10 @@
             }
 
             @media (min-width: 64rem) {
-                @apply w-full flex flex-row items-start #{!important};
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: flex-start !important;
+                width: 100% !important;
                 max-width: 75rem !important;
                 min-height: 6rem;
             }

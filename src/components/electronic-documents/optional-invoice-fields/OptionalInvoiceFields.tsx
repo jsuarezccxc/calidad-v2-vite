@@ -18,6 +18,7 @@ export const OptionalInvoiceFields: React.FC<IOptionalInvoiceFieldsProps> = ({ d
 
     const documentTypesOptionsRender = buildOptions(utils?.document_types?.slice(0, 4)).map(item => ({
         ...item,
+        value: item.id,
         name: item.value,
     }));
 
@@ -34,9 +35,10 @@ export const OptionalInvoiceFields: React.FC<IOptionalInvoiceFieldsProps> = ({ d
                     />
                     <TextInput {...fieldProps[FieldName.SalesManager]} onChange={handleValueChange} disabled={disabledInputs} />
                     <SelectSearchInput
-                        {...fieldProps[FieldName.ManagerDocumentType]}
+                        {...fieldProps[FieldName.SalesManagerDocumentTypeId]}
                         optionSelect={documentTypesOptionsRender}
-                        onChangeSelect={(_, e): void => handleOptionChange(e, FieldName.ManagerDocumentType)}
+                        valueSelect={data?.[FieldName.SalesManagerDocumentTypeId]}
+                        onChangeSelect={(_, e): void => handleOptionChange(e, FieldName.SalesManagerDocumentTypeId)}
                         disabled={disabledInputs}
                     />
                     <TextInput

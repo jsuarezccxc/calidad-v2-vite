@@ -1,8 +1,6 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import dayjs from '@utils/Dayjs';
-// FullCalendar - core must be imported first
-import '@fullcalendar/core';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';

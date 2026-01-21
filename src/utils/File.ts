@@ -118,6 +118,27 @@ export const getRouteFile = (routes: Section[]): string =>  {
 }
 
 /**
+ * Validates blob response and ensures correct MIME type
+ * Basic validation - backend is responsible for file format integrity
+ *
+ * @typeParam blob: Blob - Blob response from server
+ * @typeParam type: string - File type ('pdf' or 'xlsx')
+ * @returns Blob - Blob with correct MIME type for download
+ */
+export const validateBlobResponse = (blob: Blob, type: string): Blob => {
+    if (!blob || !(blob instanceof Blob) || blob.size === 0) {
+        throw new Error('Invalid or empty file received from server');
+    }
+
+    if (blob.type === 'application/octet-stream' || !blob.type) {
+        const mimeType = fileType[type as keyof typeof fileType] || fileType.pdf;
+        return new Blob([blob], { type: mimeType });
+    }
+
+    return blob;
+};
+
+/**
  * String constant
  */
 export const STRING = 'string';

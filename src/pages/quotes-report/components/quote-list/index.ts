@@ -1,50 +1,61 @@
-export { default as ReportTableContent } from './ReportTableContent';
-export { ReportFilters } from './components';
-import type { IQuote } from '../../index';
-import type { IPaginatorBackend } from '@components/paginator-backend';
 import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Routes } from '@constants/Paths';
-import { getRoute } from '@utils/Paths';
+
 import { LinkColor } from '@components/button';
+import type { IPaginatorBackend } from '@components/paginator-backend';
 import { IBodyTable } from '@components/table';
+
+import { Routes } from '@constants/Paths';
 import { ITableFieldType } from '@constants/TableFieldType';
+
+import { getRoute } from '@utils/Paths';
+
+import type { IQuote } from '@models/QuoteGeneration';
+
+export { default as ReportTableContent } from './ReportTableContent';
+export { ReportFilters } from './components';
 
 
 /**
  * Filter state values that IFilterValues interface receives
- * 
+ *
  * @typeParam search: string - Search term filter
  * @typeParam documentStatus: string - Document status filter
- * @typeParam startDate: string - Start date filter
- * @typeParam endDate: string - End date filter
+ * @typeParam startDate: Date | null - Start date filter as Date object
+ * @typeParam endDate: Date | null - End date filter as Date object
  * @typeParam hasSelectedQuotes: boolean - Whether quotes are selected for deletion
  */
 export interface IFilterValues {
     search: string;
     documentStatus: string;
-    startDate: string;
-    endDate: string;
+    startDate: Date | null;
+    endDate: Date | null;
     hasSelectedQuotes: boolean;
 }
 
 /**
  * Filter event handlers that IFilterHandlers interface receives
- * 
- * @typeParam handleFilterChange: function - Field value change handler
- * @typeParam handleDateChange: function - Date field change handler
+ *
+ * @typeParam onSearchChange: function - Search field change handler
+ * @typeParam onDocumentStatusChange: function - Document status filter change handler
+ * @typeParam onStartDateChange: function - Start date filter change handler (Date object)
+ * @typeParam onEndDateChange: function - End date filter change handler (Date object)
+ * @typeParam onDeleteClick: function - Delete selected quotes handler
+ * @typeParam handleFilterChange: function - Generic field value change handler
+ * @typeParam handleDateChange: function - Generic date field change handler (Date object)
  * @typeParam handleClearFilters: function - Clear all filters handler
  * @typeParam handleApplyFilters: function - Apply filters handler
- * @typeParam handleDateFocus: function - Date field focus handler
- * @typeParam handleDateBlur: function - Date field blur handler
  */
 export interface IFilterHandlers {
-    handleFilterChange: (field: keyof IFilterValues, value: string) => void;
-    handleDateChange: (field: 'startDate' | 'endDate', value: string) => void;
+    onSearchChange: (value: string) => void;
+    onDocumentStatusChange: (value: string) => void;
+    onStartDateChange: (value: Date | null) => void;
+    onEndDateChange: (value: Date | null) => void;
+    onDeleteClick: () => void;
+    handleFilterChange: (field: keyof IFilterValues, value: string | Date | null) => void;
+    handleDateChange: (field: 'startDate' | 'endDate', value: Date | null) => void;
     handleClearFilters: () => void;
     handleApplyFilters: () => void;
-    handleDateFocus?: () => void;
-    handleDateBlur?: () => void;
 }
 
 /**
@@ -68,65 +79,34 @@ export interface IReportFiltersProps {
  * @typeParam data: IQuote[] - Quotes data array
  * @typeParam onCheckboxChange: function - Checkbox change handler
  * @typeParam onQuoteClick: function - Quote click handler
+ * @typeParam isLoading: boolean - Loading state for table skeleton
  */
 export interface IReportTableProps {
     data: IQuote[];
     onCheckboxChange: (id: string, checked: boolean) => void;
     onQuoteClick: (quoteNumber: string) => void;
-}
-
-/**
- * Create quote button props that ICreateQuoteButtonProps interface receives
- * 
- * @typeParam onClick: function - Button click handler
- * @typeParam disabled: boolean - Button disabled state
- * @typeParam isLoading: boolean - Loading state indicator
- * @typeParam className: string - Additional CSS classes
- */
-export interface ICreateQuoteButtonProps {
-    onClick: () => void;
-    disabled?: boolean;
     isLoading?: boolean;
-    className?: string;
 }
 
 /**
  * Modal visibility states that IModalStates interface receives
- * 
- * @typeParam showSuccess: boolean - Success modal visibility
- * @typeParam showError: boolean - Error modal visibility
- * @typeParam showConfirm: boolean - Confirm modal visibility
- * @typeParam showInfo: boolean - Info modal visibility
- * @typeParam showWarning: boolean - Warning modal visibility
- * @typeParam showLoading: boolean - Loading modal visibility
+ *
+ * @typeParam showDeleteModal: boolean - Delete confirmation modal visibility
  */
 export interface IModalStates {
-    showSuccess: boolean;
-    showError: boolean;
-    showConfirm: boolean;
-    showInfo: boolean;
-    showWarning?: boolean;
-    showLoading?: boolean;
+    showDeleteModal: boolean;
 }
 
 /**
  * Modal event handlers that IModalHandlers interface receives
- * 
+ *
  * @interface IModalHandlers
- * @typeParam handleCloseModal: function - Close any modal handler
- * @typeParam handleShowModal: function - Show specific modal by type handler
- * @typeParam handleConfirmAction: function - Confirm action in modal handler
- * @typeParam handleCancelAction: function - Cancel action in modal handler
- * @typeParam handleSuccessAction: function - Optional success action handler
- * @typeParam handleErrorAction: function - Optional error action handler
+ * @typeParam onCloseDeleteModal: function - Close delete confirmation modal handler
+ * @typeParam onConfirmDelete: function - Confirm delete action handler
  */
 export interface IModalHandlers {
-    handleCloseModal: () => void;
-    handleShowModal: (modalType: keyof IModalStates) => void;
-    handleConfirmAction: () => void;
-    handleCancelAction: () => void;
-    handleSuccessAction?: () => void;
-    handleErrorAction?: () => void;
+    onCloseDeleteModal: () => void;
+    onConfirmDelete: () => void;
 }
 
 /**
@@ -301,10 +281,15 @@ export const utils = {
 export const useReportNavigation = (): {
     handleQuoteClick: (quoteNumber: string) => void;
     handleCreateQuote: () => void;
+    handleGoBack: () => void;
+    handleGoToGeneratedDocuments: () => void;
 } => {
     const history = useHistory();
 
     const handleQuoteClick = useCallback((quoteNumber: string): void => {
+        sessionStorage.removeItem('currentQuoteId');
+        sessionStorage.removeItem('currentQuoteNumber');
+
         const targetUrl = `${getRoute(Routes.QUOTES_REPORT)}?view=quote-view&quote=${quoteNumber}`;
         history.push(targetUrl);
     }, [history]);
@@ -313,8 +298,18 @@ export const useReportNavigation = (): {
         history.push(`${getRoute(Routes.QUOTES_REPORT)}?view=create`);
     }, [history]);
 
+    const handleGoBack = useCallback((): void => {
+        history.goBack();
+    }, [history]);
+
+    const handleGoToGeneratedDocuments = useCallback((): void => {
+        history.push(getRoute(Routes.ELECTRONIC_DOCUMENTS_GENERATED));
+    }, [history]);
+
     return {
         handleQuoteClick,
         handleCreateQuote,
+        handleGoBack,
+        handleGoToGeneratedDocuments,
     };
 };

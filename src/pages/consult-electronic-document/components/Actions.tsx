@@ -9,9 +9,17 @@ import { Icon } from '@components/icon';
 import { Modal } from '@components/modal';
 import { ElementType, generateId, ModuleApp, ActionElementType } from '@utils/GenerateId';
 import { Document, getEnum, Invoice } from '.';
+import { TYPE_NAVIGATION } from '..';
 
 export const Actions: React.FC = () => {
-    const { document } = useSelector(({ cancellationElectronicDocuments }: RootState) => cancellationElectronicDocuments);
+    const queryParams = new URLSearchParams(location.search);
+    const typeNavigation = queryParams.get('type');
+    const isQuoteView = typeNavigation === TYPE_NAVIGATION.QUOTE_VIEW;
+
+    const { document: electronicDocument } = useSelector(({ cancellationElectronicDocuments }: RootState) => cancellationElectronicDocuments);
+    const { quoteData } = useSelector(({ quotes }: RootState) => quotes);
+
+    const document = isQuoteView ? quoteData : electronicDocument;
     const [showModal, setShowModal] = useState(false);
 
     const isPurchaseNote = [CREDIT_NOTE_SUPPLIER, DEBIT_NOTE_SUPPLIER].includes(document?.invoice_type);
@@ -42,7 +50,7 @@ export const Actions: React.FC = () => {
                         Prefijo:
                         <span className="font-normal font-aller text-purple">&nbsp; {validateConsecutive().name}</span>
                     </p>
-                    {!isPurchaseNote && (
+                    {!isPurchaseNote && !isQuoteView && (
                         <p className="font-bold text-blue font-allerbold mb-5.5 w-88 xs:w-full">
                             {document?.invoice_type === PURCHASE_SUPPLIER
                                 ? 'Estado de la transmisión y envío a cliente'
@@ -52,10 +60,10 @@ export const Actions: React.FC = () => {
                                 : 'Estado de la transmisión y envío a cliente'}
                         </p>
                     )}
-                    {document?.invoice_type === PURCHASE_SUPPLIER || isPurchaseNote ? <Invoice /> : <Document />}
+                    {!isQuoteView && (document?.invoice_type === PURCHASE_SUPPLIER || isPurchaseNote ? <Invoice /> : <Document />)}
                 </div>
                 <div className="actions__preview">
-                    <PdfDocument file={document?.invoice_pdf_url} className="w-full h-full">
+                    <PdfDocument file={document?.invoice_pdf_url || document?.pdf_url} className="w-full h-full">
                         <Page pageNumber={1} className="w-full h-full" />
                     </PdfDocument>
                     <div className="actions__preview--pdf" onClick={(): void => setShowModal(true)}>
@@ -71,7 +79,7 @@ export const Actions: React.FC = () => {
                         handleClose={(): void => setShowModal(false)}
                         open={showModal}
                     >
-                        <PdfDocument file={document?.invoice_pdf_url} className="relative">
+                        <PdfDocument file={document?.invoice_pdf_url || document?.pdf_url} className="relative">
                             <Icon
                                 name="closeHeader"
                                 onClick={(): void => setShowModal(false)}
@@ -82,7 +90,7 @@ export const Actions: React.FC = () => {
                     </Modal>
                 </div>
             </div>
-            {document?.dian_url && (
+            {document?.dian_url && !isQuoteView && (
                 <>
                     <p className="mb-2 text-blue">{INFORMATION_PAGE.LINK[document?.invoice_type]}</p>
                     <a href={document?.dian_url} target="__blank" className="underline text-purple">

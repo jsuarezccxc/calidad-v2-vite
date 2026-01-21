@@ -8,8 +8,8 @@ import { getRoute, getRouteName } from '@utils/Paths';
 export const ReportHeader: React.FC = () => {
     const routes = [
         {
-            name: getRouteName(Routes.ELECTRONIC_DOCUMENTS),
-            route: getRoute(Routes.ELECTRONIC_DOCUMENTS)
+            name: getRouteName(Routes.DASHBOARD_ELECTRONIC_DOCUMENT),
+            route: getRoute(Routes.DASHBOARD_ELECTRONIC_DOCUMENT)
         },
         {
             name: getRouteName(Routes.QUOTES_REPORT),
@@ -19,7 +19,7 @@ export const ReportHeader: React.FC = () => {
 
     return (
         <>
-            <PageTitle title={getRouteName(Routes.ELECTRONIC_DOCUMENTS)} pageContent={SUPPORT_DOCUMENTS_SUBTITLE} />
+            <PageTitle title={getRouteName(Routes.DASHBOARD_ELECTRONIC_DOCUMENT)} pageContent={SUPPORT_DOCUMENTS_SUBTITLE} />
             <BreadCrumb routes={routes} />
             <h2 className="page-subtitle">Cómo generar y transmitir Factura electrónica de venta y Documento soporte</h2>
 

@@ -5,16 +5,16 @@ import { ChangeEvent } from '@components/input';
 import { Table } from '@components/table';
 import { isEven } from '@utils/Number';
 import { EMPTY_ARRAY_LENGTH } from '@utils/quoteHelpers';
-import { ModuleApp, ActionElementType, generateId, ElementType } from '@utils/GenerateId';
+import { ElementType, generateId, ModuleApp, ActionElementType } from '@utils/GenerateId';
 import { UI_TEXTS } from '@constants/QuoteViewLabels';
-import { QuotesTableHeader } from './QuotesTableHeader';
 import type { IReportTableProps } from '..';
 import { formatTimestampToDate } from '..';
+import { QuotesTableHeader } from './QuotesTableHeader';
 import '../QuoteList.scss';
 
 const OBJECT_TYPE = 'object';
 
-export const ReportTable: React.FC<IReportTableProps> = ({ data, onCheckboxChange, onQuoteClick, paginatorBackendData }) => {
+export const ReportTable: React.FC<IReportTableProps> = ({ data, onCheckboxChange, onQuoteClick, isLoading = false }) => {
     const handleSelectionRow = ({ target: { checked } }: ChangeEvent, row: number): void => {
         if (onCheckboxChange && data[row]) {
             const quoteId = data[row].id || data[row].number;
@@ -33,10 +33,11 @@ export const ReportTable: React.FC<IReportTableProps> = ({ data, onCheckboxChang
             <Table
                 id={generateId({
                     module: ModuleApp.QUOTES,
-                    submodule: `report`,
+                    submodule: 'reports',
                     action: ActionElementType.INFO,
                     elementType: ElementType.TBL,
                 })}
+                isLoading={isLoading}
                 headerRowsCustom={<QuotesTableHeader />}
                 className="quotes-report-table__table"
                 tbodyClassName="quotes-report-table__table"
@@ -45,8 +46,6 @@ export const ReportTable: React.FC<IReportTableProps> = ({ data, onCheckboxChang
                 isHeaderRowsCustom
                 customTable
                 data={data}
-                isNew
-                paginatorBackendData={paginatorBackendData}
             >
                 {Array.isArray(data) &&
                     data.length > EMPTY_ARRAY_LENGTH &&
@@ -56,7 +55,7 @@ export const ReportTable: React.FC<IReportTableProps> = ({ data, onCheckboxChang
                             <tr
                                 id={generateId({
                                     module: ModuleApp.QUOTES,
-                                    submodule: `report-${item.id}-${index}`,
+                                    submodule: `${ModuleApp.TABLE}-reports-${item.id}`,
                                     action: ActionElementType.INFO,
                                     elementType: ElementType.ROW,
                                 })}
@@ -64,6 +63,12 @@ export const ReportTable: React.FC<IReportTableProps> = ({ data, onCheckboxChang
                             >
                                 <td className="table-field quotes-report-table__selector quotes-report-table__cell-selector">
                                     <SingleCheckBox
+                                        id={generateId({
+                                            module: ModuleApp.QUOTES,
+                                            submodule: `${ModuleApp.TABLE}-reports-${item.id}`,
+                                            action: ActionElementType.INPUT,
+                                            elementType: ElementType.CHK,
+                                        })}
                                         checked={item.checked || false}
                                         handleChange={(e: ChangeEvent): void => handleSelectionRow(e, index)}
                                         name="checked"
@@ -74,8 +79,8 @@ export const ReportTable: React.FC<IReportTableProps> = ({ data, onCheckboxChang
                                     <button
                                         id={generateId({
                                             module: ModuleApp.QUOTES,
-                                            submodule: `report-${item.id}-${index}-number-quote`,
-                                            action: ActionElementType.REDIRECT,
+                                            submodule: `${ModuleApp.TABLE}-reports-${item.id}`,
+                                            action: ActionElementType.INPUT,
                                             elementType: ElementType.BTN,
                                         })}
                                         className="text-sm font-normal leading-4 text-left underline bg-transparent border-none cursor-pointer quotes-report-table__link-purple hover:opacity-80"
@@ -98,7 +103,7 @@ export const ReportTable: React.FC<IReportTableProps> = ({ data, onCheckboxChang
                                     </span>
                                 </td>
                                 <td className={getRowClassName('quotes-report-table__email', index)}>
-                                    <span className="text-sm leading-4 table-field-text">
+                                    <span className="block text-sm leading-5 break-words table-field-text">
                                         {item.email || item.client_email || UI_TEXTS.PLACEHOLDERS.DEFAULT_EMAIL}
                                     </span>
                                 </td>

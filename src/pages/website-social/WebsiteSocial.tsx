@@ -1,9 +1,4 @@
 import React, { Dispatch, SetStateAction, useEffect, useMemo, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import ReactPlayer from 'react-player';
-import { useHistory } from 'react-router';
-import WhatsappExample from '@assets/images/whatsapp-example.svg';
-import { BreadCrumb } from '@components/bread-crumb';
 
 // Vite dynamic imports for country flags
 const flagImages = import.meta.glob<{ default: string }>('/src/assets/images/flags-countries/*.svg', { eager: true });
@@ -11,6 +6,11 @@ const getFlagImage = (code: string): string => {
     const path = `/src/assets/images/flags-countries/${code.trim()}.svg`;
     return flagImages[path]?.default || '';
 };
+import { useDispatch, useSelector } from 'react-redux';
+import ReactPlayer from 'react-player';
+import { useHistory } from 'react-router';
+import WhatsappExample from '@assets/images/whatsapp-example.svg';
+import { BreadCrumb } from '@components/bread-crumb';
 import { Form } from '@components/form';
 import { ChangeEvent, DEFAULT_REQUIRED_TEXT, IOptionSelect, SelectInput } from '@components/input';
 import { Icon } from '@components/icon';

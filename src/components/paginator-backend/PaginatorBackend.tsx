@@ -57,14 +57,18 @@ export const PaginatorBackend: React.FC<IPaginatorBackend<IGenericRecord>> = req
     }, [request]);
 
     const handleBack = (): void => {
-        if (linksFormatted.last) {
+        if (linksFormatted.prev) {
             dispatch(getPaginationUrl(requestData(linksFormatted?.prev)));
+        } else if (setData && currentPage > 0) {
+            setData(currentPage - 1);
         }
     };
 
     const handleNext = (): void => {
         if (linksFormatted.next) {
             dispatch(getPaginationUrl(requestData(linksFormatted?.next)));
+        } else if (setData && currentPage < (meta?.last_page || 1) - 1) {
+            setData(currentPage + 1);
         }
     };
 
@@ -90,9 +94,13 @@ export const PaginatorBackend: React.FC<IPaginatorBackend<IGenericRecord>> = req
     const disabledClass = (page: number): string => (currentPage === page ? 'bg-transparent opacity-60' : '');
 
     const handleClickNumber = (page: number): void => {
-        const [url] = linksFormatted.first.split('?page') || [''];
-        const searchParam = params?.search ? `&search=${params.search}` : '';
-        dispatch(getPaginationUrl(requestData(`${url}?page=${Number(page + ONE)}${searchParam}`)));
+        if (linksFormatted.first) {
+            const [url] = linksFormatted.first.split('?page') || [''];
+            const searchParam = params?.search ? `&search=${params.search}` : '';
+            dispatch(getPaginationUrl(requestData(`${url}?page=${Number(page + ONE)}${searchParam}`)));
+        } else if (setData) {
+            setData(page);
+        }
     };
     return (
         <div className={`flex items-center justify-end xs:pt-0 border-gray-dark ${wrapperClassName} margin-paginator`}>

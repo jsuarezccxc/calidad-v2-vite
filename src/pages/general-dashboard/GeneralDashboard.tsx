@@ -15,7 +15,6 @@ import { getOnboardingInformation } from '@redux/onboarding/action';
 import { getEvents } from '@redux/calendar/actions';
 import { getEconomicData } from '@redux/home-landing/action';
 import { getInflation } from '@redux/utils/actions';
-import { getAnalyticsData } from '@redux/website/actions';
 import { getCommonProperties } from '@redux/website-node/actions';
 import { loginSession, setCreateAccountModal, setLoginModal } from '@redux/session/actions';
 import { setModalRedirectPlans } from '@redux/menu/actions';
@@ -23,7 +22,7 @@ import { ISetModalRedirectPlans } from '@redux/menu/types';
 import { getActivePlans } from '@utils/Membership';
 import { generateId, ModuleApp, ActionElementType, ElementType } from '@utils/GenerateId';
 import { Calendar, ChartCard, IndicatorCards, TrafficCards, WebsiteCard, WebsiteCards } from './components';
-import { getAnalyticsDates, getInitialDates, IDates, getPlan, BANNER } from '.';
+import { getInitialDates, IDates, getPlan, BANNER } from '.';
 import './GeneralDashboard.scss';
 
 const GeneralDashboard: React.FC = () => {
@@ -94,7 +93,6 @@ const GeneralDashboard: React.FC = () => {
             dispatch(getEconomicData()),
             dispatch(getActiveModules()),
             dispatch(getCommonProperties([CommonProperty.Domain])),
-            dispatch(getAnalyticsData(getAnalyticsDates(), commonProperties.domain)),
             dispatch(getInflation()),
             dispatch(getEvents()),
         ]);

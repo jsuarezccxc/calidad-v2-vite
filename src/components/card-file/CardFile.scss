@@ -4,6 +4,11 @@
     width: 12.3125rem;
     height: 3.75rem;
 
+    &--logo-container {
+        @apply w-full h-full px-4.5 gap-2.5;
+        flex-shrink: 0;
+    }
+
     &:hover {
         .card-file__shadow {
             @apply flex;

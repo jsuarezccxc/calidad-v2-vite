@@ -2,7 +2,7 @@ import { IGenericRecord } from '@models/GenericRecord';
 import { IInvoiceCalculates } from '@models/ElectronicInvoice';
 import { INVOICE_CALCULATES } from '@constants/ElectronicInvoice';
 import { IGenericPaginationData, paginationDataFormat } from '@constants/PaginationBack';
-import { ActionKeys, ElectronicInvoiceActions } from './types';
+import { ActionKeys, ElectronicInvoiceActions, IInvoiceQuoteState } from './types';
 
 interface IElectronicInvoiceReducer {
     issuedDocuments: IGenericRecord[];
@@ -25,7 +25,7 @@ interface IElectronicInvoiceReducer {
     invoiceCalculations: IInvoiceCalculates;
     prefixes: IGenericRecord[];
     invoicePrefix: IGenericRecord;
-    stateInvoice: IGenericRecord;
+    stateInvoice: IInvoiceQuoteState | IGenericRecord;
 }
 
 const initialState = {

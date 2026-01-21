@@ -61,7 +61,7 @@ export const ProductsTable: React.FC<ITableDataProps> = ({
 }) => {
     const {
         products = [],
-        suppliers: { data: suppliers },
+        suppliers: { data: suppliers } = { data: [] },
     } = useSelector(({ electronicInvoice, suppliers }: RootState) => ({
         ...electronicInvoice,
         ...suppliers,

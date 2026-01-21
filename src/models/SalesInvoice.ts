@@ -8,7 +8,9 @@ export enum FieldName {
     DocumentNumber = 'document_number',
     PersonType = 'person_type',
     PaymentType = 'payment_type_name',
+    PaymentTypeId = 'payment_type_id',
     PaymentMethod = 'payment_method_name',
+    PaymentMethodId = 'payment_method_id',
     ForeignExchangeId = 'foreign_exchange_id',
     ForeignExchangeName = 'foreign_exchange_name',
     ForeignExchangeRate = 'foreign_exchange_rate',
@@ -26,6 +28,8 @@ export enum FieldName {
     ManagerDocumentType = 'document_type_purchasing_manager',
     CollectionDays = 'collection_days',
     UnitCost = 'unit_cost',
+    QuoteManagerDocumentType = 'manager_document_type',
+    QuoteManagerDocumentNumber = 'manager_document_number',
 }
 
 export enum Modal {

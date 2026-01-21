@@ -1,12 +1,18 @@
 import React from 'react';
+
 import { SharedModal } from '@components/modal';
-import { TitleButtons } from '@constants/Buttons';
+
 import { ModalType } from '@constants/Modal';
-import { IQuoteWarningModalsProps } from '..';
+import { TitleButtons } from '@constants/Buttons';
+
+import { ModuleApp } from '@utils/GenerateId';
+
+import { IQuoteWarningModalsProps } from '.';
 
 export const QuoteCharacterLimitModal: React.FC<IQuoteWarningModalsProps> = ({ show, onClose, onAccept }) => {
     return (
         <SharedModal
+            moduleId={`${ModuleApp.QUOTES}-character-limit`}
             open={show}
             type={ModalType.Information}
             handleClosed={onClose}

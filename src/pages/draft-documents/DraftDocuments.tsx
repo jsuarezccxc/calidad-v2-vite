@@ -242,7 +242,7 @@ export const DraftDocuments: React.FC = () => {
                     {...buttonsFooterProps(
                         ModuleApp.DRAFT_DOCUMENTS,
                         history,
-                        getRoute(isDocument ? Routes.ELECTRONIC_DOCUMENTS_GENERATED : Routes.CORRECTED_DOCUMENTS),
+                        getRoute(isDocument ? Routes.QUOTES_REPORT : Routes.CORRECTED_DOCUMENTS),
                         {
                             name: getRouteName(Routes.ELECTRONIC_DOCUMENTS),
                             moduleName: getRouteName(Routes.ELECTRONIC_DOCUMENTS),

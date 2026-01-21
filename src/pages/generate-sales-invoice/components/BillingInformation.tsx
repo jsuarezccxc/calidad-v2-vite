@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -9,19 +9,11 @@ import { SharedModal } from '@components/modal';
 import { PageButtonsFooter } from '@components/page-buttons-footer';
 
 import { Routes } from '@constants/Paths';
-import { RETE_ICA, RETE_IVA } from '@constants/Tax';
 import { TitleButtons } from '@constants/Buttons';
-import { BASE, IVA, MANDATE } from '@constants/Invoice';
+import { MANDATE } from '@constants/Invoice';
 import { KEYS_ASSIGN_OBJECT } from '@constants/BillingInformation';
 import { ContingencyState } from '@constants/ContingencyActivation';
-import {
-    CONSUMER_CLIENT_DOCUMENT,
-    INVOICE_CALCULATES,
-    ONE_HUNDRED,
-    ONE_THOUSAND,
-    TypeFile,
-    ValidateClassName,
-} from '@constants/ElectronicInvoice';
+import { CONSUMER_CLIENT_DOCUMENT, INVOICE_CALCULATES, TypeFile, ValidateClassName } from '@constants/ElectronicInvoice';
 
 import useParam from '@hooks/useParam';
 import useModal from '@hooks/useModal';
@@ -30,9 +22,8 @@ import usePermissions from '@hooks/usePermissions';
 import useScrollToError from '@hooks/useScrollToError';
 import { useSymbolCurrency } from '@hooks/useSymbolCurrency';
 
-import { IGenericRecord } from '@models/GenericRecord';
 import { FieldName, Modal } from '@models/SalesInvoice';
-import { IInvoiceDetails } from '@models/ElectronicInvoice';
+import { IInvoiceDetails, ITableTaxesAndRetention } from '@models/ElectronicInvoice';
 import { Form as FormQuery } from '@models/ElectronicDocuments';
 
 import { INFORMATION } from '@information-texts/GenerateSalesInvoice';
@@ -51,14 +42,13 @@ import { ISetInvoiceCalculations } from '@redux/electronic-invoice/types';
 import { getSpecificDocument, setSpecificDocument } from '@redux/cancellation-electronic-document/actions';
 import { postFileCompanyAction } from '@redux/parameterization-customization-electronic-invoice/actions';
 
-import { getSum } from '@utils/Array';
 import { assignValue } from '@utils/Json';
 import { buttonsFooterProps } from '@utils/Button';
 import { validateEmptyFields } from '@utils/Fields';
 import { isCorrectResponse } from '@utils/Response';
 import { getRoute, getRouteName } from '@utils/Paths';
 import { lengthGreaterThanZero } from '@utils/Length';
-import { stringToFloat } from '@utils/ElectronicInvoice';
+import { stringToFloat, calculateWithholdingValues } from '@utils/ElectronicInvoice';
 import { ElementType, generateId, ModuleApp, ActionElementType } from '@utils/GenerateId';
 
 import {
@@ -82,6 +72,7 @@ import {
     INVOICE_TYPES,
     assignProducts,
     calculateVat,
+    mapProductsForTotals,
 } from '.';
 
 export const BillingInformation: React.FC<IBillingInformationProps> = ({
@@ -90,6 +81,9 @@ export const BillingInformation: React.FC<IBillingInformationProps> = ({
     updateFormData,
     isInsertedPage,
     isContingency,
+    initialProductData,
+    initialWithholdingData,
+    initialSendingCharge,
 }) => {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -102,6 +96,7 @@ export const BillingInformation: React.FC<IBillingInformationProps> = ({
         information,
         stateInvoice,
         draftDocument,
+        companyTaxes,
         clientSelected: client,
         invoiceCalculations: invoiceValues,
     } = useSelector(
@@ -132,8 +127,11 @@ export const BillingInformation: React.FC<IBillingInformationProps> = ({
     const [productData, setProductData] = useState<IInvoiceDetails[]>([]);
     const [sendingCharge, setSendingCharge] = useState<number>(0);
     const [validate, setValidate] = useState<boolean>(false);
-    const [withholdingTable, setWithholdingData] = useState<IGenericRecord[]>(WITHHOLDING_DATA);
+    const [withholdingTable, setWithholdingData] = useState<ITableTaxesAndRetention[]>(WITHHOLDING_DATA);
     const [invoice, setInvoice] = useState<string>('');
+    const [isLoadingFromQuote, setIsLoadingFromQuote] = useState<boolean>(false);
+    const hasInitializedFromQuote = useRef<boolean>(false);
+    const hasInitializedFromState = useRef<boolean>(false);
     const includeSupplier = formData?.[FieldName.OperationType] === MANDATE;
 
     const productsWithTaxes = useMemo(() => calculateProductTaxes(productData), [productData]);
@@ -144,7 +142,7 @@ export const BillingInformation: React.FC<IBillingInformationProps> = ({
 
     const { disabledInputs } = usePermissions();
 
-    const draftDocumentAssign = (): void => {
+    const draftDocumentAssign = async (): Promise<void> => {
         const { withholdings, invoiceDetails, ...form } = assignValue(KEYS_ASSIGN_OBJECT, draftDocument);
         updateFormData({
             ...formData,
@@ -152,62 +150,79 @@ export const BillingInformation: React.FC<IBillingInformationProps> = ({
             not_information_customer: form.document_number !== CONSUMER_CLIENT_DOCUMENT,
             operation_type: INVOICE_TYPES.find(item => item.id === form.operation_type_id)?.value,
         });
-        setProductData([...calculateWithRate(assignProducts(invoiceDetails, products), form.foreign_exchange_rate)]);
+
+        const loadedProducts = calculateWithRate(assignProducts(invoiceDetails, products), form.foreign_exchange_rate);
+        const productsWithCalculatedTaxes = calculateProductTaxes(loadedProducts);
+
+        setProductData([...loadedProducts]);
+        setWithholdingData(withholdings);
         setSendingCharge(draftDocument?.sending_charge || 0);
-        setWithholdingData([...withholdings]);
-        setConsulTotals(true);
+
+        const totalsPayload = {
+            products: productsWithCalculatedTaxes.map(item => ({
+                ...item,
+                quantity: stringToFloat(item.quantity),
+                taxes: item?.product_taxes ?? [],
+            })),
+            withholdings: withholdings,
+            sending_charge: draftDocument?.sending_charge || 0,
+        };
+
+        await dispatch(getTotals(totalsPayload));
     };
 
-    const getInvoiceTotals = (): ISetInvoiceCalculations | void => {
+    const getInvoiceTotals = async (): Promise<ISetInvoiceCalculations | void> => {
         if (!productData.length) return dispatch(setInvoiceCalculations({ ...INVOICE_CALCULATES }));
         if (consultTotals) {
-            dispatch(
-                getTotals({
-                    products: productsWithTaxes.map(item => ({
-                        ...item,
-                        quantity: stringToFloat(item.quantity),
-                        taxes: item?.product_taxes ?? [],
-                    })),
-                    withholdings: calculateWithholdings(),
-                    sending_charge: sendingCharge,
-                })
-            );
+            const calculatedWithholdings = calculateWithholdings();
+            const mappedProducts = mapProductsForTotals(productsWithTaxes, products, companyTaxes);
+
+            const payload = {
+                products: mappedProducts,
+                withholdings: calculatedWithholdings,
+                sending_charge: sendingCharge,
+            };
+
+            try {
+                const totalsResponse = await dispatch(getTotals(payload));
+
+                if (!totalsResponse) throw new Error();
+            } catch (error) {
+                console.error('Error calling getTotals:', error);
+            }
+
             toggleTotalsQuery();
         }
     };
 
-    const calculateWithholdings = (): IGenericRecord[] => {
-        return withholdingTable.map(({ name, ...item }: IGenericRecord) => {
-            const base = getSum(
-                productsWithTaxes.map(({ total_buy, product_taxes }) => ({
-                    iva: calculateVat(product_taxes, total_buy),
-                    base: total_buy,
-                })),
-                name === RETE_IVA ? IVA : BASE
-            );
-            return {
-                ...item,
-                base,
-                name,
-                value: (base * item.percentage) / (name === RETE_ICA ? ONE_THOUSAND : ONE_HUNDRED),
-            };
-        });
+    const calculateWithholdings = (): ITableTaxesAndRetention[] => {
+        return calculateWithholdingValues(productsWithTaxes, withholdingTable, calculateVat);
     };
 
     const assignToState = async (): Promise<void> => {
         const { formData: form, productData: details, sendingCharge: charge, withholdingTable: retentions } = stateInvoice;
         const clientId = formData?.client_id || form.client_id;
+
+        setIsLoadingFromQuote(true);
+
         updateFormData({ ...form, client_id: clientId });
         setSendingCharge(charge);
         setProductData([...details]);
-        await dispatch(
-            getTotals({
-                sending_charge: charge,
-                withholdings: retentions,
-                products: calculateProductTaxes(details),
-            })
-        );
-        setWithholdingData([...retentions]);
+
+        const productsForTotals = calculateProductTaxes(details);
+
+        const totalsPayload = {
+            sending_charge: charge,
+            withholdings: retentions,
+            products: mapProductsForTotals(productsForTotals),
+        };
+
+        await dispatch(getTotals(totalsPayload));
+        setWithholdingData(retentions);
+
+        setTimeout(() => {
+            setIsLoadingFromQuote(false);
+        }, 100);
     };
 
     const handleValueChange = ({ target: { name, value } }: ChangeEvent): void => updateFormData({ ...formData, [name]: value });
@@ -305,11 +320,16 @@ export const BillingInformation: React.FC<IBillingInformationProps> = ({
     }, [invoiceValues]);
 
     useEffect(() => {
+        if (isLoadingFromQuote) {
+            return;
+        }
         setWithholdingData(calculateWithholdings());
-    }, [productsWithTaxes]);
+    }, [productsWithTaxes, isLoadingFromQuote]);
 
     useEffect(() => {
-        getInvoiceTotals();
+        getInvoiceTotals().catch(error => {
+            console.error('❌ Error in getInvoiceTotals useEffect:', error);
+        });
     }, [consultTotals, sendingCharge]);
 
     useEffect(() => {
@@ -317,7 +337,42 @@ export const BillingInformation: React.FC<IBillingInformationProps> = ({
     }, [contingency]);
 
     useEffect(() => {
-        if (stateInvoice && !!Object.keys(stateInvoice).length) assignToState();
+        const initializeFromQuote = async (): Promise<void> => {
+            if (
+                initialProductData &&
+                initialWithholdingData !== undefined &&
+                initialSendingCharge !== undefined &&
+                !hasInitializedFromQuote.current
+            ) {
+                hasInitializedFromQuote.current = true;
+                setIsLoadingFromQuote(true);
+
+                setProductData([...initialProductData]);
+                setSendingCharge(initialSendingCharge);
+                setWithholdingData(initialWithholdingData);
+
+                setTimeout(() => {
+                    setIsLoadingFromQuote(false);
+                }, 100);
+            }
+        };
+
+        initializeFromQuote();
+    }, [initialProductData, initialWithholdingData, initialSendingCharge]);
+
+    useEffect(() => {
+        if (!isLoadingFromQuote && hasInitializedFromQuote.current && productData.length > 0 && initialProductData) {
+            toggleTotalsQuery();
+
+            hasInitializedFromQuote.current = false;
+        }
+    }, [isLoadingFromQuote, productData, initialProductData]);
+
+    useEffect(() => {
+        if (stateInvoice && !!Object.keys(stateInvoice).length && !initialProductData && !hasInitializedFromState.current) {
+            hasInitializedFromState.current = true;
+            assignToState();
+        }
     }, [stateInvoice]);
 
     useEffect(() => {
@@ -357,7 +412,7 @@ export const BillingInformation: React.FC<IBillingInformationProps> = ({
                 <div className="flex flex-col gap-7 w-max lg:flex-row">
                     <div>
                         <WithholdingTable
-                            updateData={(data: IGenericRecord[]): void => setWithholdingData(data)}
+                            updateData={(data: ITableTaxesAndRetention[]): void => setWithholdingData(data)}
                             toggleTotalsQuery={toggleTotalsQuery}
                             data={withholdingTable}
                             validate={validate}

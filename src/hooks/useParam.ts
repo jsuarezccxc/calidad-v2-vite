@@ -18,13 +18,14 @@ interface IUseParam {
  * Custom hook that return the query param of the current route
  *
  * @typeParam paramName: string - Name of the query param
- * @typeParam index: number - Param index
  * @returns IUseParam
  */
-const useParam = (paramName = 'invoice', index = 1): IUseParam => {
+const useParam = (paramName = 'invoice'): IUseParam => {
     const { search } = useLocation();
-    const queryParam = String(queryString.parse(search)[paramName] || '');
-    return { queryParam, search, id: search.split('&')[index] };
+    const parsedQuery = queryString.parse(search);
+    const queryParam = String(parsedQuery[paramName] || '');
+    const id = String(parsedQuery.id || '');
+    return { queryParam, search, id };
 };
 
 export default useParam;

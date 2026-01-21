@@ -10,7 +10,21 @@ import { rootReducer } from './rootReducer';
 const persistConfig = {
     key: 'root',
     storage: storage,
-    blacklist: ['recoverPassword'],
+    blacklist: [
+        'recoverPassword',
+        'electronicInvoice',
+        'cancellationElectronicDocuments',
+        'clientPortal',
+        'products',
+        'inventory',
+        'websiteBuilder',
+        'parameterizationInvoice',
+        'utils',
+        'quotes',
+        'homeLanding',
+        'calendar',
+        'notifications',
+    ],
 };
 
 // connect configuration with reducers modules

@@ -1,229 +1,177 @@
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import dayjs from '@utils/Dayjs';
-import { buildOptions } from '@utils/Company';
-import { getDateAnyFormat, getDateISO8601ToDate } from '@utils/Date';
-import { getDocumentType } from '@utils/ElectronicInvoice';
-import { lengthGreaterThanZero } from '@utils/Length';
-import { getUserData } from '@utils/User';
-import {
-    getDocumentTypeValue,
-    handleExchangeRateChange,
-    handleOptionChange,
-    updatePersonalFields,
-} from '@utils/quoteCalculations';
-import { generateQuoteNumber, getCurrentDateFormatted } from '@utils/quoteHelpers';
-import { ElementType, generateId, ModuleApp, ActionElementType } from '@utils/GenerateId';
-import { CardFile } from '@components/card-file';
+
 import CollapseJsx from '@components/Collapse-jsx/CollapseJsx';
 import { CreditCollection } from '@components/credit-collection';
 import { Form } from '@components/form';
 import { DatePickerDayInput, MoneyInput, SelectInput, SelectSearchInput, TextInput, WrapperInput } from '@components/input';
 import { SelectSearch } from '@components/select-search';
-import { Tooltip } from '@components/tooltip';
-import { QUOTE_MAGIC_NUMBERS, TAXPAYER_TYPE_IDS } from '@constants/QuoteViewLabels';
+
 import { CREDIT } from '@constants/Invoice';
-import {
-    COLOMBIAN_CURRENCY_ID,
-    DATE_BACK_FORMAT,
-    DOCUMENT_LANGUAGES,
-    MaxLengthFields,
-    TypeFile,
-} from '@constants/ElectronicInvoice';
+import { QUOTE_CONSTANTS, QUOTE_MAGIC_NUMBERS } from '@constants/QuoteViewLabels';
+
+import usePermissions from '@hooks/usePermissions';
+
 import { TOOLTIP_DATA } from '@information-texts/GenerateSalesInvoice';
+
 import { Form as FormQuery } from '@models/ElectronicDocuments';
 import { IGenericRecord } from '@models/GenericRecord';
+import { IQuoteFormData, IClientData, ISalesManagerData, IPaymentConfigData } from '@models/QuoteGeneration';
 import { FieldName } from '@models/SalesInvoice';
-import { setClientSelected, getClientById } from '@redux/client-portal/actions';
+import { IOptionSelect } from '@components/input';
+
+import { setClientSelected } from '@redux/client-portal/actions';
 import { getFilesCompanyAction } from '@redux/parameterization-customization-electronic-invoice/actions';
 import { getQuotes } from '@redux/quotes/actions';
 import { RootState } from '@redux/rootReducer';
-import usePermissions from '@hooks/usePermissions';
-import usePopper from '@hooks/usePopper';
-import informationIcon from '@assets/images/info-green.svg';
-import { ConditionalFieldInput } from './ConditionalFieldInput';
-import { IQuoteInformationFormProps } from '..';
+
+import './QuoteInvoiceForm.scss';
+
+import { buildOptions } from '@utils/Company';
+import { getDateAnyFormat, getDateISO8601ToDate, getUnixFromDate } from '@utils/Date';
+import { getDocumentType } from '@utils/ElectronicInvoice';
+import { lengthGreaterThanZero } from '@utils/Length';
 import {
-    formatQuotePrefixes,
-    getTooltipData,
-    INVOICE_TYPES,
-    QUOTE_PERSONAL_DATA_OPTIONS,
-    QUOTE_AUTHORIZED_DATA,
-    QUOTE_UNAUTHORIZED_DATA,
-} from '.';
+    getDocumentTypeValue,
+    handleExchangeRateChange,
+    handleOptionChange,
+    updatePersonalFields,
+    inferDocumentTypeId,
+} from '@utils/quoteCalculations';
+import { getUserData } from '@utils/User';
+import { ElementType, generateId, ModuleApp, ActionElementType } from '@utils/GenerateId';
 
-interface ICompanyFields {
-    department_name: string;
-    country_name: string;
-    phone: string;
-    domain: string;
+import { RadioButtons } from '@pages/generate-sales-invoice/components';
+
+import { ConditionalFieldInput } from './ConditionalFieldInput';
+
+import { formatQuotePrefixes, INVOICE_TYPES, QUOTE_PAGINATION_CONFIG, QUOTE_AUTHORIZED_DATA, QUOTE_UNAUTHORIZED_DATA } from '.';
+
+/**
+ * Tooltip data structure from TOOLTIP_DATA constant
+ *
+ * @interface ITooltipFieldData
+ * @typeParam titleTooltip: string - Optional tooltip title text
+ * @typeParam descTooltip: string | React.ReactElement - Optional tooltip description (text or JSX element)
+ */
+interface ITooltipFieldData {
+    titleTooltip?: string;
+    descTooltip?: string | React.ReactElement;
 }
 
-interface IClientInfo {
-    name: string;
-    documentType: string;
-    documentTypeId: string | number;
-    documentNumber: string;
-    email: string;
-    phone: string;
-    address: string;
-    taxpayerType: number | null;
-    taxpayerTypeName: string | null;
-    fiscal_responsibilities: IGenericRecord[];
-    country_id: number;
-    country_name: string;
-    department_id: number;
-    department_name: string;
-    city_id: number;
-    city_name: string;
-    postal_code: string;
+/**
+ * Props interface for QuoteInvoiceForm component
+ * Manages quote invoice form state and validation
+ *
+ * @interface IQuoteInformationFormProps
+ * @typeParam formData: IQuoteFormData - Current form data state with quote-specific fields
+ * @typeParam updateFormData: (data: Partial<IQuoteFormData> | ((prev: IQuoteFormData) => IQuoteFormData)) => void - Function to update form data with typed structure or callback with previous state
+ * @typeParam openForm: (formType?: string) => void - Function to open modal forms
+ * @typeParam validate: boolean - Flag to enable/disable validation display
+ * @typeParam isContingency: boolean - Flag indicating if this is a contingency quote
+ */
+export interface IQuoteInformationFormProps {
+    formData: IQuoteFormData;
+    updateFormData: (data: IQuoteFormData | ((prev: IQuoteFormData) => IQuoteFormData)) => void;
+    openForm: (formType?: string) => void;
+    validate: boolean;
+    isContingency: boolean;
 }
 
+/**
+ * Sales manager information structure for quote generation
+ *
+ * @interface ISalesManagerInfo
+ * @typeParam sales_manager: string - Sales manager full name
+ * @typeParam manager_document_number: string - Sales manager's document number
+ * @typeParam manager_document_type: string - Sales manager's document type code
+ * @typeParam manager_document_type_id: string - Sales manager's document type identifier
+ * @typeParam document_number_sales_manager: string - Alternative field for sales manager document number
+ * @typeParam document_type_sales_manager: string - Alternative field for sales manager document type
+ */
 interface ISalesManagerInfo {
     sales_manager: string;
     manager_document_number: string;
     manager_document_type: string;
     manager_document_type_id: string;
+    document_number_sales_manager: string;
+    document_type_sales_manager: string;
 }
 
-const extractCompanyFields = (company: IGenericRecord): ICompanyFields => ({
-    department_name: company.department_name || '',
-    country_name: company.country_name || '',
-    phone: company.phone || '',
-    domain: company.domain || '',
-});
+/**
+ * Extended user data interface that includes all possible fields from getUserData
+ * Used for building sales manager information with flexible field mappings
+ *
+ * @interface IExtendedUserData
+ * @extends ISalesManagerData
+ * @typeParam document_type_id: string - Primary document type identifier
+ * @typeParam type_document_id: string - Alternative document type identifier field
+ * @typeParam document: string - Primary document number field
+ * @typeParam identification: string - Alternative identification number field
+ * @typeParam id_number: string - Alternative ID number field
+ * @typeParam full_name: string - User's full name
+ * @typeParam username: string - User's username
+ */
+interface IExtendedUserData extends ISalesManagerData {
+    document_type_id?: string;
+    type_document_id?: string;
+    document?: string;
+    identification?: string;
+    id_number?: string;
+    full_name?: string;
+    username?: string;
+}
 
-const TAXPAYER_TYPE_KEYWORDS = {
-    NATURAL: ['natural'],
-    JURIDICA: ['jurídica', 'juridica'],
-} as const;
-
-const getTaxpayerTypeId = (taxpayerTypeName: string | null, defaultId: number | null = null): number | null => {
-    if (!taxpayerTypeName) return defaultId;
-
-    const normalizedTypeName = taxpayerTypeName.toLowerCase();
-
-    if (TAXPAYER_TYPE_KEYWORDS.NATURAL.some(keyword => normalizedTypeName.includes(keyword))) {
-        return TAXPAYER_TYPE_IDS.NATURAL;
-    }
-
-    if (TAXPAYER_TYPE_KEYWORDS.JURIDICA.some(keyword => normalizedTypeName.includes(keyword))) {
-        return TAXPAYER_TYPE_IDS.JURIDICA;
-    }
-
-    return defaultId;
-};
-
-const CLIENT_FIELD_MAPPING = {
-    NAME_FIELDS: ['name', 'name_legal_representative'],
-    DOCUMENT_TYPE_ID_FIELDS: ['document_type_id', 'document_type'],
-    FISCAL_RESPONSIBILITY_FIELDS: ['fiscal_responsibilities', 'person_fiscal_responsibilities'],
-    DEFAULTS: {
-        NAME: 'Cliente',
-        EMPTY_STRING: '',
-        NUMERIC_ZERO: 0,
-        EMPTY_ARRAY: [] as unknown[],
-    },
-} as const;
-
-const getFieldWithFallback = <T extends unknown>(data: IGenericRecord, field: string, fallback: T): T => {
-    return data[field] !== undefined && data[field] !== null ? data[field] : fallback;
-};
-
-const getFieldFromMultipleSources = <T extends unknown>(data: IGenericRecord, fields: readonly string[], fallback: T): T => {
-    for (const field of fields) {
-        if (data[field] !== undefined && data[field] !== null) {
-            return data[field];
-        }
-    }
-    return fallback;
-};
-
-const buildClientInfo = (client: IGenericRecord): IClientInfo => {
-    const taxpayerTypeName = client.type_taxpayer_name || null;
-    const taxpayerTypeId = getTaxpayerTypeId(taxpayerTypeName, client.type_taxpayer_id);
-
-    return {
-        name: getFieldFromMultipleSources(client, CLIENT_FIELD_MAPPING.NAME_FIELDS, CLIENT_FIELD_MAPPING.DEFAULTS.NAME),
-        documentType: getFieldWithFallback(client, 'document_type', CLIENT_FIELD_MAPPING.DEFAULTS.EMPTY_STRING),
-        documentTypeId: getFieldFromMultipleSources(
-            client,
-            CLIENT_FIELD_MAPPING.DOCUMENT_TYPE_ID_FIELDS,
-            CLIENT_FIELD_MAPPING.DEFAULTS.EMPTY_STRING
-        ),
-        documentNumber: getFieldWithFallback(client, 'document_number', CLIENT_FIELD_MAPPING.DEFAULTS.EMPTY_STRING),
-        email: getFieldWithFallback(client, 'email', CLIENT_FIELD_MAPPING.DEFAULTS.EMPTY_STRING),
-        phone: getFieldWithFallback(client, 'phone', CLIENT_FIELD_MAPPING.DEFAULTS.EMPTY_STRING),
-        address: getFieldWithFallback(client, 'address', CLIENT_FIELD_MAPPING.DEFAULTS.EMPTY_STRING),
-        taxpayerType: taxpayerTypeId,
-        taxpayerTypeName: taxpayerTypeName,
-        fiscal_responsibilities: getFieldFromMultipleSources(
-            client,
-            CLIENT_FIELD_MAPPING.FISCAL_RESPONSIBILITY_FIELDS,
-            CLIENT_FIELD_MAPPING.DEFAULTS.EMPTY_ARRAY
-        ),
-        country_id: getFieldWithFallback(client, 'country_id', CLIENT_FIELD_MAPPING.DEFAULTS.NUMERIC_ZERO),
-        country_name: getFieldWithFallback(client, 'country_name', CLIENT_FIELD_MAPPING.DEFAULTS.EMPTY_STRING),
-        department_id: getFieldWithFallback(client, 'department_id', CLIENT_FIELD_MAPPING.DEFAULTS.NUMERIC_ZERO),
-        department_name: getFieldWithFallback(client, 'department_name', CLIENT_FIELD_MAPPING.DEFAULTS.EMPTY_STRING),
-        city_id: getFieldWithFallback(client, 'city_id', CLIENT_FIELD_MAPPING.DEFAULTS.NUMERIC_ZERO),
-        city_name: getFieldWithFallback(client, 'city_name', CLIENT_FIELD_MAPPING.DEFAULTS.EMPTY_STRING),
-        postal_code: getFieldWithFallback(client, 'postal_code', CLIENT_FIELD_MAPPING.DEFAULTS.EMPTY_STRING),
-    };
-};
-
-const buildSalesManagerInfo = (userData: IGenericRecord): ISalesManagerInfo => {
+const buildSalesManagerInfo = (userData: IExtendedUserData): ISalesManagerInfo => {
     const documentTypeValue = getDocumentTypeValue(userData);
+    const documentTypeId = String(userData.document_type_id || userData.type_document_id || '');
+    const documentNumber = String(
+        userData.document_number || userData.document || userData.identification || userData.id_number || ''
+    );
+    const salesManagerName = String(userData.name || userData.full_name || userData.username || 'Encargado de la venta');
 
     return {
-        sales_manager: userData.name || userData.full_name || userData.username || 'Encargado de la venta',
-        manager_document_number:
-            userData.document_number || userData.document || userData.identification || userData.id_number || '',
+        sales_manager: salesManagerName,
+        manager_document_number: documentNumber,
         manager_document_type: documentTypeValue || '',
-        manager_document_type_id: userData.document_type_id || userData.type_document_id || '',
+        manager_document_type_id: documentTypeId,
+        document_number_sales_manager: documentNumber,
+        document_type_sales_manager: documentTypeId,
     };
 };
 
-const createButtonHoverHandlers = (
-    primaryColor = 'var(--primary-green)',
-    hoverColor = 'var(--primary-green-hover)'
-): {
-    onMouseEnter: (e: React.MouseEvent<HTMLButtonElement>) => void;
-    onMouseLeave: (e: React.MouseEvent<HTMLButtonElement>) => void;
-} => ({
-    onMouseEnter: (e: React.MouseEvent<HTMLButtonElement>): void => {
-        e.currentTarget.style.color = hoverColor;
-    },
-    onMouseLeave: (e: React.MouseEvent<HTMLButtonElement>): void => {
-        e.currentTarget.style.color = primaryColor;
-    },
-});
+const handleClientSelection = (
+    value: string,
+    formData: IQuoteFormData,
+    updateFormData: (data: IQuoteFormData | ((prev: IQuoteFormData) => IQuoteFormData)) => void,
+    clientsThin: IClientData[]
+): void => {
+    const selectedClient = clientsThin.find((c: IClientData) => c.client_id === value);
 
-const handleLanguageChange = (value: string, formData: IGenericRecord, updateFormData: (data: IGenericRecord) => void): void => {
-    updateFormData({ ...formData, document_language: value });
-};
-
-const handleClientSelection = (value: string, formData: IGenericRecord, updateFormData: (data: IGenericRecord) => void): void => {
-    updateFormData({ ...formData, client_id: value });
+    updateFormData((currentFormData: IQuoteFormData): IQuoteFormData => ({
+        ...currentFormData,
+        client_id: value,
+        not_information_customer: true,
+        selectedClientName: selectedClient?.name || '',
+    }));
 };
 
 const handlePaymentMethodChange = (
-    option: IGenericRecord,
-    { name }: { name: string },
-    formData: IGenericRecord,
-    updateFormData: (data: IGenericRecord) => void
+    option: string,
+    formData: IQuoteFormData,
+    updateFormData: (data: IQuoteFormData | IGenericRecord) => void
 ): void => {
     updateFormData({
         ...formData,
-        [name]: option?.name || '',
+        payment_method_id: option || '',
     });
 };
 
 const handleForeignExchangeChange = (
-    option: IGenericRecord,
+    option: string,
     { name }: { name: string },
-    formData: IGenericRecord,
-    updateFormData: (data: IGenericRecord) => void
+    formData: IQuoteFormData,
+    updateFormData: (data: IQuoteFormData | IGenericRecord) => void
 ): void => {
     updateFormData({
         ...formData,
@@ -240,6 +188,10 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
     validate,
     isContingency,
 }) => {
+    const updateFormDataGeneric = (data: IGenericRecord): void => {
+        updateFormData(data as IQuoteFormData);
+    };
+
     const dispatch = useDispatch();
     const reduxState = useSelector(
         ({
@@ -261,7 +213,7 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
             utils: utils,
 
             clientSelected: clientPortal.clientSelected,
-            clientsThin: clients.clientsThin,
+            clientsThin: (clients.clientsThin || []) as IClientData[],
 
             storePrefix: electronicInvoice.storePrefix,
 
@@ -284,59 +236,88 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
         clientsThin,
         storePrefix,
         contingency,
-        company,
-        file,
-        quotesData,
         utils,
     } = reduxState;
 
-    const handleLogoUpdate = (file: IGenericRecord): void => {
-        updateFormData({ logo: file });
-    };
-
-    const companyData = company
-        ? {
-              name: company.name,
-              document_type_name: company.document_type_name || 'NIT',
-              document_number: company.document_number,
-              address: company.address,
-              city_name: company.city_name,
-              ...extractCompanyFields(company),
-          }
-        : {
-              name: 'Centro de Consultoría para la Competitividad CCxC - 1',
-              document_type_name: 'NIT',
-              document_number: '901084754',
-              address: 'Cra 16 # 93-78 Of. 807',
-              city_name: 'Bogotá',
-              department_name: 'D.C.',
-              country_name: 'Colombia',
-              phone: '7943044',
-              domain: 'pruebadelsitio-web-v2.diggipymes.co',
-          };
-
     useEffect(() => {
-        dispatch(getFilesCompanyAction(TypeFile.LOGO_INVOICE));
-        dispatch(getQuotes({ per_page: 9999, page: 1 }));
+        dispatch(getFilesCompanyAction(QUOTE_CONSTANTS.TypeFile.LOGO_INVOICE));
+        dispatch(getQuotes({ per_page: QUOTE_PAGINATION_CONFIG.ALL_QUOTES_LIMIT, page: QUOTE_PAGINATION_CONFIG.INITIAL_PAGE }));
     }, [dispatch]);
 
     useEffect(() => {
-        const userData = getUserData();
+        const userData = getUserData() as IExtendedUserData | null;
 
-        if (userData && !formData.sales_manager) {
-            const salesManagerInfo = buildSalesManagerInfo(userData);
-            updateFormData({
-                ...formData,
-                ...salesManagerInfo,
+        if (userData) {
+            updateFormData(currentFormData => {
+                if (!currentFormData.sales_manager) {
+                    const salesManagerInfo = buildSalesManagerInfo(userData);
+                    return {
+                        ...currentFormData,
+                        ...salesManagerInfo,
+                    };
+                }
+                return currentFormData;
             });
         }
     }, []);
+
+    useEffect(() => {
+        if (clientSelected?.customer?.person) {
+            const client = clientSelected.customer.person;
+
+            const inferredDocType =
+                !client.document_type && client.type_taxpayer_name
+                    ? inferDocumentTypeId(client.type_taxpayer_name, document_types)
+                    : null;
+
+            const finalDocType = client.document_type || inferredDocType;
+
+            updateFormData(currentFormData => ({
+                ...currentFormData,
+                name: currentFormData.selectedClientName || client.name,
+                document_type: finalDocType,
+                document_type_id: client.document_type_id,
+                document_number: client.document_number,
+                clientInfo: {
+                    ...currentFormData.clientInfo,
+                    name: currentFormData.selectedClientName || client.name,
+                    address: client.address,
+                    city_id: client.city_id,
+                    city_name: client.city_name,
+                    country_id: client.country_id,
+                    country_name: client.country_name,
+                    department_id: client.department_id,
+                    department_name: client.department_name,
+                    documentNumber: client.document_number,
+                    documentType: finalDocType,
+                    documentTypeId: client.document_type_id,
+                    email: client.email,
+                    phone: client.phone,
+                    postal_code: client.postal_code,
+                    fiscal_responsibilities: client.fiscal_responsibilities || [],
+                    taxpayerType: client.type_taxpayer_id,
+                    taxpayerTypeName: client.type_taxpayer_name,
+                },
+            }));
+        }
+    }, [clientSelected]);
 
     const authorizePersonalData = formData?.not_information_customer;
 
     const { disabledInputs } = usePermissions();
 
-    const buttonHoverHandlers = createButtonHoverHandlers();
+    const handlePersonalFieldsChange = (value: boolean): void => {
+        updatePersonalFields(
+            value,
+            formData as IGenericRecord,
+            updateFormDataGeneric,
+            dispatch,
+            setClientSelected,
+            QUOTE_AUTHORIZED_DATA,
+            QUOTE_UNAUTHORIZED_DATA
+        );
+    };
+
     const client = clientSelected?.customer?.person;
 
     const documentType = useMemo(() => {
@@ -345,16 +326,16 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
             document_types: document_types,
         };
 
-        if (formData.not_information_customer && formData.clientInfo?.documentType) {
-            return getDocumentType(utilsWithDocTypes, formData.clientInfo.documentType);
+        let docType = formData.document_type || client?.document_type;
+
+        if (!docType && client?.type_taxpayer_name) {
+            docType = inferDocumentTypeId(client.type_taxpayer_name, document_types);
         }
-        return getDocumentType(utilsWithDocTypes, client?.document_type);
-    }, [utils, client, formData.not_information_customer, formData.clientInfo?.documentType, document_types]);
+
+        return getDocumentType(utilsWithDocTypes, docType);
+    }, [utils, formData.document_type, client?.document_type, client?.type_taxpayer_name, document_types]);
 
     const prefixes = useMemo(() => formatQuotePrefixes(storePrefix, isContingency), [storePrefix]);
-
-    const { activePopper, anchorEl, mouseProps } = usePopper();
-    const tooltipData = getTooltipData(QUOTE_PERSONAL_DATA_OPTIONS, activePopper);
 
     useEffect(() => {
         if (isContingency && lengthGreaterThanZero(prefixes)) {
@@ -363,172 +344,65 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
         }
     }, [prefixes]);
 
-    useEffect(() => {
-        if (formData.client_id && formData.not_information_customer) {
-            dispatch(getClientById(formData.client_id));
-        }
-    }, [formData.client_id, formData.not_information_customer, dispatch]);
-
-    useEffect(() => {
-        if (client && formData.not_information_customer) {
-            const clientInfo = buildClientInfo(client);
-            updateFormData({
-                ...formData,
-                clientInfo,
-            });
-        }
-    }, [client, formData.not_information_customer]);
-
     return (
-        <Form className="mb-6">
-            <SelectSearchInput
-                id={generateId({
-                    module: ModuleApp.QUOTES,
-                    submodule: `invoice-language`,
-                    action: ActionElementType.INPUT,
-                    elementType: ElementType.DRP,
-                })}
-                classesWrapper="w-37 xs:w-full mb-2 quote-language-select"
-                labelText="Idioma del documento:"
-                valueSelect={formData.document_language || 'es'}
-                placeholder="Seleccionar"
-                optionSelect={DOCUMENT_LANGUAGES}
-                onChangeSelect={({ value }): void => handleLanguageChange(value, formData, updateFormData)}
-                disabled={false}
-            />
-
-            <div className="mb-6 quote-generate__cards">
-                <div className="quote-generate__cards--logo-card">
-                    {file || formData.logo ? (
-                        <CardFile
-                            className="w-full"
-                            file={formData.logo || file || {}}
-                            url={(formData.logo || file)?.url}
-                            updateFile={handleLogoUpdate}
-                        />
-                    ) : (
-                        <div className="text-center">
-                            <span className="quote-generate__text--green">+Agregar logo</span>
-                            <span className="quote-generate__text--green">(jpg,png,jpeg)</span>
-                        </div>
-                    )}
-                </div>
-
-                <div className="quote-generate__cards--company-card">
-                    <p>
-                        <span className="quote-generate__text--blue">{companyData.name}</span>
-                        <span className="quote-generate__text--blue">
-                            {companyData.document_type_name} {companyData.document_number}
-                        </span>
-                        <span className="quote-generate__text--blue">{companyData.address}</span>
-                        <span className="quote-generate__text--blue">
-                            {companyData.city_name ? `${companyData.city_name}, ` : ''}
-                            {companyData.country_name}
-                        </span>
-                        <span className="quote-generate__text--blue">{companyData.phone}</span>
-                        <span className="quote-generate__text--blue">{companyData.domain}</span>
-                    </p>
-                </div>
-
-                <div className="quote-generate__cards--date-card">
-                    <p>
-                        <span className="quote-generate__text--blue">Fecha cotización:</span>
-                        <span className="quote-generate__text--blue">{getCurrentDateFormatted()}</span>
-                        <span className="quote-generate__text--blue">No. cotización:</span>
-                        <span className="quote-generate__text--blue">{generateQuoteNumber(quotesData)}</span>
-                    </p>
-                </div>
-            </div>
-
+        <Form sendWithEnter className="mb-6">
             {isContingency && (
                 <DatePickerDayInput
                     id={generateId({
                         module: ModuleApp.QUOTES,
-                        submodule: `invoice-transmission-date`,
+                        submodule: `generate-transmission-date`,
                         action: ActionElementType.INPUT,
                         elementType: ElementType.TXT,
                     })}
                     name="date"
                     labelText="*Fecha de transmisión:"
                     classesWrapper="w-38 xs:w-full mb-4.5"
-                    selected={dayjs(formData.date, DATE_BACK_FORMAT).unix()}
-                    maxDate={new Date(getDateISO8601ToDate(contingency.end_date, DATE_BACK_FORMAT))}
-                    minDate={new Date(getDateISO8601ToDate(contingency.start_date, DATE_BACK_FORMAT))}
+                    selected={getUnixFromDate(formData.date)}
+                    maxDate={new Date(getDateISO8601ToDate(contingency.end_date, QUOTE_CONSTANTS.DATE_BACK_FORMAT))}
+                    minDate={new Date(getDateISO8601ToDate(contingency.start_date, QUOTE_CONSTANTS.DATE_BACK_FORMAT))}
                     onChangeDate={(date, name): void => {
-                        updateFormData({ ...formData, [name]: getDateAnyFormat(date, DATE_BACK_FORMAT) });
+                        updateFormData({ ...formData, [name]: getDateAnyFormat(date, QUOTE_CONSTANTS.DATE_BACK_FORMAT) });
                     }}
                 />
             )}
             <SelectInput
                 id={generateId({
                     module: ModuleApp.QUOTES,
-                    submodule: `invoice-operation-type`,
+                    submodule: `generate-operation-type`,
                     action: ActionElementType.INPUT,
-                    elementType: ElementType.TXT,
+                    elementType: ElementType.DRP,
                 })}
                 options={INVOICE_TYPES}
-                optionSelected={(option: IGenericRecord): void =>
-                    handleOptionChange(option, FieldName.OperationType, formData, updateFormData)
+                optionSelected={(option: IOptionSelect): void =>
+                    handleOptionChange(option, FieldName.OperationType, formData, updateFormDataGeneric)
                 }
-                labelText="*Tipo de cotización:"
+                labelText="*Tipo de factura:"
                 classesWrapper="form-field"
                 name={FieldName.OperationType}
                 value={formData?.[FieldName.OperationType]}
                 required={validate && !formData?.[FieldName.OperationType]}
                 disabled={disabledInputs}
-                {...TOOLTIP_DATA[FieldName.OperationType]}
+                titleTooltip={(TOOLTIP_DATA[FieldName.OperationType] as ITooltipFieldData)?.titleTooltip || ''}
+                descTooltip={
+                    typeof (TOOLTIP_DATA[FieldName.OperationType] as ITooltipFieldData)?.descTooltip === 'string'
+                        ? ((TOOLTIP_DATA[FieldName.OperationType] as ITooltipFieldData)?.descTooltip as string)
+                        : ''
+                }
             />
-            <div className="mt-6 quote-generate__radio-buttons">
-                <h3 className="mb-2 font-allerbold text-gray-dark">*Seleccione la opción que aplique para su cliente:</h3>
-                <fieldset className="flex flex-col gap-7 lg:flex-row">
-                    {QUOTE_PERSONAL_DATA_OPTIONS.map(({ id, label, value }) => (
-                        <div key={id} className="radio-button">
-                            <input
-                                disabled={disabledInputs}
-                                checked={formData?.not_information_customer === value}
-                                id={label}
-                                onChange={(): void =>
-                                    updatePersonalFields(
-                                        value,
-                                        formData,
-                                        updateFormData,
-                                        dispatch,
-                                        setClientSelected,
-                                        QUOTE_AUTHORIZED_DATA,
-                                        QUOTE_UNAUTHORIZED_DATA
-                                    )
-                                }
-                                type="radio"
-                            />
-                            <label className="border radio-button__option" htmlFor={label}>
-                                {label}
-                                <img
-                                    id={id}
-                                    className="w-5.5 h-5.5 cursor-pointer"
-                                    src={informationIcon}
-                                    alt="Information"
-                                    {...mouseProps}
-                                />
-                            </label>
-                        </div>
-                    ))}
-                </fieldset>
-                <Tooltip
-                    anchorEl={anchorEl}
-                    iconName="infoBlue"
-                    title={`${tooltipData?.label}:`}
-                    description={tooltipData?.description}
-                />
-            </div>
+            <RadioButtons
+                formData={formData as IGenericRecord}
+                handleChange={handlePersonalFieldsChange}
+                disabled={disabledInputs}
+            />
             <fieldset className="flex flex-col gap-y-4.5">
-                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-                    <div>
+                <div className="content-group-input content-group-input-width-864">
+                    <div className="input-style">
                         {authorizePersonalData ? (
                             <>
                                 <WrapperInput
                                     id={generateId({
                                         module: ModuleApp.QUOTES,
-                                        submodule: `invoice-client-name`,
+                                        submodule: `generate-client-name`,
                                         action: ActionElementType.INPUT,
                                         elementType: ElementType.DRP,
                                     })}
@@ -536,12 +410,19 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
                                     classesWrapper="form-field"
                                     required={validate && !formData?.client_id}
                                     tooltipInfo
-                                    {...TOOLTIP_DATA[FieldName.ClientName]}
+                                    titleTooltip={TOOLTIP_DATA[FieldName.ClientName]?.titleTooltip || ''}
+                                    descTooltip={
+                                        typeof TOOLTIP_DATA[FieldName.ClientName]?.descTooltip === 'string'
+                                            ? TOOLTIP_DATA[FieldName.ClientName]?.descTooltip
+                                            : ''
+                                    }
                                 >
                                     <SelectSearch
                                         options={clientsThin.map(({ client_id: id, name }) => ({ name, value: id }))}
                                         value={formData?.client_id || ''}
-                                        onChange={({ value }): void => handleClientSelection(value, formData, updateFormData)}
+                                        onChange={({ value }): void =>
+                                            handleClientSelection(value, formData, updateFormData, clientsThin)
+                                        }
                                         selectIconType="arrowDownGray"
                                         disabled={disabledInputs}
                                         inputClass="w-full leading-4 max-h-8"
@@ -552,7 +433,7 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
                             <TextInput
                                 id={generateId({
                                     module: ModuleApp.QUOTES,
-                                    submodule: `invoice-client-name`,
+                                    submodule: `generate-client-name`,
                                     action: ActionElementType.INPUT,
                                     elementType: ElementType.TXT,
                                 })}
@@ -560,30 +441,34 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
                                 value={formData?.[FieldName.ClientName]}
                                 disabled
                                 classesWrapper="form-field"
-                                {...TOOLTIP_DATA[FieldName.ClientName]}
+                                titleTooltip={TOOLTIP_DATA[FieldName.ClientName]?.titleTooltip || ''}
+                                descTooltip={
+                                    typeof TOOLTIP_DATA[FieldName.ClientName]?.descTooltip === 'string'
+                                        ? TOOLTIP_DATA[FieldName.ClientName]?.descTooltip
+                                        : ''
+                                }
                             />
                         )}
                         <button
                             id={generateId({
                                 module: ModuleApp.QUOTES,
-                                submodule: `invoice-client`,
+                                submodule: `generate-client`,
                                 action: ActionElementType.ADD,
                                 elementType: ElementType.BTN,
                             })}
                             type="button"
-                            className="p-0 mt-2 transition-colors bg-transparent border-0 cursor-pointer disabled:text-gray-400 disabled:cursor-not-allowed quote-form-client-button"
+                            className="p-0 mt-2 transition-colors bg-transparent border-0 quote-form-client-button"
                             onClick={(): void => openForm(FormQuery.Client)}
                             disabled={!authorizePersonalData || disabledInputs}
-                            {...buttonHoverHandlers}
                         >
                             +Agregar cliente
                         </button>
                     </div>
-                    <div>
+                    <div className="input-style">
                         <ConditionalFieldInput
                             id={generateId({
                                 module: ModuleApp.QUOTES,
-                                submodule: `invoice-document-type`,
+                                submodule: `generate-document-type`,
                                 action: ActionElementType.INPUT,
                                 elementType: ElementType.DRP,
                             })}
@@ -591,7 +476,13 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
                             labelText="Tipo de documento:"
                             classesWrapper="form-field"
                             disabled
-                            tooltipData={TOOLTIP_DATA[FieldName.DocumentType]}
+                            tooltipData={{
+                                title: TOOLTIP_DATA[FieldName.DocumentType]?.titleTooltip || '',
+                                description:
+                                    typeof TOOLTIP_DATA[FieldName.DocumentType]?.descTooltip === 'string'
+                                        ? TOOLTIP_DATA[FieldName.DocumentType]?.descTooltip
+                                        : '',
+                            }}
                             selectProps={{
                                 value: documentType,
                             }}
@@ -602,20 +493,26 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-                    <div>
+                <div className="content-group-input content-group-input-width-864">
+                    <div className="input-style">
                         <ConditionalFieldInput
                             id={generateId({
                                 module: ModuleApp.QUOTES,
-                                submodule: `invoice-document-number`,
+                                submodule: `generate-document-number`,
                                 action: ActionElementType.INPUT,
-                                elementType: ElementType.DRP,
+                                elementType: ElementType.TXT,
                             })}
                             condition={authorizePersonalData}
                             labelText="Número de documento:"
                             classesWrapper="form-field"
                             disabled
-                            tooltipData={TOOLTIP_DATA[FieldName.DocumentNumber]}
+                            tooltipData={{
+                                title: TOOLTIP_DATA[FieldName.DocumentNumber]?.titleTooltip || '',
+                                description:
+                                    typeof TOOLTIP_DATA[FieldName.DocumentNumber]?.descTooltip === 'string'
+                                        ? TOOLTIP_DATA[FieldName.DocumentNumber]?.descTooltip
+                                        : '',
+                            }}
                             selectProps={{
                                 value: client?.document_number || '',
                             }}
@@ -624,11 +521,11 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
                             }}
                         />
                     </div>
-                    <div className="flex-1">
+                    <div className="input-style">
                         <ConditionalFieldInput
                             id={generateId({
                                 module: ModuleApp.QUOTES,
-                                submodule: `invoice-taxpayer-type`,
+                                submodule: `generate-taxpayer-type`,
                                 action: ActionElementType.INPUT,
                                 elementType: ElementType.DRP,
                             })}
@@ -636,9 +533,15 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
                             labelText="Tipo de contribuyente:"
                             classesWrapper="form-field"
                             disabled
-                            tooltipData={TOOLTIP_DATA[FieldName.PersonType]}
+                            tooltipData={{
+                                title: TOOLTIP_DATA[FieldName.PersonType]?.titleTooltip || '',
+                                description:
+                                    typeof TOOLTIP_DATA[FieldName.PersonType]?.descTooltip === 'string'
+                                        ? TOOLTIP_DATA[FieldName.PersonType]?.descTooltip
+                                        : '',
+                            }}
                             selectProps={{
-                                value: formData?.clientInfo?.taxpayerTypeName || client?.type_taxpayer_name || '',
+                                value: client?.type_taxpayer_name || '',
                                 options: type_taxpayer_types,
                             }}
                             textProps={{
@@ -651,113 +554,137 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
                     <SelectInput
                         id={generateId({
                             module: ModuleApp.QUOTES,
-                            submodule: `invoice-payment-type`,
+                            submodule: `generate-payment-type`,
                             action: ActionElementType.INPUT,
                             elementType: ElementType.DRP,
                         })}
                         labelText="*Forma de pago:"
                         options={payment_types}
                         classesWrapper="form-field"
-                        optionSelected={(option: IGenericRecord): void =>
-                            handleOptionChange(option, FieldName.PaymentType, formData, updateFormData)
+                        optionSelected={(option: IOptionSelect): void =>
+                            handleOptionChange(option, FieldName.PaymentType, formData as IGenericRecord, updateFormDataGeneric)
                         }
                         name={FieldName.PaymentType}
                         value={formData?.[FieldName.PaymentType]}
                         required={validate && !formData?.[FieldName.PaymentType]}
                         disabled={disabledInputs}
-                        {...TOOLTIP_DATA[FieldName.PaymentType]}
+                        titleTooltip={(TOOLTIP_DATA[FieldName.PaymentType] as ITooltipFieldData)?.titleTooltip || ''}
+                        descTooltip={
+                            typeof (TOOLTIP_DATA[FieldName.PaymentType] as ITooltipFieldData)?.descTooltip === 'string'
+                                ? ((TOOLTIP_DATA[FieldName.PaymentType] as ITooltipFieldData)?.descTooltip as string)
+                                : ''
+                        }
                     />
                     {formData?.[FieldName.PaymentType] === CREDIT && (
-                        <CreditCollection data={formData} updateData={updateFormData} validate={validate} />
+                        <CreditCollection data={formData as IGenericRecord} updateData={updateFormDataGeneric} validate={validate} />
                     )}
                 </div>
-                <div className="flex flex-col lg:flex-row gap-x-7 gap-y-6">
-                    <div className="flex-1">
+                <div className="content-group-input content-group-input-width-864">
+                    <div className="input-style">
                         <SelectSearchInput
                             id={generateId({
                                 module: ModuleApp.QUOTES,
-                                submodule: `invoice-payment-method`,
+                                submodule: `generate-payment-method`,
                                 action: ActionElementType.INPUT,
                                 elementType: ElementType.DRP,
                             })}
-                            labelText="Medio de pago:"
-                            optionSelect={payment_methods?.map((item: IGenericRecord) => ({ ...item, value: item.id }))}
+                            labelText="*Medio de pago:"
+                            optionSelect={payment_methods
+                                ?.filter(
+                                    (item: IPaymentConfigData) =>
+                                        item.name !== 'Instrumento no definido' && item.value !== 'Instrumento no definido'
+                                )
+                                .map((item: IPaymentConfigData) => ({ name: item.name || item.value, value: item.id }))}
                             classesWrapper="form-field"
-                            onChangeSelect={(option, nameData): void =>
-                                handlePaymentMethodChange(option, nameData, formData, updateFormData)
-                            }
+                            onChangeSelect={(option): void => handlePaymentMethodChange(option, formData, updateFormDataGeneric)}
                             name={FieldName.PaymentMethod}
                             valueSelect={
-                                formData?.[FieldName.PaymentMethod] === 'Instrumento no definido' ||
-                                !formData?.[FieldName.PaymentMethod]?.trim()
+                                !formData?.payment_method_id ||
+                                formData?.payment_method_id === 'Instrumento no definido' ||
+                                !formData?.payment_method_id.trim()
                                     ? ''
-                                    : formData?.[FieldName.PaymentMethod]
+                                    : formData?.payment_method_id
                             }
                             placeholder="Seleccionar"
                             disabled={disabledInputs}
-                            disableSearch
-                            {...TOOLTIP_DATA[FieldName.PaymentMethod]}
+                            required={validate && !formData?.payment_method_id}
+                            titleTooltip={(TOOLTIP_DATA[FieldName.PaymentMethod] as ITooltipFieldData)?.titleTooltip || ''}
+                            descTooltip={
+                                typeof (TOOLTIP_DATA[FieldName.PaymentMethod] as ITooltipFieldData)?.descTooltip === 'string'
+                                    ? ((TOOLTIP_DATA[FieldName.PaymentMethod] as ITooltipFieldData)?.descTooltip as string)
+                                    : ''
+                            }
                         />
                     </div>
-                    <div className="flex-1">
+                    <div className="input-style">
                         <SelectSearchInput
                             id={generateId({
                                 module: ModuleApp.QUOTES,
-                                submodule: `invoice-foreign-exchange`,
+                                submodule: `generate-foreign-exchange`,
                                 action: ActionElementType.INPUT,
                                 elementType: ElementType.DRP,
                             })}
                             labelText="*Divisa:"
-                            optionSelect={foreign_exchange?.map((item: IGenericRecord) => ({ ...item, value: item.id }))}
+                            optionSelect={foreign_exchange?.map((item: IPaymentConfigData) => ({
+                                name: item.name || item.value,
+                                value: item.id,
+                            }))}
                             classesWrapper="form-field"
                             valueSelect={formData?.[FieldName.ForeignExchangeId]}
                             onChangeSelect={(option, nameData): void =>
-                                handleForeignExchangeChange(option, nameData, formData, updateFormData)
+                                handleForeignExchangeChange(option, nameData, formData, updateFormDataGeneric)
                             }
                             required={validate && !formData?.[FieldName.ForeignExchangeId]}
                             disabled={disabledInputs}
                             placeholder="Seleccionar"
-                            {...TOOLTIP_DATA[FieldName.ForeignExchangeId]}
+                            titleTooltip={(TOOLTIP_DATA[FieldName.ForeignExchangeId] as ITooltipFieldData)?.titleTooltip || ''}
+                            descTooltip={
+                                typeof (TOOLTIP_DATA[FieldName.ForeignExchangeId] as ITooltipFieldData)?.descTooltip === 'string'
+                                    ? ((TOOLTIP_DATA[FieldName.ForeignExchangeId] as ITooltipFieldData)?.descTooltip as string)
+                                    : ''
+                            }
                         />
                     </div>
                 </div>
-                {formData?.[FieldName.ForeignExchangeId] && formData[FieldName.ForeignExchangeId] !== COLOMBIAN_CURRENCY_ID && (
-                    <div className="flex flex-col lg:flex-row gap-x-7 gap-y-6">
-                        <div className="flex-1">
-                            <MoneyInput
-                                id={generateId({
-                                    module: ModuleApp.QUOTES,
-                                    submodule: `invoice-foreign-exchange-rate`,
-                                    action: ActionElementType.INPUT,
-                                    elementType: ElementType.TXT,
-                                })}
-                                handleChange={({ target: { value } }): void =>
-                                    handleExchangeRateChange(value, formData, updateFormData)
-                                }
-                                required={validate && !formData?.[FieldName.ForeignExchangeRate]}
-                                value={formData?.[FieldName.ForeignExchangeRate]}
-                                name={FieldName.ForeignExchangeRate}
-                                labelText="*Tasa de cambio:"
-                                classesWrapper="form-field"
-                                disabled={disabledInputs}
-                                maxLength={MaxLengthFields.FOREIGN_EXCHANGE_RATE}
-                            />
+                {formData?.[FieldName.ForeignExchangeId] &&
+                    formData[FieldName.ForeignExchangeId] !== QUOTE_CONSTANTS.COLOMBIAN_CURRENCY_ID && (
+                        <div className="flex flex-col lg:flex-row gap-x-7 gap-y-6">
+                            <div className="flex-1">
+                                <MoneyInput
+                                    id={generateId({
+                                        module: ModuleApp.QUOTES,
+                                        submodule: `generate-exchange-rate`,
+                                        action: ActionElementType.INPUT,
+                                        elementType: ElementType.TXT,
+                                    })}
+                                    handleChange={({ target: { value } }): void =>
+                                        handleExchangeRateChange(value, formData, updateFormData)
+                                    }
+                                    required={validate && !formData?.[FieldName.ForeignExchangeRate]}
+                                    value={formData?.[FieldName.ForeignExchangeRate]}
+                                    name={FieldName.ForeignExchangeRate}
+                                    labelText="*Tasa de cambio:"
+                                    classesWrapper="form-field"
+                                    disabled={disabledInputs}
+                                    maxLength={20}
+                                />
+                            </div>
+                            <div className="flex-1"></div>
                         </div>
-                        <div className="flex-1"></div>
-                    </div>
-                )}
+                    )}
             </fieldset>
 
             <CollapseJsx
                 title="Información opcional"
                 wrapperClass="margin-8 mt-8"
+                startsOpen={validate && (!formData.sales_manager || !formData.manager_document_type || !formData.manager_document_number)}
                 data={
                     <div className="quote-generate__optional-fields quote-generate__optional-fields--active">
                         <div className="quote-generate__invoice-form quote-generate__invoice-form--group">
                             <TextInput
                                 id={generateId({
                                     module: ModuleApp.QUOTES,
-                                    submodule: `invoice-purchase-order`,
+                                    submodule: `generate-purchase-order`,
                                     action: ActionElementType.INPUT,
                                     elementType: ElementType.TXT,
                                 })}
@@ -773,7 +700,7 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
                             <TextInput
                                 id={generateId({
                                     module: ModuleApp.QUOTES,
-                                    submodule: `invoice-sales-manager`,
+                                    submodule: `generate-sales-manager`,
                                     action: ActionElementType.INPUT,
                                     elementType: ElementType.TXT,
                                 })}
@@ -789,7 +716,7 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
                             <SelectSearchInput
                                 id={generateId({
                                     module: ModuleApp.QUOTES,
-                                    submodule: `invoice-sales-manager-document-type`,
+                                    submodule: `generate-manager-document-type`,
                                     action: ActionElementType.INPUT,
                                     elementType: ElementType.DRP,
                                 })}
@@ -805,11 +732,12 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
                                     ...item,
                                     name: item.value,
                                 }))}
-                                onChangeSelect={(_, e): void =>
+                                onChangeSelect={(_value, optionData): void =>
                                     updateFormData({
                                         ...formData,
-                                        manager_document_type: e?.value || '',
-                                        manager_document_type_id: e?.id || '',
+                                        manager_document_type: optionData?.value || '',
+                                        manager_document_type_id: optionData?.id || '',
+                                        document_type_sales_manager: optionData?.id || '',
                                     })
                                 }
                                 valueSelect={formData.manager_document_type || ''}
@@ -817,12 +745,12 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
                                 required={validate && !formData.manager_document_type}
                                 classesWrapper="form-field"
                                 placeholder="Seleccionar"
-                                disableSearch
+                                isTableSearch
                             />
                             <TextInput
                                 id={generateId({
                                     module: ModuleApp.QUOTES,
-                                    submodule: `invoice-sales-manager-document-number`,
+                                    submodule: `generate-manager-document-number`,
                                     action: ActionElementType.INPUT,
                                     elementType: ElementType.TXT,
                                 })}
@@ -833,7 +761,11 @@ export const QuoteInvoiceForm: React.FC<IQuoteInformationFormProps> = ({
                                 }
                                 value={formData.manager_document_number || ''}
                                 onChange={({ target }): void =>
-                                    updateFormData({ ...formData, manager_document_number: target.value })
+                                    updateFormData({
+                                        ...formData,
+                                        manager_document_number: target.value,
+                                        document_number_sales_manager: target.value,
+                                    })
                                 }
                                 disabled={disabledInputs}
                                 required={validate && !formData.manager_document_number}

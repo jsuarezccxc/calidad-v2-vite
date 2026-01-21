@@ -3,6 +3,21 @@ import { ChangeEvent } from '@components/input';
 export * from './Checkbox';
 
 /**
+ * Determines the checkbox input className based on value and variant
+ *
+ * @typeParam value: boolean - Checkbox checked state
+ * @typeParam className: string - Optional className containing variant information
+ * @returns string - Appropriate className for checkbox styling
+ */
+export const getCheckboxInputClassName = (value: boolean, className?: string): string => {
+    if (className?.includes('--table')) {
+        return '';
+    }
+
+    return value ? 'bg-blue border-transparent' : 'bg-gray-light border-gray';
+};
+
+/**
  * This interface describes that properties the checkbox component receives
  * @typeParam id: string - Optional prop for defining element's id
  * @typeParam label: string | JSX.Element - Optional label name from checkbox

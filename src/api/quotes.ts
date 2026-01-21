@@ -46,3 +46,13 @@ export const apiDeleteQuote = (request: FetchRequest): Promise<unknown> =>
 export const apiGetQuoteBlob = (request: FetchRequest): Promise<unknown> =>
   FetchClient.get(request.resource, null, headerDefault, true);
 
+/**
+ * Performs a POST request to retrieve quote as blob data (PDF/Excel files)
+ * Used when filters/data need to be sent in request body
+ *
+ * @param request - The fetch request object containing resource endpoint and data
+ * @returns Promise with blob data for file downloads
+ */
+export const apiPostQuoteBlob = (request: FetchRequest): Promise<unknown> =>
+  FetchClient.post(request.resource, request.data, true, headerDefault);
+

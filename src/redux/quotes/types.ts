@@ -10,6 +10,7 @@ export enum ActionKeys {
     SET_ERROR = 'SET_ERROR',
     FAILED_MODIFICATIONS = 'FAILED_MODIFICATIONS',
     SEND_EMAIL_TEMPLATE = 'SEND_EMAIL_TEMPLATE',
+    SET_QUOTE_CONSECUTIVE = 'SET_QUOTE_CONSECUTIVE',
 }
 
 export interface ISetQuotesList {
@@ -37,6 +38,11 @@ export interface ISetEmailTemplateResponse {
     response: IGenericRecord;
 }
 
+export interface ISetQuoteConsecutive {
+    type: ActionKeys.SET_QUOTE_CONSECUTIVE;
+    consecutive: IGenericRecord;
+}
+
 export interface IQuoteApiResponse {
     statusCode: number;
     data: IGenericRecord;
@@ -61,9 +67,10 @@ export interface IQuoteDeleteResponse {
     message?: string;
 }
 
-export type QuotesActions = 
+export type QuotesActions =
     | ISetQuotesList
     | ISetQuoteData
     | ISetError
     | ISetFailedModifications
-    | ISetEmailTemplateResponse;
+    | ISetEmailTemplateResponse
+    | ISetQuoteConsecutive;

@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
+
+// Vite dynamic imports for general images
+const generalImages = import.meta.glob<{ default: string }>('/src/assets/images/*.svg', { eager: true });
+const getGeneralImage = (name: string): string => {
+    const path = `/src/assets/images/${name}.svg`;
+    return generalImages[path]?.default || '';
+};
 import ReactToPrint from 'react-to-print';
 import { useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { getIconName } from '@utils/Text';
-import { getIconImage } from '@utils/ImageLoader';
 import { ActionElementType, ElementType, generateId, ModuleApp } from '@utils/GenerateId';
 import { IGenericRecord } from '@models/GenericRecord';
 import ImgPDF from '@assets/images/pdf.svg';
@@ -38,7 +44,7 @@ export const Icon: React.FC<IIconProps> = ({
         <img
             id={id}
             onClick={onClick}
-            src={getIconImage(iconName)}
+            src={getGeneralImage(iconName)}
             alt={alt ? alt : name}
             className={`icon ${className} ${hoverIcon !== name ? 'cursor-pointer' : 'cursor-default'} ${classIcon}`}
             onMouseOver={(): void => setIconName(getIconName(hoverIcon))}

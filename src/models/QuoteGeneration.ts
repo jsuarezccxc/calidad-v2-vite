@@ -1,23 +1,78 @@
 import { IGenericRecord } from '@models/GenericRecord';
-import { IPaginatorBackend } from '@models/Paginator';
+import { IPaginatorBackend } from '@components/paginator-backend';
+import { IOptionSelect } from '@components/input';
+import { IInvoiceDetails, ITableTaxesAndRetention } from '@models/ElectronicInvoice';
+
+/**
+ * Tooltip configuration interface for form field guidance
+ *
+ * @interface ITooltipData
+ * @typeParam title: string - Tooltip title text
+ * @typeParam description: string - Tooltip description content
+ * @typeParam placement: string - Optional tooltip placement position (top/bottom/left/right)
+ */
+export interface ITooltipData {
+    title: string;
+    description: string;
+    placement?: string;
+}
 
 /**
  * Quote billing information component properties
  * Main interface for the billing information form component
- * 
+ *
  * @interface IQuoteBillingInformationProps
- * @typeParam formData: IGenericRecord - Form data containing all quote information
+ * @typeParam formData: IQuoteFormData - Form data containing all quote information with specific field types
  * @typeParam openForm: () => void - Function to open modal forms and dialogs
- * @typeParam updateFormData: (data: IGenericRecord) => void - Function to update form state
+ * @typeParam updateFormData: (data: IQuoteFormData | ((prev: IQuoteFormData) => IQuoteFormData)) => void - Function to update form state with typed quote data or callback with previous state
  * @typeParam isContingency: boolean - Flag indicating if this is a contingency quote
- * @typeParam onProductsChange: (products: IGenericRecord[]) => void - Callback when products array changes
+ * @typeParam validate: boolean - Flag to enable/disable field validation display
+ * @typeParam onProductsChange: (products: IInvoiceDetails[]) => void - Callback when products array changes with complete product and tax information
+ * @typeParam onWithholdingsChange: (withholdings: ITableTaxesAndRetention[]) => void - Optional callback when withholdings table changes
  */
 export interface IQuoteBillingInformationProps {
-    formData: IGenericRecord;
-    openForm: () => void;
-    updateFormData: (data: IGenericRecord) => void;
+    formData: IQuoteFormData;
+    openForm: (formType?: string) => void;
+    updateFormData: (data: IQuoteFormData | ((prev: IQuoteFormData) => IQuoteFormData)) => void;
     isContingency: boolean;
-    onProductsChange: (products: IGenericRecord[]) => void;
+    validate: boolean;
+    onProductsChange: (products: IInvoiceDetails[]) => void;
+    onWithholdingsChange?: (withholdings: ITableTaxesAndRetention[]) => void;
+}
+
+/**
+ * Quote products table component properties
+ * Nested configuration structure for table data, handlers, and display options
+ * Used by QuoteProductsTable component for managing quote product data with validation
+ *
+ * @interface IQuoteTableDataProps
+ * @typeParam tableConfig: object - Table data and validation configuration object
+ * @typeParam tableConfig.data: IInvoiceDetails[] - Array of invoice detail records with complete product information
+ * @typeParam tableConfig.validate: boolean - Flag to enable/disable validation display
+ * @typeParam tableConfig.errorMessages: string[] - Array of validation error messages
+ * @typeParam tableConfig.perishableErrors: string[] - Array of perishable product specific errors
+ * @typeParam tableHandlers: object - Event handlers for table operations and data updates
+ * @typeParam tableHandlers.updateData: (products: IInvoiceDetails[]) => void - Handler to update product data array
+ * @typeParam tableHandlers.toggleTotalsQuery: () => void - Handler to trigger totals recalculation
+ * @typeParam tableHandlers.onDeleteRow: () => void - Optional handler for row deletion confirmation
+ * @typeParam tableOptions: object - Optional display and behavior configuration settings
+ * @typeParam tableOptions.isMandate: boolean - Optional flag indicating mandate operation type
+ */
+export interface IQuoteTableDataProps {
+    tableConfig: {
+        data: IInvoiceDetails[];
+        validate: boolean;
+        errorMessages: string[];
+        perishableErrors: string[];
+    };
+    tableHandlers: {
+        updateData: (products: IInvoiceDetails[]) => void;
+        toggleTotalsQuery: () => void;
+        onDeleteRow?: () => void;
+    };
+    tableOptions?: {
+        isMandate?: boolean;
+    };
 }
 
 /**
@@ -29,16 +84,16 @@ export interface IQuoteBillingInformationProps {
  * @typeParam id: string - Unique identifier for the input element used in DOM and accessibility
  * @typeParam labelText: string - Label text displayed above the input field for user guidance
  * @typeParam classesWrapper: string - Optional CSS classes for wrapper element styling and layout
- * @typeParam tooltipData: IGenericRecord - Optional tooltip configuration object with title and description
+ * @typeParam tooltipData: ITooltipData - Optional tooltip configuration object with title and description
  * @typeParam disabled: boolean - Optional flag to disable input interaction and show disabled state
  * @typeParam required: boolean - Optional flag to mark field as required with visual indicators
  * @typeParam selectProps: object - Optional properties specific to SelectInput component rendering
- * @typeParam selectProps.value: string | number - Current selected value displayed in select dropdown
- * @typeParam selectProps.options: IGenericRecord[] - Array of selectable options with value/name pairs
- * @typeParam selectProps.optionSelected: (option: IGenericRecord) => void - Callback function when option is selected
+ * @typeParam selectProps.value: string - Optional current selected value displayed in select dropdown
+ * @typeParam selectProps.options: IOptionSelect[] - Optional array of selectable options compatible with SelectInput
+ * @typeParam selectProps.optionSelected: (option: IOptionSelect, name?: string) => void - Optional callback when option is selected
  * @typeParam selectProps.name: string - Optional form field name attribute for SelectInput form handling
  * @typeParam textProps: object - Optional properties specific to TextInput component rendering
- * @typeParam textProps.value: string | number - Current input value displayed in text field
+ * @typeParam textProps.value: string - Optional current input value displayed in text field
  * @typeParam textProps.name: string - Optional form field name attribute for TextInput form handling
  * @typeParam textProps.onChange: (e: React.ChangeEvent<HTMLInputElement>) => void - Optional change handler for TextInput events
  */
@@ -47,17 +102,17 @@ export interface IConditionalFieldInputProps {
     id: string;
     labelText: string;
     classesWrapper?: string;
-    tooltipData?: IGenericRecord;
+    tooltipData?: ITooltipData;
     disabled?: boolean;
     required?: boolean;
     selectProps?: {
-        value: string | number;
-        options?: IGenericRecord[];
-        optionSelected?: (option: IGenericRecord) => void;
+        value?: string;
+        options?: IOptionSelect[];
+        optionSelected?: (option: IOptionSelect, name?: string) => void;
         name?: string;
     };
     textProps?: {
-        value: string | number;
+        value?: string;
         name?: string;
         onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     };
@@ -100,7 +155,7 @@ export enum QuoteDianResponse {
 /**
  * Quote form data structure with specific field types
  * Extends generic record with quote-specific fields
- * 
+ *
  * @interface IQuoteFormData
  * @typeParam client_id: string - Unique client identifier
  * @typeParam authorize_personal_data: string - Personal data authorization status
@@ -116,6 +171,79 @@ export interface IQuoteFormData extends IGenericRecord {
     payment_type_name?: string;
     collection_days?: number | null;
     days_collection_type?: string;
+}
+
+/**
+ * Processed draft quote form data structure with complete billing and customer information
+ * Replaces IGenericRecord for type-safe form data processing aligned with backend structure
+ *
+ * @interface IQuoteDraftFormData
+ * @typeParam prefix_id: string - Quote prefix identifier for numbering system
+ * @typeParam prefix_name: string - Quote prefix name for display
+ * @typeParam client_id: string - Unique client database identifier
+ * @typeParam customer_id: string - Customer entity identifier
+ * @typeParam name: string - Customer legal or full name
+ * @typeParam document_number: string - Customer tax identification document number
+ * @typeParam document_type: string - Type of identification document (NIT, CC, etc.)
+ * @typeParam type_taxpayer_id: string - Taxpayer type identifier
+ * @typeParam type_taxpayer_code: string - Taxpayer classification code
+ * @typeParam type_taxpayer_name: string - Taxpayer type descriptive name
+ * @typeParam person_type: string - Person type classification (natural/juridica)
+ * @typeParam tax_details_code: string - Tax detail classification code
+ * @typeParam tax_details_name: string - Tax detail descriptive name
+ * @typeParam collection_days: number - Payment collection days
+ * @typeParam days_collection_type: string - Collection days type (calendar/business)
+ * @typeParam operation_type_id: string - Operation type identifier
+ * @typeParam operation_type: string - Operation type name for display
+ * @typeParam payment_method_id: string - Payment method identifier
+ * @typeParam payment_method_name: string - Payment method descriptive name
+ * @typeParam payment_type_id: string - Payment type identifier
+ * @typeParam payment_type_name: string - Payment type descriptive name (cash/credit)
+ * @typeParam foreign_exchange_id: string - Foreign exchange currency identifier
+ * @typeParam foreign_exchange_name: string - Currency name (COP, USD, EUR)
+ * @typeParam foreign_exchange_rate: number - Exchange rate for currency conversion
+ * @typeParam number_purchase_order: string - Customer purchase order reference number
+ * @typeParam sales_manager: string - Sales manager name assigned to quote
+ * @typeParam document_number_sales_manager: string - Sales manager identification number
+ * @typeParam document_type_purchasing_manager_id: string - Manager document type identifier
+ * @typeParam document_type_purchasing_manager: string - Manager document type name
+ * @typeParam note: string - Internal notes for quote reference
+ * @typeParam internal_notes: string - Additional internal notes field
+ * @typeParam not_information_customer: boolean - Flag indicating if customer has full information
+ */
+export interface IQuoteDraftFormData {
+    prefix_id: string;
+    prefix_name: string;
+    client_id: string;
+    customer_id: string;
+    name: string;
+    document_number: string;
+    document_type?: string;
+    type_taxpayer_id: string;
+    type_taxpayer_code: string;
+    type_taxpayer_name: string;
+    person_type: string;
+    tax_details_code?: string;
+    tax_details_name?: string;
+    collection_days: number;
+    days_collection_type: string;
+    operation_type_id: string;
+    operation_type?: string;
+    payment_method_id: string;
+    payment_method_name: string;
+    payment_type_id: string;
+    payment_type_name: string;
+    foreign_exchange_id: string;
+    foreign_exchange_name: string;
+    foreign_exchange_rate: number;
+    number_purchase_order?: string;
+    sales_manager?: string;
+    document_number_sales_manager?: string;
+    document_type_purchasing_manager_id?: string;
+    document_type_purchasing_manager?: string;
+    note?: string;
+    internal_notes?: string;
+    not_information_customer: boolean;
 }
 
 /**
@@ -162,6 +290,8 @@ export interface IQuoteProduct {
     is_product?: boolean;
     date_expiration?: string | null;
     batch_number?: string;
+    checked?: boolean;
+    sku_internal?: string;
 }
 
 /**
@@ -231,6 +361,9 @@ export interface IQuote {
     client_name?: string;
     client_email?: string;
     is_send_email?: string;
+    created_at?: string;
+    updated_at?: string;
+    status?: string;
 }
 
 /**
@@ -259,18 +392,18 @@ export interface IQuoteItem {
 
 /**
  * Filter parameters that IQuoteFilters interface receives
- * 
+ *
  * @interface IQuoteFilters
  * @typeParam search: string - Search term filter
  * @typeParam documentStatus: string - Document status filter
- * @typeParam startDate: string - Start date filter
- * @typeParam endDate: string - End date filter
+ * @typeParam startDate: Date | null - Start date filter as Date object
+ * @typeParam endDate: Date | null - End date filter as Date object
  */
 export interface IQuoteFilters {
     search: string;
     documentStatus: string;
-    startDate: string;
-    endDate: string;
+    startDate: Date | null;
+    endDate: Date | null;
 }
 
 /**
@@ -364,7 +497,7 @@ export interface IDataOperations {
  */
 export interface IUseReportDataReturn {
     state: {
-        data: IPaginatorBackend<IGenericRecord>;
+        data: IPaginatorBackend<IQuote>;
         filters: IQuoteFilters;
         hasSelectedQuotes: boolean;
         isLoading: boolean;
@@ -383,7 +516,7 @@ export interface IUseReportDataReturn {
 /**
  * Download state interface for useReportDownload hook
  * Manages modal visibility and download status for user feedback
- * 
+ *
  * @interface IDownloadState
  * @typeParam showDownloadSuccessModal: boolean - Controls visibility of download success confirmation modal
  */
@@ -394,7 +527,7 @@ export interface IDownloadState {
 /**
  * Download operation functions interface for useReportDownload hook
  * Handles PDF and Excel export functionality with Colombian business formatting
- * 
+ *
  * @interface IDownloadOperations
  * @typeParam setShowDownloadSuccessModal: (value: boolean) => void - Controls download success modal visibility
  * @typeParam handlePDFDownload: () => Promise<void> - Generates and downloads PDF report with quote data
@@ -411,22 +544,22 @@ export interface IDownloadOperations {
  * Defines required data and filters for download operations with complete context
  * 
  * @interface IUseReportDownloadParams
- * @typeParam data: IPaginatorBackend<IGenericRecord> - Paginated quote data for current view
+ * @typeParam data: IPaginatorBackend<IQuote> - Paginated quote data for current view
  * @typeParam filters: IQuoteFilters - Active filters to determine download scope
  * @typeParam allQuotes: IQuote[] - Complete quote dataset for full export operations
  */
 export interface IUseReportDownloadParams {
-    data: IPaginatorBackend<IGenericRecord>;
+    data: IPaginatorBackend<IQuote>;
     filters: IQuoteFilters;
     allQuotes: IQuote[];
 }
 
 /**
- * Comprehensive return type interface for useReportDownload hook
- * Combines download state and operations functionality for complete export workflow
- * 
+ * Return type interface for useReportDownload hook
+ * Contains download state and operation functions for PDF and Excel export
+ *
  * @interface IUseReportDownloadReturn
- * @typeParam state: IDownloadState - Download state management including modal controls
+ * @typeParam state: IDownloadState - Download state including modal visibility
  * @typeParam operations: IDownloadOperations - Download operation functions for PDF and Excel export
  */
 export interface IUseReportDownloadReturn {
@@ -435,10 +568,239 @@ export interface IUseReportDownloadReturn {
 }
 
 /**
+ * Select dropdown option event interface
+ * Replaces IGenericRecord for type-safe select option change events
+ *
+ * @interface ISelectOptionEvent
+ * @typeParam option: object - Selected option data structure
+ * @typeParam option.value: string - Selected option value
+ * @typeParam option.name: string - Selected option name/label
+ * @typeParam name: string - Optional form field name for event routing
+ */
+export interface ISelectOptionEvent {
+    option: {
+        value: string;
+        name: string;
+        [key: string]: unknown;
+    };
+    name?: string;
+}
+
+/**
+ * Input field change event interface
+ * Replaces IGenericRecord for type-safe input change events
+ *
+ * @interface IInputChangeEvent
+ * @typeParam target: object - Input target element data
+ * @typeParam target.name: string - Input field name attribute
+ * @typeParam target.value: string | number - Current input value
+ */
+export interface IInputChangeEvent {
+    target: {
+        name: string;
+        value: string | number;
+    };
+}
+
+/**
+ * Tax breakdown item structure for financial calculations
+ * Detailed breakdown of individual tax components in Colombian format
+ *
+ * @interface ITaxBreakdownItem
+ * @typeParam tax_id: string - Unique tax identifier
+ * @typeParam tax_name: string - Tax descriptive name (IVA, INC, etc.)
+ * @typeParam tax_rate: number - Tax percentage rate
+ * @typeParam tax_amount: number - Calculated tax amount in currency
+ * @typeParam tax_base: number - Base amount for tax calculation
+ */
+export interface ITaxBreakdownItem {
+    tax_id: string;
+    tax_name: string;
+    tax_rate: number;
+    tax_amount: number;
+    tax_base: number;
+}
+
+/**
+ * Quote financial totals data structure
+ * Replaces IGenericRecord for type-safe financial calculations aligned with backend
+ *
+ * @interface IQuoteTotalsData
+ * @typeParam subtotal: number - Subtotal amount before taxes and discounts
+ * @typeParam total: number - Final total amount including all calculations
+ * @typeParam total_discount: number - Total discount amount applied
+ * @typeParam total_taxes: number - Sum of all tax amounts
+ * @typeParam tax_breakdown: ITaxBreakdownItem[] - Optional detailed tax breakdown array
+ */
+export interface IQuoteTotalsData {
+    subtotal: number;
+    total: number;
+    total_discount: number;
+    total_taxes: number;
+    tax_breakdown?: ITaxBreakdownItem[];
+    [key: string]: unknown;
+}
+
+/**
+ * Fiscal responsibility structure for Colombian tax classification
+ * Required for DIAN compliance and customer invoice generation
+ *
+ * @interface IFiscalResponsibility
+ * @typeParam id: string - Fiscal responsibility unique identifier
+ * @typeParam code: string - DIAN fiscal responsibility code
+ * @typeParam name: string - Fiscal responsibility descriptive name
+ */
+export interface IFiscalResponsibility {
+    id: string;
+    code: string;
+    name: string;
+}
+
+/**
+ * Client data structure for quote generation
+ * Replaces IGenericRecord with complete Colombian customer information structure
+ *
+ * @interface IClientData
+ * @typeParam client_id: string - Unique client database identifier
+ * @typeParam name: string - Client legal or full name
+ * @typeParam document_number: string - Client tax identification number
+ * @typeParam document_type: string - Type of identification document (NIT, CC, TI, etc.)
+ * @typeParam email: string - Client primary email address
+ * @typeParam phone: string - Client contact phone number
+ * @typeParam address: string - Client physical address
+ * @typeParam city_name: string - Client city name
+ * @typeParam department_name: string - Client department/state name
+ * @typeParam country_name: string - Client country name (typically Colombia)
+ * @typeParam type_taxpayer_id: string - Taxpayer type identifier for Colombian tax system
+ * @typeParam type_taxpayer_name: string - Taxpayer type descriptive name
+ * @typeParam person_type: string - Person type classification (natural/juridica)
+ * @typeParam fiscal_responsibilities: IFiscalResponsibility[] - Array of DIAN fiscal responsibilities
+ */
+export interface IClientData {
+    client_id: string;
+    name: string;
+    document_number: string;
+    document_type: string;
+    email: string;
+    phone: string;
+    address: string;
+    city_name: string;
+    department_name: string;
+    country_name: string;
+    type_taxpayer_id: string;
+    type_taxpayer_name: string;
+    person_type: string;
+    fiscal_responsibilities?: IFiscalResponsibility[];
+    [key: string]: unknown;
+}
+
+/**
+ * Sales manager data structure for quote assignment
+ * Replaces IGenericRecord for type-safe sales manager information
+ *
+ * @interface ISalesManagerData
+ * @typeParam user_id: string - Unique user identifier in system
+ * @typeParam name: string - Sales manager full name
+ * @typeParam email: string - Sales manager email address
+ * @typeParam document_type: string - Manager document type (CC, CE, etc.)
+ * @typeParam document_number: string - Manager identification number
+ */
+export interface ISalesManagerData {
+    user_id: string;
+    name: string;
+    email: string;
+    document_type: string;
+    document_number: string;
+    [key: string]: unknown;
+}
+
+/**
+ * Payment configuration data structure for quote financial terms
+ * Replaces IGenericRecord for type-safe payment method configuration
+ *
+ * @interface IPaymentConfigData
+ * @typeParam payment_type_id: string - Payment type identifier (cash/credit)
+ * @typeParam payment_type_name: string - Payment type descriptive name
+ * @typeParam payment_method_id: string - Payment method identifier
+ * @typeParam payment_method_name: string - Payment method descriptive name (bank transfer/cash/etc.)
+ * @typeParam collection_days: number - Days for payment collection
+ * @typeParam days_collection_type: string - Collection days type (calendar/business)
+ */
+export interface IPaymentConfigData {
+    payment_type_id: string;
+    payment_type_name: string;
+    payment_method_id: string;
+    payment_method_name: string;
+    collection_days: number;
+    days_collection_type: string;
+    [key: string]: unknown;
+}
+
+/**
+ * Quote withholding tax data structure
+ * Replaces IGenericRecord[] for type-safe withholding configuration
+ *
+ * @interface IQuoteWithholdingData
+ * @typeParam id: string - Withholding identifier (06, 07, 08 for Colombian taxes)
+ * @typeParam name: string - Withholding descriptive name (Retefuente, ReteICA, ReteIVA)
+ * @typeParam tax_value: number - Withholding tax percentage
+ * @typeParam tax_amount: number - Calculated withholding amount
+ * @typeParam base_amount: number - Base amount for withholding calculation
+ */
+export interface IQuoteWithholdingData {
+    id: string;
+    name: string;
+    tax_value: number;
+    tax_amount: number;
+    base_amount: number;
+    [key: string]: unknown;
+}
+
+/**
+ * Information component props interface
+ * Replaces IGenericRecord for Information tooltip component props
+ *
+ * @interface IInformationProps
+ * @typeParam tooltip: ITooltipData - Tooltip configuration with title and description
+ * @typeParam title: string - Information label text displayed
+ */
+export interface IInformationProps {
+    tooltip: ITooltipData;
+    title: string;
+}
+
+/**
  * Pagination data types for handlePaginationChange function
- * 
+ *
  * @typeParam PageObject - Object structures with page information
  * @typeParam PaginationData - Combined union type for all pagination inputs
  */
 export type PageObject = { page?: number; meta?: { current_page?: number }; params?: { page?: number } };
 export type PaginationData = number | string | PageObject;
+
+/**
+ * Quote data with withholdings array structure
+ * Used by buildWithholdingTable function to map backend data to form structure
+ *
+ * @interface IQuoteWithWithholdings
+ * @typeParam withholdings: ITableTaxesAndRetention[] - Array of withholding tax data from backend
+ */
+export interface IQuoteWithWithholdings {
+    withholdings: ITableTaxesAndRetention[];
+}
+
+/**
+ * Totals calculation result for quote financial summary
+ * Aligned with backend calculation structure
+ *
+ * @interface IQuoteTotals
+ * @typeParam totalBase: number - Base amount before taxes and discounts
+ * @typeParam totalIva: number - Total IVA (VAT) amount calculated
+ * @typeParam totalDiscount: number - Total discount amount applied
+ */
+export interface IQuoteTotals {
+    totalBase: number;
+    totalIva: number;
+    totalDiscount: number;
+}
+

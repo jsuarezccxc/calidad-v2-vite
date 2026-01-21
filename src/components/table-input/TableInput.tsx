@@ -51,12 +51,13 @@ export const Title: React.FC<ITitleProps> = ({
     isNew = false,
 }) => {
     const [tooltip, setTooltip] = useState<string>('');
+    const colorClass = color === 'white' ? 'text-white' : color === 'gray-dark' ? 'text-gray-dark' : 'text-blue';
     return (
         <h1
             id={id}
             className={`xs:min-h-7.5 text-sm leading-4 font-allerbold ${
                 isNew ? 'text-left' : 'justify-center items-center m-auto text-center'
-            } flex  xs:p-0 xs:text-tiny ${className} text-${color}`}
+            } flex  xs:p-0 xs:text-tiny ${colorClass} ${className}`}
             aria-disabled={disabled}
         >
             {showInformation && <TooltipIcon setTooltip={(): void => setTooltip(sectionTooltip)} tooltip={tooltip} />}

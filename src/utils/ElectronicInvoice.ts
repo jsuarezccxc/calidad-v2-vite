@@ -4,8 +4,9 @@ import { IOptionSelect, IPropsInput } from '@components/input';
 import { IDataTableTotals } from '@components/table-totals';
 import { COLOMBIA } from '@constants/Location';
 import { VARIABLE_TYPE } from '@constants/DataTypes';
-import { SPECIAL_TAX, TAX_NAME_IVA } from '@constants/Tax';
+import { SPECIAL_TAX, TAX_NAME_IVA, RETE_ICA, RETE_IVA } from '@constants/Tax';
 import { IBUA, TypeTransaction } from '@constants/BuildProduct';
+import { BASE, IVA } from '@constants/Invoice';
 import { NATURAL_RESPONSIBILITIES, DEFAULT_TYPE_PRODUCT } from '@constants/ElectronicInvoice';
 import {
     CREDIT_NOTE,
@@ -19,6 +20,7 @@ import {
     MESSAGE_RETENTIONS,
     NA,
     ONE_HUNDRED,
+    ONE_THOUSAND,
     THIRTY_THREE,
     TWENTY,
     TWO,
@@ -47,6 +49,7 @@ import { buildOptions } from './Company';
 import { discountOfValue, ivaDiscount } from './Number';
 import { calculateTotal } from './Calculate';
 import { assignValue, createNewJson } from './Json';
+import { getSum } from './Array';
 import { getDateFormatUnix, nextBusinessDay } from './Date';
 import { lengthEqualToZero, lengthGreaterThanZero } from './Length';
 
@@ -345,7 +348,7 @@ export const validatePercentageWithHoldings = (percentage: number, max: number, 
 /**
  * This const is validate retentions
  */
-const [FUENTE, ICA, IVA] = ['fuente', 'ica', 'iva'];
+const [FUENTE, ICA, IVA_RETENTION] = ['fuente', 'ica', 'iva'];
 
 /**
  * This function is for validate retentions
@@ -359,7 +362,7 @@ export const validateTableRetentions = (retentions: ITableTaxesAndRetention[] = 
         const nameRetention = name.toLowerCase();
         if (nameRetention.includes(FUENTE)) return validatePercentageWithHoldings(percentage, THIRTY_THREE, country);
         if (nameRetention.includes(ICA)) return validatePercentageWithHoldings(percentage, TWO, country);
-        if (nameRetention.includes(IVA)) return validatePercentageWithHoldings(percentage, ONE_HUNDRED, country);
+        if (nameRetention.includes(IVA_RETENTION)) return validatePercentageWithHoldings(percentage, ONE_HUNDRED, country);
         return '';
     });
 
@@ -472,7 +475,7 @@ export const updateTableTotals = (
             Object.keys(total_taxes).forEach(key => {
                 const value = total_taxes[key as keyof ITotalTaxes] || ZERO;
                 if (!!value || TAXES.includes(key))
-                    tableTotals.push({ ...ITEM_TABLE_TOTAL, field: key, title: LABELS_TOTAL_TAXES[key], value });
+                    tableTotals.push({ ...ITEM_TABLE_TOTAL, id: `${ITEM_TABLE_TOTAL.id}-${key}`, field: key, title: LABELS_TOTAL_TAXES[key], value });
             });
         }
         const item = initTotal[index];
@@ -678,6 +681,37 @@ export const getPreviousDays = (): Date => {
     const initialDate = currentDate.setDate(currentDate.getDate() - 9);
     const date = new Date(initialDate);
     return date;
+};
+
+/**
+ * Calculates withholding values for products based on tax configuration
+ * Generic function that works with both invoice and quote contexts
+ *
+ * @typeParam productsWithTaxes: IInvoiceDetails[] - Array of products with calculated taxes
+ * @typeParam withholdingTable: ITableTaxesAndRetention[] - Withholding configuration table
+ * @typeParam calculateVatFn: function - VAT calculation function (calculateVat for invoices, calculateQuoteVat for quotes)
+ * @returns ITableTaxesAndRetention[] - Updated withholding table with calculated values
+ */
+export const calculateWithholdingValues = (
+    productsWithTaxes: IInvoiceDetails[],
+    withholdingTable: ITableTaxesAndRetention[],
+    calculateVatFn: (taxes: IGenericRecord[], base: number) => number
+): ITableTaxesAndRetention[] => {
+    return withholdingTable.map(({ name, ...item }: ITableTaxesAndRetention) => {
+        const base = getSum(
+            productsWithTaxes.map(({ total_buy, product_taxes }) => ({
+                iva: calculateVatFn(product_taxes, total_buy),
+                base: total_buy,
+            })),
+            name === RETE_IVA ? IVA : BASE
+        );
+        return {
+            ...item,
+            base,
+            name,
+            value: (base * item.percentage) / (name === RETE_ICA ? ONE_THOUSAND : ONE_HUNDRED),
+        };
+    });
 };
 
 /**

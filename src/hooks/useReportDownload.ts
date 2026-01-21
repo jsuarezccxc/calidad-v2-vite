@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+
 import { downloadQuoteReportWithFilters } from '@redux/quotes/actions';
+
+import { ZERO } from '@constants/Numbers';
+
 import type {
     IUseReportDownloadParams,
     IUseReportDownloadReturn
@@ -24,7 +28,7 @@ const downloadBlob = (blob: Blob, fileName: string): void => {
 
 /**
  * Custom hook for managing quote report downloads
- * 
+ *
  * @typeParam params: IUseReportDownloadParams - Configuration object containing data and filter parameters
  * @typeParam return: IUseReportDownloadReturn - Object containing download state and operations
  */
@@ -32,33 +36,31 @@ export const useReportDownload = (params: IUseReportDownloadParams): IUseReportD
     const dispatch = useDispatch();
     const [showDownloadSuccessModal, setShowDownloadSuccessModal] = useState<boolean>(false);
 
-    const { filters } = params;
+    const { filters, allQuotes } = params;
 
     /**
      * Handle PDF download functionality
-     * Uses Redux action for all business logic and API calls
+     * Uses Redux action with already filtered data from the table
      */
     const handlePDFDownload = async (): Promise<void> => {
         const fileName = `cotizaciones-reporte-${new Date().toISOString().split('T')[0]}.pdf`;
-        const blob = await dispatch(downloadQuoteReportWithFilters('pdf', filters, filters.startDate, filters.endDate));
-        
-        if (blob instanceof Blob && blob.size > 0) {
+        const blob = await dispatch(downloadQuoteReportWithFilters('pdf', allQuotes, filters.startDate, filters.endDate));
+
+        if (blob instanceof Blob && blob.size > ZERO) {
             downloadBlob(blob, fileName);
-            setShowDownloadSuccessModal(true);
         }
     };
 
     /**
-     * Handle Excel download functionality  
-     * Uses Redux action for all business logic and API calls
+     * Handle Excel download functionality
+     * Uses Redux action with already filtered data from the table
      */
     const handleExcelDownload = async (): Promise<void> => {
         const fileName = `cotizaciones-reporte-${new Date().toISOString().split('T')[0]}.xlsx`;
-        const blob = await dispatch(downloadQuoteReportWithFilters('xlsx', filters, filters.startDate, filters.endDate));
-        
-        if (blob instanceof Blob && blob.size > 0) {
+        const blob = await dispatch(downloadQuoteReportWithFilters('xlsx', allQuotes, filters.startDate, filters.endDate));
+
+        if (blob instanceof Blob && blob.size > ZERO) {
             downloadBlob(blob, fileName);
-            setShowDownloadSuccessModal(true);
         }
     };
 

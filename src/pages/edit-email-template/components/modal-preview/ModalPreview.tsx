@@ -49,7 +49,7 @@ export const ModalPreview: React.FC<IGenericRecord> = ({
                             <h3 className="mb-2 modal-preview__mail-body__title">Correo electrónico</h3>
                             <p className="mb-2.5 break-all text-gray-dark">{data.client_email || ''}</p>
                             <h3 className="modal-preview__mail-body__title mb-6.25">{data.subject || ''}</h3>
-                            <p className="break-all modal-preview-content" id="content">
+                            <p className="break-all modal-preview-content text-gray-dark" id="content">
                                 {escapeHtml(contentArticle)}
                             </p>
                         </div>

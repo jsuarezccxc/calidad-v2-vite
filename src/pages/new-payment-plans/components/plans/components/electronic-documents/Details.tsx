@@ -1,23 +1,17 @@
 import React from 'react';
+
+// Vite dynamic imports for electronic documents plan images
+const electronicDocsPlanImages = import.meta.glob<{ default: string }>('/src/assets/images/plans/electronic-documents/*.svg', { eager: true });
+const getElectronicDocsPlanImage = (index: number): string => {
+    const path = `/src/assets/images/plans/electronic-documents/detail${index}.svg`;
+    return electronicDocsPlanImages[path]?.default || '';
+};
 import information from '@assets/images/info-green.svg';
 import { Tooltip } from '@components/tooltip';
 import { useAccordion } from '@hooks/useAccordion';
 import usePopper from '@hooks/usePopper';
 import { DetailButton } from '..';
 import { DETAILS } from '.';
-
-// Static imports for Vite compatibility
-import detail1 from '@assets/images/plans/electronic-documents/detail1.svg';
-import detail2 from '@assets/images/plans/electronic-documents/detail2.svg';
-import detail3 from '@assets/images/plans/electronic-documents/detail3.svg';
-import detail4 from '@assets/images/plans/electronic-documents/detail4.svg';
-import detail5 from '@assets/images/plans/electronic-documents/detail5.svg';
-import detail6 from '@assets/images/plans/electronic-documents/detail6.svg';
-import detail7 from '@assets/images/plans/electronic-documents/detail7.svg';
-import detail8 from '@assets/images/plans/electronic-documents/detail8.svg';
-import detail9 from '@assets/images/plans/electronic-documents/detail9.svg';
-
-const detailImages = [detail1, detail2, detail3, detail4, detail5, detail6, detail7, detail8, detail9];
 
 export const Details: React.FC = () => {
     const { activePopper, anchorEl, mouseProps } = usePopper();
@@ -34,7 +28,7 @@ export const Details: React.FC = () => {
                         <div className="detail__image-container">
                             <img
                                 alt="Detail"
-                                src={detailImages[index]}
+                                src={getElectronicDocsPlanImage(index + 1)}
                             />
                         </div>
                         <p className="detail__information">

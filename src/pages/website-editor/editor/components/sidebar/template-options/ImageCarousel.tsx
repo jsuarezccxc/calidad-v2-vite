@@ -1,4 +1,11 @@
 import React, { useMemo } from 'react';
+
+// Vite dynamic imports for template images
+const templateImages = import.meta.glob<{ default: string }>('/src/assets/images/template/*.svg', { eager: true });
+const getTemplateImage = (option: string): string => {
+    const path = `/src/assets/images/template/element-${option}.svg`;
+    return templateImages[path]?.default || '';
+};
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import addIcon from '@assets/images/template/add.svg';
@@ -7,13 +14,6 @@ import { Icon } from '@components/icon';
 import { TEMPLATE } from '@constants/WebsiteNode';
 import { ElementOption } from '@models/WebsiteNode';
 import { CAROUSEL_SETTINGS, getImageOptions, IImageCarouselProps } from '.';
-
-// Vite dynamic imports for template images
-const templateImages = import.meta.glob<{ default: string }>('/src/assets/images/template/element-*.svg', { eager: true });
-const getTemplateImage = (option: string): string => {
-    const path = `/src/assets/images/template/element-${option}.svg`;
-    return templateImages[path]?.default || '';
-};
 
 export const ImageCarousel: React.FC<IImageCarouselProps> = React.memo(({ selectTemplate, templateType }) => {
     const imageOptions = useMemo(() => getImageOptions(templateType), [templateType]);

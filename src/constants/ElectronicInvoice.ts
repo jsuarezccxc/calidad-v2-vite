@@ -1,10 +1,11 @@
 import { v4 as uuid } from 'uuid';
 import { ITableProps } from '@components/table';
 import { IEntity } from '@components/radiobutton';
+import { IDataTableTotals } from '@components/table-totals';
 import { IRadioButtons } from '@hooks/useRadioButton';
 import { IFieldsAssign } from '@models/SupportDocument';
-import { IDataTableTotals } from '@components/table-totals';
 import { ITableTaxesAndRetention, KeysInvoiceCalculates } from '@models/ElectronicInvoice';
+import { ElementType, generateId, ModuleApp, ActionElementType } from '@utils/GenerateId';
 import { CREDIT_NOTE_SUPPLIER, DEBIT_NOTE_SUPPLIER } from './PurchaseInvoiceNotes';
 
 export const MORE_RECENT = 'MORE_RECENT';
@@ -589,7 +590,12 @@ export const DATA_TABLE_TOTALS = ({
     isPurchaseInvoice = false,
 }: IParamsToTableTotals): IDataTableTotals[] => [
     {
-        id: 'dp-electronic-invoice-cesi-total-sale',
+        id: generateId({
+            module: ModuleApp.ELECTRONIC_INVOICE,
+            submodule: `${ModuleApp.TABLE}-totals-subtotal`,
+            action: ActionElementType.INPUT,
+            elementType: ElementType.TXT,
+        }),
         title: 'Subtotal',
         field: 'subtotal',
         disabled: true,
@@ -597,7 +603,12 @@ export const DATA_TABLE_TOTALS = ({
         className: 'body__bg-green',
     },
     {
-        id: 'dp-electronic-invoice-cesi-total-discount',
+        id: generateId({
+            module: ModuleApp.ELECTRONIC_INVOICE,
+            submodule: `${ModuleApp.TABLE}-totals-total-discount`,
+            action: ActionElementType.INPUT,
+            elementType: ElementType.TXT,
+        }),
         title: 'Total descuento',
         field: 'total_discount',
         symbol: '-',
@@ -606,7 +617,12 @@ export const DATA_TABLE_TOTALS = ({
         className: '',
     },
     {
-        id: 'dp-electronic-invoice-cesi-shipping-cost',
+        id: generateId({
+            module: ModuleApp.ELECTRONIC_INVOICE,
+            submodule: `${ModuleApp.TABLE}-totals-shipping-cost`,
+            action: ActionElementType.INPUT,
+            elementType: ElementType.TXT,
+        }),
         title: 'Costo de envío',
         field: 'total_charge_amount',
         disabled: false,
@@ -615,7 +631,12 @@ export const DATA_TABLE_TOTALS = ({
         omitElement: isPurchaseInvoice,
     },
     {
-        id: 'dp-electronic-invoice-cesi-total-sale-value',
+        id: generateId({
+            module: ModuleApp.ELECTRONIC_INVOICE,
+            submodule: `${ModuleApp.TABLE}-totals-total-sale-value`,
+            action: ActionElementType.INPUT,
+            elementType: ElementType.TXT,
+        }),
         title: 'Total bruto',
         field: 'total_gross',
         disabled: true,
@@ -623,7 +644,12 @@ export const DATA_TABLE_TOTALS = ({
         className: 'body__bg-green',
     },
     {
-        id: 'dp-electronic-invoice-cesi-retefuente',
+        id: generateId({
+            module: ModuleApp.ELECTRONIC_INVOICE,
+            submodule: `${ModuleApp.TABLE}-totals-total-payable`,
+            action: ActionElementType.INPUT,
+            elementType: ElementType.TXT,
+        }),
         title: `Total neto ${isInvoice ? 'factura' : ''}`,
         field: 'total_payable',
         disabled: true,
@@ -632,7 +658,12 @@ export const DATA_TABLE_TOTALS = ({
         omitElement: isPurchaseInvoice,
     },
     {
-        id: 'dp-electronic-invoice-cesi-retefuente',
+        id: generateId({
+            module: ModuleApp.ELECTRONIC_INVOICE,
+            submodule: `${ModuleApp.TABLE}-totals-retefuente`,
+            action: ActionElementType.INPUT,
+            elementType: ElementType.TXT,
+        }),
         title: 'Retefuente',
         field: 'retefuente',
         symbol: '-',
@@ -643,7 +674,12 @@ export const DATA_TABLE_TOTALS = ({
     },
 
     {
-        id: 'dp-electronic-invoice-cesi-reteica',
+        id: generateId({
+            module: ModuleApp.ELECTRONIC_INVOICE,
+            submodule: `${ModuleApp.TABLE}-totals-reteica`,
+            action: ActionElementType.INPUT,
+            elementType: ElementType.TXT,
+        }),
         title: 'ReteICA',
         field: 'reteica',
         symbol: '-',
@@ -653,7 +689,12 @@ export const DATA_TABLE_TOTALS = ({
         omitElement: isSupportOrDocument || isPurchaseInvoice,
     },
     {
-        id: 'dp-electronic-invoice-cesi-reteiva',
+        id: generateId({
+            module: ModuleApp.ELECTRONIC_INVOICE,
+            submodule: `${ModuleApp.TABLE}-totals-reteiva`,
+            action: ActionElementType.INPUT,
+            elementType: ElementType.TXT,
+        }),
         title: 'ReteIVA',
         field: 'reteiva',
         symbol: '-',
@@ -663,7 +704,12 @@ export const DATA_TABLE_TOTALS = ({
         omitElement: isPurchaseInvoice,
     },
     {
-        id: 'dp-electronic-invoice-cesi-total',
+        id: generateId({
+            module: ModuleApp.ELECTRONIC_INVOICE,
+            submodule: `${ModuleApp.TABLE}-totals-total`,
+            action: ActionElementType.INPUT,
+            elementType: ElementType.TXT,
+        }),
         title: `Total ${isInvoice ? 'a pagar' : ''}`,
         field: 'total',
         disabled: true,
@@ -676,7 +722,12 @@ export const DATA_TABLE_TOTALS = ({
  * This const is item table total
  */
 export const ITEM_TABLE_TOTAL: IDataTableTotals = {
-    id: 'dp-electronic-invoice-cesi',
+    id: generateId({
+        module: ModuleApp.ELECTRONIC_INVOICE,
+        submodule: `${ModuleApp.TABLE}-totals`,
+        action: ActionElementType.INPUT,
+        elementType: ElementType.TXT,
+    }),
     title: '',
     field: '',
     value: 0,

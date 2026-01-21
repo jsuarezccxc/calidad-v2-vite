@@ -3,7 +3,7 @@ import { Icon } from '@components/icon';
 import { ICardImgProps, ICardSectionProps } from '.';
 import './Card.scss';
 
-// Vite dynamic imports for payment-gateway images
+// Vite dynamic imports for payment gateway images
 const paymentGatewayImages = import.meta.glob<{ default: string }>('/src/assets/images/payment-gateway/*.svg', { eager: true });
 const getPaymentGatewayImage = (img: string): string => {
     const path = `/src/assets/images/payment-gateway/${img}.svg`;

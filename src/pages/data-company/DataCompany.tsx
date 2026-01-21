@@ -42,7 +42,7 @@ import { getRouteName } from '@utils/Paths';
 import { validateEmail } from '@utils/Validation';
 import { isCorrectResponse } from '@utils/Response';
 import { getUserData } from '@utils/User';
-import { ModuleApp } from '@utils/GenerateId';
+import { ActionElementType, ElementType, generateId, ModuleApp } from '@utils/GenerateId';
 import useDigitVerification from '@hooks/useDigitVerification';
 import usePermissions from '@hooks/usePermissions';
 import useOnboardingNavigation from '@hooks/useOnboardingNavigation';
@@ -274,7 +274,17 @@ const DataCompany: React.FC = () => {
                 onClickButtonLeft={(): void => history.goBack()}
                 onClickButtonRight={(): Promise<void> => onSubmit()}
             />
-            <ModalCustom show={showModalSuccess} showModal={toggleModal} removeMinWidth>
+            <ModalCustom
+                show={showModalSuccess}
+                showModal={toggleModal}
+                removeMinWidth
+                id={generateId({
+                    module: ModuleApp.CLIENT_PORTAL,
+                    submodule: 'modal-data-company',
+                    action: ActionElementType.CONTAINER,
+                    elementType: ElementType.MDL,
+                })}
+            >
                 <div className="flex justify-center">
                     <Icon name="checkMulticolor" className="w-22" />
                 </div>
@@ -285,6 +295,12 @@ const DataCompany: React.FC = () => {
                         text="Aceptar"
                         onClick={(): void => handlePostConfirmation(toggleModal)}
                         classes="xs:w-22.3 shadow-templateDesign"
+                        id={generateId({
+                            module: ModuleApp.CLIENT_PORTAL,
+                            submodule: 'btn-data-company',
+                            action: ActionElementType.ACTION,
+                            elementType: ElementType.BTN,
+                        })}
                     />
                 </div>
             </ModalCustom>

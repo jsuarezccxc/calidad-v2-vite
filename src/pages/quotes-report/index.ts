@@ -1,6 +1,10 @@
 import { Section } from '@components/bread-crumb';
+
 import { MODULE_TITLES } from '@constants/ElectronicDocuments';
 import { Routes } from '@constants/Paths';
+
+import { PaginationData } from '@models/QuoteGeneration';
+
 import { getRoute, getRouteName } from '@utils/Paths';
 import { formatNumber } from '@utils/Number';
 
@@ -9,9 +13,13 @@ export { formatNumber as formatCurrency };
 
 export { default as QuotesReport } from './QuotesReport';
 export { GenerateQuote } from './components/quote-generate';
-export { QuoteView } from './components/quote-view';
-export { QuoteSendMail } from './components/quote-send-mail';
 export { ReportTableContent } from './components/quote-list';
+
+// Re-export PaginationData type for backward compatibility within module
+export type { PaginationData };
+
+// Re-export useReportData from local hooks directory
+export { useReportData } from './hooks/useReportData';
 
 /**
  * Module title constant for quotes section
@@ -31,12 +39,12 @@ export const QUOTES = 'Cotizaciones';
  */
 export const routes: Section[] = [
         {
-            name: getRouteName(Routes.ELECTRONIC_DOCUMENTS),
+            name: getRouteName(Routes.DASHBOARD_ELECTRONIC_DOCUMENT),
             route: getRoute(Routes.DASHBOARD_ELECTRONIC_DOCUMENT),
         },
         {
             name: MODULE_TITLES.INVOICE,
-            route: '#',
+            route: getRoute(Routes.DASHBOARD_ELECTRONIC_DOCUMENT),
         },
         {
             name: QUOTES,
@@ -44,5 +52,21 @@ export const routes: Section[] = [
         },
 ];
 
-// Re-export useReportData from local hooks directory
-export { useReportData } from './hooks/useReportData';
+/**
+ * Quote filters interface for backend API requests
+ * Defines the structure for filtering quotes in list/export operations
+ *
+ * @interface IQuoteFilters
+ * @typeParam paginate: boolean - Whether to paginate results (false for export/all data)
+ * @typeParam search: string | undefined - Optional search term for customer name, email, or quote number
+ * @typeParam is_send_email: boolean | undefined - Optional filter by email send status (true=Sent, false=Unsent)
+ * @typeParam start_date: number | undefined - Optional Unix timestamp for date range start
+ * @typeParam finish_date: number | undefined - Optional Unix timestamp for date range end
+ */
+export interface IQuoteFilters {
+    paginate: boolean;
+    search?: string;
+    is_send_email?: boolean;
+    start_date?: number;
+    finish_date?: number;
+}

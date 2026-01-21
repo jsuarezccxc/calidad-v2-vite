@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useMemo, useState } from 'react';
 
-// Vite dynamic imports for electronic-documents images
-const edImages = import.meta.glob<{ default: string }>('/src/assets/images/electronic-documents/*.svg', { eager: true });
-const getEdImage = (name: string): string => {
+// Vite dynamic imports for electronic documents images
+const electronicDocsImages = import.meta.glob<{ default: string }>('/src/assets/images/electronic-documents/*.svg', { eager: true });
+const getElectronicDocsImage = (name: string): string => {
     const path = `/src/assets/images/electronic-documents/${name}.svg`;
-    return edImages[path]?.default || '';
+    return electronicDocsImages[path]?.default || '';
 };
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -191,7 +191,7 @@ export const Enablement: React.FC<{
                             alt="Step"
                             className="mx-auto"
                             style={styles}
-                            src={getEdImage(image)}
+                            src={getElectronicDocsImage(image)}
                         />
                     ) : (
                         <TestSetID

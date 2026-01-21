@@ -45,6 +45,8 @@ export const headerTableTaxes = (showTaxes: boolean): IHeaderTable[] => [
  * @typeParam showTaxes: boolean - Optional prop to show taxes
  * @typeParam isSupportOrAdjustment: boolean - Optional prop to show retentions
  * @typeParam symbol: string - Prop to show symbol currency
+ * @typeParam thousandSeparator: string - Optional thousand separator character (default '.')
+ * @typeParam decimalSeparator: string - Optional decimal separator character (default ',')
  */
 export interface ITablesTaxesRetentionProps {
     id?: string;
@@ -61,6 +63,9 @@ export interface ITablesTaxesRetentionProps {
     showTaxes?: boolean;
     isSupportOrAdjustment?: boolean;
     symbol: string;
+    thousandSeparator?: string;
+    decimalSeparator?: string;
+    placeholder?: string;
 }
 
 /**

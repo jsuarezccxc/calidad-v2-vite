@@ -1,5 +1,6 @@
-import { IInvoiceCalculates } from '@models/ElectronicInvoice';
+import { IInvoiceCalculates, ITableTaxesAndRetention } from '@models/ElectronicInvoice';
 import { IGenericRecord } from '@models/GenericRecord';
+import { IQuoteProduct, IQuoteFormData } from '@models/QuoteGeneration';
 
 export enum ActionKeys {
     SET_SELECTED_DOCUMENT = 'SET_SELECTED_DOCUMENT',
@@ -126,14 +127,31 @@ export interface ISetInvoicePrefix {
 }
 
 /**
+ * Common invoice/quote state structure for Redux persistence
+ * Used by both generate-sales-invoice and quotes-report modules
+ * 
+ * @interface IInvoiceQuoteState
+ * @typeParam formData: IQuoteFormData | IGenericRecord - Form data for invoice or quote
+ * @typeParam productData: IQuoteProduct[] - Array of products in the invoice/quote
+ * @typeParam withholdingTable: ITableTaxesAndRetention[] - Withholding tax calculations
+ * @typeParam sendingCharge: number - Shipping/sending charge amount
+ */
+export interface IInvoiceQuoteState {
+    formData: IQuoteFormData | IGenericRecord;
+    productData: IQuoteProduct[];
+    withholdingTable: ITableTaxesAndRetention[];
+    sendingCharge: number;
+}
+
+/**
  * This interface is to save react state in redux
  * 
  * @typeParam type: ActionKeys.SET_STATE_INVOICE - Action type
- * @typeParam stateInvoice: IGenericRecord - React state to invoice
+ * @typeParam stateInvoice: IInvoiceQuoteState | IGenericRecord - React state to invoice (union for backward compatibility)
  */
 export interface ISetInvoiceState {
     type: ActionKeys.SET_STATE_INVOICE;
-    stateInvoice: IGenericRecord;
+    stateInvoice: IInvoiceQuoteState | IGenericRecord;
 }
 
 export type ElectronicInvoiceActions =

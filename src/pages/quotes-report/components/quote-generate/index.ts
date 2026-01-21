@@ -1,35 +1,29 @@
 import { IGenericRecord } from '@models/GenericRecord';
+import { IQuoteFormData, IQuoteProduct, IQuoteTotalsData, ITaxBreakdownItem } from '@models/QuoteGeneration';
+import { IInvoiceCalculates, ITableTaxesAndRetention } from '@models/ElectronicInvoice';
+import { IDataTableTotals } from '@components/table-totals';
+
+import { DATA_TAXES } from '@constants/ElectronicInvoice';
+
 import { QUOTE_UNAUTHORIZED_DATA } from './components';
 
-/**
- * UI Text constants for GenerateQuote component
- * Centralizes all user-facing strings for consistency and maintainability
- */
+export { QUOTE_REQUIRED_FORM_FIELDS } from './components';
+
 export const GENERATE_QUOTE_TEXTS = {
     BREADCRUMB: {
         TITLE_HOW_TO: 'Cómo generar y transmitir Factura electrónica de venta y Documento soporte',
         QUOTES: 'Cotizaciones',
         ADD_CLIENT: 'Agregar cliente',
         GENERATE_QUOTE: 'Generar cotización',
-        ROUTE_ELECTRONIC_DOCS: '/documentos-electronicos',
-        ROUTE_ELECTRONIC_INVOICE: '/documentos-electronicos/factura-electronica',
-        ROUTE_QUOTES: '/documentos-electronicos/factura-electronica/cotizaciones',
+        ROUTE_ELECTRONIC_DOCS: '/dashboard-electronic-documents',
+        ROUTE_ELECTRONIC_INVOICE: '/dashboard-electronic-documents',
+        ROUTE_QUOTES: '/quotes-report',
         ROUTE_CURRENT: '#',
-    },
-    VALIDATION: {
-        ERRORS_TITLE: 'Errores de validación:',
-        WARNINGS_TITLE: 'Advertencias:',
     },
     PAGE: {
         SUBTITLE: 'Cómo generar y transmitir Factura electrónica de venta y Documento soporte',
     },
-    KEY_PREFIXES: {
-        ERROR: 'error',
-        WARNING: 'warning',
-    },
-    KEY_SLICE_LENGTH: 20,
     UI_CONSTANTS: {
-        EMPTY_VALIDATION: 0,
         BACKGROUND_COLOR: 'bg-famiefi-light-blue',
     },
 } as const;
@@ -39,14 +33,92 @@ export { QuoteBillingInformation } from './components/QuoteBillingInformation';
 export { PageButtonsFooter } from '@components/page-buttons-footer';
 
 /**
+ * Type alias for total table rows in quote financial summary
+ * Uses the same structure as DATA_TABLE_TOTALS for consistency
+ *
+ * @typeParam id: string - Unique identifier for the total row
+ * @typeParam title: string - Display label for the total row
+ * @typeParam field: string - Field name corresponding to backend data
+ * @typeParam symbol?: string - Optional symbol prefix (e.g., '-' for discounts)
+ * @typeParam value: number - Calculated total value
+ * @typeParam disabled: boolean - Whether the field is read-only
+ * @typeParam className: string - CSS classes for styling
+ * @typeParam omitElement?: boolean - Optional flag to hide the row
+ */
+export type ITotalTableRow = IDataTableTotals;
+
+/**
+ * Event interface for sending charge input changes in quote financial summary
+ * Extends NumberFormatValues to include the float value from react-number-format
+ *
+ * @typeParam value: number - Current charge value
+ */
+export interface ISendingChargeChangeEvent {
+    value: number;
+}
+
+/**
+ * Props interface for QuoteFinancialSummary component
+ * Manages the display of quote totals, withholdings, and shipping costs
+ *
+ * @interface IQuoteFinancialSummaryProps
+ * @typeParam withholdingData: ITableTaxesAndRetention[] - Array of withholding tax configurations
+ * @typeParam updateWithholdingData: (data: ITableTaxesAndRetention[]) => void - Callback to update withholding data
+ * @typeParam totals: IInvoiceCalculates - Calculated invoice totals from Redux state
+ * @typeParam sendingCharge: number - Current shipping/sending charge amount
+ * @typeParam updateSendingCharge: (e: ISendingChargeChangeEvent) => void - Callback for shipping charge changes
+ * @typeParam disableShippingCost: boolean - Flag to disable shipping cost input
+ * @typeParam toggleTotalsQuery: () => void - Callback to trigger totals recalculation
+ * @typeParam isOnlyWithholdingTable?: boolean - Optional flag to show only withholding table
+ * @typeParam isOnlySubTotals?: boolean - Optional flag to show only subtotals section
+ */
+export interface IQuoteFinancialSummaryProps {
+    withholdingData: ITableTaxesAndRetention[];
+    updateWithholdingData: (data: ITableTaxesAndRetention[]) => void;
+    totals: IInvoiceCalculates;
+    sendingCharge: number;
+    updateSendingCharge: (e: ISendingChargeChangeEvent) => void;
+    disableShippingCost: boolean;
+    toggleTotalsQuery: () => void;
+    isOnlyWithholdingTable?: boolean;
+    isOnlySubTotals?: boolean;
+}
+
+/**
+ * Quote invoice state interface for Redux persistence
+ * Used when saving quote state to Redux for navigation between forms
+ *
+ * @interface IQuoteInvoiceState
+ * @typeParam formData: IQuoteFormData - Current quote form data including customer and payment info
+ * @typeParam productData: IQuoteProduct[] - Array of products included in the quote
+ * @typeParam withholdingTable: ITableTaxesAndRetention[] - Withholding tax calculations
+ * @typeParam sendingCharge: number - Shipping/sending charge amount
+ */
+export interface IQuoteInvoiceState {
+    formData: IQuoteFormData;
+    productData: IQuoteProduct[];
+    withholdingTable: ITableTaxesAndRetention[];
+    sendingCharge: number;
+}
+
+/**
  * Document configuration that IDocumentConfig interface receives
  * 
  * @typeParam language: string - Document language setting
  * @typeParam type: string - Invoice/quote type configuration
  * @typeParam authorizePersonalData: boolean - Personal data processing authorization
  */
+/**
+ * Document configuration that IDocumentConfig interface receives
+ * 
+ * @typeParam language: string - Document language setting (Spanish or English)
+ * @typeParam document_language: string - Document language code (es|en) for quote generation
+ * @typeParam type: string - Invoice/quote type configuration
+ * @typeParam authorizePersonalData: boolean - Personal data processing authorization
+ */
 export interface IDocumentConfig {
   language: string;
+  document_language?: string;
   type: string;
   authorizePersonalData: boolean;
 }
@@ -185,6 +257,10 @@ export interface ISalesManagerInfo {
  * @typeParam auditTrail: Array<IGenericRecord> - Optional audit trail records
  * @typeParam integrationData: IGenericRecord - Optional integration system data
  * @typeParam customFields: IGenericRecord - Optional custom field values
+ * @typeParam logo: IGenericRecord - Optional company logo file for quote header
+ * @typeParam urlLogo: string - Optional URL for stored logo file
+ * @typeParam document_language: string - Optional document language override (es|en)
+ * @typeParam not_information_customer: boolean - Optional flag for incomplete customer information
  */
 export interface IFormData {
   documentConfig: IDocumentConfig;
@@ -197,6 +273,7 @@ export interface IFormData {
   validUntilDate?: string;
   deliveryDate?: string;
   deliveryAddress?: string;
+  sending_charge?: number;
   specialInstructions?: string;
   discountPercentage?: number;
   discountAmount?: number;
@@ -234,6 +311,10 @@ export interface IFormData {
   auditTrail?: Array<IGenericRecord>;
   integrationData?: IGenericRecord;
   customFields?: IGenericRecord;
+  logo?: IGenericRecord;
+  urlLogo?: string;
+  document_language?: string;
+  not_information_customer?: boolean;
 }
 
 /**
@@ -374,12 +455,10 @@ export const INITIAL_FORM_DATA: IFormData = {
     taxpayerType: QUOTE_UNAUTHORIZED_DATA.person_type,
   },
   paymentConfig: {
-    method: '',
-    means: '',
+    paymentType: '',
+    paymentMethod: '',
     currency: DEFAULT_FORM_VALUES.CURRENCY,
-    foreignExchangeId: '',
-    foreignExchangeName: '',
-    foreignExchangeRate: null,
+    exchangeRate: undefined,
   },
   observations: '',
   internalComments: '',
@@ -387,5 +466,34 @@ export const INITIAL_FORM_DATA: IFormData = {
   not_information_customer: false,
 };
 
-// Re-export from hooks directory
+/**
+ * Tax name parsing configuration
+ * Colombian DIAN tax names follow pattern "XX IVA" where XX is the tax code
+ */
+const TAX_NAME_PARTS = {
+    SEPARATOR: ' ',
+    CODE_INDEX: 0,
+} as const;
+
+/**
+ * Formats taxes array for quote payload using backend-calculated values
+ * Follows the same pattern as generate-sales-invoice
+ *
+ * @typeParam totals: IQuoteTotalsData | IInvoiceCalculates - Invoice calculations from backend (invoiceValues)
+ * @returns ITaxBreakdownItem[] - Formatted taxes array ready for API payload
+ */
+export const formatTaxes = (totals: IQuoteTotalsData | IInvoiceCalculates): ITaxBreakdownItem[] =>
+    DATA_TAXES.map(tax => {
+        const totalTaxesIva = totals?.total_taxes_iva as Record<string, number> | undefined;
+        const taxCode = tax.name.split(TAX_NAME_PARTS.SEPARATOR)[TAX_NAME_PARTS.CODE_INDEX];
+        const taxAmount = totalTaxesIva?.[taxCode] || 0;
+        return {
+            tax_id: taxCode,
+            tax_name: tax.name,
+            tax_rate: tax.percentage,
+            tax_amount: taxAmount,
+            tax_base: taxAmount > 0 ? totals.subtotal : 0,
+        };
+    });
+
 export { useQuoteForm } from '../../hooks/useQuoteForm';

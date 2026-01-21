@@ -245,3 +245,17 @@ export interface IBanks {
     description: string;
     pseCode:     string;
 }
+
+/**
+ * Payment type information from utils store
+ *
+ * @interface IPaymentType
+ * @typeParam id: string - Unique payment type identifier
+ * @typeParam value: string - Optional payment type display value
+ * @typeParam name: string - Optional payment type descriptive name
+ */
+export interface IPaymentType {
+    id: string;
+    value?: string;
+    name?: string;
+}

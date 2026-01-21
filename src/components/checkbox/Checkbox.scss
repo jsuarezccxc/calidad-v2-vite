@@ -16,8 +16,14 @@
 }
 
 .checkmark {
-    @apply rounded absolute left-0 h-4.5 w-4.5 border border-solid border-gray pointer-events-auto;
-
+    @apply rounded absolute left-0 border border-solid border-gray pointer-events-auto;
+    box-sizing: border-box;
+    width: 1.125rem;
+    height: 1.125rem;
+    min-width: 1.125rem;
+    min-height: 1.125rem;
+    max-width: 1.125rem;
+    max-height: 1.125rem;
     top: calc(50% - 0.563rem);
 
     &:hover {
@@ -166,8 +172,14 @@
 }
 
 .checkbox {
-    @apply w-4.5 h-4.5 border border-gray cursor-pointer;
-
+    @apply border border-gray cursor-pointer;
+    box-sizing: border-box;
+    width: 1.125rem;
+    height: 1.125rem;
+    min-width: 1.125rem;
+    min-height: 1.125rem;
+    max-width: 1.125rem;
+    max-height: 1.125rem;
     border-radius: 0.25rem;
 
     &:is(:hover) {
@@ -187,14 +199,40 @@
     @apply flex items-center gap-2;
 
     &__input {
-        @apply inline-block border cursor-pointer;
-
+        @apply inline-block border cursor-pointer rounded;
+        box-sizing: border-box;
         width: 1.125rem;
         height: 1.125rem;
+        min-width: 1.125rem;
+        min-height: 1.125rem;
+        max-width: 1.125rem;
+        max-height: 1.125rem;
         border-radius: 0.25rem;
     }
 
     &__label {
         @apply text-blue text-sm font-allerbold;
+    }
+
+    &--table {
+        .single-checkbox__input {
+            @apply bg-white border-gray cursor-pointer inline-block;
+            box-sizing: border-box;
+            width: 1.125rem;
+            height: 1.125rem;
+            min-width: 1.125rem;
+            min-height: 1.125rem;
+            max-width: 1.125rem;
+            max-height: 1.125rem;
+            border-radius: 0.25rem;
+
+            &:hover {
+                @apply border-blue;
+            }
+        }
+
+        input:checked ~ .single-checkbox__input {
+            @apply bg-blue border-transparent;
+        }
     }
 }

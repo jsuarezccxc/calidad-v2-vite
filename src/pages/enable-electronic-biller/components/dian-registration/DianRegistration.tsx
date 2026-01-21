@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-// Vite dynamic imports for electronic-documents images
-const edImages = import.meta.glob<{ default: string }>('/src/assets/images/electronic-documents/*.svg', { eager: true });
-const getEdImage = (name: string): string => {
+// Vite dynamic imports for electronic documents images
+const electronicDocsImages = import.meta.glob<{ default: string }>('/src/assets/images/electronic-documents/*.svg', { eager: true });
+const getElectronicDocsImage = (name: string): string => {
     const path = `/src/assets/images/electronic-documents/${name}.svg`;
-    return edImages[path]?.default || '';
+    return electronicDocsImages[path]?.default || '';
 };
 import { Button } from '@components/button';
 import { CurrentStep, InstructionStep } from '@components/current-step';
@@ -37,7 +37,7 @@ export const DianRegistration: React.FC<{
                             alt="Step"
                             className="mx-auto"
                             style={styles}
-                            src={getEdImage(image)}
+                            src={getElectronicDocsImage(image)}
                         />
                     )}
                     {currentStep === DIAN_REGISTER_STEPS.length && (

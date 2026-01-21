@@ -33,7 +33,7 @@ export const Tab: React.FC<{ type: TabType }> = ({ type }) => {
     };
 
     const activeElement = elements.some(item => item.type === selectedItem?.type);
-    console.log('elements', elements);
+
     return (
         <>
             <button

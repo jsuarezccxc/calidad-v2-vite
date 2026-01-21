@@ -77,7 +77,7 @@ const ReportTableContent: React.FC = () => {
                             elementType: ElementType.BTN,
                         })}
                         onClick={handleCreateQuote}
-                        nameIcon="addGreen"
+                        nameIcon="addWhite"
                         className="quote-list__create-button"
                     >
                         Crear cotización

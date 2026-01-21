@@ -31,15 +31,15 @@ export const handleTypeModal = (event: string): string => {
 
 /**
  * This interface is for props component
- * 
- * @typeParam xml: string - Document id
- * @typeParam pdfUrl: string - PDF url
+ *
  * @typeParam isPurchaseSupplier: boolean - Is purchase supplier document
  * @typeParam electronicDocument: IGenericRecord - Electronic document
+ * @typeParam isQuote: boolean - Is quote document (optional)
  */
 export interface IDownloadProps {
     isPurchaseSupplier: boolean;
     electronicDocument: IGenericRecord;
+    isQuote?: boolean;
 }
 
 /**

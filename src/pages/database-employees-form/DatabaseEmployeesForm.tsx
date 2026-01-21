@@ -69,7 +69,7 @@ const DatabaseEmployeesForm: React.FC = () => {
     const { TITLE, ADD } = DATABASE_EMPLOYEE;
     const { TITLE: EDIT_TITLE } = EDIT_CONTENT;
     const { ADD_TITLE, MODAL_TITLE, MODAL_DESCRIPTION } = DATABASE_EMPLOYEE_FORM;
-    const { NAME, HAS_TRANSPORTATION_ASSISTANCE, DOCUMENT_TYPE_ID } = FIELDS_EMPLOYEE_FORM;
+    const { NAME, HAS_TRANSPORTATION_ASSISTANCE } = FIELDS_EMPLOYEE_FORM;
     const {
         handleValidateSalary,
         handleValidateFields,

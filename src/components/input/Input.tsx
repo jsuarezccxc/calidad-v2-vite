@@ -93,6 +93,9 @@ export const TextInput: React.FC<IPropsInput> = props => {
         noDecimals = false,
         limitCharacters = true,
         alphanumericNoWhitespace = false,
+        icons = false,
+        selectIconType,
+        classIconSearch,
     } = props;
 
     const handleInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -123,11 +126,25 @@ export const TextInput: React.FC<IPropsInput> = props => {
                 onPaste={onPaste}
                 placeholder={placeholder}
                 disabled={disabled}
-                className={`input ${classesInput} block`}
+                className={`input ${classesInput} block ${icons && selectIconType ? 'pr-8' : ''}`}
                 maxLength={limitCharacters ? maxLength : undefined}
                 {...(limitCharacters && { maxLength })}
                 {...(decimalComma && { pattern: '([0-9]+.{0,1}[0-9]*,{0,1})*[0-9]' })}
             />
+            {icons && selectIconType && (
+                <div className={`w-5.5 h-5.5 flex items-center justify-center pointer-events-none absolute z-1 ${classIconSearch ?? 'top-7 right-0.5'} ${disabled ? 'hidden' : ''}`}>
+                    <Icon
+                        id={generateId({
+                            module: ModuleApp.INPUT,
+                            submodule: 'default-id-text-input',
+                            action: ActionElementType.SEARCH,
+                            elementType: ElementType.ICO,
+                        })}
+                        name={selectIconType}
+                        className="w-2.5 h-2.5"
+                    />
+                </div>
+            )}
         </WrapperInput>
     );
 };
@@ -1479,8 +1496,9 @@ export const FileInput: React.FC<IPropsInput> = props => {
         const classesMultiple = multiple ? `border rounded-md h-29 py-1 items-center justify-center ${requiredFileClasses}` : '';
         const classesNewFile = addNewFile || !inputWithFiles ? 'flex' : 'hidden';
         const inputWithFilesClasses = !inputWithFiles ? 'w-max lg:w-full' : 'flex';
+        const justifyClasses = inputWithFiles ? 'justify-end' : 'justify-center';
 
-        return `h-full w-max lg:w-full flex justify-center items-center ${disabledClasses} ${classesMultiple} ${classesNewFile} ${inputWithFilesClasses} ${
+        return `h-full w-max lg:w-full flex ${justifyClasses} items-center ${disabledClasses} ${classesMultiple} ${classesNewFile} ${inputWithFilesClasses} ${
             disabled && disabledInputFile(name)
         }`;
     };
@@ -1517,7 +1535,7 @@ export const FileInput: React.FC<IPropsInput> = props => {
 
         const classesContianerTrash = !multiple && inputWithFiles ? 'self-center w-5.5' : '';
 
-        const classesMultipleTrash = !multiple && inputWithFiles ? 'block cursor-pointer ml-3 z-10' : 'hidden';
+        const classesMultipleTrash = !multiple && inputWithFiles ? 'block cursor-pointer ml-2 z-10' : 'hidden';
         const classesTrash = `w-5.5 h-5.5  input--file__trashIcon ${classesMultipleTrash}`;
 
         const mClass = !addNewFile ? '-mt-2' : '';
@@ -1596,19 +1614,21 @@ export const FileInput: React.FC<IPropsInput> = props => {
                         )}
                     <label htmlFor={getIdLabel()} className={classesMainLabel()}>
                         <label htmlFor={id} className={classesWrapper(props).classesLabel} id="editIconLabel">
-                            <div className="w-7">
-                                <IconComponent
-                                    id={generateId({
-                                        module: ModuleApp.INPUT,
-                                        submodule: 'default-id-file-input',
-                                        action: ActionElementType.EDIT,
-                                        elementType: ElementType.ICO,
-                                    })}
-                                    name="editBlue"
-                                    hoverIcon="editGreen"
-                                    className={classesWrapper(props).classesEdit}
-                                />
-                            </div>
+                            {!showUploadFile() && (
+                                <div className="w-5.5">
+                                    <IconComponent
+                                        id={generateId({
+                                            module: ModuleApp.INPUT,
+                                            submodule: 'default-id-file-input',
+                                            action: ActionElementType.EDIT,
+                                            elementType: ElementType.ICO,
+                                        })}
+                                        name="editBlue"
+                                        hoverIcon="editGreen"
+                                        className={classesWrapper(props).classesEdit}
+                                    />
+                                </div>
+                            )}
                             {showUploadFile() && (
                                 <>
                                     {placeholder && <p className="mb-1 text-gray text-tiny">{placeholder}</p>}
@@ -1649,7 +1669,6 @@ export const FileInput: React.FC<IPropsInput> = props => {
                                 name="trashBlue"
                                 hoverIcon="trashGreen"
                                 className={classesWrapper(props).classesTrash}
-                                classIcon="ml-1.4"
                                 onClick={(): void => getIdToDelete(name)}
                             />
                         )}

@@ -61,13 +61,17 @@ export const InvoiceForm: React.FC<IInformationFormProps> = ({ formData, updateF
 
     const { isTypeNit, digitVerification } = useDigitVerification(documentType, client?.document_number ?? '');
 
-    const handleOptionChange = ({ value, name, id }: IGenericRecord): void => {
+    const handleOptionChange = ({ value, name, id, ...option }: IGenericRecord): void => {
         const keyId = ID_KEY[name];
         updateFormData({
             ...formData,
             [name]: value,
             ...(keyId && { [keyId]: id }),
-            ...(name === FieldName.PaymentType && { collection_days: null, days_collection_type: 'Días calendario' }),
+            ...(name === FieldName.PaymentType && {
+                collection_days: null,
+                days_collection_type: 'Días calendario',
+                isCreditSelected: option?.isCreditSelected || false,
+            }),
         });
     };
 
@@ -82,8 +86,17 @@ export const InvoiceForm: React.FC<IInformationFormProps> = ({ formData, updateF
 
     const invoicesTypesRender = INVOICE_TYPES.map(item => ({ ...item, name: item.value }));
     const prefixesOptionsRender = prefixes.map(item => ({ ...item, name: item.value }));
-    const paymentTypesRender = utils?.payment_types?.map((item: IGenericRecord) => ({ ...item, name: item.value }));
-    const paymentMethodsRender = utils?.payment_methods?.map((item: IGenericRecord) => ({ ...item, name: item.value }));
+    const paymentTypesRender = utils?.payment_types?.map((item: IGenericRecord) => ({
+        ...item,
+        value: item.id,
+        name: item.value,
+    }));
+
+    const paymentMethodsRender = utils?.payment_methods?.map((item: IGenericRecord) => ({
+        ...item,
+        value: item.id,
+        name: item.value,
+    }));
 
     return (
         <Form sendWithEnter className="invoice-form">
@@ -118,7 +131,7 @@ export const InvoiceForm: React.FC<IInformationFormProps> = ({ formData, updateF
                 labelText="*Tipo de factura:"
                 classesWrapper="form-field"
                 name={FieldName.OperationType}
-                valueSelect={formData?.[FieldName.OperationType]}
+                valueSelect={formData?.operation_type_id}
                 required={validate && !formData?.[FieldName.OperationType]}
                 disabled={disabledInputs}
                 {...TOOLTIP_DATA[FieldName.OperationType]}
@@ -319,14 +332,16 @@ export const InvoiceForm: React.FC<IInformationFormProps> = ({ formData, updateF
                         labelText="*Forma de pago:"
                         optionSelect={paymentTypesRender}
                         classesWrapper="form-field"
-                        onChangeSelect={(_, e): void => handleOptionChange({ ...e, name: FieldName.PaymentType })}
+                        onChangeSelect={(_, e): void => {
+                            handleOptionChange({ ...e, name: FieldName.PaymentType, isCreditSelected: e.name === CREDIT });
+                        }}
                         name={FieldName.PaymentType}
-                        valueSelect={formData?.[FieldName.PaymentType]}
+                        valueSelect={formData?.[FieldName.PaymentTypeId]}
                         required={validate && !formData?.[FieldName.PaymentType]}
                         disabled={disabledInputs}
                         {...TOOLTIP_DATA[FieldName.PaymentType]}
                     />
-                    {formData?.[FieldName.PaymentType] === CREDIT && (
+                    {formData?.isCreditSelected && (
                         <CreditCollection data={formData} updateData={updateFormData} validate={validate} />
                     )}
                 </div>
@@ -343,7 +358,7 @@ export const InvoiceForm: React.FC<IInformationFormProps> = ({ formData, updateF
                         classesWrapper="form-field"
                         onChangeSelect={(_, e): void => handleOptionChange({ ...e, name: FieldName.PaymentMethod })}
                         name={FieldName.PaymentMethod}
-                        valueSelect={formData?.[FieldName.PaymentMethod]}
+                        valueSelect={formData?.[FieldName.PaymentMethodId]}
                         disabled={disabledInputs}
                         {...TOOLTIP_DATA[FieldName.PaymentMethod]}
                     />

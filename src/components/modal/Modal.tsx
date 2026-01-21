@@ -44,7 +44,7 @@ export const SharedModal: React.FC<ISharedModalProps> = ({
     finalAction,
     leftButton,
     finishButtonText = 'Aceptar',
-    iconName = 'check',
+    iconName,
     type = ModalOption.Success,
     className,
     children,

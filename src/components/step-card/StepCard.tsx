@@ -5,12 +5,15 @@ import { remToPx } from '@utils/Size';
 import { DEFAULT_INFORMATION_WIDTH, IStepCardProps } from '.';
 import './StepCard.scss';
 
-// Vite dynamic imports for electronic-documents icons
-const iconModules = import.meta.glob<{ default: string }>('/src/assets/images/electronic-documents/*.svg', { eager: true });
+const electronicDocumentIcons = import.meta.glob<{ default: string }>(
+    '../../assets/images/electronic-documents/*.svg',
+    { eager: true }
+);
 
-const getIconSrc = (iconName: string): string => {
-    const path = `/src/assets/images/electronic-documents/${iconName}.svg`;
-    return iconModules[path]?.default || '';
+const getElectronicDocumentIcon = (iconName: string): string => {
+    const key = `../../assets/images/electronic-documents/${iconName}.svg`;
+    const module = electronicDocumentIcons[key];
+    return module?.default || '';
 };
 
 export const StepCard: React.FC<IStepCardProps> = ({
@@ -27,7 +30,7 @@ export const StepCard: React.FC<IStepCardProps> = ({
             <img
                 alt="Module"
                 className="cursor-pointer icon--step"
-                src={getIconSrc(icon)}
+                src={getElectronicDocumentIcon(icon)}
             />
             <div className="mx-2 step-card__information" style={{ width: informationWidth }}>
                 <h2 className="text-sm text-left text-green font-allerbold lg:text-base">{title}</h2>

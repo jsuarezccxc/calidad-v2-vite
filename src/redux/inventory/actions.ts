@@ -212,7 +212,7 @@ export const getReportKardexInventory = (
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const response: any = await apiFile(request);
 
-            const blob = await response.blob();
+            const blob = response instanceof Blob ? response : await response.blob();
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;

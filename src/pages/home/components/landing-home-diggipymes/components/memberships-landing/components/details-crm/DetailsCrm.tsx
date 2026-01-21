@@ -1,21 +1,16 @@
 import React from 'react';
+
+// Vite dynamic imports for CRM plan images
+const crmPlanImages = import.meta.glob<{ default: string }>('/src/assets/images/plans/crm/*.svg', { eager: true });
+const getCrmPlanImage = (index: number): string => {
+    const path = `/src/assets/images/plans/crm/detail${index}.svg`;
+    return crmPlanImages[path]?.default || '';
+};
 import { generateId, ModuleApp, ElementType, ActionElementType } from '@utils/GenerateId';
 import { useAccordion } from '@hooks/useAccordion';
 import { DetailButton } from '../buttons';
 import { DETAILS_CRM } from '../..';
 import './DetailsCrm.scss';
-
-// Static imports for Vite compatibility
-import detail1 from '@assets/images/plans/crm/detail1.svg';
-import detail2 from '@assets/images/plans/crm/detail2.svg';
-import detail3 from '@assets/images/plans/crm/detail3.svg';
-import detail4 from '@assets/images/plans/crm/detail4.svg';
-import detail5 from '@assets/images/plans/crm/detail5.svg';
-import detail6 from '@assets/images/plans/crm/detail6.svg';
-import detail7 from '@assets/images/plans/crm/detail7.svg';
-import detail8 from '@assets/images/plans/crm/detail8.svg';
-
-const detailImages = [detail1, detail2, detail3, detail4, detail5, detail6, detail7, detail8];
 
 export const DetailsCrm: React.FC = () => {
     const { getActiveClass, open, toggleOpening } = useAccordion();
@@ -37,7 +32,7 @@ export const DetailsCrm: React.FC = () => {
                         <div className="detail__image-container">
                             <img
                                 alt="Detail"
-                                src={detailImages[index]}
+                                src={getCrmPlanImage(index + 1)}
                                 className="w-8 h-8"
                             />
                         </div>

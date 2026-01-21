@@ -6,4 +6,5 @@ export const VARIABLE_TYPE = {
     STRING: 'string',
     NUMBER: 'number',
     OBJECT: 'object',
+    FUNCTION: 'function',
 };

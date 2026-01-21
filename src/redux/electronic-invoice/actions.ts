@@ -2,6 +2,7 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { RootState } from '@redux/rootReducer';
 import { IGenericRecord } from '@models/GenericRecord';
+import { IInvoiceQuoteState } from './types';
 import { FetchRequest } from '@models/Request';
 import { ICalculateInvoice, IInvoiceCalculates } from '@models/ElectronicInvoice';
 import { urls } from '@api/urls';
@@ -145,7 +146,7 @@ export const setInvoicePrefix = (data: IGenericRecord): ISetInvoicePrefix => ({
     payload: data,
 });
 
-export const setStateInvoice = (stateInvoice: IGenericRecord): ISetInvoiceState => ({
+export const setStateInvoice = (stateInvoice: IInvoiceQuoteState | IGenericRecord): ISetInvoiceState => ({
     type: ActionKeys.SET_STATE_INVOICE,
     stateInvoice,
 });
@@ -262,7 +263,7 @@ export const CreateQuoteAction = (
 ): ThunkAction<Promise<void>, RootState, unknown, ElectronicInvoiceActions> => {
     return async (dispatch: ThunkDispatch<RootState, any, ElectronicInvoiceActions>): Promise<any> => {
         try {
-            const request = new FetchRequest(urls.invoice.createQuote, dataInvoice);
+            const request = new FetchRequest(urls.invoice.quotes.create, dataInvoice);
             const { statusCode, data }: any = await apiPostInvoice(request);
             return { statusCode, data };
         } catch (error) {
@@ -454,7 +455,7 @@ export const downloadXml = (
             const request = new FetchRequest(url, requestBody);
             const action = isAuth ? apiGetFile : apiFile;
             const response: any = await action(request);
-            const blob = await response.blob();
+            const blob = response instanceof Blob ? response : await response.blob();
             const urlFront = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = urlFront;
@@ -489,7 +490,14 @@ export const getDocumentList = (
 ): ThunkAction<Promise<void>, RootState, null, ElectronicInvoiceActions> => {
     return async (dispatch: ThunkDispatch<RootState, null, ElectronicInvoiceActions>): Promise<void> => {
         try {
-            const request = new FetchRequest(isList ? `${urls.invoice.getDocumentList}?per_page=${PER_PAGE_RANGE}`: search ? `${urls.invoice.getDocumentList}?search=${search}` : urls.invoice.getDocumentList , parameterList);
+            const request = new FetchRequest(
+                isList
+                    ? `${urls.invoice.getDocumentList}?per_page=${PER_PAGE_RANGE}`
+                    : search
+                    ? `${urls.invoice.getDocumentList}?search=${search}`
+                    : urls.invoice.getDocumentList,
+                parameterList
+            );
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const { data, statusCode }: any = await apiPostInvoice(request);
             if (isCorrectResponse(statusCode)) dispatch(setAdjustmentNote(data));
@@ -547,16 +555,26 @@ export const postTemplateEmail = (
 
 export const getInvoiceCalculations = (
     data: ICalculateInvoice | IGenericRecord
-): ThunkAction<Promise<void>, RootState, null, ElectronicInvoiceActions> => {
-    return async (dispatch: ThunkDispatch<RootState, null, ElectronicInvoiceActions>): Promise<void> => {
+): ThunkAction<Promise<IGenericRecord | null>, RootState, null, ElectronicInvoiceActions> => {
+    return async (dispatch: ThunkDispatch<RootState, null, ElectronicInvoiceActions>): Promise<IGenericRecord | null> => {
         try {
             const request = new FetchRequest(urls.invoice.getCalculateInvoice, data);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const { data: calculations, statusCode, errors }: any = await apiPostInvoice(request);
-            if (calculations && isCorrectResponse(statusCode)) dispatch(setInvoiceCalculations(calculations));
-            if (errors) dispatch(setInvoiceCalculations({ ...INVOICE_CALCULATES }));
+
+            if (calculations && isCorrectResponse(statusCode)) {
+                dispatch(setInvoiceCalculations(calculations));
+                return calculations;
+            }
+            if (errors) {
+                dispatch(setInvoiceCalculations({ ...INVOICE_CALCULATES }));
+                return null;
+            }
+
+            return null;
         } catch (error) {
             dispatch(setError(String(error)));
+            return null;
         }
     };
 };

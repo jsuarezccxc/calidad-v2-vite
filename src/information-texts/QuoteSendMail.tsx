@@ -43,8 +43,8 @@ export const UI_MESSAGES = {
         },
     },
     EMAIL: {
-        PLACEHOLDER: 'Ej: correo@correo.com',
-        TOOLTIP: 'Ingrese la dirección de correo electrónico del destinatario',
+        PLACEHOLDER: 'Ej: correo@correo.com; otro@correo.com',
+        TOOLTIP: 'Ingrese una o varias direcciones de correo electrónico separadas por punto y coma (;)',
         ERROR: 'Por favor ingrese un correo electrónico válido',
         LABEL: 'Correo electrónico:',
     },
@@ -87,6 +87,10 @@ export const UI_MESSAGES = {
         SIZE_LIMIT_ERROR: 'El archivo no puede ser mayor a {size}MB',
         TYPE_ERROR: 'Solo se permiten archivos PNG, JPG o JPEG',
         SIZE_TEXT: 'Tamaño máximo: {size}MB',
+        TOOLTIPS: {
+            EDIT_FILE: 'Cambiar archivo adjunto',
+            DELETE_FILE: 'Eliminar archivo adjunto',
+        },
     },
     CHARACTER_COUNTER: {
         TEMPLATE: '{current}/{max} caracteres',

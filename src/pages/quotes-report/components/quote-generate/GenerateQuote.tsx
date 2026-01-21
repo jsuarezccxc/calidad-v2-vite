@@ -1,43 +1,133 @@
-import React from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { SelectSearchOption } from 'react-select-search';
+
 import { AddPerson } from '@components/electronic-documents';
 import { BreadCrumb } from '@components/bread-crumb';
-import { PageTitle } from '@components/page-title';
+import { CardFile } from '@components/card-file';
+import { SelectSearchInput } from '@components/input';
 import { SharedModal } from '@components/modal';
+import { PageTitle } from '@components/page-title';
+
+import { MODAL_TEXTS, QUOTE_UNAUTHORIZED_DATA } from '@constants/QuoteViewLabels';
 import { ModalType } from '@constants/Modal';
-import { TitleButtons } from '@constants/Buttons';
-import { SUPPORT_DOCUMENTS_SUBTITLE } from '@constants/DocumentTexts';
 import { Routes } from '@constants/Paths';
-import { MODAL_TEXTS } from '@constants/QuoteViewLabels';
-import { Form } from '@models/ElectronicDocuments';
+import { SUPPORT_DOCUMENTS_SUBTITLE } from '@constants/DocumentTexts';
+import { TitleButtons } from '@constants/Buttons';
+import { DOCUMENT_LANGUAGES, TypeFile } from '@constants/ElectronicInvoice';
+import { ZERO } from '@constants/Numbers';
+
+import { INFORMATION } from '@information-texts/Invoice';
+
+import { IInvoiceDetails, ITableTaxesAndRetention } from '@models/ElectronicInvoice';
+import { IQuoteFormData } from '@models/QuoteGeneration';
+
+import { RootState } from '@redux/rootReducer';
+import { getClientById } from '@redux/client-portal/actions';
+import { setStateInvoice } from '@redux/electronic-invoice/actions';
+
+import { ActionElementType, ElementType, generateId, ModuleApp } from '@utils/GenerateId';
 import { getRouteName } from '@utils/Paths';
-import { ModuleApp } from '@utils/GenerateId';
+
 import { GENERATE_QUOTE_TEXTS, PageButtonsFooter, QuoteBillingInformation, useQuoteForm } from '.';
+
 import './QuoteGenerate.scss';
 
 const GenerateQuote: React.FC = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
+
+    const { filesLogo: logoFile } = useSelector(({ parameterizationInvoice }: RootState) => parameterizationInvoice);
+    const { information: companyInfo } = useSelector(({ company }: RootState) => company);
 
     const {
         formData,
         openModal,
         addClient,
-        validationErrors,
-        validationWarnings,
+        validate,
         updateFormData,
         handleSubmit,
         resetForm,
         toggleModal,
+        toggleNegativeValueModal,
         handleClientCreated,
         setAddClient,
         setProducts,
+        setWithholdings,
+        products,
+        withholdings,
         isSubmitting,
-        submitError,
+        showNegativeValueModal,
+        createdQuoteNumber,
     } = useQuoteForm();
+
+    const [clientSuccessModal, setClientSuccessModal] = useState<boolean>(false);
+
+    const toggleClientSuccessModal = (): void => setClientSuccessModal(!clientSuccessModal);
+
+    const convertFormDataToQuoteFormData = (data: IQuoteFormData): IQuoteFormData => {
+        return {
+            ...data,
+            not_information_customer: data.documentConfig?.authorizePersonalData || false,
+            authorize_personal_data: data.documentConfig?.authorizePersonalData ? 'true' : 'false',
+            selected_option_id: '',
+        } as IQuoteFormData;
+    };
+
+    const handleQuoteFormDataUpdate = (data: IQuoteFormData | ((prev: IQuoteFormData) => IQuoteFormData)): void => {
+        if (typeof data === 'function') {
+            updateFormData(currentFormData => {
+                const quoteFormData = convertFormDataToQuoteFormData(currentFormData);
+                const updatedQuoteFormData = data(quoteFormData);
+
+                const result: IQuoteFormData = {
+                    ...currentFormData,
+                    ...updatedQuoteFormData,
+                    documentConfig: {
+                        ...currentFormData.documentConfig,
+                        authorizePersonalData: updatedQuoteFormData.not_information_customer || false,
+                    },
+                };
+
+                return result;
+            });
+        } else {
+            const updatedFormData = {
+                ...formData,
+                ...data,
+            };
+
+            if (data.not_information_customer !== undefined) {
+                updatedFormData.documentConfig = {
+                    ...updatedFormData.documentConfig,
+                    authorizePersonalData: data.not_information_customer,
+                };
+            }
+
+            updateFormData(updatedFormData);
+        }
+    };
+
+    const handleProductsChange = useCallback((products: IInvoiceDetails[]): void => {
+        setProducts(products);
+    }, []);
+
+    const handleWithholdingsChange = useCallback((withholdings: ITableTaxesAndRetention[]): void => {
+        setWithholdings(withholdings);
+    }, []);
+
+    const quoteFormData = useMemo(() => convertFormDataToQuoteFormData(formData), [formData]);
+
+    useEffect(() => {
+        if (formData?.id !== QUOTE_UNAUTHORIZED_DATA.id && formData?.client_id) {
+            dispatch(getClientById(formData.client_id));
+        }
+    }, [formData?.client_id, dispatch]);
 
     const routes = [
         {
-            name: getRouteName(Routes.ELECTRONIC_DOCUMENTS),
+            name: getRouteName(Routes.DASHBOARD_ELECTRONIC_DOCUMENT),
             route: GENERATE_QUOTE_TEXTS.BREADCRUMB.ROUTE_ELECTRONIC_DOCS,
         },
         {
@@ -59,7 +149,13 @@ const GenerateQuote: React.FC = () => {
     };
 
     const handleClientFormOpen = (): void => {
-        handleSubmit(Form.Client);
+        dispatch(setStateInvoice({
+            formData: formData,
+            productData: products,
+            withholdingTable: withholdings,
+            sendingCharge: formData.sending_charge || ZERO
+        }));
+        setAddClient(true);
     };
 
     const handleBackToForm = (): void => {
@@ -69,58 +165,22 @@ const GenerateQuote: React.FC = () => {
     const handleToggleModal = (clientId?: string, isNotShow?: boolean): void => {
         handleClientCreated();
         if (clientId) {
-            updateFormData({ clientInfo: { ...formData.clientInfo, name: clientId } });
+            updateFormData({
+                ...formData,
+                client_id: clientId,
+                not_information_customer: true,
+                documentConfig: { ...formData.documentConfig, authorizePersonalData: true },
+            });
+            dispatch(getClientById(clientId));
         }
-        if (!isNotShow) toggleModal();
+        if (!isNotShow) toggleClientSuccessModal();
     };
 
     return (
-        <div className={`font-aller ${GENERATE_QUOTE_TEXTS.UI_CONSTANTS.BACKGROUND_COLOR}`}>
-            <PageTitle title={getRouteName(Routes.ELECTRONIC_DOCUMENTS)} pageContent={SUPPORT_DOCUMENTS_SUBTITLE} />
+        <div className="quotes-generate">
+            <PageTitle title={getRouteName(Routes.DASHBOARD_ELECTRONIC_DOCUMENT)} pageContent={SUPPORT_DOCUMENTS_SUBTITLE} />
             <BreadCrumb routes={routes} />
             <h2 className="page-subtitle">{GENERATE_QUOTE_TEXTS.PAGE.SUBTITLE}</h2>
-
-            {submitError && (
-                <div className="p-4 mb-4 border rounded border-red submit-error bg-gray-light">
-                    <p className="font-semibold text-red">{submitError}</p>
-                </div>
-            )}
-
-            {validationErrors.length > GENERATE_QUOTE_TEXTS.UI_CONSTANTS.EMPTY_VALIDATION && (
-                <div className="p-4 mb-4 border rounded border-red validation-errors bg-gray-light">
-                    <h4 className="mb-2 font-semibold text-red">{GENERATE_QUOTE_TEXTS.VALIDATION.ERRORS_TITLE}</h4>
-                    <ul className="list-disc list-inside text-red">
-                        {validationErrors.map((error, index) => (
-                            <li
-                                key={`${GENERATE_QUOTE_TEXTS.KEY_PREFIXES.ERROR}-${error.slice(
-                                    0,
-                                    GENERATE_QUOTE_TEXTS.KEY_SLICE_LENGTH
-                                )}-${index}`}
-                            >
-                                {error}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-
-            {validationWarnings.length > GENERATE_QUOTE_TEXTS.UI_CONSTANTS.EMPTY_VALIDATION && (
-                <div className="p-4 mb-4 border border-yellow-300 rounded validation-warnings bg-yellow-50">
-                    <h4 className="mb-2 font-semibold text-yellow-700">{GENERATE_QUOTE_TEXTS.VALIDATION.WARNINGS_TITLE}</h4>
-                    <ul className="text-yellow-600 list-disc list-inside">
-                        {validationWarnings.map((warning, index) => (
-                            <li
-                                key={`${GENERATE_QUOTE_TEXTS.KEY_PREFIXES.WARNING}-${warning.slice(
-                                    0,
-                                    GENERATE_QUOTE_TEXTS.KEY_SLICE_LENGTH
-                                )}-${index}`}
-                            >
-                                {warning}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
 
             {addClient ? (
                 <AddPerson isClient toggleModal={handleToggleModal} backAddUser={handleBackToForm} />
@@ -135,16 +195,85 @@ const GenerateQuote: React.FC = () => {
                         haga clic en el botón &quot;Siguiente&quot; para guardar los datos en el sistema y generar la cotización.
                     </p>
 
+                    <div className="mt-6 mb-6">
+                        <div className="mb-2 w-37 xs:w-full quote-language-select">
+                            <SelectSearchInput
+                                id={generateId({
+                                    module: ModuleApp.QUOTES,
+                                    submodule: `generate-language`,
+                                    action: ActionElementType.INPUT,
+                                    elementType: ElementType.DRP,
+                                })}
+                                classesWrapper="w-37 xs:w-full mb-2 quote-language-select"
+                                labelText="Idioma del documento:"
+                                valueSelect={formData.document_language || 'es'}
+                                placeholder="Seleccionar"
+                                optionSelect={DOCUMENT_LANGUAGES as unknown as SelectSearchOption[]}
+                                onChangeSelect={({ value }): void => updateFormData({ ...formData, document_language: value })}
+                                disabled={false}
+                            />
+                        </div>
+
+                        <div className="mb-6 quote-generate__cards">
+                            <div className="quote-generate__cards--logo-card">
+                                <CardFile
+                                    className="w-full h-full p-0"
+                                    file={formData?.logo || {}}
+                                    url={logoFile?.url}
+                                    updateFile={(logo): void =>
+                                        updateFormData({
+                                            ...formData,
+                                            logo,
+                                            urlLogo: logo ? '' : logoFile?.url,
+                                        })
+                                    }
+                                    typeLogo={TypeFile.LOGO_INVOICE}
+                                />
+                            </div>
+
+                            <div className="quote-generate__cards--company-card">{INFORMATION.COMPANY(companyInfo)}</div>
+
+                            <div className="quote-generate__cards--date-card">
+                                <p>
+                                    <span className="quote-generate__text--blue">Fecha cotización:</span>
+                                    <span className="quote-generate__text--blue">
+                                        {new Date().toLocaleDateString('es-CO', {
+                                            day: '2-digit',
+                                            month: '2-digit',
+                                            year: 'numeric'
+                                        })}
+                                    </span>
+                                    <span className="quote-generate__text--blue">No. cotización:</span>
+                                    <span className="quote-generate__text--blue">{formData.number || '---'}</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <p
+                            className="mt-4 mb-6 font-aller text-blue"
+                            style={{
+                                fontSize: '0.75rem',
+                                fontWeight: '400',
+                                lineHeight: 'normal',
+                                maxWidth: '60.5rem',
+                                textAlign: 'left',
+                            }}
+                        >
+                            La fecha y hora de transmisión de la factura electrónica se genera al momento de hacer click en
+                            Siguiente al final de esta pantalla.
+                        </p>
+                    </div>
+
                     <div className="billing-information">
-                        <h3 className="font-allerbold text-blue mb-4.5">Información para facturar</h3>
+                        <h3 className="font-allerbold text-blue mb-4.5">Información para cotizar</h3>
                         <QuoteBillingInformation
-                            formData={formData}
-                            updateFormData={updateFormData}
+                            formData={quoteFormData}
+                            updateFormData={handleQuoteFormDataUpdate}
                             openForm={handleClientFormOpen}
-                            toggleModal={toggleModal}
                             isContingency={false}
-                            onProductsChange={setProducts}
-                            isInsertedPage={false}
+                            validate={validate}
+                            onProductsChange={handleProductsChange}
+                            onWithholdingsChange={handleWithholdingsChange}
                         />
                     </div>
 
@@ -166,7 +295,7 @@ const GenerateQuote: React.FC = () => {
                 handleClosed={toggleModal}
                 finalAction={(): void => {
                     toggleModal();
-                    history.push('/quotes-report');
+                    history.push(`/quotes-report?view=quote-view&quote=${createdQuoteNumber}`);
                 }}
                 leftButton={{
                     text: 'Generar nueva cotización',
@@ -178,6 +307,29 @@ const GenerateQuote: React.FC = () => {
                 }}
                 text={MODAL_TEXTS.QUOTE_SAVE_SUCCESS}
                 finishButtonText={TitleButtons.NEXT}
+            />
+
+            <SharedModal
+                moduleId={`${ModuleApp.QUOTES}-negative-value-warning`}
+                open={showNegativeValueModal}
+                type={ModalType.Information}
+                iconName="alertMulticolor"
+                handleClosed={toggleNegativeValueModal}
+                finalAction={toggleNegativeValueModal}
+                text={{
+                    title: 'Advertencia',
+                    description: 'Verifique que el valor total sea correcto y no muestre un valor negativo',
+                }}
+                finishButtonText={TitleButtons.CLOSE}
+            />
+
+            <SharedModal
+                moduleId={`${ModuleApp.QUOTES}-client-success`}
+                open={clientSuccessModal}
+                type={ModalType.Success}
+                handleClosed={toggleClientSuccessModal}
+                finalAction={toggleClientSuccessModal}
+                finishButtonText={TitleButtons.ACCEPT}
             />
         </div>
     );

@@ -106,7 +106,7 @@ export const Header: React.FC = (): React.ReactElement => {
         const resultSearch = itemsSearch
             .filter(item => {
                 const { title } = PATHS[item?.routeIndex] ?? { title: item?.name || item?.module, route: '#' };
-                const letter = title[removeAccents(lowerCase(title)).indexOf(lowerCase(value.trim())) - 1];
+                const letter = title && title[removeAccents(lowerCase(title)).indexOf(lowerCase(value.trim())) - 1];
 
                 if (
                     (letter === undefined || letter === ' ') &&

@@ -1,4 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
+
+// Vite dynamic imports for wompi payment gateway images
+const wompiImages = import.meta.glob<{ default: string }>('/src/assets/images/payment-gateway/wompi/*.png', { eager: true });
+const getWompiImage = (name: string): string => {
+    const path = `/src/assets/images/payment-gateway/wompi/${name}.png`;
+    return wompiImages[path]?.default || '';
+};
 import { useHistory, useLocation } from 'react-router';
 import { Routes } from '@constants/Paths';
 import { ONE } from '@constants/ElectronicInvoice';
@@ -21,14 +28,6 @@ import { FormWompi } from '../form';
 import { IInstructionsProps, UTILS } from '.';
 import { getLocalStorage, routesToSteps } from '..';
 import './PaymentInstructions.scss';
-
-// Vite dynamic imports for wompi payment images
-const wompiImages = import.meta.glob<{ default: string }>('/src/assets/images/payment-gateway/wompi/*.png', { eager: true });
-
-const getWompiImage = (imgName: string): string => {
-    const path = `/src/assets/images/payment-gateway/wompi/${imgName}.png`;
-    return wompiImages[path]?.default || '';
-};
 
 export const PaymentInstructions: React.FC<IInstructionsProps> = ({ step, type }) => {
     const [history, { pathname, search }, numberStep] = [useHistory(), useLocation(), Number(step)];

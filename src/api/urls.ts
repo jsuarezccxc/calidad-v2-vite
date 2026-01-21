@@ -194,6 +194,7 @@ export const urls = {
         quotes: {
             create: '/invoices/bills/quotes/',
             getById: (quoteId: string): string => `/invoices/bills/quotes/${quoteId}`,
+            getForInvoice: (quoteId: string): string => `/invoices/bills/quotes/${quoteId}/for-invoice`,
             report: '/invoices/bills/quotes/report',
             consecutive: '/invoices/bills/quotes/consecutives/last',
             generatePDF: (quoteId: string): string => `/invoices/bills/quotes/${quoteId}/generate-pdf`,

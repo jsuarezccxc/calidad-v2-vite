@@ -1,4 +1,11 @@
 import React, { useEffect, useState } from 'react';
+
+// Vite dynamic imports for sidebar images
+const sidebarImages = import.meta.glob<{ default: string }>('/src/assets/images/sidebar/*.svg', { eager: true });
+const getSidebarImage = (name: string): string => {
+    const path = `/src/assets/images/sidebar/${name}.svg`;
+    return sidebarImages[path]?.default || '';
+};
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@redux/rootReducer';
@@ -12,7 +19,6 @@ import { IGenericRecord } from '@models/GenericRecord';
 import { Modal } from '@components/modal';
 import { Icon } from '@components/icon';
 import { Button } from '@components/button';
-import { getSidebarIcon } from '@utils/ImageLoader';
 import { lengthGreaterThanZero } from '@utils/Length';
 import { generateId, ModuleApp, ElementType, ActionElementType } from '@utils/GenerateId';
 import { ALWAYS_ACCESS_MODULES_NAME, ALWAYS_ACCESS_WITH_MODULE_NAME } from '@utils/Paths';
@@ -204,7 +210,7 @@ export const Tab: React.FC<IGenericRecord> = ({
                                 <img
                                     alt="Module"
                                     className="cursor-pointer icon-width--tab"
-                                    src={getSidebarIcon(icon)}
+                                    src={getSidebarImage(icon)}
                                 />
                             )}
                             <p onClick={handleClickModule} className={handleClassesName()}>

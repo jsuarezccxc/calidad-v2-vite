@@ -12,7 +12,7 @@ import { COLOMBIAN_CURRENCY_ID, DEFAULT_LANG, INVOICE, NA } from '@constants/Ele
 import { Form } from '@models/ElectronicDocuments';
 import { IGenericRecord } from '@models/GenericRecord';
 import { FieldName, Modal } from '@models/SalesInvoice';
-import { IInvoiceCalculates, IInvoiceDetails } from '@models/ElectronicInvoice';
+import { IInvoiceCalculates, IInvoiceDetails, ITableTaxesAndRetention } from '@models/ElectronicInvoice';
 
 import { TYPE_NAVIGATION } from '@pages/consult-electronic-document';
 
@@ -63,15 +63,15 @@ export interface ITableDataProps {
 /**
  * This interface is props in component withholdings
  *
- * @typeParam data: IGenericRecord[] - Withholdings
- * @typeParam updateData: (data: IGenericRecord[]) => void - Set withholdings
+ * @typeParam data: ITableTaxesAndRetention[] - Withholdings
+ * @typeParam updateData: (data: ITableTaxesAndRetention[]) => void - Set withholdings
  * @typeParam validate: boolean - Validate table
  * @typeParam toggleTotalsQuery: () => void - This toggles the state that indicates when to query the totals
  * @typeParam symbol: string - This is the currency symbol
  */
 export interface IWithholdingsProps {
-    data: IGenericRecord[];
-    updateData: (data: IGenericRecord[]) => void;
+    data: ITableTaxesAndRetention[];
+    updateData: (data: ITableTaxesAndRetention[]) => void;
     validate: boolean;
     toggleTotalsQuery: () => void;
     symbol: string;
@@ -116,12 +116,18 @@ export interface IInvoiceProps {
  * @typeParam toggleModal: () => void - Change modal
  * @typeParam isContingency: boolean - If is contingency page
  * @typeParam isInsertedPage?: boolean - Optional prop if component in other page
+ * @typeParam initialProductData?: IInvoiceDetails[] - Initial product data from quote
+ * @typeParam initialWithholdingData?: ITableTaxesAndRetention[] - Initial withholding data from quote
+ * @typeParam initialSendingCharge?: number - Initial sending charge from quote
  */
 export interface IBillingInformationProps extends IInvoiceProps {
     openForm: (type: Form) => void;
     toggleModal: () => void;
     isContingency: boolean;
     isInsertedPage?: boolean;
+    initialProductData?: IInvoiceDetails[];
+    initialWithholdingData?: ITableTaxesAndRetention[];
+    initialSendingCharge?: number;
 }
 
 /**
@@ -182,6 +188,94 @@ export enum DianResponse {
     Contingency = 'CONTINGENCY',
     NoEmailSent = 'ACCEPTED_NO_EMAIL_SENT',
 }
+
+/**
+ * Maps products with taxes to format required by backend getTotals.
+ * Hybrid approach: tries catalog first, falls back to IVA reconstruction.
+ *
+ * @typeParam products: IInvoiceDetails[] - Array of invoice products
+ * @typeParam catalogProducts: IGenericRecord[] - Redux products catalog with valid tax UUIDs
+ * @typeParam companyTaxes: IGenericRecord[] - Company taxes for fallback reconstruction
+ * @returns Array of products formatted for totals calculation with taxes
+ */
+export const mapProductsForTotals = (
+    products: IInvoiceDetails[],
+    catalogProducts?: IGenericRecord[],
+    companyTaxes?: IGenericRecord[]
+): Array<IInvoiceDetails> => {
+    return products.map(item => {
+        const quantity = stringToFloat(item.quantity);
+        const unitValue = stringToFloat(item.unit_value); // ← CORRECTED: Use existing unit_value, don't recalculate
+        const discount = stringToFloat(item.discount) || 0;
+
+        let taxes = item?.product_taxes ?? [];
+
+        // APPROACH 1: Get taxes from Redux product catalog (same as assignProducts pattern)
+        if ((!taxes || taxes.length === 0) && item.unique_products_id && catalogProducts && catalogProducts.length > 0) {
+            const matchedProduct = catalogProducts.find(catalogProduct => catalogProduct.id === item.unique_products_id);
+
+            if (matchedProduct) {
+                // Use the same pattern as assignProducts (line 1321-1323)
+                const productTaxes =
+                    matchedProduct.unique_product_taxes && matchedProduct.unique_product_taxes.length > 0
+                        ? matchedProduct.unique_product_taxes
+                        : matchedProduct.product?.product_taxes || [];
+
+                if (productTaxes && productTaxes.length > 0) {
+                    taxes = productTaxes.map(({ company_tax_id, tax_value }: IGenericRecord) => ({
+                        company_tax_id,
+                        tax_value,
+                    }));
+                }
+            }
+        }
+
+        // APPROACH 2: FALLBACK - If still no taxes but quote has IVA value, reconstruct from IVA
+        if (
+            (!taxes || taxes.length === 0) &&
+            item.iva &&
+            stringToFloat(item.iva) > 0 &&
+            companyTaxes &&
+            companyTaxes.length > 0
+        ) {
+            const ivaValue = stringToFloat(item.iva);
+            // Calculate subtotal: (unit_value * quantity) - discount
+            const subtotal = unitValue * quantity - discount;
+
+            // Calculate tax rate from IVA value: rate = (iva / subtotal) * 100
+            const calculatedRate = subtotal > 0 ? (ivaValue / subtotal) * 100 : 0;
+
+            // Find matching IVA tax in company taxes (19%, 16%, 5%, 0%)
+            const matchingTax = companyTaxes.find((tax: IGenericRecord) => {
+                const isIVA = tax.name === IVA || tax.tax_name === IVA;
+                const taxRate = tax.rate || 0; // ← CORRECTED: Use 'rate' property
+                // Allow 0.5% margin for rounding differences
+                const rateDiff = Math.abs(taxRate - calculatedRate);
+                return isIVA && rateDiff < 0.5;
+            });
+
+            if (matchingTax) {
+                taxes = [
+                    {
+                        company_tax_id: matchingTax.id,
+                        tax_value: matchingTax.rate, // ← CORRECTED: Use 'rate' property
+                    },
+                ];
+            }
+        }
+
+        // Return ONLY the fields backend needs for totals calculation
+        const cleanProduct = {
+            quantity,
+            unit_value: unitValue,
+            discount,
+            unit_measure_milliliters: item.unit_measure_milliliters || 0,
+            taxes,
+        };
+
+        return cleanProduct;
+    });
+};
 
 /**
  * Modal that is displayed according to the dian's response
@@ -345,7 +439,6 @@ export const calculateProductTaxes = (products: IInvoiceDetails[]): IInvoiceDeta
         const base = calculateBase(product);
         return {
             ...product,
-            unit_value: stringToFloat(product.quantity) * product.unit_cost,
             total_buy: base,
         };
     });
@@ -421,7 +514,7 @@ export const formatInvoiceRequest = ({
     const client = selectedClient?.customer?.person;
     const authorizePersonalData = formData?.not_information_customer;
     const isMandate = formData?.[FieldName.OperationType] === MANDATE;
-    const isCounted = formData?.[FieldName.PaymentType] !== CREDIT;
+    const isCredit = formData?.isCreditSelected;
     const [retefuente, reteica, reteiva] = withholdingTable;
     return {
         lang: formData?.lang || DEFAULT_LANG,
@@ -442,8 +535,8 @@ export const formatInvoiceRequest = ({
         customer_id: authorizePersonalData ? client?.id : formData.id,
         date: '',
         date_limit: getDateFromUnix(getUnixFromDate()).formatYearMonthDay,
-        days_collection: isCounted ? 0 : Number(formData?.collection_days),
-        days_collection_type: isCounted ? null : formData?.days_collection_type,
+        days_collection: isCredit ? Number(formData?.collection_days) : 0,
+        days_collection_type: isCredit ? formData?.days_collection_type : null,
         department_id: null,
         department_name: null,
         document_number: authorizePersonalData ? client?.document_number.slice(0, 10) : formData?.document_number,
@@ -451,7 +544,7 @@ export const formatInvoiceRequest = ({
         document_number_sales_manager: formData?.document_number_sales_manager,
         document_type: authorizePersonalData ? client?.document_type : 'f73f5793-795e-33db-9115-95437f9ecaea',
         document_type_purchasing_manager: null,
-        document_type_sales_manager: formData?.document_type_purchasing_manager_id,
+        document_type_sales_manager: formData?.document_type_sales_manager_id,
         electronic_biller: false,
         electronic_billing: true,
         email: client?.email,
@@ -1035,7 +1128,7 @@ export const REQUIRED_TABLE_FIELDS = (validateSupplier: boolean): { name: string
 /**
  * Default withholding data
  */
-export const WITHHOLDING_DATA: IGenericRecord[] = [
+export const WITHHOLDING_DATA: ITableTaxesAndRetention[] = [
     {
         name: '06 Retefuente',
         base: 0,
@@ -1110,6 +1203,7 @@ export const FORM_DATA = {
     date: getTodaysTime('YYYY-MM-DD'),
     lang: 'es',
     id: '',
+    isCreditSelected: false,
 };
 
 /**
@@ -1207,25 +1301,63 @@ export const PAYMENT_METHOD = {
  * @param products: Products company
  * @returns IGenericRecord[]
  */
-export const assignProducts = (invoiceDetails: IGenericRecord[], products: IGenericRecord[]): IInvoiceDetails[] =>
-    (invoiceDetails as IInvoiceDetails[]).map(item => {
-        const { stock, unique_product_taxes } = products.find(itemProduct => itemProduct.id === item.unique_products_id) || {
+export const assignProducts = (invoiceDetails: IGenericRecord[], products: IGenericRecord[]): IInvoiceDetails[] => {
+    if (!products || products.length === 0) {
+        console.warn('⚠️ CRITICAL: Redux products catalog is EMPTY or UNDEFINED!');
+    }
+
+    return (invoiceDetails as IGenericRecord[]).map(item => {
+        const matchedProduct = products.find(itemProduct => itemProduct.id === item.unique_products_id);
+
+        const { stock, unique_product_taxes, product } = matchedProduct || {
             stock: 0,
         };
-        const isPerishable = Array.isArray(stock);
+
+        // CRÍTICO: Siempre usar taxes del producto en Redux, no del item de cotización
+        // Los items de cotización pueden tener IVA calculado pero sin UUIDs de taxes
+        const productTaxes =
+            unique_product_taxes && unique_product_taxes.length > 0 ? unique_product_taxes : product?.product_taxes || [];
+
+        const isPerishable = Array.isArray(stock) && lengthGreaterThanZero(stock);
         const { batch: batches } = isPerishable
             ? stock.find((warehouse: IGenericRecord) => warehouse.warehouses_id === item.warehouse_id) || { batch: [] }
             : { batch: [] };
         const isNotNA = isPerishable && lengthGreaterThanZero(batches);
-        return {
-            ...item,
-            warehouse_name: isPerishable ? item.warehouse_name : NA,
-            batch_number: isNotNA ? item.batch_number : NA,
-            product_taxes: unique_product_taxes || [],
-            taxes:
-                unique_product_taxes?.map(({ company_tax_id, tax_value }: IGenericRecord) => ({ company_tax_id, tax_value })) ||
-                [],
-            date_expiration: isNotNA ? getDateFromUnix(getUnixFromDate(item.date_expiration || '')).dateFormat : NA,
+
+        const hasCalculatedIva = item.iva && parseFloat(item.iva) > 0;
+
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        const { warehouse_id, batch_id, warehouse_name, batch_number, date_expiration, ...itemWithoutWarehouseBatch } = item;
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+
+        const baseProduct = {
+            ...itemWithoutWarehouseBatch,
+            product_taxes: productTaxes,
+            taxes: productTaxes?.map(({ company_tax_id, tax_value }: IGenericRecord) => ({ company_tax_id, tax_value })) || [],
             percentage_discount: calculatePercentage(item.unit_value, item.discount),
+            iva: hasCalculatedIva ? item.iva : undefined,
+
+            ...(isPerishable
+                ? {
+                      warehouse_name: item.warehouse_name,
+                      warehouse_id: item.warehouse_id,
+                  }
+                : {
+                      warehouse_name: NA,
+                  }),
+
+            ...(isNotNA
+                ? {
+                      batch_number: item.batch_number,
+                      batch_id: item.batch_id,
+                      date_expiration: getDateFromUnix(getUnixFromDate(item.date_expiration || '')).dateFormat,
+                  }
+                : {
+                      batch_number: NA,
+                      date_expiration: NA,
+                  }),
         };
+
+        return baseProduct as IInvoiceDetails;
     });
+};

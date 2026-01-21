@@ -1,7 +1,7 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 import { IGenericRecord } from '@models/GenericRecord';
-import { ICheckboxProps } from '.';
+import { getCheckboxInputClassName, ICheckboxProps } from '.';
 import './Checkbox.scss';
 
 export const Checkbox: React.FC<ICheckboxProps> = ({
@@ -77,9 +77,7 @@ export const SingleCheckBox: React.FC<IGenericRecord> = ({
                 />
                 <label
                     htmlFor={id}
-                    className={`single-checkbox__input ${
-                        value ? 'bg-blue border-transparent' : 'bg-gray-light border-gray'
-                    } ${classInput}`}
+                    className={`single-checkbox__input ${getCheckboxInputClassName(value, className)} ${classInput}`}
                 />
                 {labelText && <span className={`single-checkbox__label ${labelClass}`}>{labelText}</span>}
                 <div />
