@@ -1,7 +1,7 @@
 //--- Libraries ---//
 import React, { useState, useEffect, ChangeEvent, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 //--- Components ---//
 import { Icon } from '@components/icon';

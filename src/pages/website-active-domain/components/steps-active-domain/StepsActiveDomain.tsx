@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { OptionCard } from '@components/option-card';
 import { InformationAlert } from '@components/information-alert';
 import { InformationCard } from '@components/information-card';

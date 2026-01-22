@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import dayjs from '@utils/Dayjs';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { BreadCrumb } from '@components/bread-crumb';
 import { SimpleButton } from '@components/button';
 import { Form } from '@components/form';

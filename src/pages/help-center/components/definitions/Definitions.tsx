@@ -1,6 +1,6 @@
 //--- Libraries ---//
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 //--- Constants ---//
 import { NAME } from '@constants/BuildProduct';
 //--- Components---//

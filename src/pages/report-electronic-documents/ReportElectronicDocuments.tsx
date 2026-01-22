@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { PageTitle } from '@components/page-title';
 import { BreadCrumb } from '@components/bread-crumb';
 import { PageButtonsFooter } from '@components/page-buttons-footer';

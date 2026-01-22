@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import React from 'react';
 import { INFORMATION } from '@information-texts/Warehouses';
 import { IGenericRecord } from '@models/GenericRecord';

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { IGenericRecord } from '@models/GenericRecord';
 import { IFiscalResponsibilitiesResponse, IFiscalResponsibility, ISupplierResponse } from '@models/Supplier';
 import { SupportContext } from '@pages/generate-support-document/context';

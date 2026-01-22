@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { WEBSITE_ANALYTICS } from '@information-texts/WebsiteDashboard';
 import { WEBSITE_DESIGN_AND_ADMINISTRATION } from '@constants/website';

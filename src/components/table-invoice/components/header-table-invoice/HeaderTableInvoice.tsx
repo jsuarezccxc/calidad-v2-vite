@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import { BODY_TOOLTIP, TABLE_TOOLTIPS } from '@information-texts/TableInvoice';
 import { TooltipTable } from '@components/tooltip-table';
 import { IHeaderTableInvoiceProps, UTILS } from '.';

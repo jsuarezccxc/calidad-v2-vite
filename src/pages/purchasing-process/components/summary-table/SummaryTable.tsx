@@ -1,6 +1,6 @@
 import React, { Fragment, ReactElement } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { Icon } from '@components/icon';
 import { Link, LinkColor } from '@components/button';
 import { IGenericRecord } from '@models/GenericRecord';

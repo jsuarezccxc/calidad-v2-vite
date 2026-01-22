@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { ProductDatabaseContext, initialRenderTaxes } from '@pages/product-database/context';
 import { ITaxOption } from '@pages/product-database';
 import { PageButtonsFooter } from '@components/page-buttons-footer';

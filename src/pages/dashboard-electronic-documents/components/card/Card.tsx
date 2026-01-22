@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { Icon } from '@components/icon';
 import { ZERO_DAYS as ZERO } from '@constants/Memberships';
 import { IColorCardProps, IContentCardProps, ILittleCardProps, ISimpleCardProps, UTILS_CARD } from '.';

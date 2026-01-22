@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -30,8 +30,7 @@ i18next.init({
     },
 });
 
-const root = ReactDOM.createRoot(document.getElementById('root')!);
-root.render(
+ReactDOM.render(
     <React.StrictMode>
         <HelmetProvider>
             <Provider store={store}>
@@ -44,7 +43,8 @@ root.render(
                 </PersistGate>
             </Provider>
         </HelmetProvider>
-    </React.StrictMode>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

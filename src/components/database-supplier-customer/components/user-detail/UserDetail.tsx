@@ -1,5 +1,5 @@
 import React, { Fragment, useMemo } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { BreadCrumb } from '@components/bread-crumb';
 import { PageTitle } from '@components/page-title';

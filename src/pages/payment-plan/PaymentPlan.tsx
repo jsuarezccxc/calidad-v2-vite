@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { RootState } from '@redux/rootReducer';
 import { postReactivePayment } from '@redux/membership/actions';
 import { cancelMembership, getActiveModules, getPlanHistory } from '@redux/company/actions';

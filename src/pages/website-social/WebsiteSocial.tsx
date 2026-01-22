@@ -8,7 +8,7 @@ const getFlagImage = (code: string): string => {
 };
 import { useDispatch, useSelector } from 'react-redux';
 import ReactPlayer from 'react-player';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import WhatsappExample from '@assets/images/whatsapp-example.svg';
 import { BreadCrumb } from '@components/bread-crumb';
 import { Form } from '@components/form';

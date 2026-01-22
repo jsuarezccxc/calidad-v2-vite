@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import signUp from '@assets/images/sign-up-blue.svg';
 import home from '@assets/images/home-blue.svg';
 import trash from '@assets/images/trash-blue.svg';

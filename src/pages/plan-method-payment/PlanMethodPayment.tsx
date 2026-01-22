@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { ModalType } from '@components/modal';
 import { PageTitle } from '@components/page-title';
 import { BreadCrumb } from '@components/bread-crumb';

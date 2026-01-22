@@ -8,7 +8,7 @@ const getElectronicDocsImage = (name: string): string => {
     return electronicDocsImages[path]?.default || '';
 };
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { IFile } from '@components/input';
 import { Button } from '@components/button';
 import { CurrentStep, InstructionStep } from '@components/current-step';

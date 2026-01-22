@@ -6,7 +6,7 @@ const getWompiImage = (name: string): string => {
     const path = `/src/assets/images/payment-gateway/wompi/${name}.png`;
     return wompiImages[path]?.default || '';
 };
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Routes } from '@constants/Paths';
 import { ONE } from '@constants/ElectronicInvoice';
 import { ADD_PRODUCT } from '@constants/AssembleProduct';

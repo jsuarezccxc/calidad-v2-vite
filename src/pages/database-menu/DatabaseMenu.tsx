@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { RootState } from '@redux/rootReducer';
 import { getListEmployees } from '@redux/company/actions';
 import { PageTitle } from '@components/page-title';

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { Icon } from '@components/icon';
 import { PageTitle } from '@components/page-title';
 import { BreadCrumb } from '@components/bread-crumb';

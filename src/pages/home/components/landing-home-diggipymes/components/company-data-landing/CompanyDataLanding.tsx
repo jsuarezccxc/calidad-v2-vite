@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { Title } from '@components/table-input';
 import { PageButtonsFooter } from '@components/page-buttons-footer';
 import Footer from '@components/footer';

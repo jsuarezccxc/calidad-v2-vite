@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import dayjs from '@utils/Dayjs';
 import { IData } from '@models/ScheduleDemo';
 import { setDailySchedules } from '@redux/calendar/actions';

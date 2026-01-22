@@ -1,6 +1,6 @@
 //--- Libraries ---//
 import React, { useContext, useEffect } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 //--- Redux ---//
 import { RootState } from '@redux/rootReducer';

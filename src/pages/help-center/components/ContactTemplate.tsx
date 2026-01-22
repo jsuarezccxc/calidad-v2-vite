@@ -1,6 +1,6 @@
 //--- Libraries ---//
 import React, { FormEvent } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 //--- Components ---//
 import { Button } from '@components/button';
 //--- Root ---//

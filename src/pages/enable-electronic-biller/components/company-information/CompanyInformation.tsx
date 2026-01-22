@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SelectSearchOption } from 'react-select-search';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import character from '@assets/images/character.png';
 import { CurrentStep } from '@components/current-step';
 import { ChangeEvent, IOptionSelect, SelectInput, SelectSearchInput, TextInput } from '@components/input';

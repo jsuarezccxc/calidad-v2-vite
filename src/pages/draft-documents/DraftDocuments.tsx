@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 import { getInformationCompany } from '@redux/company/actions';
 import { getDocumentList } from '@redux/electronic-invoice/actions';
 import { RootState } from '@redux/rootReducer';

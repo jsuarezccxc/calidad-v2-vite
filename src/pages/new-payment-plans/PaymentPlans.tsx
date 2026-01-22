@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState, ReactElement, SetStateAction, Dispatch } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { SharedModal } from '@components/modal';
 import { IconTitle, PageTitle } from '@components/page-title';
 import { PageButtonsFooter } from '@components/page-buttons-footer';

@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import { Contact } from '../../contact';
 import { ModuleHash } from '../constants/modules';
 import { HeroLanding } from '../components/hero-landing';

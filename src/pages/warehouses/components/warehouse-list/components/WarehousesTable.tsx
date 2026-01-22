@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { SimpleButton } from '@components/button';
 import { Icon } from '@components/icon';
 import { Table } from '@components/table';

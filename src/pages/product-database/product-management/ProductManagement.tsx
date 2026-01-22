@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import usePermissions from '@hooks/usePermissions';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { RootState } from '@redux/rootReducer';
 import { getCompanyTaxes } from '@redux/company/actions';
 import { postMassiveProducts, setDataMassiveUpload } from '@redux/assemble-product/action';

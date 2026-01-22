@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 import { buttonsFooterProps } from '@utils/Button';
 import { ModuleApp } from '@utils/GenerateId';
 import { PAYMENT_CATEGORIES } from '@information-texts/PaymentGatewaySynchronization';

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDataCompanyLanding } from '@redux/session/actions';
 import { RootState } from '@redux/rootReducer';

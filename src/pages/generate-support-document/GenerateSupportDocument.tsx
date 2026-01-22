@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 import useParam from '@hooks/useParam';
 import useModal from '@hooks/useModal';
 import usePermissions from '@hooks/usePermissions';

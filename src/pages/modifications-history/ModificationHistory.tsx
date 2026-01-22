@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import dayjs from '@utils/Dayjs';
 import { v4 as uuid } from 'uuid';
 import { getHistoryModifications } from '@redux/modification-history/actions';

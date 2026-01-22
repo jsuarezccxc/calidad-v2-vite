@@ -1,6 +1,6 @@
 import React, { useEffect, ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import dayjs from '@utils/Dayjs';
 import { useTranslation } from 'react-i18next';
 import { Button, Link, LinkColor } from '@components/button';

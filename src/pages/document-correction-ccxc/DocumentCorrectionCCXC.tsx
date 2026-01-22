@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { getRoute, getRouteName } from '@utils/Paths';
 import { buttonsFooterProps } from '@utils/Button';
 import { ModuleApp } from '@utils/GenerateId';

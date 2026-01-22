@@ -1,6 +1,6 @@
 //--- Libraries ---//
 import React, { ReactElement, useState } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 //--- Components ---//
 import { PageTitle } from '@components/page-title';
 import { ModalType } from '@components/modal-custom';

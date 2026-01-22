@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import aids from '@assets/images/electronic-documents/aids.svg';
 import { PageButtonsFooter } from '@components/page-buttons-footer';
 import { StepCard } from '@components/step-card';

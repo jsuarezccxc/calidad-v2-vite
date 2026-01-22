@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 import { DOC, TypeDoc } from '@pages/docs-instructions/context';
 import { BreadCrumb } from '@components/bread-crumb';
 import { SalesCards, PageDirections, AddPerson } from '@components/electronic-documents';

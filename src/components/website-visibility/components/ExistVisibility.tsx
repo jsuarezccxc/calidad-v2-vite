@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import FirstStepExample from '@assets/images/exist-first-step.png';
 import SecondStepExample from '@assets/images/exist-second-step.png';
 import ThirdStepExample from '@assets/images/exist-third-step.png';

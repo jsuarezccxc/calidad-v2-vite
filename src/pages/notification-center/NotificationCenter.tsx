@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { DownloadIcons } from '@components/icon';
 import { NotFindElements } from '@components/not-find-elements';
 import { PageButtonsFooter } from '@components/page-buttons-footer';

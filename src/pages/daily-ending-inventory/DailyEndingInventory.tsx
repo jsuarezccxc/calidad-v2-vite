@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { BreadCrumb } from '@components/bread-crumb';
 import { DatePickerBase } from '@components/date-picker';
 import { Form } from '@components/form';

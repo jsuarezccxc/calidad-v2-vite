@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { Link } from '@components/button';
 import { Icon } from '@components/icon';
 import { Tooltip } from '@components/tooltip';

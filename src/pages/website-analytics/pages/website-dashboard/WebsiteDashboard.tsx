@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { Icon } from '@components/icon';
 import { DatePickerDayRange } from '@components/input';
 import { PageButtonsFooter } from '@components/page-buttons-footer';

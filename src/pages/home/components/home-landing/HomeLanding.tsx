@@ -1,6 +1,6 @@
 /* A component that is used to display the home page of the application. */
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import loginHomeLanding from '@assets/images/login-home-landing.svg';
 import { PRODUCT_NAME } from '@constants/ProductName';
 import { Button } from '@components/button';

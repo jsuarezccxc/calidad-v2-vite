@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { urls } from '@api/urls';
 import { TextInput, FileInput, IFile, IOptionSelect, DEFAULT_REQUIRED_TEXT, SelectSearchInput } from '@components/input';
 import { Form } from '@components/form';

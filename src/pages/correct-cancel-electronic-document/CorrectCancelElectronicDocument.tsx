@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useReducer, useState } from 'react';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { INFO_DATE, MODAL_TYPE, TOOLTIP_PAGE } from '@information-texts/CorrectCancelElectronicDocument';
 import { IGenericRecord } from '@models/GenericRecord';

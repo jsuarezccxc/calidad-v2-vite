@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState, useContext, useMemo } from 'react';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { LandingContext } from '@pages/home/context/LandingContext';
 import { Button } from '@components/button';

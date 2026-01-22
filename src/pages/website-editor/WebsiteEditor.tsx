@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import useParam from '@hooks/useParam';
 import { Icon } from '@components/icon';
 import { Button } from '@components/button';

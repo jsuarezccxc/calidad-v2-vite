@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { Source, STEPS_COMPLETED_PERCENTAGE } from '@constants/Onboarding';
 import { Routes } from '@constants/Paths';
 import { IGenericRecord } from '@models/GenericRecord';

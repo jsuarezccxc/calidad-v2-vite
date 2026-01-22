@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import { IGenericRecord } from '@models/GenericRecord';
 import { lengthEqualToZero, lengthGreaterThanZero } from '@utils/Length';
 import { membershipDaysAvailable } from '@utils/Membership';

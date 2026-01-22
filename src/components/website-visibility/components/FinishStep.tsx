@@ -1,6 +1,6 @@
 //--- Libraries ---//
 import React, { Dispatch, SetStateAction } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 //--- Assets ---//
 import FinishStepExample from '@assets/images/finish-step-visibility.png';
 //--- Components ---//

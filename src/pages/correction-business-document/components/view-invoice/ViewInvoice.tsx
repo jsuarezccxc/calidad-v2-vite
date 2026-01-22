@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { RootState } from '@redux/rootReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import fileDownload from 'js-file-download';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { getSpecificDocument } from '@redux/cancellation-electronic-document/actions';
 import { Information } from '@components/information';
 import { PageTitle } from '@components/page-title';

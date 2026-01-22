@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { RootState } from '@redux/rootReducer';
 import { getActiveModules } from '@redux/company/actions';
 import { setPlanWebsiteActive } from '@redux/membership/actions';

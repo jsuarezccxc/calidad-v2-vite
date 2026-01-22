@@ -5,7 +5,7 @@ import React, { useEffect, Suspense, useMemo, useState, useRef, useCallback } fr
 import map from 'lodash/map';
 import isEqual from 'lodash/isEqual';
 import { Switch, Redirect, useLocation, useHistory } from 'react-router-dom';
-import { PublicRoute, PrivateRoute } from 'react-private-public-route';
+import { PublicRoute, PrivateRoute } from '@components/routes';
 import { useSelector, useDispatch } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
 
@@ -540,8 +540,8 @@ const App: React.FC = (): React.ReactElement => {
                                     pathname,
                                 })}
                             >
-                                <Switch>
-                                    <Suspense fallback={<div />}>
+                                <Suspense fallback={<div />}>
+                                    <Switch>
                                         {map(PATHS, (path: IPath, index: number) =>
                                             isEqual(path.type, 'private') ? (
                                                 <PrivateRoute
@@ -562,8 +562,8 @@ const App: React.FC = (): React.ReactElement => {
                                             )
                                         )}
                                         {!paths.includes(pathname) && <Redirect to="/" />}
-                                    </Suspense>
-                                </Switch>
+                                    </Switch>
+                                </Suspense>
                             </div>
                             {!clientInvoice && accessToken && !isCrmRoute && (
                                 <Footer className={footerClasses(hasFreeMonth, accessToken)} />

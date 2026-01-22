@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { buttonsFooterProps } from '@utils/Button';
 import { ModuleApp } from '@utils/GenerateId';
 import { SUB_TITLE } from '@constants/PaymentGatewaySynchronization';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { Link, LinkColor } from '@components/button';
 import { urls } from '@api/urls';
 import mail from '@assets/images/sidebar/mail.svg';

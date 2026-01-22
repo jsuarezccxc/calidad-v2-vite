@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { PageButtonsFooter } from '@components/page-buttons-footer';
 import { Routes } from '@constants/Paths';
 import { Source } from '@constants/Onboarding';

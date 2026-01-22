@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import pdf from '@assets/images/new-pdf.svg';
 import retry from '@assets/images/plans/retry-multicolor.svg';
 import finish from '@assets/images/plans/finish-multicolor.svg';

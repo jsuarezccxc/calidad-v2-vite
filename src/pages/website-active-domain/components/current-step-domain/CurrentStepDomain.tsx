@@ -1,6 +1,6 @@
 //--- Libraries ---//
 import React, { useEffect, useState, useMemo } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 //--- Components ---//
 import { Icon } from '@components/icon';

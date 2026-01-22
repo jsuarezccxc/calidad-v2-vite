@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@redux/rootReducer';
 import { changeIsInstructions, getCompanyPaymentGateway, storeCompanyPaymentGateway } from '@redux/payment-gateway/action';

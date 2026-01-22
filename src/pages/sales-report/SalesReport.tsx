@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import { toPng } from 'html-to-image';
 import { IGenericRecord } from '@models/GenericRecord';

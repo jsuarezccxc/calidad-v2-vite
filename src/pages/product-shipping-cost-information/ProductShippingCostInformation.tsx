@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import { PageTitle } from '@components/page-title';
 import { BreadCrumb } from '@components/bread-crumb';

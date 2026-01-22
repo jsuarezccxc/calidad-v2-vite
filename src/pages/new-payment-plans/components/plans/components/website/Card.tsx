@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React from 'react';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import information from '@assets/images/info-blue.svg';
 import usePopper from '@hooks/usePopper';
 import { Tooltip } from '@components/tooltip';

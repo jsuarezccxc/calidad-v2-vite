@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { IPageButtonsFooterProps } from '@components/page-buttons-footer';
 import { LANGUAGE_KEY } from '@constants/Translate';
 import { Routes } from '@constants/Paths';

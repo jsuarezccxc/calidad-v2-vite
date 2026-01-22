@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { PageButtonsFooter } from '@components/page-buttons-footer';
 import { TitleButtons } from '@constants/Buttons';
 import { lengthEqualToZero } from '@utils/Length';

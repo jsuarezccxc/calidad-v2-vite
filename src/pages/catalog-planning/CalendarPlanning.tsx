@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { BreadCrumb } from '@components/bread-crumb';
 import { Button } from '@components/button';
 import { Checkbox } from '@components/checkbox';

@@ -2,7 +2,7 @@ import split from 'lodash/split';
 import replace from 'lodash/replace';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { IGenericRecord } from '@models/GenericRecord';
 import { Routes, PATHS } from '@constants/Paths';
 import { PRODUCT_NAME } from '@constants/ProductName';

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import { Button } from '@components/button';
 import { Icon } from '@components/icon';
 import { SelectSearchInput } from '@components/input';

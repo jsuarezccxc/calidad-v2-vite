@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { BreadCrumb, Section } from '@components/bread-crumb';
 import { Button } from '@components/button';
 import { Form } from '@components/form';

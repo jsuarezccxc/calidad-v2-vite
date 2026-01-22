@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { Information } from '@components/information';
 import { Table } from '@components/table';
 import { CORRECTION_BUSINESS_DOCUMENT } from '@information-texts/CorrectionBusinessDocument';

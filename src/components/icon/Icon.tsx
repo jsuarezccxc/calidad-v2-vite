@@ -7,7 +7,7 @@ const getGeneralImage = (name: string): string => {
     return generalImages[path]?.default || '';
 };
 import ReactToPrint from 'react-to-print';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getIconName } from '@utils/Text';
 import { ActionElementType, ElementType, generateId, ModuleApp } from '@utils/GenerateId';

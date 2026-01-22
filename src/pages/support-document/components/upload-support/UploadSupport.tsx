@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { IGenericRecord } from '@models/GenericRecord';
 import { Information } from '@components/information';
 import { lengthGreaterThanZero } from '@utils/Length';

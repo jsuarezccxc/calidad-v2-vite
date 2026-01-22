@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 import { BreadCrumb } from '@components/bread-crumb';
 import { PageTitle } from '@components/page-title';
 import { Icon } from '@components/icon';

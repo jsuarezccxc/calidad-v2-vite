@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { MODAL_TYPE } from '@information-texts/ContingencyActivation';
 import useModal from '@hooks/useModal';
 import { Form } from '@components/form';
