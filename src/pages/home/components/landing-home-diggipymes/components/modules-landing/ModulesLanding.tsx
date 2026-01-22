@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
+import parse from 'html-react-parser';
 import { generateId, ModuleApp, ActionElementType, ElementType } from '@utils/GenerateId';
 import { MODULES } from '../../constants/modules';
 import './ModulesLanding.scss';
@@ -35,7 +35,7 @@ export const ModulesLanding: React.FC = () => {
                         }}
                     >
                         <img src={image} alt={title} />
-                        {ReactHtmlParser(`<p>${title}</p>`)}
+                        {parse(`<p>${title}</p>`)}
                     </div>
                 ))}
             </div>

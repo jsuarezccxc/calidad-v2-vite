@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import InputTextArea from 'react-autosize-textarea';
+import TextareaAutosize from 'react-textarea-autosize';
 import { useDispatch, useSelector } from 'react-redux';
 import SelectSearch, { fuzzySearch, SelectSearchOption } from 'react-select-search';
 import { ColorPicker, useColor } from 'react-color-palette';
@@ -2483,7 +2483,7 @@ export const TextArea: React.FC<ITextAreaProps> = React.memo(
                     </div>
                 )}
                 <div className={`flex items-center gap-2 rounded-md  ${disabled ? 'bg-gray-light' : defaultClasses}`}>
-                    <InputTextArea
+                    <TextareaAutosize
                         id={id}
                         className={`${!isTable ? 'adaptable-text-area' : 'text-area-table'} ${
                             !isTable && `border-gray${value ? '-dark' : ''}`

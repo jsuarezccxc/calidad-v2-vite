@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import NumberFormat from 'react-number-format';
-import InputTextArea from 'react-autosize-textarea';
+import TextareaAutosize from 'react-textarea-autosize';
 import usePopper from '@hooks/usePopper';
 import { PM } from '@constants/Calendar';
 import { restProps } from '@utils/Props';
@@ -321,7 +321,7 @@ export const TextArea: React.FC<ITextAreaProps> = React.memo(
                         : `${required ? 'input--required' : 'border-gray'} focus-within:border-green`
                 }`}
             >
-                <InputTextArea
+                <TextareaAutosize
                     id={id}
                     className={`adaptable-text-area-table border-transparent ${classesInput} ${
                         required && !value ? 'input--required' : ''
@@ -341,7 +341,7 @@ export const TextArea: React.FC<ITextAreaProps> = React.memo(
 );
 
 export const TableTextArea: React.FC<IGenericRecord> = React.memo(({ value = '', ...props }) => (
-    <InputTextArea value={value} {...props} />
+    <TextareaAutosize value={value} {...props} />
 ));
 
 export const DatePickerInput: React.FC<IDatePickerInputProps> = React.memo(

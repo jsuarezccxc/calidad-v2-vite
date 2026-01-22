@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReactHtmlParser from 'react-html-parser';
+import parse from 'html-react-parser';
 import { Icon, IconsNames } from '@components/icon';
 import { DatePickerDayInput, SelectInput, TextArea, TextInput } from '@components/input';
 import { Checkbox } from '@components/checkbox';
@@ -201,5 +201,5 @@ export const CalendarOne: React.FC<ICalendarOneProps> = ({ params = {}, styles =
 };
 
 const RichText: React.FC<{ text: string; className?: string }> = ({ text, className = '' }) => {
-    return text ? <section className={className}>{ReactHtmlParser(text)}</section> : null;
+    return text ? <section className={className}>{parse(text)}</section> : null;
 };
